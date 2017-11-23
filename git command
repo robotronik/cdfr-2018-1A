@@ -9,3 +9,20 @@ git config --global user.email "loibl.vincent@gmail.com"
 git push origin master // envoie sur le git tout ce qui a été commit, vous devrez vous identifier
 
 git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY // permet de clone (avec le .git dossier caché) directement dans un dossier
+
+git log // affiche tout les commit que vous avez realise
+
+git commit -a -m "commentaire" // est equivalent a un_ git add fichier _git commit -m "commentaire" (git fait ca pour tout les fichier DEJA present)
+
+git checkout SHADuCommitOuDeLaBranche // deplace la view sur un commit precedent
+
+git commit --amend -m "Votre nouveau message" // permet de changer le commentaire du dernier commit
+
+git reset --hard // annulle tous les commits fait depuis le dernier push attention HARDCORE
+
+git remote -v // montre les serveurs où sont stockés les push le -v est optionnel, il affiche les adresses des remotes
+
+git fetch nom // tire les données depuis un remote mais les clones sous une branche differente
+
+
+
