@@ -1,4 +1,4 @@
-git status // donne info sur la branche actuelle
+﻿git status // donne info sur la branche actuelle
 
 git add Mecanique // ajoute un dossier fichier à l'archive
 
@@ -7,3 +7,5 @@ git commit -m "commentaire" // commit une piece creer un wrapper autourd de tout
 git config --global user.email "loibl.vincent@gmail.com"
 
 git push origin master // envoie sur le git tout ce qui a été commit, vous devrez vous identifier
+
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY // permet de clone (avec le .git dossier caché) directement dans un dossier
