@@ -1,0 +1,9 @@
+git status // donne info sur la branche actuelle
+
+git add Mecanique // ajoute un dossier fichier à l'archive
+
+git commit -m "commentaire" // commit une piece creer un wrapper autourd de tout les fichiers add
+
+git config --global user.email "loibl.vincent@gmail.com"
+
+git push origin master // envoie sur le git tout ce qui a été commit, vous devrez vous identifier
