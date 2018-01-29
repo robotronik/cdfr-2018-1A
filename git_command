@@ -40,3 +40,5 @@ git merge brancheB // merge la brancheB avec la branche ou vous vous situez
 
 git blame nomdufichier.extension // liste toutes les modifs faites a un fichier
 
+git reset HEAD --hard // quand tu as supprime les fichiers en local et que cest le bordel
+
