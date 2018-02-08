@@ -161,13 +161,13 @@ int main(void)
   {
     HAL_Delay(2000);
     XL_Set_Goal_Position(&servo[0], 400, XL_NOW);
-    HAL_Delay(2000);
-    XL_Set_Goal_Position(&servo[1], 600, XL_NOW);
+//    HAL_Delay(2000);
+//    XL_Set_Goal_Position(&servo[1], 600, XL_NOW);
     XL_Power_On(&servo[0], XL_NOW);
-    HAL_Delay(2000);
+//    HAL_Delay(2000);
     XL_Set_Goal_Position(&servo[0], 600, XL_NOW);
     HAL_Delay(2000);
-    XL_Set_Goal_Position(&servo[1], 400, XL_NOW);
+//    XL_Set_Goal_Position(&servo[1], 400, XL_NOW);
     XL_Power_On(&servo[0], XL_NOW);
   /* USER CODE END WHILE */
 
