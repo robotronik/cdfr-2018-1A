@@ -11,6 +11,13 @@ _TestFreeCad
 
         regroupe tous les fichiers freecad "experimentaux"
 
+_ELectronique
+
+        regroupe tout les kicads pour le design des cartes
+        
+_Programation
+
+        mxcube projet des test et gestion des actionneurs et capteurs
 
 NB:
 
