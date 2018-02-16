@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccBg4GHr.s 			page 1
+ARM GAS  /tmp/ccTaqPUx.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
   28:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   29:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
   30:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-ARM GAS  /tmp/ccBg4GHr.s 			page 2
+ARM GAS  /tmp/ccTaqPUx.s 			page 2
 
 
   31:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
   85:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** @endverbatim
   86:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * @{
   87:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   */
-ARM GAS  /tmp/ccBg4GHr.s 			page 3
+ARM GAS  /tmp/ccTaqPUx.s 			page 3
 
 
   88:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** #if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx)|| defined(STM32F439xx) 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  142:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       assert_param(IS_RCC_PLLI2SR_VALUE(PeriphClkInit->PLLI2S.PLLI2SR));
  143:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       /* Configure the PLLI2S division factors */
  144:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       /* PLLI2S_VCO = f(VCO clock) = f(PLLI2S clock input) × (PLLI2SN/PLLM) */
-ARM GAS  /tmp/ccBg4GHr.s 			page 4
+ARM GAS  /tmp/ccTaqPUx.s 			page 4
 
 
  145:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       /* I2SCLK = f(PLLI2S clock output) = f(VCO clock) / PLLI2SR */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  199:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****     /* Wait till PLLSAI is disabled */
  200:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****     while(__HAL_RCC_PLLSAI_GET_FLAG() != RESET)
  201:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****     {
-ARM GAS  /tmp/ccBg4GHr.s 			page 5
+ARM GAS  /tmp/ccTaqPUx.s 			page 5
 
 
  202:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       if((HAL_GetTick() - tickstart ) > PLLSAI_TIMEOUT_VALUE)
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  256:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** 
  257:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****    
  258:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   /*---------------------------- RTC configuration ---------------------------*/
-ARM GAS  /tmp/ccBg4GHr.s 			page 6
+ARM GAS  /tmp/ccTaqPUx.s 			page 6
 
 
  259:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   if(((PeriphClkInit->PeriphClockSelection) & RCC_PERIPHCLK_RTC) == (RCC_PERIPHCLK_RTC))
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  313:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   return HAL_OK;
  314:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** }
  315:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** 
-ARM GAS  /tmp/ccBg4GHr.s 			page 7
+ARM GAS  /tmp/ccTaqPUx.s 			page 7
 
 
  316:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** /**
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  370:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   */
  371:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
  372:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** {
-ARM GAS  /tmp/ccBg4GHr.s 			page 8
+ARM GAS  /tmp/ccTaqPUx.s 			page 8
 
 
   29              		.loc 1 372 0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
   60              		.loc 1 395 0
   61 001a FFF7FEFF 		bl	HAL_GetTick
   62              	.LVL5:
-ARM GAS  /tmp/ccBg4GHr.s 			page 9
+ARM GAS  /tmp/ccTaqPUx.s 			page 9
 
 
   63 001e 401B     		subs	r0, r0, r5
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
   23:../Drivers/CMSIS/Include/core_cmInstr.h ****    *
   24:../Drivers/CMSIS/Include/core_cmInstr.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
   25:../Drivers/CMSIS/Include/core_cmInstr.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-ARM GAS  /tmp/ccBg4GHr.s 			page 10
+ARM GAS  /tmp/ccTaqPUx.s 			page 10
 
 
   26:../Drivers/CMSIS/Include/core_cmInstr.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
   80:../Drivers/CMSIS/Include/core_cmInstr.h **** 
   81:../Drivers/CMSIS/Include/core_cmInstr.h ****     Send Event is a hint instruction. It causes an event to be signaled to the CPU.
   82:../Drivers/CMSIS/Include/core_cmInstr.h ****  */
-ARM GAS  /tmp/ccBg4GHr.s 			page 11
+ARM GAS  /tmp/ccTaqPUx.s 			page 11
 
 
   83:../Drivers/CMSIS/Include/core_cmInstr.h **** #define __SEV                             __sev
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  137:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  138:../Drivers/CMSIS/Include/core_cmInstr.h ****     This function reverses the byte order in a signed short value with sign extension to integer.
  139:../Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/ccBg4GHr.s 			page 12
+ARM GAS  /tmp/ccTaqPUx.s 			page 12
 
 
  140:../Drivers/CMSIS/Include/core_cmInstr.h ****     \param [in]    value  Value to reverse
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  194:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  195:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  196:../Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  LDR Exclusive (16 bit)
-ARM GAS  /tmp/ccBg4GHr.s 			page 13
+ARM GAS  /tmp/ccTaqPUx.s 			page 13
 
 
  197:../Drivers/CMSIS/Include/core_cmInstr.h **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  251:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  252:../Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  Remove the exclusive lock
  253:../Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/ccBg4GHr.s 			page 14
+ARM GAS  /tmp/ccTaqPUx.s 			page 14
 
 
  254:../Drivers/CMSIS/Include/core_cmInstr.h ****     This function removes the exclusive lock which is created by LDREX.
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  308:../Drivers/CMSIS/Include/core_cmInstr.h **** /* GNU gcc specific functions */
  309:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  310:../Drivers/CMSIS/Include/core_cmInstr.h **** /* Define macros for porting to both thumb1 and thumb2.
-ARM GAS  /tmp/ccBg4GHr.s 			page 15
+ARM GAS  /tmp/ccTaqPUx.s 			page 15
 
 
  311:../Drivers/CMSIS/Include/core_cmInstr.h ****  * For thumb1, use low register (r0-r7), specified by constrant "l"
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  365:../Drivers/CMSIS/Include/core_cmInstr.h ****     Instruction Synchronization Barrier flushes the pipeline in the processor,
  366:../Drivers/CMSIS/Include/core_cmInstr.h ****     so that all instructions following the ISB are fetched from cache or
  367:../Drivers/CMSIS/Include/core_cmInstr.h ****     memory, after the instruction has been completed.
-ARM GAS  /tmp/ccBg4GHr.s 			page 16
+ARM GAS  /tmp/ccTaqPUx.s 			page 16
 
 
  368:../Drivers/CMSIS/Include/core_cmInstr.h ****  */
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  422:../Drivers/CMSIS/Include/core_cmInstr.h ****     \return               Reversed value
  423:../Drivers/CMSIS/Include/core_cmInstr.h ****  */
  424:../Drivers/CMSIS/Include/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __REV16(uint32_t value)
-ARM GAS  /tmp/ccBg4GHr.s 			page 17
+ARM GAS  /tmp/ccTaqPUx.s 			page 17
 
 
  425:../Drivers/CMSIS/Include/core_cmInstr.h **** {
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  479:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  480:../Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  Reverse bit order of value
  481:../Drivers/CMSIS/Include/core_cmInstr.h **** 
-ARM GAS  /tmp/ccBg4GHr.s 			page 18
+ARM GAS  /tmp/ccTaqPUx.s 			page 18
 
 
  482:../Drivers/CMSIS/Include/core_cmInstr.h ****     This function reverses the bit order of the given value.
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  525:../Drivers/CMSIS/Include/core_cmInstr.h ****  */
  526:../Drivers/CMSIS/Include/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint16_t __LDREXH(volatile uint16_t *addr)
  527:../Drivers/CMSIS/Include/core_cmInstr.h **** {
-ARM GAS  /tmp/ccBg4GHr.s 			page 19
+ARM GAS  /tmp/ccTaqPUx.s 			page 19
 
 
  528:../Drivers/CMSIS/Include/core_cmInstr.h ****     uint32_t result;
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  582:../Drivers/CMSIS/Include/core_cmInstr.h ****     \return          0  Function succeeded
  583:../Drivers/CMSIS/Include/core_cmInstr.h ****     \return          1  Function failed
  584:../Drivers/CMSIS/Include/core_cmInstr.h ****  */
-ARM GAS  /tmp/ccBg4GHr.s 			page 20
+ARM GAS  /tmp/ccTaqPUx.s 			page 20
 
 
  585:../Drivers/CMSIS/Include/core_cmInstr.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __STREXH(uint16_t value, volatile uint1
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  639:../Drivers/CMSIS/Include/core_cmInstr.h **** /** \brief  Unsigned Saturate
  640:../Drivers/CMSIS/Include/core_cmInstr.h **** 
  641:../Drivers/CMSIS/Include/core_cmInstr.h ****     This function saturates an unsigned value.
-ARM GAS  /tmp/ccBg4GHr.s 			page 21
+ARM GAS  /tmp/ccTaqPUx.s 			page 21
 
 
  642:../Drivers/CMSIS/Include/core_cmInstr.h **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  116              	.LBB25:
  666:../Drivers/CMSIS/Include/core_cmInstr.h ****   return(result);
  117              		.loc 2 666 0
-ARM GAS  /tmp/ccBg4GHr.s 			page 22
+ARM GAS  /tmp/ccTaqPUx.s 			page 22
 
 
  118              	@ 666 "../Drivers/CMSIS/Include/core_cmInstr.h" 1
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  423:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****         /* return in case of Timeout detected */
  424:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****         return HAL_TIMEOUT;
  425:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       }
-ARM GAS  /tmp/ccBg4GHr.s 			page 23
+ARM GAS  /tmp/ccTaqPUx.s 			page 23
 
 
  426:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****     }
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  444:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       {
  445:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****         return HAL_TIMEOUT;
  446:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****       }      
-ARM GAS  /tmp/ccBg4GHr.s 			page 24
+ARM GAS  /tmp/ccTaqPUx.s 			page 24
 
 
  447:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****     }
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  227              		.loc 1 468 0
  228 00ea 06E0     		b	.L12
  229              	.LVL27:
-ARM GAS  /tmp/ccBg4GHr.s 			page 25
+ARM GAS  /tmp/ccTaqPUx.s 			page 25
 
 
  230              	.L13:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  479:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   return HAL_OK;
  273              		.loc 1 479 0 is_stmt 1 discriminator 4
  274 013e 0020     		movs	r0, #0
-ARM GAS  /tmp/ccBg4GHr.s 			page 26
+ARM GAS  /tmp/ccTaqPUx.s 			page 26
 
 
  275 0140 38BD     		pop	{r3, r4, r5, pc}
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  486:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * will be configured.
  487:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   * @retval None
  488:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c ****   */
-ARM GAS  /tmp/ccBg4GHr.s 			page 27
+ARM GAS  /tmp/ccTaqPUx.s 			page 27
 
 
  489:../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c **** void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  363 0020 D1F88430 		ldr	r3, [r1, #132]
  364 0024 03F0E042 		and	r2, r3, #1879048192
  365              	.LVL40:
-ARM GAS  /tmp/ccBg4GHr.s 			page 28
+ARM GAS  /tmp/ccTaqPUx.s 			page 28
 
 
  366              	.LBB30:
@@ -1678,24 +1678,24 @@ ARM GAS  /tmp/ccBg4GHr.s 			page 1
  413              		.file 4 "/usr/include/newlib/sys/_stdint.h"
  414              		.file 5 "../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
  415              		.file 6 "../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
-ARM GAS  /tmp/ccBg4GHr.s 			page 29
+ARM GAS  /tmp/ccTaqPUx.s 			page 29
 
 
  416              		.file 7 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  417              		.file 8 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h"
  418              		.file 9 "../Drivers/CMSIS/Include/core_cm4.h"
  419              		.file 10 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/ccBg4GHr.s 			page 30
+ARM GAS  /tmp/ccTaqPUx.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_rcc_ex.c
-     /tmp/ccBg4GHr.s:21     .text.HAL_RCCEx_PeriphCLKConfig:0000000000000000 $t
-     /tmp/ccBg4GHr.s:26     .text.HAL_RCCEx_PeriphCLKConfig:0000000000000000 HAL_RCCEx_PeriphCLKConfig
-     /tmp/ccBg4GHr.s:306    .text.HAL_RCCEx_PeriphCLKConfig:0000000000000158 $d
-     /tmp/ccBg4GHr.s:314    .text.HAL_RCCEx_GetPeriphCLKConfig:0000000000000000 $t
-     /tmp/ccBg4GHr.s:319    .text.HAL_RCCEx_GetPeriphCLKConfig:0000000000000000 HAL_RCCEx_GetPeriphCLKConfig
-     /tmp/ccBg4GHr.s:406    .text.HAL_RCCEx_GetPeriphCLKConfig:0000000000000050 $d
+     /tmp/ccTaqPUx.s:21     .text.HAL_RCCEx_PeriphCLKConfig:0000000000000000 $t
+     /tmp/ccTaqPUx.s:26     .text.HAL_RCCEx_PeriphCLKConfig:0000000000000000 HAL_RCCEx_PeriphCLKConfig
+     /tmp/ccTaqPUx.s:306    .text.HAL_RCCEx_PeriphCLKConfig:0000000000000158 $d
+     /tmp/ccTaqPUx.s:314    .text.HAL_RCCEx_GetPeriphCLKConfig:0000000000000000 $t
+     /tmp/ccTaqPUx.s:319    .text.HAL_RCCEx_GetPeriphCLKConfig:0000000000000000 HAL_RCCEx_GetPeriphCLKConfig
+     /tmp/ccTaqPUx.s:406    .text.HAL_RCCEx_GetPeriphCLKConfig:0000000000000050 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

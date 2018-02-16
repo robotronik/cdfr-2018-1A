@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccI39Vqx.s 			page 1
+ARM GAS  /tmp/ccEa7K1a.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
   28:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****  */
   29:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #   define VL53L0X_PutI2cBus(...) (void)0
   30:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #endif
-ARM GAS  /tmp/ccI39Vqx.s 			page 2
+ARM GAS  /tmp/ccEa7K1a.s 			page 2
 
 
   31:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
   64              		.cfi_def_cfa_offset 12
   65              		@ sp needed
   66 0022 30BD     		pop	{r4, r5, pc}
-ARM GAS  /tmp/ccI39Vqx.s 			page 3
+ARM GAS  /tmp/ccEa7K1a.s 			page 3
 
 
   67              		.cfi_endproc
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  111              	.LCFI5:
  112              		.cfi_def_cfa_offset 8
  113              		@ sp needed
-ARM GAS  /tmp/ccI39Vqx.s 			page 4
+ARM GAS  /tmp/ccEa7K1a.s 			page 4
 
 
  114 0022 10BD     		pop	{r4, pc}
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  158 001c 2946     		mov	r1, r5
  159 001e 621C     		adds	r2, r4, #1
  160 0020 FFF7FEFF 		bl	_I2CWrite
-ARM GAS  /tmp/ccI39Vqx.s 			page 5
+ARM GAS  /tmp/ccEa7K1a.s 			page 5
 
 
  161              	.LVL20:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  207              	.LCFI8:
  208              		.cfi_def_cfa_offset 24
  209 0004 0646     		mov	r6, r0
-ARM GAS  /tmp/ccI39Vqx.s 			page 6
+ARM GAS  /tmp/ccEa7K1a.s 			page 6
 
 
  210 0006 1546     		mov	r5, r2
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  247 002e 40B2     		sxtb	r0, r0
  248 0030 02B0     		add	sp, sp, #8
  249              	.LCFI9:
-ARM GAS  /tmp/ccI39Vqx.s 			page 7
+ARM GAS  /tmp/ccEa7K1a.s 			page 7
 
 
  250              		.cfi_def_cfa_offset 16
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  111:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
  112:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
  113:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
-ARM GAS  /tmp/ccI39Vqx.s 			page 8
+ARM GAS  /tmp/ccEa7K1a.s 			page 8
 
 
  114:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  126:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
  338              		.loc 1 126 0
  339 0014 00B1     		cbz	r0, .L25
-ARM GAS  /tmp/ccI39Vqx.s 			page 9
+ARM GAS  /tmp/ccEa7K1a.s 			page 9
 
 
  127:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  383              		.loc 1 139 0
  384 000e 110A     		lsrs	r1, r2, #8
  385 0010 D970     		strb	r1, [r3, #3]
-ARM GAS  /tmp/ccI39Vqx.s 			page 10
+ARM GAS  /tmp/ccEa7K1a.s 			page 10
 
 
  140:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[4] = (data >> 0 ) & 0xFF;
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  164:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_RdByte(VL53L0X_DEV Dev, uint8_t index, uint8_t *data) {
  418              		.loc 1 164 0
  419              		.cfi_startproc
-ARM GAS  /tmp/ccI39Vqx.s 			page 11
+ARM GAS  /tmp/ccEa7K1a.s 			page 11
 
 
  420              		@ args = 0, pretend = 0, frame = 8
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  462              	.L39:
  176:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
  463              		.loc 1 176 0
-ARM GAS  /tmp/ccI39Vqx.s 			page 12
+ARM GAS  /tmp/ccEa7K1a.s 			page 12
 
 
  464 002a EC20     		movs	r0, #236
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  512 0014 0346     		mov	r3, r0
  513 0016 50B9     		cbnz	r0, .L42
  158:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     Status = VL53L0X_WrByte(Dev, index, data);
-ARM GAS  /tmp/ccI39Vqx.s 			page 13
+ARM GAS  /tmp/ccEa7K1a.s 			page 13
 
 
  514              		.loc 1 158 0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  185:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
  186:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
  187:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
-ARM GAS  /tmp/ccI39Vqx.s 			page 14
+ARM GAS  /tmp/ccEa7K1a.s 			page 14
 
 
  188:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, &index, 1);
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  204:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
  601              		.loc 1 204 0
  602 0038 40B2     		sxtb	r0, r0
-ARM GAS  /tmp/ccI39Vqx.s 			page 15
+ARM GAS  /tmp/ccEa7K1a.s 			page 15
 
 
  603 003a 03B0     		add	sp, sp, #12
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  651 0016 90B9     		cbnz	r0, .L53
  213:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
  214:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
-ARM GAS  /tmp/ccI39Vqx.s 			page 16
+ARM GAS  /tmp/ccEa7K1a.s 			page 16
 
 
  215:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  691              	.LVL93:
  692              	.L57:
  693 004a 00BF     		.align	2
-ARM GAS  /tmp/ccI39Vqx.s 			page 17
+ARM GAS  /tmp/ccEa7K1a.s 			page 17
 
 
  694              	.L56:
@@ -1016,42 +1016,42 @@ ARM GAS  /tmp/ccI39Vqx.s 			page 1
  741              		.file 11 "../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.h"
  742              		.file 12 "../Drivers/CMSIS/Include/core_cm4.h"
  743              		.file 13 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/ccI39Vqx.s 			page 18
+ARM GAS  /tmp/ccEa7K1a.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 vl53l0x_platform.c
-     /tmp/ccI39Vqx.s:21     .text._I2CWrite:0000000000000000 $t
-     /tmp/ccI39Vqx.s:26     .text._I2CWrite:0000000000000000 _I2CWrite
-     /tmp/ccI39Vqx.s:71     .text._I2CRead:0000000000000000 $t
-     /tmp/ccI39Vqx.s:76     .text._I2CRead:0000000000000000 _I2CRead
-     /tmp/ccI39Vqx.s:119    .text.VL53L0X_WriteMulti:0000000000000000 $t
-     /tmp/ccI39Vqx.s:124    .text.VL53L0X_WriteMulti:0000000000000000 VL53L0X_WriteMulti
-     /tmp/ccI39Vqx.s:182    .text.VL53L0X_WriteMulti:0000000000000030 $d
+     /tmp/ccEa7K1a.s:21     .text._I2CWrite:0000000000000000 $t
+     /tmp/ccEa7K1a.s:26     .text._I2CWrite:0000000000000000 _I2CWrite
+     /tmp/ccEa7K1a.s:71     .text._I2CRead:0000000000000000 $t
+     /tmp/ccEa7K1a.s:76     .text._I2CRead:0000000000000000 _I2CRead
+     /tmp/ccEa7K1a.s:119    .text.VL53L0X_WriteMulti:0000000000000000 $t
+     /tmp/ccEa7K1a.s:124    .text.VL53L0X_WriteMulti:0000000000000000 VL53L0X_WriteMulti
+     /tmp/ccEa7K1a.s:182    .text.VL53L0X_WriteMulti:0000000000000030 $d
                             *COM*:0000000000000040 _I2CBuffer
-     /tmp/ccI39Vqx.s:187    .text.VL53L0X_ReadMulti:0000000000000000 $t
-     /tmp/ccI39Vqx.s:192    .text.VL53L0X_ReadMulti:0000000000000000 VL53L0X_ReadMulti
-     /tmp/ccI39Vqx.s:258    .text.VL53L0X_WrByte:0000000000000000 $t
-     /tmp/ccI39Vqx.s:263    .text.VL53L0X_WrByte:0000000000000000 VL53L0X_WrByte
-     /tmp/ccI39Vqx.s:300    .text.VL53L0X_WrByte:0000000000000018 $d
-     /tmp/ccI39Vqx.s:305    .text.VL53L0X_WrWord:0000000000000000 $t
-     /tmp/ccI39Vqx.s:310    .text.VL53L0X_WrWord:0000000000000000 VL53L0X_WrWord
-     /tmp/ccI39Vqx.s:350    .text.VL53L0X_WrWord:000000000000001c $d
-     /tmp/ccI39Vqx.s:355    .text.VL53L0X_WrDWord:0000000000000000 $t
-     /tmp/ccI39Vqx.s:360    .text.VL53L0X_WrDWord:0000000000000000 VL53L0X_WrDWord
-     /tmp/ccI39Vqx.s:406    .text.VL53L0X_WrDWord:0000000000000024 $d
-     /tmp/ccI39Vqx.s:411    .text.VL53L0X_RdByte:0000000000000000 $t
-     /tmp/ccI39Vqx.s:416    .text.VL53L0X_RdByte:0000000000000000 VL53L0X_RdByte
-     /tmp/ccI39Vqx.s:478    .text.VL53L0X_UpdateByte:0000000000000000 $t
-     /tmp/ccI39Vqx.s:483    .text.VL53L0X_UpdateByte:0000000000000000 VL53L0X_UpdateByte
-     /tmp/ccI39Vqx.s:539    .text.VL53L0X_RdWord:0000000000000000 $t
-     /tmp/ccI39Vqx.s:544    .text.VL53L0X_RdWord:0000000000000000 VL53L0X_RdWord
-     /tmp/ccI39Vqx.s:612    .text.VL53L0X_RdWord:0000000000000040 $d
-     /tmp/ccI39Vqx.s:617    .text.VL53L0X_RdDWord:0000000000000000 $t
-     /tmp/ccI39Vqx.s:622    .text.VL53L0X_RdDWord:0000000000000000 VL53L0X_RdDWord
-     /tmp/ccI39Vqx.s:695    .text.VL53L0X_RdDWord:000000000000004c $d
-     /tmp/ccI39Vqx.s:700    .text.VL53L0X_PollingDelay:0000000000000000 $t
-     /tmp/ccI39Vqx.s:705    .text.VL53L0X_PollingDelay:0000000000000000 VL53L0X_PollingDelay
+     /tmp/ccEa7K1a.s:187    .text.VL53L0X_ReadMulti:0000000000000000 $t
+     /tmp/ccEa7K1a.s:192    .text.VL53L0X_ReadMulti:0000000000000000 VL53L0X_ReadMulti
+     /tmp/ccEa7K1a.s:258    .text.VL53L0X_WrByte:0000000000000000 $t
+     /tmp/ccEa7K1a.s:263    .text.VL53L0X_WrByte:0000000000000000 VL53L0X_WrByte
+     /tmp/ccEa7K1a.s:300    .text.VL53L0X_WrByte:0000000000000018 $d
+     /tmp/ccEa7K1a.s:305    .text.VL53L0X_WrWord:0000000000000000 $t
+     /tmp/ccEa7K1a.s:310    .text.VL53L0X_WrWord:0000000000000000 VL53L0X_WrWord
+     /tmp/ccEa7K1a.s:350    .text.VL53L0X_WrWord:000000000000001c $d
+     /tmp/ccEa7K1a.s:355    .text.VL53L0X_WrDWord:0000000000000000 $t
+     /tmp/ccEa7K1a.s:360    .text.VL53L0X_WrDWord:0000000000000000 VL53L0X_WrDWord
+     /tmp/ccEa7K1a.s:406    .text.VL53L0X_WrDWord:0000000000000024 $d
+     /tmp/ccEa7K1a.s:411    .text.VL53L0X_RdByte:0000000000000000 $t
+     /tmp/ccEa7K1a.s:416    .text.VL53L0X_RdByte:0000000000000000 VL53L0X_RdByte
+     /tmp/ccEa7K1a.s:478    .text.VL53L0X_UpdateByte:0000000000000000 $t
+     /tmp/ccEa7K1a.s:483    .text.VL53L0X_UpdateByte:0000000000000000 VL53L0X_UpdateByte
+     /tmp/ccEa7K1a.s:539    .text.VL53L0X_RdWord:0000000000000000 $t
+     /tmp/ccEa7K1a.s:544    .text.VL53L0X_RdWord:0000000000000000 VL53L0X_RdWord
+     /tmp/ccEa7K1a.s:612    .text.VL53L0X_RdWord:0000000000000040 $d
+     /tmp/ccEa7K1a.s:617    .text.VL53L0X_RdDWord:0000000000000000 $t
+     /tmp/ccEa7K1a.s:622    .text.VL53L0X_RdDWord:0000000000000000 VL53L0X_RdDWord
+     /tmp/ccEa7K1a.s:695    .text.VL53L0X_RdDWord:000000000000004c $d
+     /tmp/ccEa7K1a.s:700    .text.VL53L0X_PollingDelay:0000000000000000 $t
+     /tmp/ccEa7K1a.s:705    .text.VL53L0X_PollingDelay:0000000000000000 VL53L0X_PollingDelay
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccdn33pv.s 			page 1
+ARM GAS  /tmp/ccGFS4G6.s 			page 1
 
 
    1              		.syntax unified
@@ -41,16 +41,16 @@ ARM GAS  /tmp/ccdn33pv.s 			page 1
   44              		.file 2 "/usr/include/newlib/sys/_stdint.h"
   45              		.file 3 "../Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.h"
   46              		.file 4 "../Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.c"
-ARM GAS  /tmp/ccdn33pv.s 			page 2
+ARM GAS  /tmp/ccGFS4G6.s 			page 2
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 vl53l0x_platform_log.c
-     /tmp/ccdn33pv.s:39     .bss._trace_functions:0000000000000000 _trace_functions
-     /tmp/ccdn33pv.s:33     .bss._trace_modules:0000000000000000 _trace_modules
-     /tmp/ccdn33pv.s:27     .data._trace_level:0000000000000000 _trace_level
-     /tmp/ccdn33pv.s:24     .data._trace_level:0000000000000000 $d
-     /tmp/ccdn33pv.s:30     .bss._trace_modules:0000000000000000 $d
-     /tmp/ccdn33pv.s:36     .bss._trace_functions:0000000000000000 $d
+     /tmp/ccGFS4G6.s:39     .bss._trace_functions:0000000000000000 _trace_functions
+     /tmp/ccGFS4G6.s:33     .bss._trace_modules:0000000000000000 _trace_modules
+     /tmp/ccGFS4G6.s:27     .data._trace_level:0000000000000000 _trace_level
+     /tmp/ccGFS4G6.s:24     .data._trace_level:0000000000000000 $d
+     /tmp/ccGFS4G6.s:30     .bss._trace_modules:0000000000000000 $d
+     /tmp/ccGFS4G6.s:36     .bss._trace_functions:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

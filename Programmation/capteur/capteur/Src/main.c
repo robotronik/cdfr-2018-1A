@@ -190,8 +190,6 @@ void TimeStamp_Init(){
 void TimeStamp_Reset(){
     HAL_TIM_Base_Start(&htim5);
     htim5.Instance->CNT=0;
-    HAL_TIM_Base_Start(&htim3);
-    htim3.Instance->CNT=0;
 }
 
 uint32_t TimeStamp_Get(){
@@ -203,7 +201,6 @@ uint32_t TimeStamp_Get(){
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-//static void SystemClock_Config(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM3_Init(void);
 
@@ -523,8 +520,14 @@ void Sensor_SetNewRange(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *p
     }
 }
 
-void blink_led(int valeur){//£
-    htim3.Instance->ARR=10*valeur-1+20;;
+void blink_led(int valeur, int* compteur){     /////modification de la led
+    if (*compteur == 6){                       /////modification toutes les 6 mesures correctes du capteur (valeur limite ?)
+        HAL_TIM_Base_Stop_IT(&htim3);
+        htim3.Instance->ARR = 2*valeur-1+20;   /////modification de la période du capteur (voir wiki stm32 pour plus de details) selon une droite
+        HAL_TIM_Base_Start_IT(&htim3);  
+        htim3.Instance->CNT = 0;               /////remise a zero du timer de la led
+        *compteur = 0;                         /////remise a zero du compteur
+    }
 }
 
 
@@ -543,6 +546,9 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
     int nSensorToUse;
     int SingleSensorNo=0;
     int valeur;
+    int s=0;                ///creation compteur
+    int* compteur = NULL;   ///creation pointeur sur compteur
+    compteur=&s;
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
@@ -590,56 +596,18 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
             	trace_printf("%d,%u,%d,%d,%d\n", VL53L0XDevs[SingleSensorNo].Id, TimeStamp_Get(), RangingMeasurementData.RangeStatus, RangingMeasurementData.RangeMilliMeter, RangingMeasurementData.SignalRateRtnMegaCps);
             	Sensor_SetNewRange(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
                 /* Display distance in cm */
-            	if( RangingMeasurementData.RangeStatus == 0 ){
-                    sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);
-                    valeur=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;//£
-                    blink_led(valeur); //probleme de synchro des timers
-                    //HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-                    //HAL_Delay(2000);
-                    //HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-                    /*if (valeur <= 150){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(1000); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);  
-                        //htim3.Instance->ARR;
-                    } else if (valeur >= 100 && valeur < 150){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(800); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur >= 70 && valeur < 100){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(600); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur >= 50 && valeur < 70){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(500); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur >= 40 && valeur < 50){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(400); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur >= 30 && valeur < 40){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(300); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur >= 20 && valeur < 30){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(200); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur >=10 && valeur < 20){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(100); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    } else if (valeur < 10){
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                        HAL_Delay(50); 
-                        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
-                    }*/                  
+            	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
+                    *compteur+=1;                               /////incrementation du compteur
+                    sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
+                    valeur=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////valeur lue par le capteur en cm
+                    blink_led(valeur,compteur);                 /////fonction blink_led
                 }
-                else{
+                else{                                           /////boucle de mesures incorrectes
                     sprintf(StrDisplay, "----");
                     StrDisplay[0]=VL53L0XDevs[SingleSensorNo].DevLetter;
-                    htim3.Instance->ARR=2000;
+                    //HAL_TIM_Base_Stop_IT(&htim3);
+                    //htim3.Instance->ARR=2000;
+                    //HAL_TIM_Base_Start_IT(&htim3);
                 }
             }
             else{
@@ -655,7 +623,7 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
     }while( !over);
     /* Wait button to be un-pressed to decide if it is a short or long press */
     status=PusbButton_WaitUnPress();
-    htim3.Instance->CNT=0;
+    htim3.Instance->CNT=0;       /////remise a zero du timer de la led
     return status;
 }
 
@@ -992,7 +960,7 @@ void MX_GPIO_Init(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){ //£
   if(htim->Instance == htim3.Instance){
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);              /////changement d'etat de la led
   }
 }
 

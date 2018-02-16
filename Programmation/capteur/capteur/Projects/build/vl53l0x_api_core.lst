@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cck2Fec7.s 			page 1
+ARM GAS  /tmp/ccfCLKEL.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
   28:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
   29:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** #include "vl53l0x_api.h"
   30:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** #include "vl53l0x_api_core.h"
-ARM GAS  /tmp/cck2Fec7.s 			page 2
+ARM GAS  /tmp/ccfCLKEL.s 			page 2
 
 
   31:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** #include "vl53l0x_api_calibration.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
   58 000e 855C     		ldrb	r5, [r0, r2]	@ zero_extendqisi2
   59 0010 C554     		strb	r5, [r0, r3]
   56:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		data[mirrorIndex] = tempData;
-ARM GAS  /tmp/cck2Fec7.s 			page 3
+ARM GAS  /tmp/ccfCLKEL.s 			page 3
 
 
   60              		.loc 1 56 0 discriminator 3
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
   64:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint8_t NewDataReady = 0;
  107              		.loc 1 64 0
  108 0006 0024     		movs	r4, #0
-ARM GAS  /tmp/cck2Fec7.s 			page 4
+ARM GAS  /tmp/ccfCLKEL.s 			page 4
 
 
  109 0008 8DF80740 		strb	r4, [sp, #7]
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  140 0032 F922     		movs	r2, #249
  141              	.L6:
  142              	.LVL17:
-ARM GAS  /tmp/cck2Fec7.s 			page 5
+ARM GAS  /tmp/ccfCLKEL.s 			page 5
 
 
   87:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  180              		.align	2
  181              		.global	VL53L0X_encode_vcsel_period
  182              		.thumb
-ARM GAS  /tmp/cck2Fec7.s 			page 6
+ARM GAS  /tmp/ccfCLKEL.s 			page 6
 
 
  183              		.thumb_func
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  129:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	 */
  130:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  131:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint32_t  res = 0;
-ARM GAS  /tmp/cck2Fec7.s 			page 7
+ARM GAS  /tmp/ccfCLKEL.s 			page 7
 
 
  132:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint32_t  bit = 1 << 30;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  254              	.L15:
  141:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (num >= res + bit) {
  255              		.loc 1 141 0
-ARM GAS  /tmp/cck2Fec7.s 			page 8
+ARM GAS  /tmp/ccfCLKEL.s 			page 8
 
 
  256 0022 002B     		cmp	r3, #0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  170:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		res = 65535;
  171:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	else
  172:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		res = VL53L0X_isqrt(a * a + b * b);
-ARM GAS  /tmp/cck2Fec7.s 			page 9
+ARM GAS  /tmp/ccfCLKEL.s 			page 9
 
 
  290              		.loc 1 172 0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  338              		.cfi_def_cfa_offset 24
  339 0004 0646     		mov	r6, r0
  340              	.LVL43:
-ARM GAS  /tmp/cck2Fec7.s 			page 10
+ARM GAS  /tmp/ccfCLKEL.s 			page 10
 
 
  180:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  375 0036 00D3     		bcc	.L26
  200:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status = VL53L0X_ERROR_TIME_OUT;
  376              		.loc 1 200 0
-ARM GAS  /tmp/cck2Fec7.s 			page 11
+ARM GAS  /tmp/ccfCLKEL.s 			page 11
 
 
  377 0038 F925     		movs	r5, #249
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  421              		.cfi_offset 11, -8
  422              		.cfi_offset 14, -4
  423 0004 8DB0     		sub	sp, sp, #52
-ARM GAS  /tmp/cck2Fec7.s 			page 12
+ARM GAS  /tmp/ccfCLKEL.s 			page 12
 
 
  424              	.LCFI11:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  445 001e FFF7FEFF 		bl	VL53L0X_WrByte
  446              	.LVL58:
  447 0022 0446     		mov	r4, r0
-ARM GAS  /tmp/cck2Fec7.s 			page 13
+ARM GAS  /tmp/ccfCLKEL.s 			page 13
 
 
  448              	.LVL59:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  495              		.loc 1 252 0
  496 0072 2846     		mov	r0, r5
  497 0074 FF21     		movs	r1, #255
-ARM GAS  /tmp/cck2Fec7.s 			page 14
+ARM GAS  /tmp/ccfCLKEL.s 			page 14
 
 
  498 0076 0722     		movs	r2, #7
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  543              	.LVL79:
  262:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status |= VL53L0X_device_read_strobe(Dev);
  544              		.loc 1 262 0
-ARM GAS  /tmp/cck2Fec7.s 			page 15
+ARM GAS  /tmp/ccfCLKEL.s 			page 15
 
 
  545 00c0 2846     		mov	r0, r5
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  591              	.LVL91:
  271:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  272:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 16
+ARM GAS  /tmp/ccfCLKEL.s 			page 16
 
 
  273:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			NvmRefGoodSpadMap[0] = (uint8_t)((TmpDWord >> 24)
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  286:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				& 0xff);
  287:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			NvmRefGoodSpadMap[5] = (uint8_t)((TmpDWord >> 16)
  633              		.loc 1 287 0
-ARM GAS  /tmp/cck2Fec7.s 			page 17
+ARM GAS  /tmp/ccfCLKEL.s 			page 17
 
 
  634 0152 C3F30743 		ubfx	r3, r3, #16, #8
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  675 0194 9021     		movs	r1, #144
  676 0196 0DF12702 		add	r2, sp, #39
  677 019a FFF7FEFF 		bl	VL53L0X_RdByte
-ARM GAS  /tmp/cck2Fec7.s 			page 18
+ARM GAS  /tmp/ccfCLKEL.s 			page 18
 
 
  678              	.LVL104:
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  724 01e2 2846     		mov	r0, r5
  725 01e4 9021     		movs	r1, #144
  726 01e6 0AAA     		add	r2, sp, #40
-ARM GAS  /tmp/cck2Fec7.s 			page 19
+ARM GAS  /tmp/ccfCLKEL.s 			page 19
 
 
  727 01e8 FFF7FEFF 		bl	VL53L0X_RdDWord
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  770              	.LVL122:
  771 023c 2043     		orrs	r0, r0, r4
  772 023e C4B2     		uxtb	r4, r0
-ARM GAS  /tmp/cck2Fec7.s 			page 20
+ARM GAS  /tmp/ccfCLKEL.s 			page 20
 
 
  773              	.LVL123:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  330:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status |= VL53L0X_RdDWord(Dev, 0x90, &TmpDWord);
  812              		.loc 1 330 0
  813 0290 2846     		mov	r0, r5
-ARM GAS  /tmp/cck2Fec7.s 			page 21
+ARM GAS  /tmp/ccfCLKEL.s 			page 21
 
 
  814 0292 9021     		movs	r1, #144
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  855              	.LVL133:
  343:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  344:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status |= VL53L0X_RdDWord(Dev, 0x90, &TmpDWord);
-ARM GAS  /tmp/cck2Fec7.s 			page 22
+ARM GAS  /tmp/ccfCLKEL.s 			page 22
 
 
  856              		.loc 1 344 0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  894 0338 2846     		mov	r0, r5
  895 033a 9421     		movs	r1, #148
  896 033c 7B22     		movs	r2, #123
-ARM GAS  /tmp/cck2Fec7.s 			page 23
+ARM GAS  /tmp/ccfCLKEL.s 			page 23
 
 
  897 033e FFF7FEFF 		bl	VL53L0X_WrByte
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  943              		.loc 1 367 0
  944 0384 2846     		mov	r0, r5
  945 0386 9421     		movs	r1, #148
-ARM GAS  /tmp/cck2Fec7.s 			page 24
+ARM GAS  /tmp/ccfCLKEL.s 			page 24
 
 
  946 0388 7322     		movs	r2, #115
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  990              		.loc 1 376 0
  991 03cc 2846     		mov	r0, r5
  992 03ce 9021     		movs	r1, #144
-ARM GAS  /tmp/cck2Fec7.s 			page 25
+ARM GAS  /tmp/ccfCLKEL.s 			page 25
 
 
  993 03d0 0AAA     		add	r2, sp, #40
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  387:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  388:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status |= VL53L0X_WrByte(Dev, 0x94, 0x76);
  1035              		.loc 1 388 0
-ARM GAS  /tmp/cck2Fec7.s 			page 26
+ARM GAS  /tmp/ccfCLKEL.s 			page 26
 
 
  1036 0412 2846     		mov	r0, r5
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  394:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		}
  395:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  396:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		Status |= VL53L0X_WrByte(Dev, 0x81, 0x00);
-ARM GAS  /tmp/cck2Fec7.s 			page 27
+ARM GAS  /tmp/ccfCLKEL.s 			page 27
 
 
  1080              		.loc 1 396 0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1129 04a2 0122     		movs	r2, #1
  1130 04a4 FFF7FEFF 		bl	VL53L0X_WrByte
  1131              	.LVL188:
-ARM GAS  /tmp/cck2Fec7.s 			page 28
+ARM GAS  /tmp/ccfCLKEL.s 			page 28
 
 
  1132 04a8 2043     		orrs	r0, r0, r4
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  409:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		/* Assign to variable if status is ok */
  410:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (((option & 1) == 1) &&
  1174              		.loc 1 410 0 is_stmt 1
-ARM GAS  /tmp/cck2Fec7.s 			page 29
+ARM GAS  /tmp/ccfCLKEL.s 			page 29
 
 
  1175 04de 16F0010F 		tst	r6, #1
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  425:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			((ReadDataFromDeviceDone & 2) == 0)) {
  426:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			VL53L0X_SETDEVICESPECIFICPARAMETER(Dev,
  1212              		.loc 1 426 0 is_stmt 1
-ARM GAS  /tmp/cck2Fec7.s 			page 30
+ARM GAS  /tmp/ccfCLKEL.s 			page 30
 
 
  1213 0516 9DF82730 		ldrb	r3, [sp, #39]	@ zero_extendqisi2
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  451:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				SignalRateMeasFixed400mm,
  452:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				SignalRateMeasFixed400mmFix);
  453:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 31
+ARM GAS  /tmp/ccfCLKEL.s 			page 31
 
 
  454:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			OffsetMicroMeters = 0;
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  471:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	}
  472:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  473:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	LOG_FUNCTION_END(Status);
-ARM GAS  /tmp/cck2Fec7.s 			page 32
+ARM GAS  /tmp/ccfCLKEL.s 			page 32
 
 
  474:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	return Status;
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1311 000a 00FB01F0 		mul	r0, r0, r1
  1312              	.LVL218:
  1313 000e 7047     		bx	lr
-ARM GAS  /tmp/cck2Fec7.s 			page 33
+ARM GAS  /tmp/ccfCLKEL.s 			page 33
 
 
  1314              		.cfi_endproc
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  512:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			ls_byte = ls_byte >> 1;
  1352              		.loc 1 512 0
  1353 000e 33F0FF02 		bics	r2, r3, #255
-ARM GAS  /tmp/cck2Fec7.s 			page 34
+ARM GAS  /tmp/ccfCLKEL.s 			page 34
 
 
  1354 0012 F9D1     		bne	.L54
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1389              		.loc 1 534 0
  1390 0002 030A     		lsrs	r3, r0, #8
  1391 0004 02FA03F0 		lsl	r0, r2, r3
-ARM GAS  /tmp/cck2Fec7.s 			page 35
+ARM GAS  /tmp/ccfCLKEL.s 			page 35
 
 
  1392              	.LVL232:
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  551:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  552:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	timeout_period_mclks =
  553:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		(uint32_t) (((timeout_period_us * 1000)
-ARM GAS  /tmp/cck2Fec7.s 			page 36
+ARM GAS  /tmp/ccfCLKEL.s 			page 36
 
 
  554:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		+ (macro_period_ns / 2)) / macro_period_ns);
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1473              	.LVL246:
  569:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	macro_period_ns = (macro_period_ps + 500) / 1000;
  1474              		.loc 1 569 0
-ARM GAS  /tmp/cck2Fec7.s 			page 37
+ARM GAS  /tmp/ccfCLKEL.s 			page 37
 
 
  1475 000a 00F5FA71 		add	r1, r0, #500
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1518              		.cfi_offset 6, -12
  1519              		.cfi_offset 7, -8
  1520              		.cfi_offset 14, -4
-ARM GAS  /tmp/cck2Fec7.s 			page 38
+ARM GAS  /tmp/ccfCLKEL.s 			page 38
 
 
  1521 0002 85B0     		sub	sp, sp, #20
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1555              	.LVL262:
  1556              	.L67:
  602:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 					VL53L0X_REG_MSRC_CONFIG_TIMEOUT_MACROP,
-ARM GAS  /tmp/cck2Fec7.s 			page 39
+ARM GAS  /tmp/ccfCLKEL.s 			page 39
 
 
  603:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 					&EncodedTimeOutByte);
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  622:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 					&CurrentVCSELPulsePeriodPClk);
  623:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  624:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			if (Status == VL53L0X_ERROR_NONE) {
-ARM GAS  /tmp/cck2Fec7.s 			page 40
+ARM GAS  /tmp/ccfCLKEL.s 			page 40
 
 
  1592              		.loc 1 624 0
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1628 0098 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
  1629 009c 9BB1     		cbz	r3, .L76
  643:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			/* Retrieve PRE-RANGE VCSEL Period */
-ARM GAS  /tmp/cck2Fec7.s 			page 41
+ARM GAS  /tmp/ccfCLKEL.s 			page 41
 
 
  644:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status = VL53L0X_GetVcselPulsePeriod(Dev,
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  657:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		}
  658:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  659:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (Status == VL53L0X_ERROR_NONE) {
-ARM GAS  /tmp/cck2Fec7.s 			page 42
+ARM GAS  /tmp/ccfCLKEL.s 			page 42
 
 
  1668              		.loc 1 659 0
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  676:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		TimeoutMicroSeconds = VL53L0X_calc_timeout_us(Dev,
  1705              		.loc 1 676 0
  1706 00fe 2846     		mov	r0, r5
-ARM GAS  /tmp/cck2Fec7.s 			page 43
+ARM GAS  /tmp/ccfCLKEL.s 			page 43
 
 
  1707 0100 89B2     		uxth	r1, r1
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1747              		.loc 1 690 0
  1748              		.cfi_startproc
  1749              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  /tmp/cck2Fec7.s 			page 44
+ARM GAS  /tmp/ccfCLKEL.s 			page 44
 
 
  1750              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1784 0022 FFF7FEFF 		bl	VL53L0X_calc_timeout_mclks
  1785              	.LVL312:
  1786 0026 83B2     		uxth	r3, r0
-ARM GAS  /tmp/cck2Fec7.s 			page 45
+ARM GAS  /tmp/ccfCLKEL.s 			page 45
 
 
  1787              	.LVL313:
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  731:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  732:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (SequenceStepId == VL53L0X_SEQUENCESTEP_PRE_RANGE) {
  1820              		.loc 1 732 0
-ARM GAS  /tmp/cck2Fec7.s 			page 46
+ARM GAS  /tmp/ccfCLKEL.s 			page 46
 
 
  1821 004e 0329     		cmp	r1, #3
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  752:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				VL53L0X_REG_PRE_RANGE_CONFIG_TIMEOUT_MACROP_HI,
  753:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				PreRangeEncodedTimeOut);
  754:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			}
-ARM GAS  /tmp/cck2Fec7.s 			page 47
+ARM GAS  /tmp/ccfCLKEL.s 			page 47
 
 
  755:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1882 00ac 0446     		mov	r4, r0
  1883 00ae 70B9     		cbnz	r0, .L93
  783:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 					Status = VL53L0X_RdWord(Dev, 0x51,
-ARM GAS  /tmp/cck2Fec7.s 			page 48
+ARM GAS  /tmp/ccfCLKEL.s 			page 48
 
 
  1884              		.loc 1 783 0
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1921              	.LVL341:
  1922 00de 0446     		mov	r4, r0
  1923              	.LVL342:
-ARM GAS  /tmp/cck2Fec7.s 			page 49
+ARM GAS  /tmp/ccfCLKEL.s 			page 49
 
 
  1924              	.L88:
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  1956              	.L91:
  819:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 						Dev,
  820:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 						FinalRangeTimeoutMicroSecs,
-ARM GAS  /tmp/cck2Fec7.s 			page 50
+ARM GAS  /tmp/ccfCLKEL.s 			page 50
 
 
  821:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 						TimeOutMicroSecs);
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  835:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint8_t vcsel_period_reg;
  836:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint8_t MinPreVcselPeriodPCLK = 12;
  837:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint8_t MaxPreVcselPeriodPCLK = 18;
-ARM GAS  /tmp/cck2Fec7.s 			page 51
+ARM GAS  /tmp/ccfCLKEL.s 			page 51
 
 
  838:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint8_t MinFinalVcselPeriodPCLK = 8;
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2031              		.loc 1 854 0
  2032 0034 FC23     		movs	r3, #252
  2033 0036 06E0     		b	.L96
-ARM GAS  /tmp/cck2Fec7.s 			page 52
+ARM GAS  /tmp/ccfCLKEL.s 			page 52
 
 
  2034              	.L120:
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2067 005c 3846     		mov	r0, r7
  2068 005e 5621     		movs	r1, #86
  2069 0060 0822     		movs	r2, #8
-ARM GAS  /tmp/cck2Fec7.s 			page 53
+ARM GAS  /tmp/ccfCLKEL.s 			page 53
 
 
  2070 0062 FFF7FEFF 		bl	VL53L0X_WrByte
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2111              	.LVL371:
  890:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				VL53L0X_REG_PRE_RANGE_CONFIG_VALID_PHASE_HIGH,
  891:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				0x40);
-ARM GAS  /tmp/cck2Fec7.s 			page 54
+ARM GAS  /tmp/ccfCLKEL.s 			page 54
 
 
  892:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status = VL53L0X_WrByte(Dev,
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2151 00c8 2ED1     		bne	.L104
  907:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  908:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status = VL53L0X_WrByte(Dev,
-ARM GAS  /tmp/cck2Fec7.s 			page 55
+ARM GAS  /tmp/ccfCLKEL.s 			page 55
 
 
  2152              		.loc 1 908 0
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2194 0108 C4B2     		uxtb	r4, r0
  2195              	.LVL393:
  921:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status |= VL53L0X_WrByte(Dev,
-ARM GAS  /tmp/cck2Fec7.s 			page 56
+ARM GAS  /tmp/ccfCLKEL.s 			page 56
 
 
  2196              		.loc 1 921 0
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2237              		.loc 1 934 0
  2238 0142 3846     		mov	r0, r7
  2239 0144 3221     		movs	r1, #50
-ARM GAS  /tmp/cck2Fec7.s 			page 57
+ARM GAS  /tmp/ccfCLKEL.s 			page 57
 
 
  2240 0146 0322     		movs	r2, #3
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  944:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		} else if (VCSELPulsePeriodPCLK == 12) {
  2285              		.loc 1 944 0
  2286 018a 0C2D     		cmp	r5, #12
-ARM GAS  /tmp/cck2Fec7.s 			page 58
+ARM GAS  /tmp/ccfCLKEL.s 			page 58
 
 
  2287 018c 2ED1     		bne	.L106
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2327 01c6 FFF7FEFF 		bl	VL53L0X_WrByte
  2328              	.LVL426:
  2329 01ca 2043     		orrs	r0, r0, r4
-ARM GAS  /tmp/cck2Fec7.s 			page 59
+ARM GAS  /tmp/ccfCLKEL.s 			page 59
 
 
  2330 01cc C4B2     		uxtb	r4, r0
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  970:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				0x08);
  971:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
  972:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status |= VL53L0X_WrByte(Dev,
-ARM GAS  /tmp/cck2Fec7.s 			page 60
+ARM GAS  /tmp/ccfCLKEL.s 			page 60
 
 
  2373              		.loc 1 972 0
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2418              	.L101:
  982:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		}
  983:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	}
-ARM GAS  /tmp/cck2Fec7.s 			page 61
+ARM GAS  /tmp/ccfCLKEL.s 			page 61
 
 
  984:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2448 0274 FFF7FEFF 		bl	get_sequence_step_timeout
  2449              	.LVL453:
  2450 0278 0346     		mov	r3, r0
-ARM GAS  /tmp/cck2Fec7.s 			page 62
+ARM GAS  /tmp/ccfCLKEL.s 			page 62
 
 
  2451              	.LVL454:
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1028:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1029:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			VL53L0X_SETDEVICESPECIFICPARAMETER(
  2486              		.loc 1 1029 0
-ARM GAS  /tmp/cck2Fec7.s 			page 63
+ARM GAS  /tmp/ccfCLKEL.s 			page 63
 
 
  2487 02a4 87F8E850 		strb	r5, [r7, #232]
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1049:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1050:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			VL53L0X_SETDEVICESPECIFICPARAMETER(
  2522              		.loc 1 1050 0
-ARM GAS  /tmp/cck2Fec7.s 			page 64
+ARM GAS  /tmp/ccfCLKEL.s 			page 64
 
 
  2523 02d2 87F8E050 		strb	r5, [r7, #224]
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2553 02f6 0346     		mov	r3, r0
  2554              	.LVL475:
  2555              	.L98:
-ARM GAS  /tmp/cck2Fec7.s 			page 65
+ARM GAS  /tmp/ccfCLKEL.s 			page 65
 
 
 1075:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Dev, &PhaseCalInt, 0, 1);
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2598              	.LVL478:
  2599 0010 0DF10702 		add	r2, sp, #7
  2600              	.LVL479:
-ARM GAS  /tmp/cck2Fec7.s 			page 66
+ARM GAS  /tmp/ccfCLKEL.s 			page 66
 
 
  2601 0014 FFF7FEFF 		bl	VL53L0X_RdByte
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2636 0038 60B2     		sxtb	r0, r4
  2637 003a 03B0     		add	sp, sp, #12
  2638              	.LCFI26:
-ARM GAS  /tmp/cck2Fec7.s 			page 67
+ARM GAS  /tmp/ccfCLKEL.s 			page 67
 
 
  2639              		.cfi_def_cfa_offset 12
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1125:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint32_t cMinTimingBudgetMicroSeconds	= 20000;
 1126:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	uint32_t SubTimeout = 0;
 1127:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 68
+ARM GAS  /tmp/ccfCLKEL.s 			page 68
 
 
 1128:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	LOG_FUNCTION_START("");
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2707              		.loc 1 1148 0
  2708 003a 2046     		mov	r0, r4
  2709              	.LVL497:
-ARM GAS  /tmp/cck2Fec7.s 			page 69
+ARM GAS  /tmp/ccfCLKEL.s 			page 69
 
 
  2710 003c 0221     		movs	r1, #2
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1174:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (Status != VL53L0X_ERROR_NONE) {
  2738              		.loc 1 1174 0
  2739 0060 D3BB     		cbnz	r3, .L146
-ARM GAS  /tmp/cck2Fec7.s 			page 70
+ARM GAS  /tmp/ccfCLKEL.s 			page 70
 
 
 1175:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			LOG_FUNCTION_END(Status);
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2769              	.LVL506:
  2770 008a 02E0     		b	.L137
  2771              	.L147:
-ARM GAS  /tmp/cck2Fec7.s 			page 71
+ARM GAS  /tmp/ccfCLKEL.s 			page 71
 
 
 1190:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			}
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2800 00ac B242     		cmp	r2, r6
  2801 00ae 01D2     		bcs	.L150
 1225:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			FinalRangeTimingBudgetMicroSeconds -= SubTimeout;
-ARM GAS  /tmp/cck2Fec7.s 			page 72
+ARM GAS  /tmp/ccfCLKEL.s 			page 72
 
 
  2802              		.loc 1 1225 0
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2830              	.L142:
 1251:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			MeasurementTimingBudgetMicroSeconds,
 1252:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			MeasurementTimingBudgetMicroSeconds);
-ARM GAS  /tmp/cck2Fec7.s 			page 73
+ARM GAS  /tmp/ccfCLKEL.s 			page 73
 
 
 1253:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	}
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2874              		@ frame_needed = 0, uses_anonymous_args = 0
  2875              	.LVL525:
  2876 0000 30B5     		push	{r4, r5, lr}
-ARM GAS  /tmp/cck2Fec7.s 			page 74
+ARM GAS  /tmp/ccfCLKEL.s 			page 74
 
 
  2877              	.LCFI30:
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1287:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	}
 1288:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1289:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 75
+ARM GAS  /tmp/ccfCLKEL.s 			page 75
 
 
 1290:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	if (SchedulerSequenceSteps.TccOn  ||
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2942 005a 3AB1     		cbz	r2, .L157
 1306:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				*pMeasurementTimingBudgetMicroSeconds +=
 1307:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				2 * (MsrcDccTccTimeoutMicroSeconds +
-ARM GAS  /tmp/cck2Fec7.s 			page 76
+ARM GAS  /tmp/ccfCLKEL.s 			page 76
 
 
  2943              		.loc 1 1307 0
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  2979 0094 02F52572 		add	r2, r2, #660
 1322:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				PreRangeTimeoutMicroSeconds +
  2980              		.loc 1 1322 0
-ARM GAS  /tmp/cck2Fec7.s 			page 77
+ARM GAS  /tmp/ccfCLKEL.s 			page 77
 
 
  2981 0098 2168     		ldr	r1, [r4]
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1345:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	LOG_FUNCTION_END(Status);
 1346:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	return Status;
 1347:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** }
-ARM GAS  /tmp/cck2Fec7.s 			page 78
+ARM GAS  /tmp/ccfCLKEL.s 			page 78
 
 
  3013              		.loc 1 1347 0
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1367:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	Index = 0;
  3050              		.loc 1 1367 0
  3051 0008 0024     		movs	r4, #0
-ARM GAS  /tmp/cck2Fec7.s 			page 79
+ARM GAS  /tmp/ccfCLKEL.s 			page 79
 
 
 1354:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3089 0028 AB5C     		ldrb	r3, [r5, r2]	@ zero_extendqisi2
  3090              	.LVL547:
  3091 002a 0434     		adds	r4, r4, #4
-ARM GAS  /tmp/cck2Fec7.s 			page 80
+ARM GAS  /tmp/ccfCLKEL.s 			page 80
 
 
  3092              	.LVL548:
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3129 004c AB5C     		ldrb	r3, [r5, r2]	@ zero_extendqisi2
  3130              	.LVL561:
  3131 004e 0434     		adds	r4, r4, #4
-ARM GAS  /tmp/cck2Fec7.s 			page 81
+ARM GAS  /tmp/ccfCLKEL.s 			page 81
 
 
  3132              	.LVL562:
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3169 0072 0234     		adds	r4, r4, #2
  3170              	.LVL574:
 1418:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 82
+ARM GAS  /tmp/ccfCLKEL.s 			page 82
 
 
 1419:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			for (i = 0; i < NumberOfWrites; i++) {
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1429:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status = VL53L0X_ERROR_INVALID_PARAMS;
  3210              		.loc 1 1429 0
  3211 009c FC20     		movs	r0, #252
-ARM GAS  /tmp/cck2Fec7.s 			page 83
+ARM GAS  /tmp/ccfCLKEL.s 			page 83
 
 
  3212              	.LVL583:
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3255 0006 0D46     		mov	r5, r1
  3256 0008 1446     		mov	r4, r2
  3257              	.LVL585:
-ARM GAS  /tmp/cck2Fec7.s 			page 84
+ARM GAS  /tmp/ccfCLKEL.s 			page 84
 
 
 1441:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1465:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				(totalXtalkMegaCps + 0x80) >> 8;
  3285              		.loc 1 1465 0
  3286 002c 2360     		str	r3, [r4]
-ARM GAS  /tmp/cck2Fec7.s 			page 85
+ARM GAS  /tmp/ccfCLKEL.s 			page 85
 
 
  3287              	.LVL592:
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3325              		.loc 1 1482 0
  3326 0008 1360     		str	r3, [r2]
 1484:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 86
+ARM GAS  /tmp/ccfCLKEL.s 			page 86
 
 
 1485:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	Status = VL53L0X_get_total_xtalk_rate(
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3364              	.LVL599:
  3365 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
  3366              	.LCFI42:
-ARM GAS  /tmp/cck2Fec7.s 			page 87
+ARM GAS  /tmp/ccfCLKEL.s 			page 87
 
 
  3367              		.cfi_def_cfa_offset 24
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1538:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1539:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	/* FixPoint1616 >> 8 = FixPoint2408 */
 1540:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	SignalAt0mm = (SignalAt0mm + 0x80) >> 8;
-ARM GAS  /tmp/cck2Fec7.s 			page 88
+ARM GAS  /tmp/ccfCLKEL.s 			page 88
 
 
  3387              		.loc 1 1540 0
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3415 0032 00F50040 		add	r0, r0, #32768
  3416              	.LVL613:
  3417 0036 000C     		lsrs	r0, r0, #16
-ARM GAS  /tmp/cck2Fec7.s 			page 89
+ARM GAS  /tmp/ccfCLKEL.s 			page 89
 
 
  3418              	.LVL614:
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3452 005c C1EBC101 		rsb	r1, r1, r1, lsl #3
  3453              	.LVL626:
 1585:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 90
+ARM GAS  /tmp/ccfCLKEL.s 			page 90
 
 
 1586:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	if (sigmaEstP2Tmp > 0xffff) {
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1610:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1611:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	/* FixPoint1616 * FixPoint1616 = FixPoint3232 */
 1612:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	sigmaEstSqTmp = cSigmaEstRef * cSigmaEstRef;
-ARM GAS  /tmp/cck2Fec7.s 			page 91
+ARM GAS  /tmp/ccfCLKEL.s 			page 91
 
 
 1613:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1642:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1643:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	/* Apply correction by dividing by 1000000.
 1644:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	 * This assumes 10E16 on the numerator of the equation
-ARM GAS  /tmp/cck2Fec7.s 			page 92
+ARM GAS  /tmp/ccfCLKEL.s 			page 92
 
 
 1645:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	 * and 10E-22 on the denominator.
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3538 00c2 24B1     		cbz	r4, .L191
 1669:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		dmaxAmbient = (SignalAt0mm + minSignalNeeded/2)
  3539              		.loc 1 1669 0
-ARM GAS  /tmp/cck2Fec7.s 			page 93
+ARM GAS  /tmp/ccfCLKEL.s 			page 93
 
 
  3540 00c4 05EB5400 		add	r0, r5, r4, lsr #1
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3581              		.thumb_func
  3583              	VL53L0X_calc_sigma_estimate:
  3584              	.LFB135:
-ARM GAS  /tmp/cck2Fec7.s 			page 94
+ARM GAS  /tmp/ccfCLKEL.s 			page 94
 
 
 1684:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1713:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	FixPoint1616_t sigmaEstimateP3;
 1714:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	FixPoint1616_t deltaT_ps;
 1715:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	FixPoint1616_t pwMult;
-ARM GAS  /tmp/cck2Fec7.s 			page 95
+ARM GAS  /tmp/ccfCLKEL.s 			page 95
 
 
 1716:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	FixPoint1616_t sigmaEstRtn;
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1758:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1759:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	correctedSignalRate_mcps =
  3621              		.loc 1 1759 0
-ARM GAS  /tmp/cck2Fec7.s 			page 96
+ARM GAS  /tmp/ccfCLKEL.s 			page 96
 
 
  3622 001e CB68     		ldr	r3, [r1, #12]
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3657              	.L196:
 1779:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1780:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	if (Status == VL53L0X_ERROR_NONE) {
-ARM GAS  /tmp/cck2Fec7.s 			page 97
+ARM GAS  /tmp/ccfCLKEL.s 			page 97
 
 
  3658              		.loc 1 1780 0
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3689 0084 01D0     		beq	.L208
 1802:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (finalRangeVcselPCLKS == 8)
  3690              		.loc 1 1802 0
-ARM GAS  /tmp/cck2Fec7.s 			page 98
+ARM GAS  /tmp/ccfCLKEL.s 			page 98
 
 
  3691 0086 0322     		movs	r2, #3
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3730 00be 08FB03FB 		mul	fp, r8, r3
  3731              	.LVL694:
 1818:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			peakVcselDuration_us;
-ARM GAS  /tmp/cck2Fec7.s 			page 99
+ARM GAS  /tmp/ccfCLKEL.s 			page 99
 
 
 1819:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -5938,7 +5938,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3766              	.L202:
 1839:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 1840:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		sigmaEstimateP1 = cPulseEffectiveWidth_centi_ns;
-ARM GAS  /tmp/cck2Fec7.s 			page 100
+ARM GAS  /tmp/ccfCLKEL.s 			page 100
 
 
 1841:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -5998,7 +5998,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3797 0124 3A04     		lsls	r2, r7, #16
  3798 0126 A2EB4404 		sub	r4, r2, r4, lsl #1
  3799              	.LVL707:
-ARM GAS  /tmp/cck2Fec7.s 			page 101
+ARM GAS  /tmp/ccfCLKEL.s 			page 101
 
 
 1865:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			2 * xTalkCompRate_kcps) + 500)/1000;
@@ -6058,7 +6058,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1888:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			 * values are small enough such that32 bits will not be
 1889:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			 * exceeded.
 1890:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			 */
-ARM GAS  /tmp/cck2Fec7.s 			page 102
+ARM GAS  /tmp/ccfCLKEL.s 			page 102
 
 
 1891:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			pwMult *= ((1 << 16) - xTalkCorrection);
@@ -6118,7 +6118,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3860 017c 4FF44870 		mov	r0, #800
  3861 0180 00FB09F0 		mul	r0, r0, r9
  3862              	.LVL725:
-ARM GAS  /tmp/cck2Fec7.s 			page 103
+ARM GAS  /tmp/ccfCLKEL.s 			page 103
 
 
 1914:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -6178,7 +6178,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3887 01a2 A3FB0023 		umull	r2, r3, r3, r0
  3888 01a6 5B09     		lsrs	r3, r3, #5
  3889 01a8 B3FBF8F3 		udiv	r3, r3, r8
-ARM GAS  /tmp/cck2Fec7.s 			page 104
+ARM GAS  /tmp/ccfCLKEL.s 			page 104
 
 
  3890              	.LVL734:
@@ -6238,7 +6238,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1963:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 				finalRangeIntegrationTimeMilliSecs/2)/
  3922              		.loc 1 1963 0
  3923 01e0 03F5C813 		add	r3, r3, #1638400
-ARM GAS  /tmp/cck2Fec7.s 			page 105
+ARM GAS  /tmp/ccfCLKEL.s 			page 105
 
 
 1962:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			VL53L0X_isqrt((cDfltFinalRangeIntegrationTimeMilliSecs +
@@ -6298,7 +6298,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  3955 0212 05D0     		beq	.L214
  3956              		.loc 1 1986 0 discriminator 2
  3957 0214 114B     		ldr	r3, .L217+4
-ARM GAS  /tmp/cck2Fec7.s 			page 106
+ARM GAS  /tmp/ccfCLKEL.s 			page 106
 
 
  3958 0216 9842     		cmp	r0, r3
@@ -6358,7 +6358,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 1998:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			sigmaEstimateP1,
 1999:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			sigmaEstimateP2,
 2000:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			peakVcselDuration_us,
-ARM GAS  /tmp/cck2Fec7.s 			page 107
+ARM GAS  /tmp/ccfCLKEL.s 			page 107
 
 
 2001:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			pDmax_mm);
@@ -6418,7 +6418,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4043              		.cfi_offset 9, -16
  4044              		.cfi_offset 10, -12
  4045              		.cfi_offset 11, -8
-ARM GAS  /tmp/cck2Fec7.s 			page 108
+ARM GAS  /tmp/ccfCLKEL.s 			page 108
 
 
  4046              		.cfi_offset 14, -4
@@ -6478,7 +6478,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2045:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 2046:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	DeviceRangeStatusInternal = ((DeviceRangeStatus & 0x78) >> 3);
  4070              		.loc 1 2046 0
-ARM GAS  /tmp/cck2Fec7.s 			page 109
+ARM GAS  /tmp/ccfCLKEL.s 			page 109
 
 
  4071 0026 C1F3C305 		ubfx	r5, r1, #3, #4
@@ -6538,7 +6538,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2057:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	} else {
 2058:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		NoneFlag = 0;
  4115              		.loc 1 2058 0
-ARM GAS  /tmp/cck2Fec7.s 			page 110
+ARM GAS  /tmp/ccfCLKEL.s 			page 110
 
 
  4116 006e 4FF00008 		mov	r8, #0
@@ -6598,7 +6598,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4148 009a 1299     		ldr	r1, [sp, #72]
  4149 009c 4A81     		strh	r2, [r1, #10]	@ movhi
  4150              	.L222:
-ARM GAS  /tmp/cck2Fec7.s 			page 111
+ARM GAS  /tmp/ccfCLKEL.s 			page 111
 
 
 2081:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
@@ -6658,7 +6658,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2092:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	}
 2093:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 2094:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	/*
-ARM GAS  /tmp/cck2Fec7.s 			page 112
+ARM GAS  /tmp/ccfCLKEL.s 			page 112
 
 
 2095:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	 * Check if Signal ref clip limit is enabled, if yes then do comparison
@@ -6718,7 +6718,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2114:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		if (Status == VL53L0X_ERROR_NONE)
  4227              		.loc 1 2114 0
  4228 010a 33B9     		cbnz	r3, .L226
-ARM GAS  /tmp/cck2Fec7.s 			page 113
+ARM GAS  /tmp/ccfCLKEL.s 			page 113
 
 
 2115:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 			Status = VL53L0X_RdWord(Dev,
@@ -6778,7 +6778,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4271              	.LVL793:
  4272              	.L261:
  4273 014c 4FF0000A 		mov	r10, #0
-ARM GAS  /tmp/cck2Fec7.s 			page 114
+ARM GAS  /tmp/ccfCLKEL.s 			page 114
 
 
  4274 0150 01E0     		b	.L224
@@ -6838,7 +6838,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4303              	.LVL798:
  4304 0178 01E0     		b	.L230
  4305              	.LVL799:
-ARM GAS  /tmp/cck2Fec7.s 			page 115
+ARM GAS  /tmp/ccfCLKEL.s 			page 115
 
 
  4306              	.L265:
@@ -6898,7 +6898,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2162:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 		}
 2163:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	}
 2164:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
-ARM GAS  /tmp/cck2Fec7.s 			page 116
+ARM GAS  /tmp/ccfCLKEL.s 			page 116
 
 
 2165:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	if (Status == VL53L0X_ERROR_NONE) {
@@ -6958,7 +6958,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2176:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 					DeviceRangeStatusInternal == 10 ||
  4389              		.loc 1 2176 0 is_stmt 1
  4390 01d6 BAF1000F 		cmp	r10, #0
-ARM GAS  /tmp/cck2Fec7.s 			page 117
+ARM GAS  /tmp/ccfCLKEL.s 			page 117
 
 
  4391 01da 02D0     		beq	.L237
@@ -7018,7 +7018,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
 2194:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 
 2195:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.c **** 	Status =  VL53L0X_GetLimitCheckEnable(Dev,
  4428              		.loc 1 2195 0
-ARM GAS  /tmp/cck2Fec7.s 			page 118
+ARM GAS  /tmp/ccfCLKEL.s 			page 118
 
 
  4429 0206 2046     		mov	r0, r4
@@ -7078,7 +7078,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4468              	.L270:
  4469 023e 0122     		movs	r2, #1
  4470              	.LVL816:
-ARM GAS  /tmp/cck2Fec7.s 			page 119
+ARM GAS  /tmp/ccfCLKEL.s 			page 119
 
 
  4471 0240 00E0     		b	.L244
@@ -7138,7 +7138,7 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4507 026c 02E0     		b	.L246
  4508              	.L274:
  4509 026e 0122     		movs	r2, #1
-ARM GAS  /tmp/cck2Fec7.s 			page 120
+ARM GAS  /tmp/ccfCLKEL.s 			page 120
 
 
  4510 0270 00E0     		b	.L246
@@ -7189,70 +7189,70 @@ ARM GAS  /tmp/cck2Fec7.s 			page 1
  4544              		.file 13 "/usr/include/newlib/string.h"
  4545              		.file 14 "../Drivers/BSP/Components/vl53l0x/vl53l0x_api_calibration.h"
  4546              		.file 15 "../Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/cck2Fec7.s 			page 121
+ARM GAS  /tmp/ccfCLKEL.s 			page 121
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 vl53l0x_api_core.c
-     /tmp/cck2Fec7.s:21     .text.VL53L0X_reverse_bytes:0000000000000000 $t
-     /tmp/cck2Fec7.s:26     .text.VL53L0X_reverse_bytes:0000000000000000 VL53L0X_reverse_bytes
-     /tmp/cck2Fec7.s:84     .text.VL53L0X_measurement_poll_for_completion:0000000000000000 $t
-     /tmp/cck2Fec7.s:89     .text.VL53L0X_measurement_poll_for_completion:0000000000000000 VL53L0X_measurement_poll_for_completion
-     /tmp/cck2Fec7.s:154    .text.VL53L0X_decode_vcsel_period:0000000000000000 $t
-     /tmp/cck2Fec7.s:159    .text.VL53L0X_decode_vcsel_period:0000000000000000 VL53L0X_decode_vcsel_period
-     /tmp/cck2Fec7.s:180    .text.VL53L0X_encode_vcsel_period:0000000000000000 $t
-     /tmp/cck2Fec7.s:185    .text.VL53L0X_encode_vcsel_period:0000000000000000 VL53L0X_encode_vcsel_period
-     /tmp/cck2Fec7.s:205    .text.VL53L0X_isqrt:0000000000000000 $t
-     /tmp/cck2Fec7.s:210    .text.VL53L0X_isqrt:0000000000000000 VL53L0X_isqrt
-     /tmp/cck2Fec7.s:266    .text.VL53L0X_quadrature_sum:0000000000000000 $t
-     /tmp/cck2Fec7.s:271    .text.VL53L0X_quadrature_sum:0000000000000000 VL53L0X_quadrature_sum
-     /tmp/cck2Fec7.s:317    .text.VL53L0X_device_read_strobe:0000000000000000 $t
-     /tmp/cck2Fec7.s:322    .text.VL53L0X_device_read_strobe:0000000000000000 VL53L0X_device_read_strobe
-     /tmp/cck2Fec7.s:399    .text.VL53L0X_get_info_from_device:0000000000000000 $t
-     /tmp/cck2Fec7.s:404    .text.VL53L0X_get_info_from_device:0000000000000000 VL53L0X_get_info_from_device
-     /tmp/cck2Fec7.s:1290   .text.VL53L0X_calc_macro_period_ps:0000000000000000 $t
-     /tmp/cck2Fec7.s:1295   .text.VL53L0X_calc_macro_period_ps:0000000000000000 VL53L0X_calc_macro_period_ps
-     /tmp/cck2Fec7.s:1318   .text.VL53L0X_encode_timeout:0000000000000000 $t
-     /tmp/cck2Fec7.s:1323   .text.VL53L0X_encode_timeout:0000000000000000 VL53L0X_encode_timeout
-     /tmp/cck2Fec7.s:1374   .text.VL53L0X_decode_timeout:0000000000000000 $t
-     /tmp/cck2Fec7.s:1379   .text.VL53L0X_decode_timeout:0000000000000000 VL53L0X_decode_timeout
-     /tmp/cck2Fec7.s:1401   .text.VL53L0X_calc_timeout_mclks:0000000000000000 $t
-     /tmp/cck2Fec7.s:1406   .text.VL53L0X_calc_timeout_mclks:0000000000000000 VL53L0X_calc_timeout_mclks
-     /tmp/cck2Fec7.s:1445   .text.VL53L0X_calc_timeout_mclks:0000000000000028 $d
-     /tmp/cck2Fec7.s:1450   .text.VL53L0X_calc_timeout_us:0000000000000000 $t
-     /tmp/cck2Fec7.s:1455   .text.VL53L0X_calc_timeout_us:0000000000000000 VL53L0X_calc_timeout_us
-     /tmp/cck2Fec7.s:1496   .text.VL53L0X_calc_timeout_us:0000000000000028 $d
-     /tmp/cck2Fec7.s:1501   .text.get_sequence_step_timeout:0000000000000000 $t
-     /tmp/cck2Fec7.s:1506   .text.get_sequence_step_timeout:0000000000000000 get_sequence_step_timeout
-     /tmp/cck2Fec7.s:1740   .text.set_sequence_step_timeout:0000000000000000 $t
-     /tmp/cck2Fec7.s:1745   .text.set_sequence_step_timeout:0000000000000000 set_sequence_step_timeout
-     /tmp/cck2Fec7.s:1972   .text.VL53L0X_set_vcsel_pulse_period:0000000000000000 $t
-     /tmp/cck2Fec7.s:1977   .text.VL53L0X_set_vcsel_pulse_period:0000000000000000 VL53L0X_set_vcsel_pulse_period
-     /tmp/cck2Fec7.s:2567   .text.VL53L0X_get_vcsel_pulse_period:0000000000000000 $t
-     /tmp/cck2Fec7.s:2572   .text.VL53L0X_get_vcsel_pulse_period:0000000000000000 VL53L0X_get_vcsel_pulse_period
-     /tmp/cck2Fec7.s:2646   .text.VL53L0X_set_measurement_timing_budget_micro_seconds:0000000000000000 $t
-     /tmp/cck2Fec7.s:2651   .text.VL53L0X_set_measurement_timing_budget_micro_seconds:0000000000000000 VL53L0X_set_measurement_timing_budget_micro_seconds
-     /tmp/cck2Fec7.s:2864   .text.VL53L0X_get_measurement_timing_budget_micro_seconds:0000000000000000 $t
-     /tmp/cck2Fec7.s:2869   .text.VL53L0X_get_measurement_timing_budget_micro_seconds:0000000000000000 VL53L0X_get_measurement_timing_budget_micro_seconds
-     /tmp/cck2Fec7.s:3024   .text.VL53L0X_load_tuning_settings:0000000000000000 $t
-     /tmp/cck2Fec7.s:3029   .text.VL53L0X_load_tuning_settings:0000000000000000 VL53L0X_load_tuning_settings
-     /tmp/cck2Fec7.s:3076   .text.VL53L0X_load_tuning_settings:0000000000000020 $d
-     /tmp/cck2Fec7.s:3080   .text.VL53L0X_load_tuning_settings:0000000000000024 $t
-     /tmp/cck2Fec7.s:3232   .text.VL53L0X_get_total_xtalk_rate:0000000000000000 $t
-     /tmp/cck2Fec7.s:3237   .text.VL53L0X_get_total_xtalk_rate:0000000000000000 VL53L0X_get_total_xtalk_rate
-     /tmp/cck2Fec7.s:3301   .text.VL53L0X_get_total_signal_rate:0000000000000000 $t
-     /tmp/cck2Fec7.s:3306   .text.VL53L0X_get_total_signal_rate:0000000000000000 VL53L0X_get_total_signal_rate
-     /tmp/cck2Fec7.s:3353   .text.VL53L0X_calc_dmax:0000000000000000 $t
-     /tmp/cck2Fec7.s:3358   .text.VL53L0X_calc_dmax:0000000000000000 VL53L0X_calc_dmax
-     /tmp/cck2Fec7.s:3570   .text.VL53L0X_calc_dmax:00000000000000e0 $d
-     /tmp/cck2Fec7.s:3578   .text.VL53L0X_calc_sigma_estimate:0000000000000000 $t
-     /tmp/cck2Fec7.s:3583   .text.VL53L0X_calc_sigma_estimate:0000000000000000 VL53L0X_calc_sigma_estimate
-     /tmp/cck2Fec7.s:4012   .text.VL53L0X_calc_sigma_estimate:0000000000000258 $d
-     /tmp/cck2Fec7.s:4023   .text.VL53L0X_get_pal_range_status:0000000000000000 $t
-ARM GAS  /tmp/cck2Fec7.s 			page 122
+     /tmp/ccfCLKEL.s:21     .text.VL53L0X_reverse_bytes:0000000000000000 $t
+     /tmp/ccfCLKEL.s:26     .text.VL53L0X_reverse_bytes:0000000000000000 VL53L0X_reverse_bytes
+     /tmp/ccfCLKEL.s:84     .text.VL53L0X_measurement_poll_for_completion:0000000000000000 $t
+     /tmp/ccfCLKEL.s:89     .text.VL53L0X_measurement_poll_for_completion:0000000000000000 VL53L0X_measurement_poll_for_completion
+     /tmp/ccfCLKEL.s:154    .text.VL53L0X_decode_vcsel_period:0000000000000000 $t
+     /tmp/ccfCLKEL.s:159    .text.VL53L0X_decode_vcsel_period:0000000000000000 VL53L0X_decode_vcsel_period
+     /tmp/ccfCLKEL.s:180    .text.VL53L0X_encode_vcsel_period:0000000000000000 $t
+     /tmp/ccfCLKEL.s:185    .text.VL53L0X_encode_vcsel_period:0000000000000000 VL53L0X_encode_vcsel_period
+     /tmp/ccfCLKEL.s:205    .text.VL53L0X_isqrt:0000000000000000 $t
+     /tmp/ccfCLKEL.s:210    .text.VL53L0X_isqrt:0000000000000000 VL53L0X_isqrt
+     /tmp/ccfCLKEL.s:266    .text.VL53L0X_quadrature_sum:0000000000000000 $t
+     /tmp/ccfCLKEL.s:271    .text.VL53L0X_quadrature_sum:0000000000000000 VL53L0X_quadrature_sum
+     /tmp/ccfCLKEL.s:317    .text.VL53L0X_device_read_strobe:0000000000000000 $t
+     /tmp/ccfCLKEL.s:322    .text.VL53L0X_device_read_strobe:0000000000000000 VL53L0X_device_read_strobe
+     /tmp/ccfCLKEL.s:399    .text.VL53L0X_get_info_from_device:0000000000000000 $t
+     /tmp/ccfCLKEL.s:404    .text.VL53L0X_get_info_from_device:0000000000000000 VL53L0X_get_info_from_device
+     /tmp/ccfCLKEL.s:1290   .text.VL53L0X_calc_macro_period_ps:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1295   .text.VL53L0X_calc_macro_period_ps:0000000000000000 VL53L0X_calc_macro_period_ps
+     /tmp/ccfCLKEL.s:1318   .text.VL53L0X_encode_timeout:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1323   .text.VL53L0X_encode_timeout:0000000000000000 VL53L0X_encode_timeout
+     /tmp/ccfCLKEL.s:1374   .text.VL53L0X_decode_timeout:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1379   .text.VL53L0X_decode_timeout:0000000000000000 VL53L0X_decode_timeout
+     /tmp/ccfCLKEL.s:1401   .text.VL53L0X_calc_timeout_mclks:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1406   .text.VL53L0X_calc_timeout_mclks:0000000000000000 VL53L0X_calc_timeout_mclks
+     /tmp/ccfCLKEL.s:1445   .text.VL53L0X_calc_timeout_mclks:0000000000000028 $d
+     /tmp/ccfCLKEL.s:1450   .text.VL53L0X_calc_timeout_us:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1455   .text.VL53L0X_calc_timeout_us:0000000000000000 VL53L0X_calc_timeout_us
+     /tmp/ccfCLKEL.s:1496   .text.VL53L0X_calc_timeout_us:0000000000000028 $d
+     /tmp/ccfCLKEL.s:1501   .text.get_sequence_step_timeout:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1506   .text.get_sequence_step_timeout:0000000000000000 get_sequence_step_timeout
+     /tmp/ccfCLKEL.s:1740   .text.set_sequence_step_timeout:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1745   .text.set_sequence_step_timeout:0000000000000000 set_sequence_step_timeout
+     /tmp/ccfCLKEL.s:1972   .text.VL53L0X_set_vcsel_pulse_period:0000000000000000 $t
+     /tmp/ccfCLKEL.s:1977   .text.VL53L0X_set_vcsel_pulse_period:0000000000000000 VL53L0X_set_vcsel_pulse_period
+     /tmp/ccfCLKEL.s:2567   .text.VL53L0X_get_vcsel_pulse_period:0000000000000000 $t
+     /tmp/ccfCLKEL.s:2572   .text.VL53L0X_get_vcsel_pulse_period:0000000000000000 VL53L0X_get_vcsel_pulse_period
+     /tmp/ccfCLKEL.s:2646   .text.VL53L0X_set_measurement_timing_budget_micro_seconds:0000000000000000 $t
+     /tmp/ccfCLKEL.s:2651   .text.VL53L0X_set_measurement_timing_budget_micro_seconds:0000000000000000 VL53L0X_set_measurement_timing_budget_micro_seconds
+     /tmp/ccfCLKEL.s:2864   .text.VL53L0X_get_measurement_timing_budget_micro_seconds:0000000000000000 $t
+     /tmp/ccfCLKEL.s:2869   .text.VL53L0X_get_measurement_timing_budget_micro_seconds:0000000000000000 VL53L0X_get_measurement_timing_budget_micro_seconds
+     /tmp/ccfCLKEL.s:3024   .text.VL53L0X_load_tuning_settings:0000000000000000 $t
+     /tmp/ccfCLKEL.s:3029   .text.VL53L0X_load_tuning_settings:0000000000000000 VL53L0X_load_tuning_settings
+     /tmp/ccfCLKEL.s:3076   .text.VL53L0X_load_tuning_settings:0000000000000020 $d
+     /tmp/ccfCLKEL.s:3080   .text.VL53L0X_load_tuning_settings:0000000000000024 $t
+     /tmp/ccfCLKEL.s:3232   .text.VL53L0X_get_total_xtalk_rate:0000000000000000 $t
+     /tmp/ccfCLKEL.s:3237   .text.VL53L0X_get_total_xtalk_rate:0000000000000000 VL53L0X_get_total_xtalk_rate
+     /tmp/ccfCLKEL.s:3301   .text.VL53L0X_get_total_signal_rate:0000000000000000 $t
+     /tmp/ccfCLKEL.s:3306   .text.VL53L0X_get_total_signal_rate:0000000000000000 VL53L0X_get_total_signal_rate
+     /tmp/ccfCLKEL.s:3353   .text.VL53L0X_calc_dmax:0000000000000000 $t
+     /tmp/ccfCLKEL.s:3358   .text.VL53L0X_calc_dmax:0000000000000000 VL53L0X_calc_dmax
+     /tmp/ccfCLKEL.s:3570   .text.VL53L0X_calc_dmax:00000000000000e0 $d
+     /tmp/ccfCLKEL.s:3578   .text.VL53L0X_calc_sigma_estimate:0000000000000000 $t
+     /tmp/ccfCLKEL.s:3583   .text.VL53L0X_calc_sigma_estimate:0000000000000000 VL53L0X_calc_sigma_estimate
+     /tmp/ccfCLKEL.s:4012   .text.VL53L0X_calc_sigma_estimate:0000000000000258 $d
+     /tmp/ccfCLKEL.s:4023   .text.VL53L0X_get_pal_range_status:0000000000000000 $t
+ARM GAS  /tmp/ccfCLKEL.s 			page 122
 
 
-     /tmp/cck2Fec7.s:4028   .text.VL53L0X_get_pal_range_status:0000000000000000 VL53L0X_get_pal_range_status
+     /tmp/ccfCLKEL.s:4028   .text.VL53L0X_get_pal_range_status:0000000000000000 VL53L0X_get_pal_range_status
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

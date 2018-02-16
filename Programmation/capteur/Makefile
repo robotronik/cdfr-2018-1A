@@ -1,6 +1,6 @@
 BOARD=f4
-PROJECT_DIR=capteur
-PROJECT_NAME=/Projects/NucleoF401_capteur
+PROJECT_DIR=capteur/Projects
+PROJECT_NAME=NucleoF401
 DOC_DIR= /home/$(USER)/STM32Cube/
 
 rouge = \033[0;31m

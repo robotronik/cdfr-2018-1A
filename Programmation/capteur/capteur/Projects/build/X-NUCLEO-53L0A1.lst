@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIkzMyz.s 			page 1
+ARM GAS  /tmp/cctZFtzh.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
   29:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** #   define XNUCLEO53L0A1_PutI2cBus(...) (void)0
   30:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** #endif
   31:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
-ARM GAS  /tmp/ccIkzMyz.s 			page 2
+ARM GAS  /tmp/cctZFtzh.s 			page 2
 
 
   32:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** /**
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
   86:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * @li Do not define @a #VL53L0A1_GPIO1_SHARED  or set to 0
   87:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * @li U7 and U8 must not be soldered (disconnect L and R GPIO from C before level shifter)
   88:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  *
-ARM GAS  /tmp/ccIkzMyz.s 			page 3
+ARM GAS  /tmp/cctZFtzh.s 			page 3
 
 
   89:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * ### Center on-board vl53l0x  ###
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  143:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  */
  144:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
  145:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** /**
-ARM GAS  /tmp/ccIkzMyz.s 			page 4
+ARM GAS  /tmp/cctZFtzh.s 			page 4
 
 
  146:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * Expander 0 i2c address[7..0] format
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  200:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** /**
  201:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * lookup table for for digit  to bit position in @a CurIOVal u32
  202:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  */
-ARM GAS  /tmp/ccIkzMyz.s 			page 5
+ARM GAS  /tmp/cctZFtzh.s 			page 5
 
 
  203:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** static int  DisplayBitPos[4]={0, 7, 16, 16+7};
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
   53 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
   54              	.LVL1:
  232:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
-ARM GAS  /tmp/ccIkzMyz.s 			page 6
+ARM GAS  /tmp/cctZFtzh.s 			page 6
 
 
   55              		.loc 1 232 0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
   89              		.loc 1 240 0 discriminator 3
   90 0048 2D4D     		ldr	r5, .L10+4
   91 004a 2846     		mov	r0, r5
-ARM GAS  /tmp/ccIkzMyz.s 			page 7
+ARM GAS  /tmp/cctZFtzh.s 			page 7
 
 
   92 004c 4FF48071 		mov	r1, #256
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  138 0094 136B     		ldr	r3, [r2, #48]
  139 0096 43F00103 		orr	r3, r3, #1
  140 009a 1363     		str	r3, [r2, #48]
-ARM GAS  /tmp/ccIkzMyz.s 			page 8
+ARM GAS  /tmp/cctZFtzh.s 			page 8
 
 
  253:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         //We are still in bad i2c state warm user by blinking led but stay here
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  183              		.loc 1 264 0 discriminator 1
  184 00dc 2120     		movs	r0, #33
  185 00de FFF7FEFF 		bl	HAL_Delay
-ARM GAS  /tmp/ccIkzMyz.s 			page 9
+ARM GAS  /tmp/cctZFtzh.s 			page 9
 
 
  186              	.LVL22:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  283:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     /**I2C1 GPIO Configuration\n
  284:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****      PB8     ------> I2C1_SCL\n
  285:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****      PB9     ------> I2C1_SDA
-ARM GAS  /tmp/ccIkzMyz.s 			page 10
+ARM GAS  /tmp/cctZFtzh.s 			page 10
 
 
  286:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****      */
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  340:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     case XNUCLEO53L0A1_DEV_RIGHT :
  341:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         IntrNo = VL53L0A1_GPIO1_R_INTx;
  342:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         IntrPin= VL53L0A1_GPIO1_R_GPIO_PIN;
-ARM GAS  /tmp/ccIkzMyz.s 			page 11
+ARM GAS  /tmp/cctZFtzh.s 			page 11
 
 
  343:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         if( VL53L0A1_GPIO1_L_INTx == VL53L0A1_GPIO1_R_INTx || VL53L0A1_GPIO1_R_INTx == VL53L0A1_GPI
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  397:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     if (status != 0 || ExpanderData[0] != 0x00 || ExpanderData[1] != 0x16) {
  398:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         XNUCLEO53L0A1_ErrLog("I2C Expander @0x%02X not detected",(int)I2cExpAddr1);
  399:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         goto done_err;
-ARM GAS  /tmp/ccIkzMyz.s 			page 12
+ARM GAS  /tmp/cctZFtzh.s 			page 12
 
 
  400:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  454:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****             CurIOVal.bytes[3]|=0x80; /* bit 15 expender 1  => byte #3 */
  455:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         status= _ExpanderWR(I2cExpAddr1, GPSR+1, &CurIOVal.bytes[3], 1);
  456:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         break;
-ARM GAS  /tmp/ccIkzMyz.s 			page 13
+ARM GAS  /tmp/cctZFtzh.s 			page 13
 
 
  457:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     case XNUCLEO53L0A1_DEV_LEFT :
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  511:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         break;
  512:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
  513:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     case XNUCLEO53L0A1_DEV_RIGHT:
-ARM GAS  /tmp/ccIkzMyz.s 			page 14
+ARM GAS  /tmp/cctZFtzh.s 			page 14
 
 
  514:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         VL53L0A1_GPIO1_R_CLK_ENABLE();
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  568:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * STMPE1600  i2c Expender register read
  569:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * @param I2cExpAddr Expender address
  570:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * @param index      register index
-ARM GAS  /tmp/ccIkzMyz.s 			page 15
+ARM GAS  /tmp/cctZFtzh.s 			page 15
 
 
  571:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  * @param data       read data buffer
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  263 0024 03FB05F3 		mul	r3, r3, r5
  264 0028 0093     		str	r3, [sp]
  265 002a 0448     		ldr	r0, .L15
-ARM GAS  /tmp/ccIkzMyz.s 			page 16
+ARM GAS  /tmp/cctZFtzh.s 			page 16
 
 
  266              	.LVL34:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  308              		.cfi_def_cfa_offset 40
  309 0004 0646     		mov	r6, r0
  310 0006 1C46     		mov	r4, r3
-ARM GAS  /tmp/ccIkzMyz.s 			page 17
+ARM GAS  /tmp/cctZFtzh.s 			page 17
 
 
  600:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  356              		@ args = 0, pretend = 0, frame = 0
  357              		@ frame_needed = 0, uses_anonymous_args = 0
  358 0000 08B5     		push	{r3, lr}
-ARM GAS  /tmp/ccIkzMyz.s 			page 18
+ARM GAS  /tmp/cctZFtzh.s 			page 18
 
 
  359              	.LCFI9:
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  410              		.cfi_def_cfa_offset 8
  411              		.cfi_offset 4, -8
  412              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccIkzMyz.s 			page 19
+ARM GAS  /tmp/cctZFtzh.s 			page 19
 
 
  413 0002 86B0     		sub	sp, sp, #24
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  455 0042 8460     		str	r4, [r0, #8]
  302:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     XNUCLEO53L0A1_hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
  456              		.loc 1 302 0
-ARM GAS  /tmp/ccIkzMyz.s 			page 20
+ARM GAS  /tmp/cctZFtzh.s 			page 20
 
 
  457 0044 C460     		str	r4, [r0, #12]
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  505              		.cfi_offset 4, -16
  506              		.cfi_offset 5, -12
  507              		.cfi_offset 6, -8
-ARM GAS  /tmp/ccIkzMyz.s 			page 21
+ARM GAS  /tmp/cctZFtzh.s 			page 21
 
 
  508              		.cfi_offset 14, -4
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  553              		.file 2 "../Drivers/CMSIS/Include/core_cm4.h"
    1:../Drivers/CMSIS/Include/core_cm4.h **** /**************************************************************************//**
    2:../Drivers/CMSIS/Include/core_cm4.h ****  * @file     core_cm4.h
-ARM GAS  /tmp/ccIkzMyz.s 			page 22
+ARM GAS  /tmp/cctZFtzh.s 			page 22
 
 
    3:../Drivers/CMSIS/Include/core_cm4.h ****  * @brief    CMSIS Cortex-M4 Core Peripheral Access Layer Header File
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
   57:../Drivers/CMSIS/Include/core_cm4.h **** 
   58:../Drivers/CMSIS/Include/core_cm4.h ****    \li Advisory Rule 19.7, Function-like macro defined.<br>
   59:../Drivers/CMSIS/Include/core_cm4.h ****      Function-like macros are used to allow more efficient code.
-ARM GAS  /tmp/ccIkzMyz.s 			page 23
+ARM GAS  /tmp/cctZFtzh.s 			page 23
 
 
   60:../Drivers/CMSIS/Include/core_cm4.h ****  */
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  114:../Drivers/CMSIS/Include/core_cm4.h ****     #endif
  115:../Drivers/CMSIS/Include/core_cm4.h ****   #else
  116:../Drivers/CMSIS/Include/core_cm4.h ****     #define __FPU_USED         0
-ARM GAS  /tmp/ccIkzMyz.s 			page 24
+ARM GAS  /tmp/cctZFtzh.s 			page 24
 
 
  117:../Drivers/CMSIS/Include/core_cm4.h ****   #endif
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  171:../Drivers/CMSIS/Include/core_cm4.h **** #include <core_cm4_simd.h>               /* Compiler specific SIMD Intrinsics               */
  172:../Drivers/CMSIS/Include/core_cm4.h **** 
  173:../Drivers/CMSIS/Include/core_cm4.h **** #endif /* __CORE_CM4_H_GENERIC */
-ARM GAS  /tmp/ccIkzMyz.s 			page 25
+ARM GAS  /tmp/cctZFtzh.s 			page 25
 
 
  174:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  228:../Drivers/CMSIS/Include/core_cm4.h **** /*******************************************************************************
  229:../Drivers/CMSIS/Include/core_cm4.h ****  *                 Register Abstraction
  230:../Drivers/CMSIS/Include/core_cm4.h ****   Core Register contain:
-ARM GAS  /tmp/ccIkzMyz.s 			page 26
+ARM GAS  /tmp/cctZFtzh.s 			page 26
 
 
  231:../Drivers/CMSIS/Include/core_cm4.h ****   - Core Register
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  285:../Drivers/CMSIS/Include/core_cm4.h **** /** \brief  Union type to access the Special-Purpose Program Status Registers (xPSR).
  286:../Drivers/CMSIS/Include/core_cm4.h ****  */
  287:../Drivers/CMSIS/Include/core_cm4.h **** typedef union
-ARM GAS  /tmp/ccIkzMyz.s 			page 27
+ARM GAS  /tmp/cctZFtzh.s 			page 27
 
 
  288:../Drivers/CMSIS/Include/core_cm4.h **** {
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  342:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t ISPR[8];                 /*!< Offset: 0x100 (R/W)  Interrupt Set Pending Register  
  343:../Drivers/CMSIS/Include/core_cm4.h ****        uint32_t RESERVED2[24];
  344:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t ICPR[8];                 /*!< Offset: 0x180 (R/W)  Interrupt Clear Pending Register
-ARM GAS  /tmp/ccIkzMyz.s 			page 28
+ARM GAS  /tmp/cctZFtzh.s 			page 28
 
 
  345:../Drivers/CMSIS/Include/core_cm4.h ****        uint32_t RESERVED3[24];
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  399:../Drivers/CMSIS/Include/core_cm4.h **** 
  400:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CPUID_ARCHITECTURE_Pos         16                                             /*!< SCB 
  401:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CPUID_ARCHITECTURE_Msk         (0xFUL << SCB_CPUID_ARCHITECTURE_Pos)          /*!< SCB 
-ARM GAS  /tmp/ccIkzMyz.s 			page 29
+ARM GAS  /tmp/cctZFtzh.s 			page 29
 
 
  402:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  456:../Drivers/CMSIS/Include/core_cm4.h **** 
  457:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_AIRCR_SYSRESETREQ_Pos           2                                             /*!< SCB 
  458:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_AIRCR_SYSRESETREQ_Msk          (1UL << SCB_AIRCR_SYSRESETREQ_Pos)             /*!< SCB 
-ARM GAS  /tmp/ccIkzMyz.s 			page 30
+ARM GAS  /tmp/cctZFtzh.s 			page 30
 
 
  459:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  513:../Drivers/CMSIS/Include/core_cm4.h **** 
  514:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_USGFAULTPENDED_Pos       12                                             /*!< SCB 
  515:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_USGFAULTPENDED_Msk       (1UL << SCB_SHCSR_USGFAULTPENDED_Pos)          /*!< SCB 
-ARM GAS  /tmp/ccIkzMyz.s 			page 31
+ARM GAS  /tmp/cctZFtzh.s 			page 31
 
 
  516:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  570:../Drivers/CMSIS/Include/core_cm4.h **** 
  571:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_DFSR_HALTED_Pos                 0                                             /*!< SCB 
  572:../Drivers/CMSIS/Include/core_cm4.h **** #define SCB_DFSR_HALTED_Msk                (1UL << SCB_DFSR_HALTED_Pos)                   /*!< SCB 
-ARM GAS  /tmp/ccIkzMyz.s 			page 32
+ARM GAS  /tmp/cctZFtzh.s 			page 32
 
 
  573:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  627:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t VAL;                     /*!< Offset: 0x008 (R/W)  SysTick Current Value Register  
  628:../Drivers/CMSIS/Include/core_cm4.h ****   __I  uint32_t CALIB;                   /*!< Offset: 0x00C (R/ )  SysTick Calibration Register    
  629:../Drivers/CMSIS/Include/core_cm4.h **** } SysTick_Type;
-ARM GAS  /tmp/ccIkzMyz.s 			page 33
+ARM GAS  /tmp/cctZFtzh.s 			page 33
 
 
  630:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  684:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t TPR;                     /*!< Offset: 0xE40 (R/W)  ITM Trace Privilege Register    
  685:../Drivers/CMSIS/Include/core_cm4.h ****        uint32_t RESERVED2[15];
  686:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t TCR;                     /*!< Offset: 0xE80 (R/W)  ITM Trace Control Register      
-ARM GAS  /tmp/ccIkzMyz.s 			page 34
+ARM GAS  /tmp/cctZFtzh.s 			page 34
 
 
  687:../Drivers/CMSIS/Include/core_cm4.h ****        uint32_t RESERVED3[29];
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  741:../Drivers/CMSIS/Include/core_cm4.h **** /* ITM Integration Write Register Definitions */
  742:../Drivers/CMSIS/Include/core_cm4.h **** #define ITM_IWR_ATVALIDM_Pos                0                                             /*!< ITM 
  743:../Drivers/CMSIS/Include/core_cm4.h **** #define ITM_IWR_ATVALIDM_Msk               (1UL << ITM_IWR_ATVALIDM_Pos)                  /*!< ITM 
-ARM GAS  /tmp/ccIkzMyz.s 			page 35
+ARM GAS  /tmp/cctZFtzh.s 			page 35
 
 
  744:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  798:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t FUNCTION3;               /*!< Offset: 0x058 (R/W)  Function Register 3             
  799:../Drivers/CMSIS/Include/core_cm4.h **** } DWT_Type;
  800:../Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /tmp/ccIkzMyz.s 			page 36
+ARM GAS  /tmp/cctZFtzh.s 			page 36
 
 
  801:../Drivers/CMSIS/Include/core_cm4.h **** /* DWT Control Register Definitions */
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  855:../Drivers/CMSIS/Include/core_cm4.h **** 
  856:../Drivers/CMSIS/Include/core_cm4.h **** /* DWT CPI Count Register Definitions */
  857:../Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CPICNT_CPICNT_Pos               0                                          /*!< DWT CPI
-ARM GAS  /tmp/ccIkzMyz.s 			page 37
+ARM GAS  /tmp/cctZFtzh.s 			page 37
 
 
  858:../Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CPICNT_CPICNT_Msk              (0xFFUL << DWT_CPICNT_CPICNT_Pos)           /*!< DWT CPI
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  912:../Drivers/CMSIS/Include/core_cm4.h ****     \defgroup CMSIS_TPI     Trace Port Interface (TPI)
  913:../Drivers/CMSIS/Include/core_cm4.h ****     \brief      Type definitions for the Trace Port Interface (TPI)
  914:../Drivers/CMSIS/Include/core_cm4.h ****   @{
-ARM GAS  /tmp/ccIkzMyz.s 			page 38
+ARM GAS  /tmp/cctZFtzh.s 			page 38
 
 
  915:../Drivers/CMSIS/Include/core_cm4.h ****  */
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  969:../Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FFCR_TrigIn_Pos                 8                                          /*!< TPI FFC
  970:../Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FFCR_TrigIn_Msk                (0x1UL << TPI_FFCR_TrigIn_Pos)              /*!< TPI FFC
  971:../Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /tmp/ccIkzMyz.s 			page 39
+ARM GAS  /tmp/cctZFtzh.s 			page 39
 
 
  972:../Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FFCR_EnFCont_Pos                1                                          /*!< TPI FFC
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1026:../Drivers/CMSIS/Include/core_cm4.h **** 
 1027:../Drivers/CMSIS/Include/core_cm4.h **** /* TPI ITATBCTR0 Register Definitions */
 1028:../Drivers/CMSIS/Include/core_cm4.h **** #define TPI_ITATBCTR0_ATREADY_Pos           0                                          /*!< TPI ITA
-ARM GAS  /tmp/ccIkzMyz.s 			page 40
+ARM GAS  /tmp/cctZFtzh.s 			page 40
 
 
 1029:../Drivers/CMSIS/Include/core_cm4.h **** #define TPI_ITATBCTR0_ATREADY_Msk          (0x1UL << TPI_ITATBCTR0_ATREADY_Pos)        /*!< TPI ITA
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1083:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t RASR_A2;                 /*!< Offset: 0x020 (R/W)  MPU Alias 2 Region Attribute and
 1084:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t RBAR_A3;                 /*!< Offset: 0x024 (R/W)  MPU Alias 3 Region Base Address 
 1085:../Drivers/CMSIS/Include/core_cm4.h ****   __IO uint32_t RASR_A3;                 /*!< Offset: 0x028 (R/W)  MPU Alias 3 Region Attribute and
-ARM GAS  /tmp/ccIkzMyz.s 			page 41
+ARM GAS  /tmp/cctZFtzh.s 			page 41
 
 
 1086:../Drivers/CMSIS/Include/core_cm4.h **** } MPU_Type;
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1140:../Drivers/CMSIS/Include/core_cm4.h **** 
 1141:../Drivers/CMSIS/Include/core_cm4.h **** #define MPU_RASR_B_Pos                     16                                             /*!< MPU 
 1142:../Drivers/CMSIS/Include/core_cm4.h **** #define MPU_RASR_B_Msk                     (1UL << MPU_RASR_B_Pos)                        /*!< MPU 
-ARM GAS  /tmp/ccIkzMyz.s 			page 42
+ARM GAS  /tmp/cctZFtzh.s 			page 42
 
 
 1143:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1197:../Drivers/CMSIS/Include/core_cm4.h **** 
 1198:../Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPCCR_USER_Pos                  1                                             /*!< FPCC
 1199:../Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPCCR_USER_Msk                 (1UL << FPU_FPCCR_USER_Pos)                    /*!< FPCC
-ARM GAS  /tmp/ccIkzMyz.s 			page 43
+ARM GAS  /tmp/cctZFtzh.s 			page 43
 
 
 1200:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1254:../Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_D_NaN_mode_Msk           (0xFUL << FPU_MVFR1_D_NaN_mode_Pos)            /*!< MVFR
 1255:../Drivers/CMSIS/Include/core_cm4.h **** 
 1256:../Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_FtZ_mode_Pos              0                                             /*!< MVFR
-ARM GAS  /tmp/ccIkzMyz.s 			page 44
+ARM GAS  /tmp/cctZFtzh.s 			page 44
 
 
 1257:../Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_FtZ_mode_Msk             (0xFUL << FPU_MVFR1_FtZ_mode_Pos)              /*!< MVFR
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1311:../Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_HALT_Msk         (1UL << CoreDebug_DHCSR_C_HALT_Pos)            /*!< Core
 1312:../Drivers/CMSIS/Include/core_cm4.h **** 
 1313:../Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Pos       0                                             /*!< Core
-ARM GAS  /tmp/ccIkzMyz.s 			page 45
+ARM GAS  /tmp/cctZFtzh.s 			page 45
 
 
 1314:../Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Msk      (1UL << CoreDebug_DHCSR_C_DEBUGEN_Pos)         /*!< Core
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1368:../Drivers/CMSIS/Include/core_cm4.h ****     \brief      Definitions for base addresses, unions, and structures.
 1369:../Drivers/CMSIS/Include/core_cm4.h ****   @{
 1370:../Drivers/CMSIS/Include/core_cm4.h ****  */
-ARM GAS  /tmp/ccIkzMyz.s 			page 46
+ARM GAS  /tmp/cctZFtzh.s 			page 46
 
 
 1371:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1425:../Drivers/CMSIS/Include/core_cm4.h **** /** \brief  Set Priority Grouping
 1426:../Drivers/CMSIS/Include/core_cm4.h **** 
 1427:../Drivers/CMSIS/Include/core_cm4.h ****   The function sets the priority grouping field using the required unlock sequence.
-ARM GAS  /tmp/ccIkzMyz.s 			page 47
+ARM GAS  /tmp/cctZFtzh.s 			page 47
 
 
 1428:../Drivers/CMSIS/Include/core_cm4.h ****   The parameter PriorityGroup is assigned to the field SCB->AIRCR [10:8] PRIGROUP field.
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
 1482:../Drivers/CMSIS/Include/core_cm4.h ****   NVIC->ICER[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* disable interrupt */
 1483:../Drivers/CMSIS/Include/core_cm4.h **** }
 1484:../Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /tmp/ccIkzMyz.s 			page 48
+ARM GAS  /tmp/cctZFtzh.s 			page 48
 
 
 1485:../Drivers/CMSIS/Include/core_cm4.h **** 
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  569 0048 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
  570              	.LVL60:
  571 004c 0020     		movs	r0, #0
-ARM GAS  /tmp/ccIkzMyz.s 			page 49
+ARM GAS  /tmp/cctZFtzh.s 			page 49
 
 
  572 004e 70BD     		pop	{r4, r5, r6, pc}
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  384:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     int status;
  624              		.loc 1 384 0
  625              		.cfi_startproc
-ARM GAS  /tmp/ccIkzMyz.s 			page 50
+ARM GAS  /tmp/cctZFtzh.s 			page 50
 
 
  626              		@ args = 0, pretend = 0, frame = 8
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  671              		.loc 1 397 0 discriminator 2
  672 003e 9DF80520 		ldrb	r2, [sp, #5]	@ zero_extendqisi2
  673 0042 162A     		cmp	r2, #22
-ARM GAS  /tmp/ccIkzMyz.s 			page 51
+ARM GAS  /tmp/cctZFtzh.s 			page 51
 
 
  674 0044 24D1     		bne	.L43
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  717 008a FFF7FEFF 		bl	_ExpandersSetAllIO
  718              	.LVL77:
  719 008e 0346     		mov	r3, r0
-ARM GAS  /tmp/ccIkzMyz.s 			page 52
+ARM GAS  /tmp/cctZFtzh.s 			page 52
 
 
  720              	.LVL78:
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  771 001c 12F0400F 		tst	r2, #64
  772 0020 03D0     		beq	.L49
  436:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         else
-ARM GAS  /tmp/ccIkzMyz.s 			page 53
+ARM GAS  /tmp/cctZFtzh.s 			page 53
 
 
  773              		.loc 1 436 0
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  824 0012 13D0     		beq	.L55
  825 0014 7228     		cmp	r0, #114
  826 0016 21D0     		beq	.L53
-ARM GAS  /tmp/ccIkzMyz.s 			page 54
+ARM GAS  /tmp/cctZFtzh.s 			page 54
 
 
  827 0018 6328     		cmp	r0, #99
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  872 0056 FFF7FEFF 		bl	_ExpanderWR
  873              	.LVL90:
  463:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     case 'r' :
-ARM GAS  /tmp/ccIkzMyz.s 			page 55
+ARM GAS  /tmp/cctZFtzh.s 			page 55
 
 
  874              		.loc 1 463 0
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  923              	VL53L0A1_EXTI_IOConfigure:
  924              	.LFB118:
  485:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****     GPIO_InitTypeDef GPIO_InitStruct;
-ARM GAS  /tmp/ccIkzMyz.s 			page 56
+ARM GAS  /tmp/cctZFtzh.s 			page 56
 
 
  925              		.loc 1 485 0
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  498:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         HAL_GPIO_Init(VL53L0A1_GPIO1_C_GPIO_PORT, &GPIO_InitStruct);
  974              		.loc 1 498 0
  975 003a 0020     		movs	r0, #0
-ARM GAS  /tmp/ccIkzMyz.s 			page 57
+ARM GAS  /tmp/cctZFtzh.s 			page 57
 
 
  976              	.LVL99:
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1022              	.LVL110:
  511:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
  1023              		.loc 1 511 0
-ARM GAS  /tmp/ccIkzMyz.s 			page 58
+ARM GAS  /tmp/cctZFtzh.s 			page 58
 
 
  1024 0080 15E0     		b	.L64
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1073              		.align	2
  1074              		.global	VL53L0A1_EXTI_IOUnconfigure
  1075              		.thumb
-ARM GAS  /tmp/ccIkzMyz.s 			page 59
+ARM GAS  /tmp/cctZFtzh.s 			page 59
 
 
  1076              		.thumb_func
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1125              	.LVL124:
  540:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         break;
  1126              		.loc 1 540 0
-ARM GAS  /tmp/ccIkzMyz.s 			page 60
+ARM GAS  /tmp/cctZFtzh.s 			page 60
 
 
  1127 0034 8022     		movs	r2, #128
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  627:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****  */
  628:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** /** decimal point bit mapping*  */
  629:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** #define DP  (1<<7)
-ARM GAS  /tmp/ccIkzMyz.s 			page 61
+ARM GAS  /tmp/cctZFtzh.s 			page 61
 
 
  630:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  684:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       [']']=           S0+S3+S2+S1,
  685:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       ['@']=           S0+S3,
  686:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c **** 
-ARM GAS  /tmp/ccIkzMyz.s 			page 62
+ARM GAS  /tmp/cctZFtzh.s 			page 62
 
 
  687:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       ['0']=           NOT_7_NO_DP(S6),
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  741:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       ['R']=           S4+S6,
  742:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       ['S']=           NOT_7_NO_DP(S1+S4), /* sasme as 5 */
  743:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       ['T']=           NOT_7_NO_DP(S0+S1+S2), /* sasme as t */
-ARM GAS  /tmp/ccIkzMyz.s 			page 63
+ARM GAS  /tmp/cctZFtzh.s 			page 63
 
 
  744:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****       ['U']=           NOT_7_NO_DP(S6+S0),
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1189              	.LVL133:
  772:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         BitPos=DisplayBitPos[i];
  1190              		.loc 1 772 0 discriminator 4
-ARM GAS  /tmp/ccIkzMyz.s 			page 64
+ARM GAS  /tmp/cctZFtzh.s 			page 64
 
 
  1191 0010 1249     		ldr	r1, .L89+4
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1234              	.LVL141:
  1235              	.L86:
  777:../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.c ****         BitPos=DisplayBitPos[i];
-ARM GAS  /tmp/ccIkzMyz.s 			page 65
+ARM GAS  /tmp/cctZFtzh.s 			page 65
 
 
  1236              		.loc 1 777 0 is_stmt 0 discriminator 1
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1280 003f 2D       		.byte	45
  1281 0040 18       		.byte	24
  1282 0041 6F       		.byte	111
-ARM GAS  /tmp/ccIkzMyz.s 			page 66
+ARM GAS  /tmp/cctZFtzh.s 			page 66
 
 
  1283 0042 57       		.byte	87
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1337 0078 67       		.byte	103
  1338 0079 76       		.byte	118
  1339 007a 3D       		.byte	61
-ARM GAS  /tmp/ccIkzMyz.s 			page 67
+ARM GAS  /tmp/cctZFtzh.s 			page 67
 
 
  1340 007b 000000   		.space	3
@@ -3993,53 +3993,53 @@ ARM GAS  /tmp/ccIkzMyz.s 			page 1
  1369              		.file 10 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  1370              		.file 11 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
  1371              		.file 12 "../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.h"
-ARM GAS  /tmp/ccIkzMyz.s 			page 68
+ARM GAS  /tmp/cctZFtzh.s 			page 68
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 X-NUCLEO-53L0A1.c
-     /tmp/ccIkzMyz.s:21     .text._I2cFailRecover:0000000000000000 $t
-     /tmp/ccIkzMyz.s:25     .text._I2cFailRecover:0000000000000000 _I2cFailRecover
-     /tmp/ccIkzMyz.s:211    .text._I2cFailRecover:00000000000000fc $d
-     /tmp/ccIkzMyz.s:218    .text._ExpanderRd:0000000000000000 $t
-     /tmp/ccIkzMyz.s:222    .text._ExpanderRd:0000000000000000 _ExpanderRd
-     /tmp/ccIkzMyz.s:283    .text._ExpanderRd:000000000000003c $d
+     /tmp/cctZFtzh.s:21     .text._I2cFailRecover:0000000000000000 $t
+     /tmp/cctZFtzh.s:25     .text._I2cFailRecover:0000000000000000 _I2cFailRecover
+     /tmp/cctZFtzh.s:211    .text._I2cFailRecover:00000000000000fc $d
+     /tmp/cctZFtzh.s:218    .text._ExpanderRd:0000000000000000 $t
+     /tmp/cctZFtzh.s:222    .text._ExpanderRd:0000000000000000 _ExpanderRd
+     /tmp/cctZFtzh.s:283    .text._ExpanderRd:000000000000003c $d
                             *COM*:0000000000000038 XNUCLEO53L0A1_hi2c
-     /tmp/ccIkzMyz.s:288    .text._ExpanderWR:0000000000000000 $t
-     /tmp/ccIkzMyz.s:292    .text._ExpanderWR:0000000000000000 _ExpanderWR
-     /tmp/ccIkzMyz.s:343    .text._ExpanderWR:0000000000000030 $d
-     /tmp/ccIkzMyz.s:348    .text._ExpandersSetAllIO:0000000000000000 $t
-     /tmp/ccIkzMyz.s:352    .text._ExpandersSetAllIO:0000000000000000 _ExpandersSetAllIO
-     /tmp/ccIkzMyz.s:391    .text._ExpandersSetAllIO:0000000000000024 $d
-     /tmp/ccIkzMyz.s:397    .text.XNUCLEO53L0A1_I2C1Configure:0000000000000000 $t
-     /tmp/ccIkzMyz.s:402    .text.XNUCLEO53L0A1_I2C1Configure:0000000000000000 XNUCLEO53L0A1_I2C1Configure
-     /tmp/ccIkzMyz.s:481    .text.XNUCLEO53L0A1_I2C1Configure:000000000000005c $d
-     /tmp/ccIkzMyz.s:490    .text.XNUCLEO53L0A1_SetIntrStateId:0000000000000000 $t
-     /tmp/ccIkzMyz.s:495    .text.XNUCLEO53L0A1_SetIntrStateId:0000000000000000 XNUCLEO53L0A1_SetIntrStateId
-     /tmp/ccIkzMyz.s:611    .text.XNUCLEO53L0A1_SetIntrStateId:0000000000000078 $d
-     /tmp/ccIkzMyz.s:617    .text.XNUCLEO53L0A1_Init:0000000000000000 $t
-     /tmp/ccIkzMyz.s:622    .text.XNUCLEO53L0A1_Init:0000000000000000 XNUCLEO53L0A1_Init
-     /tmp/ccIkzMyz.s:732    .text.XNUCLEO53L0A1_Init:0000000000000098 $d
-     /tmp/ccIkzMyz.s:737    .text.XNUCLEO53L0A1_GetPB1:0000000000000000 $t
-     /tmp/ccIkzMyz.s:742    .text.XNUCLEO53L0A1_GetPB1:0000000000000000 XNUCLEO53L0A1_GetPB1
-     /tmp/ccIkzMyz.s:797    .text.XNUCLEO53L0A1_ResetId:0000000000000000 $t
-     /tmp/ccIkzMyz.s:802    .text.XNUCLEO53L0A1_ResetId:0000000000000000 XNUCLEO53L0A1_ResetId
-     /tmp/ccIkzMyz.s:911    .text.XNUCLEO53L0A1_ResetId:0000000000000084 $d
-     /tmp/ccIkzMyz.s:918    .text.VL53L0A1_EXTI_IOConfigure:0000000000000000 $t
-     /tmp/ccIkzMyz.s:923    .text.VL53L0A1_EXTI_IOConfigure:0000000000000000 VL53L0A1_EXTI_IOConfigure
-     /tmp/ccIkzMyz.s:1065   .text.VL53L0A1_EXTI_IOConfigure:00000000000000b4 $d
-     /tmp/ccIkzMyz.s:1073   .text.VL53L0A1_EXTI_IOUnconfigure:0000000000000000 $t
-     /tmp/ccIkzMyz.s:1078   .text.VL53L0A1_EXTI_IOUnconfigure:0000000000000000 VL53L0A1_EXTI_IOUnconfigure
-     /tmp/ccIkzMyz.s:1149   .text.VL53L0A1_EXTI_IOUnconfigure:0000000000000050 $d
-     /tmp/ccIkzMyz.s:1156   .text.XNUCLEO53L0A1_SetDisplayString:0000000000000000 $t
-     /tmp/ccIkzMyz.s:1161   .text.XNUCLEO53L0A1_SetDisplayString:0000000000000000 XNUCLEO53L0A1_SetDisplayString
-     /tmp/ccIkzMyz.s:1247   .text.XNUCLEO53L0A1_SetDisplayString:0000000000000058 $d
-     /tmp/ccIkzMyz.s:1255   .rodata.ascii_to_display_lut:0000000000000000 $d
-     /tmp/ccIkzMyz.s:1259   .rodata.ascii_to_display_lut:0000000000000000 ascii_to_display_lut
-     /tmp/ccIkzMyz.s:1344   .bss.CurIOVal:0000000000000000 $d
-     /tmp/ccIkzMyz.s:1348   .bss.CurIOVal:0000000000000000 CurIOVal
-     /tmp/ccIkzMyz.s:1351   .rodata.DisplayBitPos:0000000000000000 $d
-     /tmp/ccIkzMyz.s:1355   .rodata.DisplayBitPos:0000000000000000 DisplayBitPos
+     /tmp/cctZFtzh.s:288    .text._ExpanderWR:0000000000000000 $t
+     /tmp/cctZFtzh.s:292    .text._ExpanderWR:0000000000000000 _ExpanderWR
+     /tmp/cctZFtzh.s:343    .text._ExpanderWR:0000000000000030 $d
+     /tmp/cctZFtzh.s:348    .text._ExpandersSetAllIO:0000000000000000 $t
+     /tmp/cctZFtzh.s:352    .text._ExpandersSetAllIO:0000000000000000 _ExpandersSetAllIO
+     /tmp/cctZFtzh.s:391    .text._ExpandersSetAllIO:0000000000000024 $d
+     /tmp/cctZFtzh.s:397    .text.XNUCLEO53L0A1_I2C1Configure:0000000000000000 $t
+     /tmp/cctZFtzh.s:402    .text.XNUCLEO53L0A1_I2C1Configure:0000000000000000 XNUCLEO53L0A1_I2C1Configure
+     /tmp/cctZFtzh.s:481    .text.XNUCLEO53L0A1_I2C1Configure:000000000000005c $d
+     /tmp/cctZFtzh.s:490    .text.XNUCLEO53L0A1_SetIntrStateId:0000000000000000 $t
+     /tmp/cctZFtzh.s:495    .text.XNUCLEO53L0A1_SetIntrStateId:0000000000000000 XNUCLEO53L0A1_SetIntrStateId
+     /tmp/cctZFtzh.s:611    .text.XNUCLEO53L0A1_SetIntrStateId:0000000000000078 $d
+     /tmp/cctZFtzh.s:617    .text.XNUCLEO53L0A1_Init:0000000000000000 $t
+     /tmp/cctZFtzh.s:622    .text.XNUCLEO53L0A1_Init:0000000000000000 XNUCLEO53L0A1_Init
+     /tmp/cctZFtzh.s:732    .text.XNUCLEO53L0A1_Init:0000000000000098 $d
+     /tmp/cctZFtzh.s:737    .text.XNUCLEO53L0A1_GetPB1:0000000000000000 $t
+     /tmp/cctZFtzh.s:742    .text.XNUCLEO53L0A1_GetPB1:0000000000000000 XNUCLEO53L0A1_GetPB1
+     /tmp/cctZFtzh.s:797    .text.XNUCLEO53L0A1_ResetId:0000000000000000 $t
+     /tmp/cctZFtzh.s:802    .text.XNUCLEO53L0A1_ResetId:0000000000000000 XNUCLEO53L0A1_ResetId
+     /tmp/cctZFtzh.s:911    .text.XNUCLEO53L0A1_ResetId:0000000000000084 $d
+     /tmp/cctZFtzh.s:918    .text.VL53L0A1_EXTI_IOConfigure:0000000000000000 $t
+     /tmp/cctZFtzh.s:923    .text.VL53L0A1_EXTI_IOConfigure:0000000000000000 VL53L0A1_EXTI_IOConfigure
+     /tmp/cctZFtzh.s:1065   .text.VL53L0A1_EXTI_IOConfigure:00000000000000b4 $d
+     /tmp/cctZFtzh.s:1073   .text.VL53L0A1_EXTI_IOUnconfigure:0000000000000000 $t
+     /tmp/cctZFtzh.s:1078   .text.VL53L0A1_EXTI_IOUnconfigure:0000000000000000 VL53L0A1_EXTI_IOUnconfigure
+     /tmp/cctZFtzh.s:1149   .text.VL53L0A1_EXTI_IOUnconfigure:0000000000000050 $d
+     /tmp/cctZFtzh.s:1156   .text.XNUCLEO53L0A1_SetDisplayString:0000000000000000 $t
+     /tmp/cctZFtzh.s:1161   .text.XNUCLEO53L0A1_SetDisplayString:0000000000000000 XNUCLEO53L0A1_SetDisplayString
+     /tmp/cctZFtzh.s:1247   .text.XNUCLEO53L0A1_SetDisplayString:0000000000000058 $d
+     /tmp/cctZFtzh.s:1255   .rodata.ascii_to_display_lut:0000000000000000 $d
+     /tmp/cctZFtzh.s:1259   .rodata.ascii_to_display_lut:0000000000000000 ascii_to_display_lut
+     /tmp/cctZFtzh.s:1344   .bss.CurIOVal:0000000000000000 $d
+     /tmp/cctZFtzh.s:1348   .bss.CurIOVal:0000000000000000 CurIOVal
+     /tmp/cctZFtzh.s:1351   .rodata.DisplayBitPos:0000000000000000 $d
+     /tmp/cctZFtzh.s:1355   .rodata.DisplayBitPos:0000000000000000 DisplayBitPos
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -4053,7 +4053,7 @@ memcpy
 HAL_I2C_Init
 HAL_NVIC_EnableIRQ
 HAL_NVIC_DisableIRQ
-ARM GAS  /tmp/ccIkzMyz.s 			page 69
+ARM GAS  /tmp/cctZFtzh.s 			page 69
 
 
 HAL_NVIC_SetPriority
