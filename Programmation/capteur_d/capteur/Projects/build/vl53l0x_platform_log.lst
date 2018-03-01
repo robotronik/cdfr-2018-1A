@@ -1,0 +1,56 @@
+ARM GAS  /tmp/cchHtu7P.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.file	"vl53l0x_platform_log.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.global	_trace_functions
+  21              		.global	_trace_modules
+  22              		.global	_trace_level
+  23              		.section	.data._trace_level,"aw",%progbits
+  24              		.align	2
+  27              	_trace_level:
+  28 0000 02000000 		.word	2
+  29              		.section	.bss._trace_modules,"aw",%nobits
+  30              		.align	2
+  33              	_trace_modules:
+  34 0000 00000000 		.space	4
+  35              		.section	.bss._trace_functions,"aw",%nobits
+  36              		.align	2
+  39              	_trace_functions:
+  40 0000 00000000 		.space	4
+  41              		.text
+  42              	.Letext0:
+  43              		.file 1 "/usr/include/newlib/machine/_default_types.h"
+  44              		.file 2 "/usr/include/newlib/sys/_stdint.h"
+  45              		.file 3 "../Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.h"
+  46              		.file 4 "../Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.c"
+ARM GAS  /tmp/cchHtu7P.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 vl53l0x_platform_log.c
+     /tmp/cchHtu7P.s:39     .bss._trace_functions:0000000000000000 _trace_functions
+     /tmp/cchHtu7P.s:33     .bss._trace_modules:0000000000000000 _trace_modules
+     /tmp/cchHtu7P.s:27     .data._trace_level:0000000000000000 _trace_level
+     /tmp/cchHtu7P.s:24     .data._trace_level:0000000000000000 $d
+     /tmp/cchHtu7P.s:30     .bss._trace_modules:0000000000000000 $d
+     /tmp/cchHtu7P.s:36     .bss._trace_functions:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,2596 @@
+ARM GAS  /tmp/ccNTPRvH.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.file	"vl53l0x_api_strings.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.VL53L0X_check_part_used,"ax",%progbits
+  21              		.align	2
+  22              		.global	VL53L0X_check_part_used
+  23              		.thumb
+  24              		.thumb_func
+  26              	VL53L0X_check_part_used:
+  27              	.LFB112:
+  28              		.file 1 "../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c"
+   1:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** /*******************************************************************************
+   2:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  Copyright © 2016, STMicroelectronics International N.V.
+   3:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  All rights reserved.
+   4:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+   5:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  Redistribution and use in source and binary forms, with or without
+   6:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  modification, are permitted provided that the following conditions are met:
+   7:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  * Redistributions of source code must retain the above copyright
+   8:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  notice, this list of conditions and the following disclaimer.
+   9:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  * Redistributions in binary form must reproduce the above copyright
+  10:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  notice, this list of conditions and the following disclaimer in the
+  11:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  documentation and/or other materials provided with the distribution.
+  12:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  * Neither the name of STMicroelectronics nor the
+  13:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  names of its contributors may be used to endorse or promote products
+  14:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  derived from this software without specific prior written permission.
+  15:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  16:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  17:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  18:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+  19:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  NON-INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS ARE DISCLAIMED.
+  20:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  IN NO EVENT SHALL STMICROELECTRONICS INTERNATIONAL N.V. BE LIABLE FOR ANY
+  21:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+  22:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  23:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+  24:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  25:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  26:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  27:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c ****  ******************************************************************************/
+  28:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  29:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #include "vl53l0x_api.h"
+  30:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #include "vl53l0x_api_core.h"
+ARM GAS  /tmp/ccNTPRvH.s 			page 2
+
+
+  31:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #include "vl53l0x_api_strings.h"
+  32:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  33:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #ifndef __KERNEL__
+  34:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #include <stdlib.h>
+  35:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #endif
+  36:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  37:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  38:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	_LOG_FUNCTION_START(TRACE_MODULE_API, fmt, ##__VA_ARGS__)
+  39:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #define LOG_FUNCTION_END(status, ...) \
+  40:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	_LOG_FUNCTION_END(TRACE_MODULE_API, status, ##__VA_ARGS__)
+  41:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  42:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	_LOG_FUNCTION_END_FMT(TRACE_MODULE_API, status, fmt, ##__VA_ARGS__)
+  43:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  44:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  45:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_check_part_used(VL53L0X_DEV Dev,
+  46:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		uint8_t *Revision,
+  47:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_DeviceInfo_t *pVL53L0X_DeviceInfo)
+  48:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+  29              		.loc 1 48 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 24
+  37              		.cfi_offset 3, -24
+  38              		.cfi_offset 4, -20
+  39              		.cfi_offset 5, -16
+  40              		.cfi_offset 6, -12
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 0446     		mov	r4, r0
+  44 0004 0F46     		mov	r7, r1
+  45 0006 1646     		mov	r6, r2
+  46              	.LVL1:
+  49:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+  50:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	uint8_t ModuleIdInt;
+  51:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	char *ProductId_tmp;
+  52:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  53:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+  54:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  55:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	Status = VL53L0X_get_info_from_device(Dev, 2);
+  47              		.loc 1 55 0
+  48 0008 0221     		movs	r1, #2
+  49              	.LVL2:
+  50 000a FFF7FEFF 		bl	VL53L0X_get_info_from_device
+  51              	.LVL3:
+  56:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  57:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	if (Status == VL53L0X_ERROR_NONE) {
+  52              		.loc 1 57 0
+  53 000e 0546     		mov	r5, r0
+  54 0010 78B9     		cbnz	r0, .L2
+  58:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		ModuleIdInt = VL53L0X_GETDEVICESPECIFICPARAMETER(Dev, ModuleId);
+  55              		.loc 1 58 0
+  56 0012 94F8F130 		ldrb	r3, [r4, #241]	@ zero_extendqisi2
+  57              	.LVL4:
+ARM GAS  /tmp/ccNTPRvH.s 			page 3
+
+
+  59:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  60:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	if (ModuleIdInt == 0) {
+  58              		.loc 1 60 0
+  59 0016 1BB9     		cbnz	r3, .L3
+  61:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		*Revision = 0;
+  60              		.loc 1 61 0
+  61 0018 3B70     		strb	r3, [r7]
+  62:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->ProductId, "");
+  62              		.loc 1 62 0
+  63 001a 86F84030 		strb	r3, [r6, #64]
+  64 001e 08E0     		b	.L2
+  65              	.L3:
+  63:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	} else {
+  64:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		*Revision = VL53L0X_GETDEVICESPECIFICPARAMETER(Dev, Revision);
+  66              		.loc 1 64 0
+  67 0020 94F8F230 		ldrb	r3, [r4, #242]	@ zero_extendqisi2
+  68              	.LVL5:
+  69 0024 3B70     		strb	r3, [r7]
+  70              	.LVL6:
+  65:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		ProductId_tmp = VL53L0X_GETDEVICESPECIFICPARAMETER(Dev,
+  66:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			ProductId);
+  67:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->ProductId, ProductId_tmp);
+  71              		.loc 1 67 0
+  72 0026 06F14000 		add	r0, r6, #64
+  73              	.LVL7:
+  74 002a 04F1F301 		add	r1, r4, #243
+  75              	.LVL8:
+  76 002e FFF7FEFF 		bl	strcpy
+  77              	.LVL9:
+  78              	.L2:
+  68:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+  69:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+  70:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  71:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+  72:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+  73:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+  79              		.loc 1 73 0
+  80 0032 2846     		mov	r0, r5
+  81 0034 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  82              		.cfi_endproc
+  83              	.LFE112:
+  85 0036 00BF     		.section	.text.VL53L0X_get_device_info,"ax",%progbits
+  86              		.align	2
+  87              		.global	VL53L0X_get_device_info
+  88              		.thumb
+  89              		.thumb_func
+  91              	VL53L0X_get_device_info:
+  92              	.LFB113:
+  74:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  75:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  76:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_device_info(VL53L0X_DEV Dev,
+  77:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 				VL53L0X_DeviceInfo_t *pVL53L0X_DeviceInfo)
+  78:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+  93              		.loc 1 78 0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 8
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccNTPRvH.s 			page 4
+
+
+  97              	.LVL10:
+  98 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  99              	.LCFI1:
+ 100              		.cfi_def_cfa_offset 20
+ 101              		.cfi_offset 4, -20
+ 102              		.cfi_offset 5, -16
+ 103              		.cfi_offset 6, -12
+ 104              		.cfi_offset 7, -8
+ 105              		.cfi_offset 14, -4
+ 106 0002 83B0     		sub	sp, sp, #12
+ 107              	.LCFI2:
+ 108              		.cfi_def_cfa_offset 32
+ 109 0004 0646     		mov	r6, r0
+ 110 0006 0C46     		mov	r4, r1
+ 111              	.LVL11:
+  79:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+  80:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	uint8_t revision_id;
+  81:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	uint8_t Revision;
+  82:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  83:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	Status = VL53L0X_check_part_used(Dev, &Revision, pVL53L0X_DeviceInfo);
+ 112              		.loc 1 83 0
+ 113 0008 0DF10601 		add	r1, sp, #6
+ 114              	.LVL12:
+ 115 000c 2246     		mov	r2, r4
+ 116 000e FFF7FEFF 		bl	VL53L0X_check_part_used
+ 117              	.LVL13:
+  84:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+  85:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	if (Status == VL53L0X_ERROR_NONE) {
+ 118              		.loc 1 85 0
+ 119 0012 0546     		mov	r5, r0
+ 120 0014 40BB     		cbnz	r0, .L6
+  86:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		if (Revision == 0) {
+ 121              		.loc 1 86 0
+ 122 0016 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 123 001a 2BB9     		cbnz	r3, .L7
+  87:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->Name,
+ 124              		.loc 1 87 0
+ 125 001c 204B     		ldr	r3, .L14
+ 126 001e 07CB     		ldmia	r3!, {r0, r1, r2}
+ 127              	.LVL14:
+ 128 0020 2060     		str	r0, [r4]	@ unaligned
+ 129 0022 6160     		str	r1, [r4, #4]	@ unaligned
+ 130 0024 A260     		str	r2, [r4, #8]	@ unaligned
+ 131 0026 1BE0     		b	.L8
+ 132              	.LVL15:
+ 133              	.L7:
+  88:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 					VL53L0X_STRING_DEVICE_INFO_NAME_TS0);
+  89:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		} else if ((Revision <= 34) && (Revision != 32)) {
+ 134              		.loc 1 89 0
+ 135 0028 222B     		cmp	r3, #34
+ 136 002a 07D8     		bhi	.L9
+ 137              		.loc 1 89 0 is_stmt 0 discriminator 1
+ 138 002c 202B     		cmp	r3, #32
+ 139 002e 05D0     		beq	.L9
+  90:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->Name,
+ 140              		.loc 1 90 0 is_stmt 1
+ 141 0030 1C4B     		ldr	r3, .L14+4
+ARM GAS  /tmp/ccNTPRvH.s 			page 5
+
+
+ 142 0032 07CB     		ldmia	r3!, {r0, r1, r2}
+ 143              	.LVL16:
+ 144 0034 2060     		str	r0, [r4]	@ unaligned
+ 145 0036 6160     		str	r1, [r4, #4]	@ unaligned
+ 146 0038 A260     		str	r2, [r4, #8]	@ unaligned
+ 147 003a 11E0     		b	.L8
+ 148              	.LVL17:
+ 149              	.L9:
+  91:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 					VL53L0X_STRING_DEVICE_INFO_NAME_TS1);
+  92:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		} else if (Revision < 39) {
+ 150              		.loc 1 92 0
+ 151 003c 262B     		cmp	r3, #38
+ 152 003e 05D8     		bhi	.L10
+  93:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->Name,
+ 153              		.loc 1 93 0
+ 154 0040 194B     		ldr	r3, .L14+8
+ 155 0042 07CB     		ldmia	r3!, {r0, r1, r2}
+ 156              	.LVL18:
+ 157 0044 2060     		str	r0, [r4]	@ unaligned
+ 158 0046 6160     		str	r1, [r4, #4]	@ unaligned
+ 159 0048 A260     		str	r2, [r4, #8]	@ unaligned
+ 160 004a 09E0     		b	.L8
+ 161              	.LVL19:
+ 162              	.L10:
+  94:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 					VL53L0X_STRING_DEVICE_INFO_NAME_TS2);
+  95:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		} else {
+  96:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->Name,
+ 163              		.loc 1 96 0
+ 164 004c 174F     		ldr	r7, .L14+12
+ 165 004e 0FCF     		ldmia	r7!, {r0, r1, r2, r3}
+ 166              	.LVL20:
+ 167 0050 2060     		str	r0, [r4]	@ unaligned
+ 168 0052 6160     		str	r1, [r4, #4]	@ unaligned
+ 169 0054 A260     		str	r2, [r4, #8]	@ unaligned
+ 170 0056 E360     		str	r3, [r4, #12]	@ unaligned
+ 171 0058 3868     		ldr	r0, [r7]	@ unaligned
+ 172 005a 2061     		str	r0, [r4, #16]	@ unaligned
+ 173 005c 3B79     		ldrb	r3, [r7, #4]	@ zero_extendqisi2
+ 174 005e 2375     		strb	r3, [r4, #20]
+ 175              	.L8:
+  97:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 					VL53L0X_STRING_DEVICE_INFO_NAME_ES1);
+  98:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		}
+  99:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 100:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pVL53L0X_DeviceInfo->Type,
+ 176              		.loc 1 100 0
+ 177 0060 134B     		ldr	r3, .L14+16
+ 178 0062 03CB     		ldmia	r3!, {r0, r1}
+ 179 0064 2062     		str	r0, [r4, #32]	@ unaligned
+ 180 0066 6162     		str	r1, [r4, #36]	@ unaligned
+ 181              	.L6:
+ 101:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 				VL53L0X_STRING_DEVICE_INFO_TYPE);
+ 102:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 103:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 104:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 105:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	if (Status == VL53L0X_ERROR_NONE) {
+ 182              		.loc 1 105 0
+ 183 0068 35B9     		cbnz	r5, .L11
+ARM GAS  /tmp/ccNTPRvH.s 			page 6
+
+
+ 106:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		Status = VL53L0X_RdByte(Dev, VL53L0X_REG_IDENTIFICATION_MODEL_ID,
+ 184              		.loc 1 106 0
+ 185 006a 3046     		mov	r0, r6
+ 186 006c C021     		movs	r1, #192
+ 187 006e 04F16002 		add	r2, r4, #96
+ 188 0072 FFF7FEFF 		bl	VL53L0X_RdByte
+ 189              	.LVL21:
+ 190 0076 0546     		mov	r5, r0
+ 191              	.LVL22:
+ 192              	.L11:
+ 107:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 				&pVL53L0X_DeviceInfo->ProductType);
+ 108:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 109:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 110:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	if (Status == VL53L0X_ERROR_NONE) {
+ 193              		.loc 1 110 0
+ 194 0078 75B9     		cbnz	r5, .L12
+ 111:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		Status = VL53L0X_RdByte(Dev,
+ 195              		.loc 1 111 0
+ 196 007a 3046     		mov	r0, r6
+ 197 007c C221     		movs	r1, #194
+ 198 007e 0DF10702 		add	r2, sp, #7
+ 199 0082 FFF7FEFF 		bl	VL53L0X_RdByte
+ 200              	.LVL23:
+ 201 0086 0546     		mov	r5, r0
+ 202              	.LVL24:
+ 112:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_REG_IDENTIFICATION_REVISION_ID,
+ 113:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 				&revision_id);
+ 114:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		pVL53L0X_DeviceInfo->ProductRevisionMajor = 1;
+ 203              		.loc 1 114 0
+ 204 0088 0123     		movs	r3, #1
+ 205 008a 84F86130 		strb	r3, [r4, #97]
+ 115:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		pVL53L0X_DeviceInfo->ProductRevisionMinor =
+ 116:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 					(revision_id & 0xF0) >> 4;
+ 206              		.loc 1 116 0
+ 207 008e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 208 0092 1B09     		lsrs	r3, r3, #4
+ 115:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		pVL53L0X_DeviceInfo->ProductRevisionMinor =
+ 209              		.loc 1 115 0
+ 210 0094 84F86230 		strb	r3, [r4, #98]
+ 211              	.L12:
+ 117:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 118:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 119:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 120:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 212              		.loc 1 120 0
+ 213 0098 68B2     		sxtb	r0, r5
+ 214 009a 03B0     		add	sp, sp, #12
+ 215              	.LCFI3:
+ 216              		.cfi_def_cfa_offset 20
+ 217              		@ sp needed
+ 218 009c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 219              	.LVL25:
+ 220              	.L15:
+ 221 009e 00BF     		.align	2
+ 222              	.L14:
+ 223 00a0 00000000 		.word	.LC0
+ 224 00a4 0C000000 		.word	.LC1
+ARM GAS  /tmp/ccNTPRvH.s 			page 7
+
+
+ 225 00a8 18000000 		.word	.LC2
+ 226 00ac 24000000 		.word	.LC3
+ 227 00b0 3C000000 		.word	.LC4
+ 228              		.cfi_endproc
+ 229              	.LFE113:
+ 231              		.section	.text.VL53L0X_get_device_error_string,"ax",%progbits
+ 232              		.align	2
+ 233              		.global	VL53L0X_get_device_error_string
+ 234              		.thumb
+ 235              		.thumb_func
+ 237              	VL53L0X_get_device_error_string:
+ 238              	.LFB114:
+ 121:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 122:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 123:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_device_error_string(VL53L0X_DeviceError ErrorCode,
+ 124:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		char *pDeviceErrorString)
+ 125:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+ 239              		.loc 1 125 0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243              		@ link register save eliminated.
+ 244              	.LVL26:
+ 245 0000 30B4     		push	{r4, r5}
+ 246              	.LCFI4:
+ 247              		.cfi_def_cfa_offset 8
+ 248              		.cfi_offset 4, -8
+ 249              		.cfi_offset 5, -4
+ 250 0002 0C46     		mov	r4, r1
+ 251              	.LVL27:
+ 126:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 127:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 128:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 129:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 130:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	switch (ErrorCode) {
+ 252              		.loc 1 130 0
+ 253 0004 0E28     		cmp	r0, #14
+ 254 0006 00F2AA80 		bhi	.L17
+ 255 000a DFE800F0 		tbb	[pc, r0]
+ 256              	.L19:
+ 257 000e 08       		.byte	(.L18-.L19)/2
+ 258 000f 0F       		.byte	(.L20-.L19)/2
+ 259 0010 1C       		.byte	(.L21-.L19)/2
+ 260 0011 27       		.byte	(.L22-.L19)/2
+ 261 0012 32       		.byte	(.L23-.L19)/2
+ 262 0013 3D       		.byte	(.L24-.L19)/2
+ 263 0014 47       		.byte	(.L25-.L19)/2
+ 264 0015 51       		.byte	(.L26-.L19)/2
+ 265 0016 5C       		.byte	(.L27-.L19)/2
+ 266 0017 63       		.byte	(.L28-.L19)/2
+ 267 0018 6D       		.byte	(.L29-.L19)/2
+ 268 0019 77       		.byte	(.L30-.L19)/2
+ 269 001a 81       		.byte	(.L31-.L19)/2
+ 270 001b 8F       		.byte	(.L32-.L19)/2
+ 271 001c 9B       		.byte	(.L33-.L19)/2
+ 272 001d 00       		.p2align 1
+ 273              	.L18:
+ARM GAS  /tmp/ccNTPRvH.s 			page 8
+
+
+ 131:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_NONE:
+ 132:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 274              		.loc 1 132 0
+ 275 001e 564B     		ldr	r3, .L36
+ 276 0020 03CB     		ldmia	r3!, {r0, r1}
+ 277              	.LVL28:
+ 278 0022 2060     		str	r0, [r4]	@ unaligned
+ 279 0024 6160     		str	r1, [r4, #4]	@ unaligned
+ 280 0026 1B88     		ldrh	r3, [r3]	@ unaligned
+ 281 0028 2381     		strh	r3, [r4, #8]	@ unaligned
+ 133:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_NONE);
+ 134:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 282              		.loc 1 134 0
+ 283 002a A2E0     		b	.L34
+ 284              	.LVL29:
+ 285              	.L20:
+ 135:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_VCSELCONTINUITYTESTFAILURE:
+ 136:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 286              		.loc 1 136 0
+ 287 002c 534D     		ldr	r5, .L36+4
+ 288 002e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 289              	.LVL30:
+ 290 0030 2060     		str	r0, [r4]	@ unaligned
+ 291 0032 6160     		str	r1, [r4, #4]	@ unaligned
+ 292 0034 A260     		str	r2, [r4, #8]	@ unaligned
+ 293 0036 E360     		str	r3, [r4, #12]	@ unaligned
+ 294 0038 07CD     		ldmia	r5!, {r0, r1, r2}
+ 295 003a 2061     		str	r0, [r4, #16]	@ unaligned
+ 296 003c 6161     		str	r1, [r4, #20]	@ unaligned
+ 297 003e A261     		str	r2, [r4, #24]	@ unaligned
+ 298 0040 2B88     		ldrh	r3, [r5]	@ unaligned
+ 299 0042 A383     		strh	r3, [r4, #28]	@ unaligned
+ 137:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_VCSELCONTINUITYTESTFAILURE);
+ 138:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 300              		.loc 1 138 0
+ 301 0044 95E0     		b	.L34
+ 302              	.LVL31:
+ 303              	.L21:
+ 139:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_VCSELWATCHDOGTESTFAILURE:
+ 140:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 304              		.loc 1 140 0
+ 305 0046 4E4D     		ldr	r5, .L36+8
+ 306 0048 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 307              	.LVL32:
+ 308 004a 2060     		str	r0, [r4]	@ unaligned
+ 309 004c 6160     		str	r1, [r4, #4]	@ unaligned
+ 310 004e A260     		str	r2, [r4, #8]	@ unaligned
+ 311 0050 E360     		str	r3, [r4, #12]	@ unaligned
+ 312 0052 07CD     		ldmia	r5!, {r0, r1, r2}
+ 313 0054 2061     		str	r0, [r4, #16]	@ unaligned
+ 314 0056 6161     		str	r1, [r4, #20]	@ unaligned
+ 315 0058 A261     		str	r2, [r4, #24]	@ unaligned
+ 141:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_VCSELWATCHDOGTESTFAILURE);
+ 142:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 316              		.loc 1 142 0
+ 317 005a 8AE0     		b	.L34
+ 318              	.LVL33:
+ARM GAS  /tmp/ccNTPRvH.s 			page 9
+
+
+ 319              	.L22:
+ 143:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_NOVHVVALUEFOUND:
+ 144:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 320              		.loc 1 144 0
+ 321 005c 494D     		ldr	r5, .L36+12
+ 322 005e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 323              	.LVL34:
+ 324 0060 2060     		str	r0, [r4]	@ unaligned
+ 325 0062 6160     		str	r1, [r4, #4]	@ unaligned
+ 326 0064 A260     		str	r2, [r4, #8]	@ unaligned
+ 327 0066 E360     		str	r3, [r4, #12]	@ unaligned
+ 328 0068 2A88     		ldrh	r2, [r5]	@ unaligned
+ 329 006a AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 330 006c 2282     		strh	r2, [r4, #16]	@ unaligned
+ 331 006e A374     		strb	r3, [r4, #18]
+ 145:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_NOVHVVALUEFOUND);
+ 146:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 332              		.loc 1 146 0
+ 333 0070 7FE0     		b	.L34
+ 334              	.LVL35:
+ 335              	.L23:
+ 147:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_MSRCNOTARGET:
+ 148:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 336              		.loc 1 148 0
+ 337 0072 454D     		ldr	r5, .L36+16
+ 338 0074 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 339              	.LVL36:
+ 340 0076 2060     		str	r0, [r4]	@ unaligned
+ 341 0078 6160     		str	r1, [r4, #4]	@ unaligned
+ 342 007a A260     		str	r2, [r4, #8]	@ unaligned
+ 343 007c E360     		str	r3, [r4, #12]	@ unaligned
+ 344 007e 2868     		ldr	r0, [r5]	@ unaligned
+ 345 0080 2061     		str	r0, [r4, #16]	@ unaligned
+ 346 0082 2B79     		ldrb	r3, [r5, #4]	@ zero_extendqisi2
+ 347 0084 2375     		strb	r3, [r4, #20]
+ 149:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_MSRCNOTARGET);
+ 150:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 348              		.loc 1 150 0
+ 349 0086 74E0     		b	.L34
+ 350              	.LVL37:
+ 351              	.L24:
+ 151:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_SNRCHECK:
+ 152:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 352              		.loc 1 152 0
+ 353 0088 404B     		ldr	r3, .L36+20
+ 354 008a 07CB     		ldmia	r3!, {r0, r1, r2}
+ 355              	.LVL38:
+ 356 008c 2060     		str	r0, [r4]	@ unaligned
+ 357 008e 6160     		str	r1, [r4, #4]	@ unaligned
+ 358 0090 A260     		str	r2, [r4, #8]	@ unaligned
+ 359 0092 1A88     		ldrh	r2, [r3]	@ unaligned
+ 360 0094 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 361 0096 A281     		strh	r2, [r4, #12]	@ unaligned
+ 362 0098 A373     		strb	r3, [r4, #14]
+ 153:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_SNRCHECK);
+ 154:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 363              		.loc 1 154 0
+ARM GAS  /tmp/ccNTPRvH.s 			page 10
+
+
+ 364 009a 6AE0     		b	.L34
+ 365              	.LVL39:
+ 366              	.L25:
+ 155:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_RANGEPHASECHECK:
+ 156:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 367              		.loc 1 156 0
+ 368 009c 3C4D     		ldr	r5, .L36+24
+ 369 009e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 370              	.LVL40:
+ 371 00a0 2060     		str	r0, [r4]	@ unaligned
+ 372 00a2 6160     		str	r1, [r4, #4]	@ unaligned
+ 373 00a4 A260     		str	r2, [r4, #8]	@ unaligned
+ 374 00a6 E360     		str	r3, [r4, #12]	@ unaligned
+ 375 00a8 03CD     		ldmia	r5!, {r0, r1}
+ 376 00aa 2061     		str	r0, [r4, #16]	@ unaligned
+ 377 00ac 6161     		str	r1, [r4, #20]	@ unaligned
+ 157:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_RANGEPHASECHECK);
+ 158:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 378              		.loc 1 158 0
+ 379 00ae 60E0     		b	.L34
+ 380              	.LVL41:
+ 381              	.L26:
+ 159:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_SIGMATHRESHOLDCHECK:
+ 160:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 382              		.loc 1 160 0
+ 383 00b0 384D     		ldr	r5, .L36+28
+ 384 00b2 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 385              	.LVL42:
+ 386 00b4 2060     		str	r0, [r4]	@ unaligned
+ 387 00b6 6160     		str	r1, [r4, #4]	@ unaligned
+ 388 00b8 A260     		str	r2, [r4, #8]	@ unaligned
+ 389 00ba E360     		str	r3, [r4, #12]	@ unaligned
+ 390 00bc 07CD     		ldmia	r5!, {r0, r1, r2}
+ 391 00be 2061     		str	r0, [r4, #16]	@ unaligned
+ 392 00c0 6161     		str	r1, [r4, #20]	@ unaligned
+ 393 00c2 A261     		str	r2, [r4, #24]	@ unaligned
+ 161:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_SIGMATHRESHOLDCHECK);
+ 162:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 394              		.loc 1 162 0
+ 395 00c4 55E0     		b	.L34
+ 396              	.LVL43:
+ 397              	.L27:
+ 163:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_TCC:
+ 164:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 398              		.loc 1 164 0
+ 399 00c6 344B     		ldr	r3, .L36+32
+ 400 00c8 03CB     		ldmia	r3!, {r0, r1}
+ 401              	.LVL44:
+ 402 00ca 2060     		str	r0, [r4]	@ unaligned
+ 403 00cc 6160     		str	r1, [r4, #4]	@ unaligned
+ 404 00ce 1B88     		ldrh	r3, [r3]	@ unaligned
+ 405 00d0 2381     		strh	r3, [r4, #8]	@ unaligned
+ 165:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_TCC);
+ 166:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 406              		.loc 1 166 0
+ 407 00d2 4EE0     		b	.L34
+ 408              	.LVL45:
+ARM GAS  /tmp/ccNTPRvH.s 			page 11
+
+
+ 409              	.L28:
+ 167:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_PHASECONSISTENCY:
+ 168:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 410              		.loc 1 168 0
+ 411 00d4 314D     		ldr	r5, .L36+36
+ 412 00d6 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 413              	.LVL46:
+ 414 00d8 2060     		str	r0, [r4]	@ unaligned
+ 415 00da 6160     		str	r1, [r4, #4]	@ unaligned
+ 416 00dc A260     		str	r2, [r4, #8]	@ unaligned
+ 417 00de E360     		str	r3, [r4, #12]	@ unaligned
+ 418 00e0 03CD     		ldmia	r5!, {r0, r1}
+ 419 00e2 2061     		str	r0, [r4, #16]	@ unaligned
+ 420 00e4 6161     		str	r1, [r4, #20]	@ unaligned
+ 169:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_PHASECONSISTENCY);
+ 170:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 421              		.loc 1 170 0
+ 422 00e6 44E0     		b	.L34
+ 423              	.LVL47:
+ 424              	.L29:
+ 171:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_MINCLIP:
+ 172:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 425              		.loc 1 172 0
+ 426 00e8 2D4B     		ldr	r3, .L36+40
+ 427 00ea 07CB     		ldmia	r3!, {r0, r1, r2}
+ 428              	.LVL48:
+ 429 00ec 2060     		str	r0, [r4]	@ unaligned
+ 430 00ee 6160     		str	r1, [r4, #4]	@ unaligned
+ 431 00f0 A260     		str	r2, [r4, #8]	@ unaligned
+ 432 00f2 1A88     		ldrh	r2, [r3]	@ unaligned
+ 433 00f4 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 434 00f6 A281     		strh	r2, [r4, #12]	@ unaligned
+ 435 00f8 A373     		strb	r3, [r4, #14]
+ 173:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_MINCLIP);
+ 174:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 436              		.loc 1 174 0
+ 437 00fa 3AE0     		b	.L34
+ 438              	.LVL49:
+ 439              	.L30:
+ 175:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_RANGECOMPLETE:
+ 176:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 440              		.loc 1 176 0
+ 441 00fc 294B     		ldr	r3, .L36+44
+ 442 00fe 07CB     		ldmia	r3!, {r0, r1, r2}
+ 443              	.LVL50:
+ 444 0100 2060     		str	r0, [r4]	@ unaligned
+ 445 0102 6160     		str	r1, [r4, #4]	@ unaligned
+ 446 0104 A260     		str	r2, [r4, #8]	@ unaligned
+ 447 0106 1A88     		ldrh	r2, [r3]	@ unaligned
+ 448 0108 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 449 010a A281     		strh	r2, [r4, #12]	@ unaligned
+ 450 010c A373     		strb	r3, [r4, #14]
+ 177:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_RANGECOMPLETE);
+ 178:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 451              		.loc 1 178 0
+ 452 010e 30E0     		b	.L34
+ 453              	.LVL51:
+ARM GAS  /tmp/ccNTPRvH.s 			page 12
+
+
+ 454              	.L31:
+ 179:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_ALGOUNDERFLOW:
+ 180:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 455              		.loc 1 180 0
+ 456 0110 254D     		ldr	r5, .L36+48
+ 457 0112 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 458              	.LVL52:
+ 459 0114 2060     		str	r0, [r4]	@ unaligned
+ 460 0116 6160     		str	r1, [r4, #4]	@ unaligned
+ 461 0118 A260     		str	r2, [r4, #8]	@ unaligned
+ 462 011a E360     		str	r3, [r4, #12]	@ unaligned
+ 463 011c 03CD     		ldmia	r5!, {r0, r1}
+ 464 011e 2061     		str	r0, [r4, #16]	@ unaligned
+ 465 0120 6161     		str	r1, [r4, #20]	@ unaligned
+ 466 0122 2A88     		ldrh	r2, [r5]	@ unaligned
+ 467 0124 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 468 0126 2283     		strh	r2, [r4, #24]	@ unaligned
+ 469 0128 A376     		strb	r3, [r4, #26]
+ 181:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_ALGOUNDERFLOW);
+ 182:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 470              		.loc 1 182 0
+ 471 012a 22E0     		b	.L34
+ 472              	.LVL53:
+ 473              	.L32:
+ 183:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_ALGOOVERFLOW:
+ 184:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 474              		.loc 1 184 0
+ 475 012c 1F4D     		ldr	r5, .L36+52
+ 476 012e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 477              	.LVL54:
+ 478 0130 2060     		str	r0, [r4]	@ unaligned
+ 479 0132 6160     		str	r1, [r4, #4]	@ unaligned
+ 480 0134 A260     		str	r2, [r4, #8]	@ unaligned
+ 481 0136 E360     		str	r3, [r4, #12]	@ unaligned
+ 482 0138 03CD     		ldmia	r5!, {r0, r1}
+ 483 013a 2061     		str	r0, [r4, #16]	@ unaligned
+ 484 013c 6161     		str	r1, [r4, #20]	@ unaligned
+ 485 013e 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 486 0140 2376     		strb	r3, [r4, #24]
+ 185:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_ALGOOVERFLOW);
+ 186:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 487              		.loc 1 186 0
+ 488 0142 16E0     		b	.L34
+ 489              	.LVL55:
+ 490              	.L33:
+ 187:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_DEVICEERROR_RANGEIGNORETHRESHOLD:
+ 188:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 491              		.loc 1 188 0
+ 492 0144 1A4D     		ldr	r5, .L36+56
+ 493 0146 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 494              	.LVL56:
+ 495 0148 2060     		str	r0, [r4]	@ unaligned
+ 496 014a 6160     		str	r1, [r4, #4]	@ unaligned
+ 497 014c A260     		str	r2, [r4, #8]	@ unaligned
+ 498 014e E360     		str	r3, [r4, #12]	@ unaligned
+ 499 0150 07CD     		ldmia	r5!, {r0, r1, r2}
+ 500 0152 2061     		str	r0, [r4, #16]	@ unaligned
+ARM GAS  /tmp/ccNTPRvH.s 			page 13
+
+
+ 501 0154 6161     		str	r1, [r4, #20]	@ unaligned
+ 502 0156 A261     		str	r2, [r4, #24]	@ unaligned
+ 503 0158 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 504 015a 2377     		strb	r3, [r4, #28]
+ 189:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_DEVICEERROR_RANGEIGNORETHRESHOLD);
+ 190:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 505              		.loc 1 190 0
+ 506 015c 09E0     		b	.L34
+ 507              	.LVL57:
+ 508              	.L17:
+ 191:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 192:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	default:
+ 193:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pDeviceErrorString,
+ 509              		.loc 1 193 0
+ 510 015e 154D     		ldr	r5, .L36+60
+ 511 0160 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 512              	.LVL58:
+ 513 0162 2060     		str	r0, [r4]	@ unaligned
+ 514 0164 6160     		str	r1, [r4, #4]	@ unaligned
+ 515 0166 A260     		str	r2, [r4, #8]	@ unaligned
+ 516 0168 E360     		str	r3, [r4, #12]	@ unaligned
+ 517 016a 2A88     		ldrh	r2, [r5]	@ unaligned
+ 518 016c AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 519 016e 2282     		strh	r2, [r4, #16]	@ unaligned
+ 520 0170 A374     		strb	r3, [r4, #18]
+ 521              	.L34:
+ 194:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_UNKNOW_ERROR_CODE);
+ 195:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 196:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 197:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 198:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 199:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 200:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 522              		.loc 1 200 0
+ 523 0172 0020     		movs	r0, #0
+ 524 0174 30BC     		pop	{r4, r5}
+ 525              	.LCFI5:
+ 526              		.cfi_restore 5
+ 527              		.cfi_restore 4
+ 528              		.cfi_def_cfa_offset 0
+ 529              	.LVL59:
+ 530 0176 7047     		bx	lr
+ 531              	.L37:
+ 532              		.align	2
+ 533              	.L36:
+ 534 0178 44000000 		.word	.LC5
+ 535 017c 50000000 		.word	.LC6
+ 536 0180 70000000 		.word	.LC7
+ 537 0184 8C000000 		.word	.LC8
+ 538 0188 A0000000 		.word	.LC9
+ 539 018c B8000000 		.word	.LC10
+ 540 0190 C8000000 		.word	.LC11
+ 541 0194 E0000000 		.word	.LC12
+ 542 0198 FC000000 		.word	.LC13
+ 543 019c 08010000 		.word	.LC14
+ 544 01a0 20010000 		.word	.LC15
+ 545 01a4 30010000 		.word	.LC16
+ARM GAS  /tmp/ccNTPRvH.s 			page 14
+
+
+ 546 01a8 40010000 		.word	.LC17
+ 547 01ac 5C010000 		.word	.LC18
+ 548 01b0 78010000 		.word	.LC19
+ 549 01b4 98010000 		.word	.LC20
+ 550              		.cfi_endproc
+ 551              	.LFE114:
+ 553              		.section	.text.VL53L0X_get_range_status_string,"ax",%progbits
+ 554              		.align	2
+ 555              		.global	VL53L0X_get_range_status_string
+ 556              		.thumb
+ 557              		.thumb_func
+ 559              	VL53L0X_get_range_status_string:
+ 560              	.LFB115:
+ 201:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 202:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_range_status_string(uint8_t RangeStatus,
+ 203:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		char *pRangeStatusString)
+ 204:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+ 561              		.loc 1 204 0
+ 562              		.cfi_startproc
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 565              		@ link register save eliminated.
+ 566              	.LVL60:
+ 567 0000 10B4     		push	{r4}
+ 568              	.LCFI6:
+ 569              		.cfi_def_cfa_offset 4
+ 570              		.cfi_offset 4, -4
+ 571 0002 0B46     		mov	r3, r1
+ 572              	.LVL61:
+ 205:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 206:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 207:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 208:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 209:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	switch (RangeStatus) {
+ 573              		.loc 1 209 0
+ 574 0004 0528     		cmp	r0, #5
+ 575 0006 34D8     		bhi	.L39
+ 576 0008 DFE800F0 		tbb	[pc, r0]
+ 577              	.L41:
+ 578 000c 03       		.byte	(.L40-.L41)/2
+ 579 000d 09       		.byte	(.L42-.L41)/2
+ 580 000e 12       		.byte	(.L43-.L41)/2
+ 581 000f 18       		.byte	(.L44-.L41)/2
+ 582 0010 22       		.byte	(.L45-.L41)/2
+ 583 0011 2B       		.byte	(.L46-.L41)/2
+ 584              		.p2align 1
+ 585              	.L40:
+ 210:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case 0:
+ 211:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 586              		.loc 1 211 0
+ 587 0012 1D4C     		ldr	r4, .L49
+ 588 0014 07CC     		ldmia	r4!, {r0, r1, r2}
+ 589              	.LVL62:
+ 590 0016 1860     		str	r0, [r3]	@ unaligned
+ 591 0018 5960     		str	r1, [r3, #4]	@ unaligned
+ 592 001a 9A60     		str	r2, [r3, #8]	@ unaligned
+ 212:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_RANGESTATUS_RANGEVALID);
+ARM GAS  /tmp/ccNTPRvH.s 			page 15
+
+
+ 213:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 593              		.loc 1 213 0
+ 594 001c 2FE0     		b	.L47
+ 595              	.LVL63:
+ 596              	.L42:
+ 214:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case 1:
+ 215:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 597              		.loc 1 215 0
+ 598 001e 1B4A     		ldr	r2, .L49+4
+ 599 0020 03CA     		ldmia	r2!, {r0, r1}
+ 600              	.LVL64:
+ 601 0022 1860     		str	r0, [r3]	@ unaligned
+ 602 0024 5960     		str	r1, [r3, #4]	@ unaligned
+ 603 0026 1188     		ldrh	r1, [r2]	@ unaligned
+ 604 0028 9278     		ldrb	r2, [r2, #2]	@ zero_extendqisi2
+ 605 002a 1981     		strh	r1, [r3, #8]	@ unaligned
+ 606 002c 9A72     		strb	r2, [r3, #10]
+ 216:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_RANGESTATUS_SIGMA);
+ 217:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 607              		.loc 1 217 0
+ 608 002e 26E0     		b	.L47
+ 609              	.LVL65:
+ 610              	.L43:
+ 218:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case 2:
+ 219:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 611              		.loc 1 219 0
+ 612 0030 174C     		ldr	r4, .L49+8
+ 613 0032 07CC     		ldmia	r4!, {r0, r1, r2}
+ 614              	.LVL66:
+ 615 0034 1860     		str	r0, [r3]	@ unaligned
+ 616 0036 5960     		str	r1, [r3, #4]	@ unaligned
+ 617 0038 9A60     		str	r2, [r3, #8]	@ unaligned
+ 220:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_RANGESTATUS_SIGNAL);
+ 221:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 618              		.loc 1 221 0
+ 619 003a 20E0     		b	.L47
+ 620              	.LVL67:
+ 621              	.L44:
+ 222:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case 3:
+ 223:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 622              		.loc 1 223 0
+ 623 003c 154C     		ldr	r4, .L49+12
+ 624 003e 07CC     		ldmia	r4!, {r0, r1, r2}
+ 625              	.LVL68:
+ 626 0040 1860     		str	r0, [r3]	@ unaligned
+ 627 0042 5960     		str	r1, [r3, #4]	@ unaligned
+ 628 0044 9A60     		str	r2, [r3, #8]	@ unaligned
+ 629 0046 2188     		ldrh	r1, [r4]	@ unaligned
+ 630 0048 A278     		ldrb	r2, [r4, #2]	@ zero_extendqisi2
+ 631 004a 9981     		strh	r1, [r3, #12]	@ unaligned
+ 632 004c 9A73     		strb	r2, [r3, #14]
+ 224:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_RANGESTATUS_MINRANGE);
+ 225:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 633              		.loc 1 225 0
+ 634 004e 16E0     		b	.L47
+ 635              	.LVL69:
+ 636              	.L45:
+ARM GAS  /tmp/ccNTPRvH.s 			page 16
+
+
+ 226:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case 4:
+ 227:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 637              		.loc 1 227 0
+ 638 0050 114A     		ldr	r2, .L49+16
+ 639 0052 03CA     		ldmia	r2!, {r0, r1}
+ 640              	.LVL70:
+ 641 0054 1860     		str	r0, [r3]	@ unaligned
+ 642 0056 5960     		str	r1, [r3, #4]	@ unaligned
+ 643 0058 1188     		ldrh	r1, [r2]	@ unaligned
+ 644 005a 9278     		ldrb	r2, [r2, #2]	@ zero_extendqisi2
+ 645 005c 1981     		strh	r1, [r3, #8]	@ unaligned
+ 646 005e 9A72     		strb	r2, [r3, #10]
+ 228:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_RANGESTATUS_PHASE);
+ 229:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 647              		.loc 1 229 0
+ 648 0060 0DE0     		b	.L47
+ 649              	.LVL71:
+ 650              	.L46:
+ 230:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case 5:
+ 231:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 651              		.loc 1 231 0
+ 652 0062 0E4C     		ldr	r4, .L49+20
+ 653 0064 07CC     		ldmia	r4!, {r0, r1, r2}
+ 654              	.LVL72:
+ 655 0066 1860     		str	r0, [r3]	@ unaligned
+ 656 0068 5960     		str	r1, [r3, #4]	@ unaligned
+ 657 006a 9A60     		str	r2, [r3, #8]	@ unaligned
+ 658 006c 2288     		ldrh	r2, [r4]	@ unaligned
+ 659 006e 9A81     		strh	r2, [r3, #12]	@ unaligned
+ 232:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_RANGESTATUS_HW);
+ 233:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 660              		.loc 1 233 0
+ 661 0070 05E0     		b	.L47
+ 662              	.LVL73:
+ 663              	.L39:
+ 234:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 235:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	default: /**/
+ 236:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pRangeStatusString,
+ 664              		.loc 1 236 0
+ 665 0072 0B4A     		ldr	r2, .L49+24
+ 666 0074 03CA     		ldmia	r2!, {r0, r1}
+ 667              	.LVL74:
+ 668 0076 1860     		str	r0, [r3]	@ unaligned
+ 669 0078 5960     		str	r1, [r3, #4]	@ unaligned
+ 670 007a 1288     		ldrh	r2, [r2]	@ unaligned
+ 671 007c 1A81     		strh	r2, [r3, #8]	@ unaligned
+ 672              	.L47:
+ 237:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 				VL53L0X_STRING_RANGESTATUS_NONE);
+ 238:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 239:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 240:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 241:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 242:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 673              		.loc 1 242 0
+ 674 007e 0020     		movs	r0, #0
+ 675 0080 5DF8044B 		ldr	r4, [sp], #4
+ 676              	.LCFI7:
+ARM GAS  /tmp/ccNTPRvH.s 			page 17
+
+
+ 677              		.cfi_restore 4
+ 678              		.cfi_def_cfa_offset 0
+ 679 0084 7047     		bx	lr
+ 680              	.L50:
+ 681 0086 00BF     		.align	2
+ 682              	.L49:
+ 683 0088 AC010000 		.word	.LC21
+ 684 008c B8010000 		.word	.LC22
+ 685 0090 C4010000 		.word	.LC23
+ 686 0094 D0010000 		.word	.LC24
+ 687 0098 E0010000 		.word	.LC25
+ 688 009c EC010000 		.word	.LC26
+ 689 00a0 44000000 		.word	.LC5
+ 690              		.cfi_endproc
+ 691              	.LFE115:
+ 693              		.section	.text.VL53L0X_get_pal_error_string,"ax",%progbits
+ 694              		.align	2
+ 695              		.global	VL53L0X_get_pal_error_string
+ 696              		.thumb
+ 697              		.thumb_func
+ 699              	VL53L0X_get_pal_error_string:
+ 700              	.LFB116:
+ 243:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 244:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_pal_error_string(VL53L0X_Error PalErrorCode,
+ 245:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		char *pPalErrorString)
+ 246:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+ 701              		.loc 1 246 0
+ 702              		.cfi_startproc
+ 703              		@ args = 0, pretend = 0, frame = 0
+ 704              		@ frame_needed = 0, uses_anonymous_args = 0
+ 705              		@ link register save eliminated.
+ 706              	.LVL75:
+ 707 0000 30B4     		push	{r4, r5}
+ 708              	.LCFI8:
+ 709              		.cfi_def_cfa_offset 8
+ 710              		.cfi_offset 4, -8
+ 711              		.cfi_offset 5, -4
+ 712 0002 0C46     		mov	r4, r1
+ 713              	.LVL76:
+ 247:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 248:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 249:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 250:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 251:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	switch (PalErrorCode) {
+ 714              		.loc 1 251 0
+ 715 0004 6330     		adds	r0, r0, #99
+ 716              	.LVL77:
+ 717 0006 6328     		cmp	r0, #99
+ 718 0008 00F21C81 		bhi	.L52
+ 719 000c DFE810F0 		tbh	[pc, r0, lsl #1]
+ 720              	.L54:
+ 721 0010 0F01     		.2byte	(.L53-.L54)/2
+ 722 0012 1A01     		.2byte	(.L52-.L54)/2
+ 723 0014 1A01     		.2byte	(.L52-.L54)/2
+ 724 0016 1A01     		.2byte	(.L52-.L54)/2
+ 725 0018 1A01     		.2byte	(.L52-.L54)/2
+ 726 001a 1A01     		.2byte	(.L52-.L54)/2
+ARM GAS  /tmp/ccNTPRvH.s 			page 18
+
+
+ 727 001c 1A01     		.2byte	(.L52-.L54)/2
+ 728 001e 1A01     		.2byte	(.L52-.L54)/2
+ 729 0020 1A01     		.2byte	(.L52-.L54)/2
+ 730 0022 1A01     		.2byte	(.L52-.L54)/2
+ 731 0024 1A01     		.2byte	(.L52-.L54)/2
+ 732 0026 1A01     		.2byte	(.L52-.L54)/2
+ 733 0028 1A01     		.2byte	(.L52-.L54)/2
+ 734 002a 1A01     		.2byte	(.L52-.L54)/2
+ 735 002c 1A01     		.2byte	(.L52-.L54)/2
+ 736 002e 1A01     		.2byte	(.L52-.L54)/2
+ 737 0030 1A01     		.2byte	(.L52-.L54)/2
+ 738 0032 1A01     		.2byte	(.L52-.L54)/2
+ 739 0034 1A01     		.2byte	(.L52-.L54)/2
+ 740 0036 1A01     		.2byte	(.L52-.L54)/2
+ 741 0038 1A01     		.2byte	(.L52-.L54)/2
+ 742 003a 1A01     		.2byte	(.L52-.L54)/2
+ 743 003c 1A01     		.2byte	(.L52-.L54)/2
+ 744 003e 1A01     		.2byte	(.L52-.L54)/2
+ 745 0040 1A01     		.2byte	(.L52-.L54)/2
+ 746 0042 1A01     		.2byte	(.L52-.L54)/2
+ 747 0044 1A01     		.2byte	(.L52-.L54)/2
+ 748 0046 1A01     		.2byte	(.L52-.L54)/2
+ 749 0048 1A01     		.2byte	(.L52-.L54)/2
+ 750 004a 1A01     		.2byte	(.L52-.L54)/2
+ 751 004c 1A01     		.2byte	(.L52-.L54)/2
+ 752 004e 1A01     		.2byte	(.L52-.L54)/2
+ 753 0050 1A01     		.2byte	(.L52-.L54)/2
+ 754 0052 1A01     		.2byte	(.L52-.L54)/2
+ 755 0054 1A01     		.2byte	(.L52-.L54)/2
+ 756 0056 1A01     		.2byte	(.L52-.L54)/2
+ 757 0058 1A01     		.2byte	(.L52-.L54)/2
+ 758 005a 1A01     		.2byte	(.L52-.L54)/2
+ 759 005c 1A01     		.2byte	(.L52-.L54)/2
+ 760 005e 1A01     		.2byte	(.L52-.L54)/2
+ 761 0060 1A01     		.2byte	(.L52-.L54)/2
+ 762 0062 1A01     		.2byte	(.L52-.L54)/2
+ 763 0064 1A01     		.2byte	(.L52-.L54)/2
+ 764 0066 1A01     		.2byte	(.L52-.L54)/2
+ 765 0068 1A01     		.2byte	(.L52-.L54)/2
+ 766 006a 1A01     		.2byte	(.L52-.L54)/2
+ 767 006c 1A01     		.2byte	(.L52-.L54)/2
+ 768 006e 1A01     		.2byte	(.L52-.L54)/2
+ 769 0070 1A01     		.2byte	(.L52-.L54)/2
+ 770 0072 0301     		.2byte	(.L55-.L54)/2
+ 771 0074 1A01     		.2byte	(.L52-.L54)/2
+ 772 0076 1A01     		.2byte	(.L52-.L54)/2
+ 773 0078 1A01     		.2byte	(.L52-.L54)/2
+ 774 007a 1A01     		.2byte	(.L52-.L54)/2
+ 775 007c 1A01     		.2byte	(.L52-.L54)/2
+ 776 007e 1A01     		.2byte	(.L52-.L54)/2
+ 777 0080 1A01     		.2byte	(.L52-.L54)/2
+ 778 0082 1A01     		.2byte	(.L52-.L54)/2
+ 779 0084 1A01     		.2byte	(.L52-.L54)/2
+ 780 0086 F600     		.2byte	(.L56-.L54)/2
+ 781 0088 1A01     		.2byte	(.L52-.L54)/2
+ 782 008a 1A01     		.2byte	(.L52-.L54)/2
+ 783 008c 1A01     		.2byte	(.L52-.L54)/2
+ARM GAS  /tmp/ccNTPRvH.s 			page 19
+
+
+ 784 008e 1A01     		.2byte	(.L52-.L54)/2
+ 785 0090 1A01     		.2byte	(.L52-.L54)/2
+ 786 0092 1A01     		.2byte	(.L52-.L54)/2
+ 787 0094 1A01     		.2byte	(.L52-.L54)/2
+ 788 0096 1A01     		.2byte	(.L52-.L54)/2
+ 789 0098 1A01     		.2byte	(.L52-.L54)/2
+ 790 009a EB00     		.2byte	(.L57-.L54)/2
+ 791 009c 1A01     		.2byte	(.L52-.L54)/2
+ 792 009e 1A01     		.2byte	(.L52-.L54)/2
+ 793 00a0 1A01     		.2byte	(.L52-.L54)/2
+ 794 00a2 1A01     		.2byte	(.L52-.L54)/2
+ 795 00a4 1A01     		.2byte	(.L52-.L54)/2
+ 796 00a6 1A01     		.2byte	(.L52-.L54)/2
+ 797 00a8 1A01     		.2byte	(.L52-.L54)/2
+ 798 00aa 1A01     		.2byte	(.L52-.L54)/2
+ 799 00ac 1A01     		.2byte	(.L52-.L54)/2
+ 800 00ae E100     		.2byte	(.L58-.L54)/2
+ 801 00b0 1A01     		.2byte	(.L52-.L54)/2
+ 802 00b2 1A01     		.2byte	(.L52-.L54)/2
+ 803 00b4 1A01     		.2byte	(.L52-.L54)/2
+ 804 00b6 1A01     		.2byte	(.L52-.L54)/2
+ 805 00b8 1A01     		.2byte	(.L52-.L54)/2
+ 806 00ba 1A01     		.2byte	(.L52-.L54)/2
+ 807 00bc 1A01     		.2byte	(.L52-.L54)/2
+ 808 00be 9C00     		.2byte	(.L59-.L54)/2
+ 809 00c0 D500     		.2byte	(.L60-.L54)/2
+ 810 00c2 CC00     		.2byte	(.L61-.L54)/2
+ 811 00c4 C300     		.2byte	(.L62-.L54)/2
+ 812 00c6 B700     		.2byte	(.L63-.L54)/2
+ 813 00c8 AD00     		.2byte	(.L64-.L54)/2
+ 814 00ca A700     		.2byte	(.L65-.L54)/2
+ 815 00cc 9300     		.2byte	(.L66-.L54)/2
+ 816 00ce 8700     		.2byte	(.L67-.L54)/2
+ 817 00d0 8000     		.2byte	(.L68-.L54)/2
+ 818 00d2 7700     		.2byte	(.L69-.L54)/2
+ 819 00d4 6B00     		.2byte	(.L70-.L54)/2
+ 820 00d6 6400     		.2byte	(.L71-.L54)/2
+ 821              		.p2align 1
+ 822              	.L71:
+ 252:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_NONE:
+ 253:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 823              		.loc 1 253 0
+ 824 00d8 614B     		ldr	r3, .L74
+ 825 00da 03CB     		ldmia	r3!, {r0, r1}
+ 826              	.LVL78:
+ 827 00dc 2060     		str	r0, [r4]	@ unaligned
+ 828 00de 6160     		str	r1, [r4, #4]	@ unaligned
+ 829 00e0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 830 00e2 2372     		strb	r3, [r4, #8]
+ 254:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_NONE);
+ 255:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 831              		.loc 1 255 0
+ 832 00e4 B8E0     		b	.L72
+ 833              	.LVL79:
+ 834              	.L70:
+ 256:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_CALIBRATION_WARNING:
+ 257:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ARM GAS  /tmp/ccNTPRvH.s 			page 20
+
+
+ 835              		.loc 1 257 0
+ 836 00e6 5F4D     		ldr	r5, .L74+4
+ 837 00e8 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 838              	.LVL80:
+ 839 00ea 2060     		str	r0, [r4]	@ unaligned
+ 840 00ec 6160     		str	r1, [r4, #4]	@ unaligned
+ 841 00ee A260     		str	r2, [r4, #8]	@ unaligned
+ 842 00f0 E360     		str	r3, [r4, #12]	@ unaligned
+ 843 00f2 03CD     		ldmia	r5!, {r0, r1}
+ 844 00f4 2061     		str	r0, [r4, #16]	@ unaligned
+ 845 00f6 6161     		str	r1, [r4, #20]	@ unaligned
+ 846 00f8 2B88     		ldrh	r3, [r5]	@ unaligned
+ 847 00fa 2383     		strh	r3, [r4, #24]	@ unaligned
+ 258:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_CALIBRATION_WARNING);
+ 259:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 848              		.loc 1 259 0
+ 849 00fc ACE0     		b	.L72
+ 850              	.LVL81:
+ 851              	.L69:
+ 260:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_MIN_CLIPPED:
+ 261:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 852              		.loc 1 261 0
+ 853 00fe 5A4D     		ldr	r5, .L74+8
+ 854 0100 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 855              	.LVL82:
+ 856 0102 2060     		str	r0, [r4]	@ unaligned
+ 857 0104 6160     		str	r1, [r4, #4]	@ unaligned
+ 858 0106 A260     		str	r2, [r4, #8]	@ unaligned
+ 859 0108 E360     		str	r3, [r4, #12]	@ unaligned
+ 860 010a 2B88     		ldrh	r3, [r5]	@ unaligned
+ 861 010c 2382     		strh	r3, [r4, #16]	@ unaligned
+ 262:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_MIN_CLIPPED);
+ 263:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 862              		.loc 1 263 0
+ 863 010e A3E0     		b	.L72
+ 864              	.LVL83:
+ 865              	.L68:
+ 264:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_UNDEFINED:
+ 265:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 866              		.loc 1 265 0
+ 867 0110 564D     		ldr	r5, .L74+12
+ 868 0112 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 869              	.LVL84:
+ 870 0114 2060     		str	r0, [r4]	@ unaligned
+ 871 0116 6160     		str	r1, [r4, #4]	@ unaligned
+ 872 0118 A260     		str	r2, [r4, #8]	@ unaligned
+ 873 011a E360     		str	r3, [r4, #12]	@ unaligned
+ 266:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_UNDEFINED);
+ 267:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 874              		.loc 1 267 0
+ 875 011c 9CE0     		b	.L72
+ 876              	.LVL85:
+ 877              	.L67:
+ 268:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_INVALID_PARAMS:
+ 269:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 878              		.loc 1 269 0
+ 879 011e 544D     		ldr	r5, .L74+16
+ARM GAS  /tmp/ccNTPRvH.s 			page 21
+
+
+ 880 0120 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 881              	.LVL86:
+ 882 0122 2060     		str	r0, [r4]	@ unaligned
+ 883 0124 6160     		str	r1, [r4, #4]	@ unaligned
+ 884 0126 A260     		str	r2, [r4, #8]	@ unaligned
+ 885 0128 E360     		str	r3, [r4, #12]	@ unaligned
+ 886 012a 03CD     		ldmia	r5!, {r0, r1}
+ 887 012c 2061     		str	r0, [r4, #16]	@ unaligned
+ 888 012e 6161     		str	r1, [r4, #20]	@ unaligned
+ 889 0130 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 890 0132 2376     		strb	r3, [r4, #24]
+ 270:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_INVALID_PARAMS);
+ 271:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 891              		.loc 1 271 0
+ 892 0134 90E0     		b	.L72
+ 893              	.LVL87:
+ 894              	.L66:
+ 272:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_NOT_SUPPORTED:
+ 273:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 895              		.loc 1 273 0
+ 896 0136 4F4D     		ldr	r5, .L74+20
+ 897 0138 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 898              	.LVL88:
+ 899 013a 2060     		str	r0, [r4]	@ unaligned
+ 900 013c 6160     		str	r1, [r4, #4]	@ unaligned
+ 901 013e A260     		str	r2, [r4, #8]	@ unaligned
+ 902 0140 E360     		str	r3, [r4, #12]	@ unaligned
+ 903 0142 2868     		ldr	r0, [r5]	@ unaligned
+ 904 0144 2061     		str	r0, [r4, #16]	@ unaligned
+ 274:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_NOT_SUPPORTED);
+ 275:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 905              		.loc 1 275 0
+ 906 0146 87E0     		b	.L72
+ 907              	.LVL89:
+ 908              	.L59:
+ 276:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_INTERRUPT_NOT_CLEARED:
+ 277:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 909              		.loc 1 277 0
+ 910 0148 4B4D     		ldr	r5, .L74+24
+ 911 014a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 912              	.LVL90:
+ 913 014c 2060     		str	r0, [r4]	@ unaligned
+ 914 014e 6160     		str	r1, [r4, #4]	@ unaligned
+ 915 0150 A260     		str	r2, [r4, #8]	@ unaligned
+ 916 0152 E360     		str	r3, [r4, #12]	@ unaligned
+ 917 0154 2868     		ldr	r0, [r5]	@ unaligned
+ 918 0156 2061     		str	r0, [r4, #16]	@ unaligned
+ 919 0158 AB88     		ldrh	r3, [r5, #4]	@ unaligned
+ 920 015a A382     		strh	r3, [r4, #20]	@ unaligned
+ 278:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_INTERRUPT_NOT_CLEARED);
+ 279:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 921              		.loc 1 279 0
+ 922 015c 7CE0     		b	.L72
+ 923              	.LVL91:
+ 924              	.L65:
+ 280:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_RANGE_ERROR:
+ 281:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ARM GAS  /tmp/ccNTPRvH.s 			page 22
+
+
+ 925              		.loc 1 281 0
+ 926 015e 474B     		ldr	r3, .L74+28
+ 927 0160 07CB     		ldmia	r3!, {r0, r1, r2}
+ 928              	.LVL92:
+ 929 0162 2060     		str	r0, [r4]	@ unaligned
+ 930 0164 6160     		str	r1, [r4, #4]	@ unaligned
+ 931 0166 A260     		str	r2, [r4, #8]	@ unaligned
+ 282:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_RANGE_ERROR);
+ 283:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 932              		.loc 1 283 0
+ 933 0168 76E0     		b	.L72
+ 934              	.LVL93:
+ 935              	.L64:
+ 284:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_TIME_OUT:
+ 285:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 936              		.loc 1 285 0
+ 937 016a 454B     		ldr	r3, .L74+32
+ 938 016c 07CB     		ldmia	r3!, {r0, r1, r2}
+ 939              	.LVL94:
+ 940 016e 2060     		str	r0, [r4]	@ unaligned
+ 941 0170 6160     		str	r1, [r4, #4]	@ unaligned
+ 942 0172 A260     		str	r2, [r4, #8]	@ unaligned
+ 943 0174 1A88     		ldrh	r2, [r3]	@ unaligned
+ 944 0176 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 945 0178 A281     		strh	r2, [r4, #12]	@ unaligned
+ 946 017a A373     		strb	r3, [r4, #14]
+ 286:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_TIME_OUT);
+ 287:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 947              		.loc 1 287 0
+ 948 017c 6CE0     		b	.L72
+ 949              	.LVL95:
+ 950              	.L63:
+ 288:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_MODE_NOT_SUPPORTED:
+ 289:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 951              		.loc 1 289 0
+ 952 017e 414D     		ldr	r5, .L74+36
+ 953 0180 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 954              	.LVL96:
+ 955 0182 2060     		str	r0, [r4]	@ unaligned
+ 956 0184 6160     		str	r1, [r4, #4]	@ unaligned
+ 957 0186 A260     		str	r2, [r4, #8]	@ unaligned
+ 958 0188 E360     		str	r3, [r4, #12]	@ unaligned
+ 959 018a 03CD     		ldmia	r5!, {r0, r1}
+ 960 018c 2061     		str	r0, [r4, #16]	@ unaligned
+ 961 018e 6161     		str	r1, [r4, #20]	@ unaligned
+ 962 0190 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 963 0192 2376     		strb	r3, [r4, #24]
+ 290:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_MODE_NOT_SUPPORTED);
+ 291:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 964              		.loc 1 291 0
+ 965 0194 60E0     		b	.L72
+ 966              	.LVL97:
+ 967              	.L62:
+ 292:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_BUFFER_TOO_SMALL:
+ 293:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 968              		.loc 1 293 0
+ 969 0196 3C4D     		ldr	r5, .L74+40
+ARM GAS  /tmp/ccNTPRvH.s 			page 23
+
+
+ 970 0198 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 971              	.LVL98:
+ 972 019a 2060     		str	r0, [r4]	@ unaligned
+ 973 019c 6160     		str	r1, [r4, #4]	@ unaligned
+ 974 019e A260     		str	r2, [r4, #8]	@ unaligned
+ 975 01a0 E360     		str	r3, [r4, #12]	@ unaligned
+ 976 01a2 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 977 01a4 2374     		strb	r3, [r4, #16]
+ 294:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_BUFFER_TOO_SMALL);
+ 295:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 978              		.loc 1 295 0
+ 979 01a6 57E0     		b	.L72
+ 980              	.LVL99:
+ 981              	.L61:
+ 296:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_GPIO_NOT_EXISTING:
+ 297:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 982              		.loc 1 297 0
+ 983 01a8 384D     		ldr	r5, .L74+44
+ 984 01aa 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 985              	.LVL100:
+ 986 01ac 2060     		str	r0, [r4]	@ unaligned
+ 987 01ae 6160     		str	r1, [r4, #4]	@ unaligned
+ 988 01b0 A260     		str	r2, [r4, #8]	@ unaligned
+ 989 01b2 E360     		str	r3, [r4, #12]	@ unaligned
+ 990 01b4 2B88     		ldrh	r3, [r5]	@ unaligned
+ 991 01b6 2382     		strh	r3, [r4, #16]	@ unaligned
+ 298:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_GPIO_NOT_EXISTING);
+ 299:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 992              		.loc 1 299 0
+ 993 01b8 4EE0     		b	.L72
+ 994              	.LVL101:
+ 995              	.L60:
+ 300:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_GPIO_FUNCTIONALITY_NOT_SUPPORTED:
+ 301:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 996              		.loc 1 301 0
+ 997 01ba 354D     		ldr	r5, .L74+48
+ 998 01bc 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 999              	.LVL102:
+ 1000 01be 2060     		str	r0, [r4]	@ unaligned
+ 1001 01c0 6160     		str	r1, [r4, #4]	@ unaligned
+ 1002 01c2 A260     		str	r2, [r4, #8]	@ unaligned
+ 1003 01c4 E360     		str	r3, [r4, #12]	@ unaligned
+ 1004 01c6 03CD     		ldmia	r5!, {r0, r1}
+ 1005 01c8 2061     		str	r0, [r4, #16]	@ unaligned
+ 1006 01ca 6161     		str	r1, [r4, #20]	@ unaligned
+ 1007 01cc 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 1008 01ce 2376     		strb	r3, [r4, #24]
+ 302:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_GPIO_FUNCTIONALITY_NOT_SUPPORTED);
+ 303:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1009              		.loc 1 303 0
+ 1010 01d0 42E0     		b	.L72
+ 1011              	.LVL103:
+ 1012              	.L58:
+ 304:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_CONTROL_INTERFACE:
+ 305:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 1013              		.loc 1 305 0
+ 1014 01d2 304D     		ldr	r5, .L74+52
+ARM GAS  /tmp/ccNTPRvH.s 			page 24
+
+
+ 1015 01d4 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1016              	.LVL104:
+ 1017 01d6 2060     		str	r0, [r4]	@ unaligned
+ 1018 01d8 6160     		str	r1, [r4, #4]	@ unaligned
+ 1019 01da A260     		str	r2, [r4, #8]	@ unaligned
+ 1020 01dc E360     		str	r3, [r4, #12]	@ unaligned
+ 1021 01de 03CD     		ldmia	r5!, {r0, r1}
+ 1022 01e0 2061     		str	r0, [r4, #16]	@ unaligned
+ 1023 01e2 6161     		str	r1, [r4, #20]	@ unaligned
+ 306:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_CONTROL_INTERFACE);
+ 307:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1024              		.loc 1 307 0
+ 1025 01e4 38E0     		b	.L72
+ 1026              	.LVL105:
+ 1027              	.L57:
+ 308:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_INVALID_COMMAND:
+ 309:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 1028              		.loc 1 309 0
+ 1029 01e6 2C4D     		ldr	r5, .L74+56
+ 1030 01e8 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1031              	.LVL106:
+ 1032 01ea 2060     		str	r0, [r4]	@ unaligned
+ 1033 01ec 6160     		str	r1, [r4, #4]	@ unaligned
+ 1034 01ee A260     		str	r2, [r4, #8]	@ unaligned
+ 1035 01f0 E360     		str	r3, [r4, #12]	@ unaligned
+ 1036 01f2 2868     		ldr	r0, [r5]	@ unaligned
+ 1037 01f4 2061     		str	r0, [r4, #16]	@ unaligned
+ 1038 01f6 AB88     		ldrh	r3, [r5, #4]	@ unaligned
+ 1039 01f8 A382     		strh	r3, [r4, #20]	@ unaligned
+ 310:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_INVALID_COMMAND);
+ 311:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1040              		.loc 1 311 0
+ 1041 01fa 2DE0     		b	.L72
+ 1042              	.LVL107:
+ 1043              	.L56:
+ 312:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_DIVISION_BY_ZERO:
+ 313:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 1044              		.loc 1 313 0
+ 1045 01fc 274D     		ldr	r5, .L74+60
+ 1046 01fe 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1047              	.LVL108:
+ 1048 0200 2060     		str	r0, [r4]	@ unaligned
+ 1049 0202 6160     		str	r1, [r4, #4]	@ unaligned
+ 1050 0204 A260     		str	r2, [r4, #8]	@ unaligned
+ 1051 0206 E360     		str	r3, [r4, #12]	@ unaligned
+ 1052 0208 2868     		ldr	r0, [r5]	@ unaligned
+ 1053 020a 2061     		str	r0, [r4, #16]	@ unaligned
+ 1054 020c AA88     		ldrh	r2, [r5, #4]	@ unaligned
+ 1055 020e AB79     		ldrb	r3, [r5, #6]	@ zero_extendqisi2
+ 1056 0210 A282     		strh	r2, [r4, #20]	@ unaligned
+ 1057 0212 A375     		strb	r3, [r4, #22]
+ 314:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_DIVISION_BY_ZERO);
+ 315:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1058              		.loc 1 315 0
+ 1059 0214 20E0     		b	.L72
+ 1060              	.LVL109:
+ 1061              	.L55:
+ARM GAS  /tmp/ccNTPRvH.s 			page 25
+
+
+ 316:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_REF_SPAD_INIT:
+ 317:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 1062              		.loc 1 317 0
+ 1063 0216 224D     		ldr	r5, .L74+64
+ 1064 0218 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1065              	.LVL110:
+ 1066 021a 2060     		str	r0, [r4]	@ unaligned
+ 1067 021c 6160     		str	r1, [r4, #4]	@ unaligned
+ 1068 021e A260     		str	r2, [r4, #8]	@ unaligned
+ 1069 0220 E360     		str	r3, [r4, #12]	@ unaligned
+ 1070 0222 03CD     		ldmia	r5!, {r0, r1}
+ 1071 0224 2061     		str	r0, [r4, #16]	@ unaligned
+ 1072 0226 6161     		str	r1, [r4, #20]	@ unaligned
+ 1073 0228 2B88     		ldrh	r3, [r5]	@ unaligned
+ 1074 022a 2383     		strh	r3, [r4, #24]	@ unaligned
+ 318:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_REF_SPAD_INIT);
+ 319:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1075              		.loc 1 319 0
+ 1076 022c 14E0     		b	.L72
+ 1077              	.LVL111:
+ 1078              	.L53:
+ 320:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_ERROR_NOT_IMPLEMENTED:
+ 321:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 1079              		.loc 1 321 0
+ 1080 022e 1D4D     		ldr	r5, .L74+68
+ 1081 0230 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1082              	.LVL112:
+ 1083 0232 2060     		str	r0, [r4]	@ unaligned
+ 1084 0234 6160     		str	r1, [r4, #4]	@ unaligned
+ 1085 0236 A260     		str	r2, [r4, #8]	@ unaligned
+ 1086 0238 E360     		str	r3, [r4, #12]	@ unaligned
+ 1087 023a 2868     		ldr	r0, [r5]	@ unaligned
+ 1088 023c 2061     		str	r0, [r4, #16]	@ unaligned
+ 1089 023e AB88     		ldrh	r3, [r5, #4]	@ unaligned
+ 1090 0240 A382     		strh	r3, [r4, #20]	@ unaligned
+ 322:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_ERROR_NOT_IMPLEMENTED);
+ 323:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1091              		.loc 1 323 0
+ 1092 0242 09E0     		b	.L72
+ 1093              	.LVL113:
+ 1094              	.L52:
+ 324:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 325:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	default:
+ 326:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalErrorString,
+ 1095              		.loc 1 326 0
+ 1096 0244 184D     		ldr	r5, .L74+72
+ 1097 0246 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1098              	.LVL114:
+ 1099 0248 2060     		str	r0, [r4]	@ unaligned
+ 1100 024a 6160     		str	r1, [r4, #4]	@ unaligned
+ 1101 024c A260     		str	r2, [r4, #8]	@ unaligned
+ 1102 024e E360     		str	r3, [r4, #12]	@ unaligned
+ 1103 0250 2A88     		ldrh	r2, [r5]	@ unaligned
+ 1104 0252 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 1105 0254 2282     		strh	r2, [r4, #16]	@ unaligned
+ 1106 0256 A374     		strb	r3, [r4, #18]
+ 1107              	.L72:
+ARM GAS  /tmp/ccNTPRvH.s 			page 26
+
+
+ 327:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 				VL53L0X_STRING_UNKNOW_ERROR_CODE);
+ 328:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 329:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 330:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 331:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 332:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 1108              		.loc 1 332 0
+ 1109 0258 0020     		movs	r0, #0
+ 1110 025a 30BC     		pop	{r4, r5}
+ 1111              	.LCFI9:
+ 1112              		.cfi_restore 5
+ 1113              		.cfi_restore 4
+ 1114              		.cfi_def_cfa_offset 0
+ 1115              	.LVL115:
+ 1116 025c 7047     		bx	lr
+ 1117              	.L75:
+ 1118 025e 00BF     		.align	2
+ 1119              	.L74:
+ 1120 0260 FC010000 		.word	.LC27
+ 1121 0264 08020000 		.word	.LC28
+ 1122 0268 24020000 		.word	.LC29
+ 1123 026c 38020000 		.word	.LC30
+ 1124 0270 48020000 		.word	.LC31
+ 1125 0274 64020000 		.word	.LC32
+ 1126 0278 78020000 		.word	.LC33
+ 1127 027c 90020000 		.word	.LC34
+ 1128 0280 9C020000 		.word	.LC35
+ 1129 0284 AC020000 		.word	.LC36
+ 1130 0288 C8020000 		.word	.LC37
+ 1131 028c DC020000 		.word	.LC38
+ 1132 0290 F0020000 		.word	.LC39
+ 1133 0294 0C030000 		.word	.LC40
+ 1134 0298 24030000 		.word	.LC41
+ 1135 029c 3C030000 		.word	.LC42
+ 1136 02a0 54030000 		.word	.LC43
+ 1137 02a4 70030000 		.word	.LC44
+ 1138 02a8 98010000 		.word	.LC20
+ 1139              		.cfi_endproc
+ 1140              	.LFE116:
+ 1142              		.section	.text.VL53L0X_get_pal_state_string,"ax",%progbits
+ 1143              		.align	2
+ 1144              		.global	VL53L0X_get_pal_state_string
+ 1145              		.thumb
+ 1146              		.thumb_func
+ 1148              	VL53L0X_get_pal_state_string:
+ 1149              	.LFB117:
+ 333:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 334:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_pal_state_string(VL53L0X_State PalStateCode,
+ 335:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		char *pPalStateString)
+ 336:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+ 1150              		.loc 1 336 0
+ 1151              		.cfi_startproc
+ 1152              		@ args = 0, pretend = 0, frame = 0
+ 1153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1154              		@ link register save eliminated.
+ 1155              	.LVL116:
+ 1156 0000 30B4     		push	{r4, r5}
+ARM GAS  /tmp/ccNTPRvH.s 			page 27
+
+
+ 1157              	.LCFI10:
+ 1158              		.cfi_def_cfa_offset 8
+ 1159              		.cfi_offset 4, -8
+ 1160              		.cfi_offset 5, -4
+ 1161 0002 0C46     		mov	r4, r1
+ 1162              	.LVL117:
+ 337:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 338:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 339:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 340:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 341:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	switch (PalStateCode) {
+ 1163              		.loc 1 341 0
+ 1164 0004 0328     		cmp	r0, #3
+ 1165 0006 26D0     		beq	.L78
+ 1166 0008 03D8     		bhi	.L79
+ 1167 000a 0128     		cmp	r0, #1
+ 1168 000c 0FD0     		beq	.L80
+ 1169 000e 07D9     		bls	.L87
+ 1170 0010 19E0     		b	.L81
+ 1171              	.L79:
+ 1172 0012 6228     		cmp	r0, #98
+ 1173 0014 30D0     		beq	.L83
+ 1174 0016 6328     		cmp	r0, #99
+ 1175 0018 36D0     		beq	.L84
+ 1176 001a 0428     		cmp	r0, #4
+ 1177 001c 3AD1     		bne	.L88
+ 1178 001e 23E0     		b	.L85
+ 1179              	.L87:
+ 342:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_POWERDOWN:
+ 343:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1180              		.loc 1 343 0
+ 1181 0020 214D     		ldr	r5, .L90
+ 1182 0022 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1183              	.LVL118:
+ 1184 0024 2060     		str	r0, [r4]	@ unaligned
+ 1185 0026 6160     		str	r1, [r4, #4]	@ unaligned
+ 1186 0028 A260     		str	r2, [r4, #8]	@ unaligned
+ 1187 002a E360     		str	r3, [r4, #12]	@ unaligned
+ 344:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_POWERDOWN);
+ 345:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1188              		.loc 1 345 0
+ 1189 002c 39E0     		b	.L86
+ 1190              	.LVL119:
+ 1191              	.L80:
+ 346:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_WAIT_STATICINIT:
+ 347:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1192              		.loc 1 347 0
+ 1193 002e 1F4D     		ldr	r5, .L90+4
+ 1194 0030 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1195              	.LVL120:
+ 1196 0032 2060     		str	r0, [r4]	@ unaligned
+ 1197 0034 6160     		str	r1, [r4, #4]	@ unaligned
+ 1198 0036 A260     		str	r2, [r4, #8]	@ unaligned
+ 1199 0038 E360     		str	r3, [r4, #12]	@ unaligned
+ 1200 003a 03CD     		ldmia	r5!, {r0, r1}
+ 1201 003c 2061     		str	r0, [r4, #16]	@ unaligned
+ 1202 003e 6161     		str	r1, [r4, #20]	@ unaligned
+ARM GAS  /tmp/ccNTPRvH.s 			page 28
+
+
+ 1203 0040 2B88     		ldrh	r3, [r5]	@ unaligned
+ 1204 0042 2383     		strh	r3, [r4, #24]	@ unaligned
+ 348:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_WAIT_STATICINIT);
+ 349:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1205              		.loc 1 349 0
+ 1206 0044 2DE0     		b	.L86
+ 1207              	.LVL121:
+ 1208              	.L81:
+ 350:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_STANDBY:
+ 351:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1209              		.loc 1 351 0
+ 1210 0046 1A4B     		ldr	r3, .L90+8
+ 1211 0048 07CB     		ldmia	r3!, {r0, r1, r2}
+ 1212              	.LVL122:
+ 1213 004a 2060     		str	r0, [r4]	@ unaligned
+ 1214 004c 6160     		str	r1, [r4, #4]	@ unaligned
+ 1215 004e A260     		str	r2, [r4, #8]	@ unaligned
+ 1216 0050 1B88     		ldrh	r3, [r3]	@ unaligned
+ 1217 0052 A381     		strh	r3, [r4, #12]	@ unaligned
+ 352:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_STANDBY);
+ 353:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1218              		.loc 1 353 0
+ 1219 0054 25E0     		b	.L86
+ 1220              	.LVL123:
+ 1221              	.L78:
+ 354:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_IDLE:
+ 355:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1222              		.loc 1 355 0
+ 1223 0056 174B     		ldr	r3, .L90+12
+ 1224 0058 03CB     		ldmia	r3!, {r0, r1}
+ 1225              	.LVL124:
+ 1226 005a 2060     		str	r0, [r4]	@ unaligned
+ 1227 005c 6160     		str	r1, [r4, #4]	@ unaligned
+ 1228 005e 1A88     		ldrh	r2, [r3]	@ unaligned
+ 1229 0060 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 1230 0062 2281     		strh	r2, [r4, #8]	@ unaligned
+ 1231 0064 A372     		strb	r3, [r4, #10]
+ 356:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_IDLE);
+ 357:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1232              		.loc 1 357 0
+ 1233 0066 1CE0     		b	.L86
+ 1234              	.LVL125:
+ 1235              	.L85:
+ 358:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_RUNNING:
+ 359:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1236              		.loc 1 359 0
+ 1237 0068 134B     		ldr	r3, .L90+16
+ 1238 006a 07CB     		ldmia	r3!, {r0, r1, r2}
+ 1239              	.LVL126:
+ 1240 006c 2060     		str	r0, [r4]	@ unaligned
+ 1241 006e 6160     		str	r1, [r4, #4]	@ unaligned
+ 1242 0070 A260     		str	r2, [r4, #8]	@ unaligned
+ 1243 0072 1B88     		ldrh	r3, [r3]	@ unaligned
+ 1244 0074 A381     		strh	r3, [r4, #12]	@ unaligned
+ 360:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_RUNNING);
+ 361:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1245              		.loc 1 361 0
+ARM GAS  /tmp/ccNTPRvH.s 			page 29
+
+
+ 1246 0076 14E0     		b	.L86
+ 1247              	.LVL127:
+ 1248              	.L83:
+ 362:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_UNKNOWN:
+ 363:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1249              		.loc 1 363 0
+ 1250 0078 104B     		ldr	r3, .L90+20
+ 1251 007a 07CB     		ldmia	r3!, {r0, r1, r2}
+ 1252              	.LVL128:
+ 1253 007c 2060     		str	r0, [r4]	@ unaligned
+ 1254 007e 6160     		str	r1, [r4, #4]	@ unaligned
+ 1255 0080 A260     		str	r2, [r4, #8]	@ unaligned
+ 1256 0082 1B88     		ldrh	r3, [r3]	@ unaligned
+ 1257 0084 A381     		strh	r3, [r4, #12]	@ unaligned
+ 364:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_UNKNOWN);
+ 365:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1258              		.loc 1 365 0
+ 1259 0086 0CE0     		b	.L86
+ 1260              	.LVL129:
+ 1261              	.L84:
+ 366:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_STATE_ERROR:
+ 367:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1262              		.loc 1 367 0
+ 1263 0088 0D4B     		ldr	r3, .L90+24
+ 1264 008a 07CB     		ldmia	r3!, {r0, r1, r2}
+ 1265              	.LVL130:
+ 1266 008c 2060     		str	r0, [r4]	@ unaligned
+ 1267 008e 6160     		str	r1, [r4, #4]	@ unaligned
+ 1268 0090 A260     		str	r2, [r4, #8]	@ unaligned
+ 368:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_ERROR);
+ 369:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1269              		.loc 1 369 0
+ 1270 0092 06E0     		b	.L86
+ 1271              	.LVL131:
+ 1272              	.L88:
+ 370:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 371:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	default:
+ 372:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pPalStateString,
+ 1273              		.loc 1 372 0
+ 1274 0094 094B     		ldr	r3, .L90+20
+ 1275 0096 07CB     		ldmia	r3!, {r0, r1, r2}
+ 1276              	.LVL132:
+ 1277 0098 2060     		str	r0, [r4]	@ unaligned
+ 1278 009a 6160     		str	r1, [r4, #4]	@ unaligned
+ 1279 009c A260     		str	r2, [r4, #8]	@ unaligned
+ 1280 009e 1B88     		ldrh	r3, [r3]	@ unaligned
+ 1281 00a0 A381     		strh	r3, [r4, #12]	@ unaligned
+ 1282              	.L86:
+ 373:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_STATE_UNKNOWN);
+ 374:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 375:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 376:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 377:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 378:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 1283              		.loc 1 378 0
+ 1284 00a2 0020     		movs	r0, #0
+ 1285 00a4 30BC     		pop	{r4, r5}
+ARM GAS  /tmp/ccNTPRvH.s 			page 30
+
+
+ 1286              	.LCFI11:
+ 1287              		.cfi_restore 5
+ 1288              		.cfi_restore 4
+ 1289              		.cfi_def_cfa_offset 0
+ 1290              	.LVL133:
+ 1291 00a6 7047     		bx	lr
+ 1292              	.L91:
+ 1293              		.align	2
+ 1294              	.L90:
+ 1295 00a8 88030000 		.word	.LC45
+ 1296 00ac 98030000 		.word	.LC46
+ 1297 00b0 B4030000 		.word	.LC47
+ 1298 00b4 C4030000 		.word	.LC48
+ 1299 00b8 D0030000 		.word	.LC49
+ 1300 00bc E0030000 		.word	.LC50
+ 1301 00c0 F0030000 		.word	.LC51
+ 1302              		.cfi_endproc
+ 1303              	.LFE117:
+ 1305              		.section	.text.VL53L0X_get_sequence_steps_info,"ax",%progbits
+ 1306              		.align	2
+ 1307              		.global	VL53L0X_get_sequence_steps_info
+ 1308              		.thumb
+ 1309              		.thumb_func
+ 1311              	VL53L0X_get_sequence_steps_info:
+ 1312              	.LFB118:
+ 379:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 380:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_sequence_steps_info(
+ 381:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_SequenceStepId SequenceStepId,
+ 382:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		char *pSequenceStepsString)
+ 383:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+ 1313              		.loc 1 383 0
+ 1314              		.cfi_startproc
+ 1315              		@ args = 0, pretend = 0, frame = 0
+ 1316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1317              		@ link register save eliminated.
+ 1318              	.LVL134:
+ 1319 0000 0B46     		mov	r3, r1
+ 1320              	.LVL135:
+ 384:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 385:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 386:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 387:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	switch (SequenceStepId) {
+ 1321              		.loc 1 387 0
+ 1322 0002 0428     		cmp	r0, #4
+ 1323 0004 26D8     		bhi	.L100
+ 1324 0006 DFE800F0 		tbb	[pc, r0]
+ 1325              	.L95:
+ 1326 000a 03       		.byte	(.L94-.L95)/2
+ 1327 000b 08       		.byte	(.L96-.L95)/2
+ 1328 000c 0D       		.byte	(.L97-.L95)/2
+ 1329 000d 14       		.byte	(.L98-.L95)/2
+ 1330 000e 1D       		.byte	(.L99-.L95)/2
+ 1331 000f 00       		.p2align 1
+ 1332              	.L94:
+ 388:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_SEQUENCESTEP_TCC:
+ 389:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pSequenceStepsString,
+ 1333              		.loc 1 389 0
+ARM GAS  /tmp/ccNTPRvH.s 			page 31
+
+
+ 1334 0010 134A     		ldr	r2, .L103
+ 1335 0012 1068     		ldr	r0, [r2]	@ unaligned
+ 1336              	.LVL136:
+ 1337 0014 0860     		str	r0, [r1]	@ unaligned
+ 384:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 1338              		.loc 1 384 0
+ 1339 0016 0020     		movs	r0, #0
+ 390:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_SEQUENCESTEP_TCC);
+ 391:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1340              		.loc 1 391 0
+ 1341 0018 12E0     		b	.L102
+ 1342              	.LVL137:
+ 1343              	.L96:
+ 392:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_SEQUENCESTEP_DSS:
+ 393:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pSequenceStepsString,
+ 1344              		.loc 1 393 0
+ 1345 001a 124A     		ldr	r2, .L103+4
+ 1346 001c 1068     		ldr	r0, [r2]	@ unaligned
+ 1347              	.LVL138:
+ 1348 001e 0860     		str	r0, [r1]	@ unaligned
+ 384:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 1349              		.loc 1 384 0
+ 1350 0020 0020     		movs	r0, #0
+ 394:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_SEQUENCESTEP_DSS);
+ 395:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1351              		.loc 1 395 0
+ 1352 0022 0DE0     		b	.L102
+ 1353              	.LVL139:
+ 1354              	.L97:
+ 396:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_SEQUENCESTEP_MSRC:
+ 397:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pSequenceStepsString,
+ 1355              		.loc 1 397 0
+ 1356 0024 104A     		ldr	r2, .L103+8
+ 1357 0026 1068     		ldr	r0, [r2]	@ unaligned
+ 1358              	.LVL140:
+ 1359 0028 0860     		str	r0, [r1]	@ unaligned
+ 1360 002a 1279     		ldrb	r2, [r2, #4]	@ zero_extendqisi2
+ 1361 002c 1A71     		strb	r2, [r3, #4]
+ 384:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 1362              		.loc 1 384 0
+ 1363 002e 0020     		movs	r0, #0
+ 398:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_SEQUENCESTEP_MSRC);
+ 399:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1364              		.loc 1 399 0
+ 1365 0030 06E0     		b	.L102
+ 1366              	.LVL141:
+ 1367              	.L98:
+ 400:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_SEQUENCESTEP_PRE_RANGE:
+ 401:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pSequenceStepsString,
+ 1368              		.loc 1 401 0
+ 1369 0032 0E4A     		ldr	r2, .L103+12
+ 1370 0034 03CA     		ldmia	r2!, {r0, r1}
+ 1371              	.LVL142:
+ 1372 0036 1860     		str	r0, [r3]	@ unaligned
+ 1373 0038 5960     		str	r1, [r3, #4]	@ unaligned
+ 1374 003a 1288     		ldrh	r2, [r2]	@ unaligned
+ 1375 003c 1A81     		strh	r2, [r3, #8]	@ unaligned
+ARM GAS  /tmp/ccNTPRvH.s 			page 32
+
+
+ 384:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 1376              		.loc 1 384 0
+ 1377 003e 0020     		movs	r0, #0
+ 1378              	.L102:
+ 1379              	.LVL143:
+ 402:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_SEQUENCESTEP_PRE_RANGE);
+ 403:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 404:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_SEQUENCESTEP_FINAL_RANGE:
+ 405:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pSequenceStepsString,
+ 406:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_SEQUENCESTEP_FINAL_RANGE);
+ 407:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 408:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 409:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	default:
+ 410:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		Status = VL53L0X_ERROR_INVALID_PARAMS;
+ 411:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 412:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 413:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 414:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 415:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 416:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 1380              		.loc 1 416 0
+ 1381 0040 40B2     		sxtb	r0, r0
+ 1382 0042 7047     		bx	lr
+ 1383              	.LVL144:
+ 1384              	.L99:
+ 383:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 1385              		.loc 1 383 0
+ 1386 0044 10B4     		push	{r4}
+ 1387              	.LCFI12:
+ 1388              		.cfi_def_cfa_offset 4
+ 1389              		.cfi_offset 4, -4
+ 405:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_SEQUENCESTEP_FINAL_RANGE);
+ 1390              		.loc 1 405 0
+ 1391 0046 0A4C     		ldr	r4, .L103+16
+ 1392 0048 07CC     		ldmia	r4!, {r0, r1, r2}
+ 1393              	.LVL145:
+ 1394 004a 1860     		str	r0, [r3]	@ unaligned
+ 1395 004c 5960     		str	r1, [r3, #4]	@ unaligned
+ 1396 004e 9A60     		str	r2, [r3, #8]	@ unaligned
+ 384:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 1397              		.loc 1 384 0
+ 1398 0050 0020     		movs	r0, #0
+ 407:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 1399              		.loc 1 407 0
+ 1400 0052 01E0     		b	.L93
+ 1401              	.LVL146:
+ 1402              	.L100:
+ 410:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 1403              		.loc 1 410 0
+ 1404 0054 FC20     		movs	r0, #252
+ 1405              	.LVL147:
+ 1406 0056 F3E7     		b	.L102
+ 1407              	.LVL148:
+ 1408              	.L93:
+ 1409              		.loc 1 416 0
+ 1410 0058 40B2     		sxtb	r0, r0
+ 1411 005a 5DF8044B 		ldr	r4, [sp], #4
+ARM GAS  /tmp/ccNTPRvH.s 			page 33
+
+
+ 1412              	.LCFI13:
+ 1413              		.cfi_restore 4
+ 1414              		.cfi_def_cfa_offset 0
+ 1415 005e 7047     		bx	lr
+ 1416              	.L104:
+ 1417              		.align	2
+ 1418              	.L103:
+ 1419 0060 FC030000 		.word	.LC52
+ 1420 0064 00040000 		.word	.LC53
+ 1421 0068 04040000 		.word	.LC54
+ 1422 006c 0C040000 		.word	.LC55
+ 1423 0070 18040000 		.word	.LC56
+ 1424              		.cfi_endproc
+ 1425              	.LFE118:
+ 1427              		.section	.text.VL53L0X_get_limit_check_info,"ax",%progbits
+ 1428              		.align	2
+ 1429              		.global	VL53L0X_get_limit_check_info
+ 1430              		.thumb
+ 1431              		.thumb_func
+ 1433              	VL53L0X_get_limit_check_info:
+ 1434              	.LFB119:
+ 417:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 418:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 419:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** VL53L0X_Error VL53L0X_get_limit_check_info(VL53L0X_DEV Dev, uint16_t LimitCheckId,
+ 420:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	char *pLimitCheckString)
+ 421:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** {
+ 1435              		.loc 1 421 0
+ 1436              		.cfi_startproc
+ 1437              		@ args = 0, pretend = 0, frame = 0
+ 1438              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1439              		@ link register save eliminated.
+ 1440              	.LVL149:
+ 1441 0000 30B4     		push	{r4, r5}
+ 1442              	.LCFI14:
+ 1443              		.cfi_def_cfa_offset 8
+ 1444              		.cfi_offset 4, -8
+ 1445              		.cfi_offset 5, -4
+ 1446 0002 1446     		mov	r4, r2
+ 1447              	.LVL150:
+ 422:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 423:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 424:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_START("");
+ 425:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 426:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	switch (LimitCheckId) {
+ 1448              		.loc 1 426 0
+ 1449 0004 0529     		cmp	r1, #5
+ 1450 0006 3FD8     		bhi	.L106
+ 1451 0008 DFE801F0 		tbb	[pc, r1]
+ 1452              	.L108:
+ 1453 000c 03       		.byte	(.L107-.L108)/2
+ 1454 000d 0C       		.byte	(.L109-.L108)/2
+ 1455 000e 16       		.byte	(.L110-.L108)/2
+ 1456 000f 1D       		.byte	(.L111-.L108)/2
+ 1457 0010 2A       		.byte	(.L112-.L108)/2
+ 1458 0011 33       		.byte	(.L113-.L108)/2
+ 1459              		.p2align 1
+ 1460              	.L107:
+ARM GAS  /tmp/ccNTPRvH.s 			page 34
+
+
+ 427:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE:
+ 428:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1461              		.loc 1 428 0
+ 1462 0012 244D     		ldr	r5, .L116
+ 1463 0014 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1464              	.LVL151:
+ 1465 0016 2060     		str	r0, [r4]	@ unaligned
+ 1466 0018 6160     		str	r1, [r4, #4]	@ unaligned
+ 1467 001a A260     		str	r2, [r4, #8]	@ unaligned
+ 1468 001c E360     		str	r3, [r4, #12]	@ unaligned
+ 1469 001e 2B88     		ldrh	r3, [r5]	@ unaligned
+ 1470 0020 2382     		strh	r3, [r4, #16]	@ unaligned
+ 429:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_CHECKENABLE_SIGMA_FINAL_RANGE);
+ 430:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1471              		.loc 1 430 0
+ 1472 0022 3BE0     		b	.L114
+ 1473              	.LVL152:
+ 1474              	.L109:
+ 431:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE:
+ 432:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1475              		.loc 1 432 0
+ 1476 0024 204D     		ldr	r5, .L116+4
+ 1477 0026 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1478              	.LVL153:
+ 1479 0028 2060     		str	r0, [r4]	@ unaligned
+ 1480 002a 6160     		str	r1, [r4, #4]	@ unaligned
+ 1481 002c A260     		str	r2, [r4, #8]	@ unaligned
+ 1482 002e E360     		str	r3, [r4, #12]	@ unaligned
+ 1483 0030 03CD     		ldmia	r5!, {r0, r1}
+ 1484 0032 2061     		str	r0, [r4, #16]	@ unaligned
+ 1485 0034 6161     		str	r1, [r4, #20]	@ unaligned
+ 433:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE);
+ 434:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1486              		.loc 1 434 0
+ 1487 0036 31E0     		b	.L114
+ 1488              	.LVL154:
+ 1489              	.L110:
+ 435:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_CHECKENABLE_SIGNAL_REF_CLIP:
+ 436:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1490              		.loc 1 436 0
+ 1491 0038 1C4D     		ldr	r5, .L116+8
+ 1492 003a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1493              	.LVL155:
+ 1494 003c 2060     		str	r0, [r4]	@ unaligned
+ 1495 003e 6160     		str	r1, [r4, #4]	@ unaligned
+ 1496 0040 A260     		str	r2, [r4, #8]	@ unaligned
+ 1497 0042 E360     		str	r3, [r4, #12]	@ unaligned
+ 437:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_CHECKENABLE_SIGNAL_REF_CLIP);
+ 438:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1498              		.loc 1 438 0
+ 1499 0044 2AE0     		b	.L114
+ 1500              	.LVL156:
+ 1501              	.L111:
+ 439:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_CHECKENABLE_RANGE_IGNORE_THRESHOLD:
+ 440:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1502              		.loc 1 440 0
+ 1503 0046 1A4D     		ldr	r5, .L116+12
+ARM GAS  /tmp/ccNTPRvH.s 			page 35
+
+
+ 1504 0048 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1505              	.LVL157:
+ 1506 004a 2060     		str	r0, [r4]	@ unaligned
+ 1507 004c 6160     		str	r1, [r4, #4]	@ unaligned
+ 1508 004e A260     		str	r2, [r4, #8]	@ unaligned
+ 1509 0050 E360     		str	r3, [r4, #12]	@ unaligned
+ 1510 0052 2868     		ldr	r0, [r5]	@ unaligned
+ 1511 0054 2061     		str	r0, [r4, #16]	@ unaligned
+ 1512 0056 AA88     		ldrh	r2, [r5, #4]	@ unaligned
+ 1513 0058 AB79     		ldrb	r3, [r5, #6]	@ zero_extendqisi2
+ 1514 005a A282     		strh	r2, [r4, #20]	@ unaligned
+ 1515 005c A375     		strb	r3, [r4, #22]
+ 441:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_CHECKENABLE_RANGE_IGNORE_THRESHOLD);
+ 442:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1516              		.loc 1 442 0
+ 1517 005e 1DE0     		b	.L114
+ 1518              	.LVL158:
+ 1519              	.L112:
+ 443:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 444:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_CHECKENABLE_SIGNAL_RATE_MSRC:
+ 445:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1520              		.loc 1 445 0
+ 1521 0060 144D     		ldr	r5, .L116+16
+ 1522 0062 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1523              	.LVL159:
+ 1524 0064 2060     		str	r0, [r4]	@ unaligned
+ 1525 0066 6160     		str	r1, [r4, #4]	@ unaligned
+ 1526 0068 A260     		str	r2, [r4, #8]	@ unaligned
+ 1527 006a E360     		str	r3, [r4, #12]	@ unaligned
+ 1528 006c 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 1529 006e 2374     		strb	r3, [r4, #16]
+ 446:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_CHECKENABLE_SIGNAL_RATE_MSRC);
+ 447:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1530              		.loc 1 447 0
+ 1531 0070 14E0     		b	.L114
+ 1532              	.LVL160:
+ 1533              	.L113:
+ 448:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 449:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	case VL53L0X_CHECKENABLE_SIGNAL_RATE_PRE_RANGE:
+ 450:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1534              		.loc 1 450 0
+ 1535 0072 114D     		ldr	r5, .L116+20
+ 1536 0074 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1537              	.LVL161:
+ 1538 0076 2060     		str	r0, [r4]	@ unaligned
+ 1539 0078 6160     		str	r1, [r4, #4]	@ unaligned
+ 1540 007a A260     		str	r2, [r4, #8]	@ unaligned
+ 1541 007c E360     		str	r3, [r4, #12]	@ unaligned
+ 1542 007e 2868     		ldr	r0, [r5]	@ unaligned
+ 1543 0080 2061     		str	r0, [r4, #16]	@ unaligned
+ 1544 0082 AB88     		ldrh	r3, [r5, #4]	@ unaligned
+ 1545 0084 A382     		strh	r3, [r4, #20]	@ unaligned
+ 451:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_CHECKENABLE_SIGNAL_RATE_PRE_RANGE);
+ 452:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	break;
+ 1546              		.loc 1 452 0
+ 1547 0086 09E0     		b	.L114
+ 1548              	.LVL162:
+ARM GAS  /tmp/ccNTPRvH.s 			page 36
+
+
+ 1549              	.L106:
+ 453:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 454:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	default:
+ 455:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 		VL53L0X_COPYSTRING(pLimitCheckString,
+ 1550              		.loc 1 455 0
+ 1551 0088 0C4D     		ldr	r5, .L116+24
+ 1552 008a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1553              	.LVL163:
+ 1554 008c 2060     		str	r0, [r4]	@ unaligned
+ 1555 008e 6160     		str	r1, [r4, #4]	@ unaligned
+ 1556 0090 A260     		str	r2, [r4, #8]	@ unaligned
+ 1557 0092 E360     		str	r3, [r4, #12]	@ unaligned
+ 1558 0094 2A88     		ldrh	r2, [r5]	@ unaligned
+ 1559 0096 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 1560 0098 2282     		strh	r2, [r4, #16]	@ unaligned
+ 1561 009a A374     		strb	r3, [r4, #18]
+ 1562              	.L114:
+ 456:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 			VL53L0X_STRING_UNKNOW_ERROR_CODE);
+ 457:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 458:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	}
+ 459:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 
+ 460:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 461:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** 	return Status;
+ 462:../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.c **** }
+ 1563              		.loc 1 462 0
+ 1564 009c 0020     		movs	r0, #0
+ 1565 009e 30BC     		pop	{r4, r5}
+ 1566              	.LCFI15:
+ 1567              		.cfi_restore 5
+ 1568              		.cfi_restore 4
+ 1569              		.cfi_def_cfa_offset 0
+ 1570              	.LVL164:
+ 1571 00a0 7047     		bx	lr
+ 1572              	.L117:
+ 1573 00a2 00BF     		.align	2
+ 1574              	.L116:
+ 1575 00a4 24040000 		.word	.LC57
+ 1576 00a8 38040000 		.word	.LC58
+ 1577 00ac 50040000 		.word	.LC59
+ 1578 00b0 60040000 		.word	.LC60
+ 1579 00b4 78040000 		.word	.LC61
+ 1580 00b8 8C040000 		.word	.LC62
+ 1581 00bc 98010000 		.word	.LC20
+ 1582              		.cfi_endproc
+ 1583              	.LFE119:
+ 1585              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1586              		.align	2
+ 1587              	.LC0:
+ 1588 0000 564C3533 		.ascii	"VL53L0X TS0\000"
+ 1588      4C305820 
+ 1588      54533000 
+ 1589              	.LC1:
+ 1590 000c 564C3533 		.ascii	"VL53L0X TS1\000"
+ 1590      4C305820 
+ 1590      54533100 
+ 1591              	.LC2:
+ 1592 0018 564C3533 		.ascii	"VL53L0X TS2\000"
+ARM GAS  /tmp/ccNTPRvH.s 			page 37
+
+
+ 1592      4C305820 
+ 1592      54533200 
+ 1593              	.LC3:
+ 1594 0024 564C3533 		.ascii	"VL53L0X ES1 or later\000"
+ 1594      4C305820 
+ 1594      45533120 
+ 1594      6F72206C 
+ 1594      61746572 
+ 1595 0039 000000   		.space	3
+ 1596              	.LC4:
+ 1597 003c 564C3533 		.ascii	"VL53L0X\000"
+ 1597      4C305800 
+ 1598              	.LC5:
+ 1599 0044 4E6F2055 		.ascii	"No Update\000"
+ 1599      70646174 
+ 1599      6500
+ 1600 004e 0000     		.space	2
+ 1601              	.LC6:
+ 1602 0050 56435345 		.ascii	"VCSEL Continuity Test Failure\000"
+ 1602      4C20436F 
+ 1602      6E74696E 
+ 1602      75697479 
+ 1602      20546573 
+ 1603 006e 0000     		.space	2
+ 1604              	.LC7:
+ 1605 0070 56435345 		.ascii	"VCSEL Watchdog Test Failure\000"
+ 1605      4C205761 
+ 1605      74636864 
+ 1605      6F672054 
+ 1605      65737420 
+ 1606              	.LC8:
+ 1607 008c 4E6F2056 		.ascii	"No VHV Value found\000"
+ 1607      48562056 
+ 1607      616C7565 
+ 1607      20666F75 
+ 1607      6E6400
+ 1608 009f 00       		.space	1
+ 1609              	.LC9:
+ 1610 00a0 4D535243 		.ascii	"MSRC No Target Error\000"
+ 1610      204E6F20 
+ 1610      54617267 
+ 1610      65742045 
+ 1610      72726F72 
+ 1611 00b5 000000   		.space	3
+ 1612              	.LC10:
+ 1613 00b8 534E5220 		.ascii	"SNR Check Exit\000"
+ 1613      43686563 
+ 1613      6B204578 
+ 1613      697400
+ 1614 00c7 00       		.space	1
+ 1615              	.LC11:
+ 1616 00c8 52616E67 		.ascii	"Range Phase Check Error\000"
+ 1616      65205068 
+ 1616      61736520 
+ 1616      43686563 
+ 1616      6B204572 
+ 1617              	.LC12:
+ARM GAS  /tmp/ccNTPRvH.s 			page 38
+
+
+ 1618 00e0 5369676D 		.ascii	"Sigma Threshold Check Error\000"
+ 1618      61205468 
+ 1618      72657368 
+ 1618      6F6C6420 
+ 1618      43686563 
+ 1619              	.LC13:
+ 1620 00fc 54434320 		.ascii	"TCC Error\000"
+ 1620      4572726F 
+ 1620      7200
+ 1621 0106 0000     		.space	2
+ 1622              	.LC14:
+ 1623 0108 50686173 		.ascii	"Phase Consistency Error\000"
+ 1623      6520436F 
+ 1623      6E736973 
+ 1623      74656E63 
+ 1623      79204572 
+ 1624              	.LC15:
+ 1625 0120 4D696E20 		.ascii	"Min Clip Error\000"
+ 1625      436C6970 
+ 1625      20457272 
+ 1625      6F7200
+ 1626 012f 00       		.space	1
+ 1627              	.LC16:
+ 1628 0130 52616E67 		.ascii	"Range Complete\000"
+ 1628      6520436F 
+ 1628      6D706C65 
+ 1628      746500
+ 1629 013f 00       		.space	1
+ 1630              	.LC17:
+ 1631 0140 52616E67 		.ascii	"Range Algo Underflow Error\000"
+ 1631      6520416C 
+ 1631      676F2055 
+ 1631      6E646572 
+ 1631      666C6F77 
+ 1632 015b 00       		.space	1
+ 1633              	.LC18:
+ 1634 015c 52616E67 		.ascii	"Range Algo Overlow Error\000"
+ 1634      6520416C 
+ 1634      676F204F 
+ 1634      7665726C 
+ 1634      6F772045 
+ 1635 0175 000000   		.space	3
+ 1636              	.LC19:
+ 1637 0178 52616E67 		.ascii	"Range Ignore Threshold Error\000"
+ 1637      65204967 
+ 1637      6E6F7265 
+ 1637      20546872 
+ 1637      6573686F 
+ 1638 0195 000000   		.space	3
+ 1639              	.LC20:
+ 1640 0198 556E6B6E 		.ascii	"Unknown Error Code\000"
+ 1640      6F776E20 
+ 1640      4572726F 
+ 1640      7220436F 
+ 1640      646500
+ 1641 01ab 00       		.space	1
+ 1642              	.LC21:
+ARM GAS  /tmp/ccNTPRvH.s 			page 39
+
+
+ 1643 01ac 52616E67 		.ascii	"Range Valid\000"
+ 1643      65205661 
+ 1643      6C696400 
+ 1644              	.LC22:
+ 1645 01b8 5369676D 		.ascii	"Sigma Fail\000"
+ 1645      61204661 
+ 1645      696C00
+ 1646 01c3 00       		.space	1
+ 1647              	.LC23:
+ 1648 01c4 5369676E 		.ascii	"Signal Fail\000"
+ 1648      616C2046 
+ 1648      61696C00 
+ 1649              	.LC24:
+ 1650 01d0 4D696E20 		.ascii	"Min Range Fail\000"
+ 1650      52616E67 
+ 1650      65204661 
+ 1650      696C00
+ 1651 01df 00       		.space	1
+ 1652              	.LC25:
+ 1653 01e0 50686173 		.ascii	"Phase Fail\000"
+ 1653      65204661 
+ 1653      696C00
+ 1654 01eb 00       		.space	1
+ 1655              	.LC26:
+ 1656 01ec 48617264 		.ascii	"Hardware Fail\000"
+ 1656      77617265 
+ 1656      20466169 
+ 1656      6C00
+ 1657 01fa 0000     		.space	2
+ 1658              	.LC27:
+ 1659 01fc 4E6F2045 		.ascii	"No Error\000"
+ 1659      72726F72 
+ 1659      00
+ 1660 0205 000000   		.space	3
+ 1661              	.LC28:
+ 1662 0208 43616C69 		.ascii	"Calibration Warning Error\000"
+ 1662      62726174 
+ 1662      696F6E20 
+ 1662      5761726E 
+ 1662      696E6720 
+ 1663 0222 0000     		.space	2
+ 1664              	.LC29:
+ 1665 0224 4D696E20 		.ascii	"Min clipped error\000"
+ 1665      636C6970 
+ 1665      70656420 
+ 1665      6572726F 
+ 1665      7200
+ 1666 0236 0000     		.space	2
+ 1667              	.LC30:
+ 1668 0238 556E6465 		.ascii	"Undefined error\000"
+ 1668      66696E65 
+ 1668      64206572 
+ 1668      726F7200 
+ 1669              	.LC31:
+ 1670 0248 496E7661 		.ascii	"Invalid parameters error\000"
+ 1670      6C696420 
+ 1670      70617261 
+ARM GAS  /tmp/ccNTPRvH.s 			page 40
+
+
+ 1670      6D657465 
+ 1670      72732065 
+ 1671 0261 000000   		.space	3
+ 1672              	.LC32:
+ 1673 0264 4E6F7420 		.ascii	"Not supported error\000"
+ 1673      73757070 
+ 1673      6F727465 
+ 1673      64206572 
+ 1673      726F7200 
+ 1674              	.LC33:
+ 1675 0278 496E7465 		.ascii	"Interrupt not Cleared\000"
+ 1675      72727570 
+ 1675      74206E6F 
+ 1675      7420436C 
+ 1675      65617265 
+ 1676 028e 0000     		.space	2
+ 1677              	.LC34:
+ 1678 0290 52616E67 		.ascii	"Range error\000"
+ 1678      65206572 
+ 1678      726F7200 
+ 1679              	.LC35:
+ 1680 029c 54696D65 		.ascii	"Time out error\000"
+ 1680      206F7574 
+ 1680      20657272 
+ 1680      6F7200
+ 1681 02ab 00       		.space	1
+ 1682              	.LC36:
+ 1683 02ac 4D6F6465 		.ascii	"Mode not supported error\000"
+ 1683      206E6F74 
+ 1683      20737570 
+ 1683      706F7274 
+ 1683      65642065 
+ 1684 02c5 000000   		.space	3
+ 1685              	.LC37:
+ 1686 02c8 42756666 		.ascii	"Buffer too small\000"
+ 1686      65722074 
+ 1686      6F6F2073 
+ 1686      6D616C6C 
+ 1686      00
+ 1687 02d9 000000   		.space	3
+ 1688              	.LC38:
+ 1689 02dc 4750494F 		.ascii	"GPIO not existing\000"
+ 1689      206E6F74 
+ 1689      20657869 
+ 1689      7374696E 
+ 1689      6700
+ 1690 02ee 0000     		.space	2
+ 1691              	.LC39:
+ 1692 02f0 4750494F 		.ascii	"GPIO funct not supported\000"
+ 1692      2066756E 
+ 1692      6374206E 
+ 1692      6F742073 
+ 1692      7570706F 
+ 1693 0309 000000   		.space	3
+ 1694              	.LC40:
+ 1695 030c 436F6E74 		.ascii	"Control Interface Error\000"
+ 1695      726F6C20 
+ARM GAS  /tmp/ccNTPRvH.s 			page 41
+
+
+ 1695      496E7465 
+ 1695      72666163 
+ 1695      65204572 
+ 1696              	.LC41:
+ 1697 0324 496E7661 		.ascii	"Invalid Command Error\000"
+ 1697      6C696420 
+ 1697      436F6D6D 
+ 1697      616E6420 
+ 1697      4572726F 
+ 1698 033a 0000     		.space	2
+ 1699              	.LC42:
+ 1700 033c 44697669 		.ascii	"Division by zero Error\000"
+ 1700      73696F6E 
+ 1700      20627920 
+ 1700      7A65726F 
+ 1700      20457272 
+ 1701 0353 00       		.space	1
+ 1702              	.LC43:
+ 1703 0354 52656665 		.ascii	"Reference Spad Init Error\000"
+ 1703      72656E63 
+ 1703      65205370 
+ 1703      61642049 
+ 1703      6E697420 
+ 1704 036e 0000     		.space	2
+ 1705              	.LC44:
+ 1706 0370 4E6F7420 		.ascii	"Not implemented error\000"
+ 1706      696D706C 
+ 1706      656D656E 
+ 1706      74656420 
+ 1706      6572726F 
+ 1707 0386 0000     		.space	2
+ 1708              	.LC45:
+ 1709 0388 504F5745 		.ascii	"POWERDOWN State\000"
+ 1709      52444F57 
+ 1709      4E205374 
+ 1709      61746500 
+ 1710              	.LC46:
+ 1711 0398 57616974 		.ascii	"Wait for staticinit State\000"
+ 1711      20666F72 
+ 1711      20737461 
+ 1711      74696369 
+ 1711      6E697420 
+ 1712 03b2 0000     		.space	2
+ 1713              	.LC47:
+ 1714 03b4 5354414E 		.ascii	"STANDBY State\000"
+ 1714      44425920 
+ 1714      53746174 
+ 1714      6500
+ 1715 03c2 0000     		.space	2
+ 1716              	.LC48:
+ 1717 03c4 49444C45 		.ascii	"IDLE State\000"
+ 1717      20537461 
+ 1717      746500
+ 1718 03cf 00       		.space	1
+ 1719              	.LC49:
+ 1720 03d0 52554E4E 		.ascii	"RUNNING State\000"
+ 1720      494E4720 
+ARM GAS  /tmp/ccNTPRvH.s 			page 42
+
+
+ 1720      53746174 
+ 1720      6500
+ 1721 03de 0000     		.space	2
+ 1722              	.LC50:
+ 1723 03e0 554E4B4E 		.ascii	"UNKNOWN State\000"
+ 1723      4F574E20 
+ 1723      53746174 
+ 1723      6500
+ 1724 03ee 0000     		.space	2
+ 1725              	.LC51:
+ 1726 03f0 4552524F 		.ascii	"ERROR State\000"
+ 1726      52205374 
+ 1726      61746500 
+ 1727              	.LC52:
+ 1728 03fc 54434300 		.ascii	"TCC\000"
+ 1729              	.LC53:
+ 1730 0400 44535300 		.ascii	"DSS\000"
+ 1731              	.LC54:
+ 1732 0404 4D535243 		.ascii	"MSRC\000"
+ 1732      00
+ 1733 0409 000000   		.space	3
+ 1734              	.LC55:
+ 1735 040c 50524520 		.ascii	"PRE RANGE\000"
+ 1735      52414E47 
+ 1735      4500
+ 1736 0416 0000     		.space	2
+ 1737              	.LC56:
+ 1738 0418 46494E41 		.ascii	"FINAL RANGE\000"
+ 1738      4C205241 
+ 1738      4E474500 
+ 1739              	.LC57:
+ 1740 0424 5349474D 		.ascii	"SIGMA FINAL RANGE\000"
+ 1740      41204649 
+ 1740      4E414C20 
+ 1740      52414E47 
+ 1740      4500
+ 1741 0436 0000     		.space	2
+ 1742              	.LC58:
+ 1743 0438 5349474E 		.ascii	"SIGNAL RATE FINAL RANGE\000"
+ 1743      414C2052 
+ 1743      41544520 
+ 1743      46494E41 
+ 1743      4C205241 
+ 1744              	.LC59:
+ 1745 0450 5349474E 		.ascii	"SIGNAL REF CLIP\000"
+ 1745      414C2052 
+ 1745      45462043 
+ 1745      4C495000 
+ 1746              	.LC60:
+ 1747 0460 52414E47 		.ascii	"RANGE IGNORE THRESHOLD\000"
+ 1747      45204947 
+ 1747      4E4F5245 
+ 1747      20544852 
+ 1747      4553484F 
+ 1748 0477 00       		.space	1
+ 1749              	.LC61:
+ 1750 0478 5349474E 		.ascii	"SIGNAL RATE MSRC\000"
+ARM GAS  /tmp/ccNTPRvH.s 			page 43
+
+
+ 1750      414C2052 
+ 1750      41544520 
+ 1750      4D535243 
+ 1750      00
+ 1751 0489 000000   		.space	3
+ 1752              	.LC62:
+ 1753 048c 5349474E 		.ascii	"SIGNAL RATE PRE RANGE\000"
+ 1753      414C2052 
+ 1753      41544520 
+ 1753      50524520 
+ 1753      52414E47 
+ 1754              		.text
+ 1755              	.Letext0:
+ 1756              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 1757              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 1758              		.file 4 "../Drivers/BSP/Components/vl53l0x/vl53l0x_types.h"
+ 1759              		.file 5 "../Drivers/BSP/Components/vl53l0x/vl53l0x_device.h"
+ 1760              		.file 6 "../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h"
+ 1761              		.file 7 "../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
+ 1762              		.file 8 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1763              		.file 9 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1764              		.file 10 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 1765              		.file 11 "../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.h"
+ 1766              		.file 12 "../Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.h"
+ 1767              		.file 13 "/usr/include/newlib/string.h"
+ 1768              		.file 14 "../Drivers/CMSIS/Include/core_cm4.h"
+ARM GAS  /tmp/ccNTPRvH.s 			page 44
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 vl53l0x_api_strings.c
+     /tmp/ccNTPRvH.s:21     .text.VL53L0X_check_part_used:0000000000000000 $t
+     /tmp/ccNTPRvH.s:26     .text.VL53L0X_check_part_used:0000000000000000 VL53L0X_check_part_used
+     /tmp/ccNTPRvH.s:86     .text.VL53L0X_get_device_info:0000000000000000 $t
+     /tmp/ccNTPRvH.s:91     .text.VL53L0X_get_device_info:0000000000000000 VL53L0X_get_device_info
+     /tmp/ccNTPRvH.s:223    .text.VL53L0X_get_device_info:00000000000000a0 $d
+     /tmp/ccNTPRvH.s:232    .text.VL53L0X_get_device_error_string:0000000000000000 $t
+     /tmp/ccNTPRvH.s:237    .text.VL53L0X_get_device_error_string:0000000000000000 VL53L0X_get_device_error_string
+     /tmp/ccNTPRvH.s:257    .text.VL53L0X_get_device_error_string:000000000000000e $d
+     /tmp/ccNTPRvH.s:534    .text.VL53L0X_get_device_error_string:0000000000000178 $d
+     /tmp/ccNTPRvH.s:554    .text.VL53L0X_get_range_status_string:0000000000000000 $t
+     /tmp/ccNTPRvH.s:559    .text.VL53L0X_get_range_status_string:0000000000000000 VL53L0X_get_range_status_string
+     /tmp/ccNTPRvH.s:578    .text.VL53L0X_get_range_status_string:000000000000000c $d
+     /tmp/ccNTPRvH.s:584    .text.VL53L0X_get_range_status_string:0000000000000012 $t
+     /tmp/ccNTPRvH.s:683    .text.VL53L0X_get_range_status_string:0000000000000088 $d
+     /tmp/ccNTPRvH.s:694    .text.VL53L0X_get_pal_error_string:0000000000000000 $t
+     /tmp/ccNTPRvH.s:699    .text.VL53L0X_get_pal_error_string:0000000000000000 VL53L0X_get_pal_error_string
+     /tmp/ccNTPRvH.s:721    .text.VL53L0X_get_pal_error_string:0000000000000010 $d
+     /tmp/ccNTPRvH.s:821    .text.VL53L0X_get_pal_error_string:00000000000000d8 $t
+     /tmp/ccNTPRvH.s:1120   .text.VL53L0X_get_pal_error_string:0000000000000260 $d
+     /tmp/ccNTPRvH.s:1143   .text.VL53L0X_get_pal_state_string:0000000000000000 $t
+     /tmp/ccNTPRvH.s:1148   .text.VL53L0X_get_pal_state_string:0000000000000000 VL53L0X_get_pal_state_string
+     /tmp/ccNTPRvH.s:1295   .text.VL53L0X_get_pal_state_string:00000000000000a8 $d
+     /tmp/ccNTPRvH.s:1306   .text.VL53L0X_get_sequence_steps_info:0000000000000000 $t
+     /tmp/ccNTPRvH.s:1311   .text.VL53L0X_get_sequence_steps_info:0000000000000000 VL53L0X_get_sequence_steps_info
+     /tmp/ccNTPRvH.s:1326   .text.VL53L0X_get_sequence_steps_info:000000000000000a $d
+     /tmp/ccNTPRvH.s:1419   .text.VL53L0X_get_sequence_steps_info:0000000000000060 $d
+     /tmp/ccNTPRvH.s:1428   .text.VL53L0X_get_limit_check_info:0000000000000000 $t
+     /tmp/ccNTPRvH.s:1433   .text.VL53L0X_get_limit_check_info:0000000000000000 VL53L0X_get_limit_check_info
+     /tmp/ccNTPRvH.s:1453   .text.VL53L0X_get_limit_check_info:000000000000000c $d
+     /tmp/ccNTPRvH.s:1459   .text.VL53L0X_get_limit_check_info:0000000000000012 $t
+     /tmp/ccNTPRvH.s:1575   .text.VL53L0X_get_limit_check_info:00000000000000a4 $d
+     /tmp/ccNTPRvH.s:1586   .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+     /tmp/ccNTPRvH.s:272    .text.VL53L0X_get_device_error_string:000000000000001d $d
+     /tmp/ccNTPRvH.s:272    .text.VL53L0X_get_device_error_string:000000000000001e $t
+     /tmp/ccNTPRvH.s:1331   .text.VL53L0X_get_sequence_steps_info:000000000000000f $d
+     /tmp/ccNTPRvH.s:1331   .text.VL53L0X_get_sequence_steps_info:0000000000000010 $t
+
+UNDEFINED SYMBOLS
+VL53L0X_get_info_from_device
+strcpy
+VL53L0X_RdByte
