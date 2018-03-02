@@ -24,7 +24,7 @@ def graphe(L,theta):                           #fonction graphe
     plt.show()                                 #affichage
 
 
-with Serial(port="/dev/ttyACM0", baudrate=9600, timeout=1, writeTimeout=1) as port_serie:   #port serie
+with Serial(port="/dev/ttyACM0", baudrate=1000000, timeout=1, writeTimeout=1) as port_serie:   #port serie
     if port_serie.isOpen():
 	while True:
             ligne = port_serie.readline()                             #lire la ligne de transmission

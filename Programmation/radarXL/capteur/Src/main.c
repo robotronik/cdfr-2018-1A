@@ -543,24 +543,30 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
 
 #define Maxi_char_transmit 40  /////////          
 #define Delay 1000  /////////
-void transmit(int* i, char* bufferDistance, int distance){  /////transmission vers pc
+void transmit(int* i, char* bufferDistance, char* bufferAngle, int distance, int angle){  /////transmission vers pc
     char dataDistance[10];                                /////variable stockage de la valeur du capteur
+    char dataAngle[10];
     char ligne[2];                                /////variable stockage du separateur \n
     int len;                                      /////variable longueur du buffer
     if (*i<Maxi_char_transmit-1){                 /////ajout valeur, dans data
         sprintf(dataDistance, "%d,",distance);
+        sprintf(dataAngle, "%d,",angle);
     }
     else if (*i==Maxi_char_transmit-1){           /////ajout valeur dans data -> pour cloturer la sequence
         sprintf(dataDistance, "%d",distance);
+        sprintf(dataAngle, "%d",angle);
     }
     strcat(bufferDistance,dataDistance);                          /////ajout valeur au buffer
+    strcat(bufferAngle, dataAngle);
     if (*i==Maxi_char_transmit-1){
         len=strlen(bufferDistance);                       /////longueur du buffer
-        HAL_UART_Transmit(&huart2, (uint8_t*)(bufferDistance), len, 1000); /////transmission du buffer
+        HAL_UART_Transmit(&huart2, (uint8_t*)(strcat(bufferDistance,";")), len, 1000); /////transmission du buffer
+        HAL_UART_Transmit(&huart2, (uint8_t*)(bufferAngle), len, 1000);
         sprintf(ligne, "\n");                                     /////ajout \n a ligne
         HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne
         (*i)=-1;                                                  /////remise a zero du compteur
         sprintf(bufferDistance, "");                                      /////remise a zero du buffer
+        sprintf(bufferAngle, "");
         HAL_Delay(Delay);         //////necessaire pour le graphique
     }
 }
@@ -572,8 +578,22 @@ void transmit(int* i, char* bufferDistance, int distance){  /////transmission ve
  * @param UseSensorsMask Mask of any sensors to use if not only one present
  * @param rangingConfig Ranging configuration to be used (same for all sensors)
  */
+void VariationAngle(XL * servo, int* compteurAngle){
+    if(*compteurAngle<621 && *compteurAngle>=0){
+        XL_Set_Goal_Position(servo, *compteurAngle, 1);
+        *compteurAngle++;
+    }
+    else if(*compteurAngle == 620){
+        *compteurAngle --;
+        XL_Set_Goal_Position(servo, *compteurAngle, 1);
+    }
+    else{
+        XL_Set_Goal_Position(servo, *compteurAngle, 1);
+        *compteurAngle--;
+    }
+}
 
-int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
+int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     int over=0;
     int status;
     char StrDisplay[5];
@@ -582,6 +602,7 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
     int nSensorToUse;
     int SingleSensorNo=0;
     int distance;     ///creation variable distance
+    int angle;        ///creation variable angle
     int s=0;                ///creation compteur
     int* compteur = NULL;   ///creation pointeur sur compteur
     compteur=&s;
@@ -589,7 +610,9 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
     int* compteur2 = NULL;   ///creation pointeur sur compteur2
     compteur2=&d;
     char buffer[Maxi_char_transmit*4]; /////creation du buffer
+    char buffer1[Maxi_char_transmit*4];
     sprintf(buffer, "");               /////mise a zero du buffer
+    sprintf(buffer1, "");
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
@@ -642,8 +665,9 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
                     *compteur+=1;                               /////incrementation du compteur
                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
                     distance=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
+                    XL_Get_Current_Position(servo, angle);
                     blink_led(distance, compteur);                 /////fonction blink_led
-                    transmit(compteur2, buffer, distance);        /////fonction transmit vers pc
+                    transmit(compteur2, buffer, buffer1, distance, angle);        /////fonction transmit vers pc
                     *compteur2+=1;                              /////incrementation du compteur2
                 }
                 else{                                           /////boucle de mesures incorrectes
@@ -878,6 +902,7 @@ int main(void)
 
   XL servo;
   uint16_t nb_servos = 0;
+  int compteurAngle=0;      //compteur de variation d'angle
 
   XL_Discover(&interface, &servo, 1, &nb_servos);
   #if CONFIG==1
@@ -914,9 +939,10 @@ int main(void)
       ResetAndDetectSensor(0);
       AlarmDemo();
 #else
+      VariationAngle(&servo, &compteurAngle);
 
       /* Start Ranging demo */
-      ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig);
+      ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig, &servo);
 
       /* Blue button has been pressed (long or short press) */
       if(ExitWithLongPress){
