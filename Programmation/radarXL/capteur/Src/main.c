@@ -543,24 +543,24 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
 
 #define Maxi_char_transmit 40  /////////          
 #define Delay 1000  /////////
-void transmit(int* i, char* buffer, int valeur){  /////transmission vers pc
-    char data[10];                                /////variable stockage de la valeur du capteur
+void transmit(int* i, char* bufferDistance, int distance){  /////transmission vers pc
+    char dataDistance[10];                                /////variable stockage de la valeur du capteur
     char ligne[2];                                /////variable stockage du separateur \n
     int len;                                      /////variable longueur du buffer
     if (*i<Maxi_char_transmit-1){                 /////ajout valeur, dans data
-        sprintf(data, "%d,",valeur);
+        sprintf(dataDistance, "%d,",distance);
     }
     else if (*i==Maxi_char_transmit-1){           /////ajout valeur dans data -> pour cloturer la sequence
-        sprintf(data, "%d",valeur);
+        sprintf(dataDistance, "%d",distance);
     }
-    strcat(buffer,data);                          /////ajout valeur au buffer
+    strcat(bufferDistance,dataDistance);                          /////ajout valeur au buffer
     if (*i==Maxi_char_transmit-1){
-        len=strlen(buffer);                       /////longueur du buffer
-        HAL_UART_Transmit(&huart2, (uint8_t*)(buffer), len, 1000); /////transmission du buffer
+        len=strlen(bufferDistance);                       /////longueur du buffer
+        HAL_UART_Transmit(&huart2, (uint8_t*)(bufferDistance), len, 1000); /////transmission du buffer
         sprintf(ligne, "\n");                                     /////ajout \n a ligne
         HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne
         (*i)=-1;                                                  /////remise a zero du compteur
-        sprintf(buffer, "");                                      /////remise a zero du buffer
+        sprintf(bufferDistance, "");                                      /////remise a zero du buffer
         HAL_Delay(Delay);         //////necessaire pour le graphique
     }
 }
@@ -572,6 +572,7 @@ void transmit(int* i, char* buffer, int valeur){  /////transmission vers pc
  * @param UseSensorsMask Mask of any sensors to use if not only one present
  * @param rangingConfig Ranging configuration to be used (same for all sensors)
  */
+
 int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
     int over=0;
     int status;
@@ -580,7 +581,7 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
     int i;
     int nSensorToUse;
     int SingleSensorNo=0;
-    int valeur;             ///creation variable valeur
+    int distance;     ///creation variable distance
     int s=0;                ///creation compteur
     int* compteur = NULL;   ///creation pointeur sur compteur
     compteur=&s;
@@ -592,6 +593,7 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
+
 
     /* Which sensor to use ? */
     for(i=0, nSensorToUse=0; i<3; i++){
@@ -639,9 +641,9 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
             	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
                     *compteur+=1;                               /////incrementation du compteur
                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
-                    valeur=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////valeur lue par le capteur en cm
-                    blink_led(valeur, compteur);                 /////fonction blink_led
-                    transmit(compteur2, buffer, valeur);        /////fonction transmit vers pc
+                    distance=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
+                    blink_led(distance, compteur);                 /////fonction blink_led
+                    transmit(compteur2, buffer, distance);        /////fonction transmit vers pc
                     *compteur2+=1;                              /////incrementation du compteur2
                 }
                 else{                                           /////boucle de mesures incorrectes
@@ -876,8 +878,6 @@ int main(void)
 
   XL servo;
   uint16_t nb_servos = 0;
-  uint16_t positionGet;
-  uint16_t positionSet = 0;
 
   XL_Discover(&interface, &servo, 1, &nb_servos);
   #if CONFIG==1
