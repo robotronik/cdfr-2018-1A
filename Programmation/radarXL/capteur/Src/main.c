@@ -74,7 +74,7 @@
 #define USART1_DIR_Pin GPIO_PIN_9
 #define USART1_DIR_GPIO_Port GPIOC
 
- 
+
 #ifndef ARRAY_SIZE
 #   define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
 #endif
@@ -535,15 +535,18 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
     if (*compteur == 6){                       /////modification toutes les 6 mesures correctes du capteur (valeur limite ?)
         HAL_TIM_Base_Stop_IT(&htim3);
         htim3.Instance->ARR = 2*valeur-1+20;   /////modification de la periode du capteur (voir wiki stm32 pour plus de details) selon une droite
-        HAL_TIM_Base_Start_IT(&htim3);  
+        HAL_TIM_Base_Start_IT(&htim3);
         htim3.Instance->CNT = 0;               /////remise a zero du timer de la led
         *compteur = 0;                         /////remise a zero du compteur
     }
 }
 
-#define Maxi_char_transmit 40  /////////          
+#define Maxi_char_transmit 40  /////////
 #define Delay 1000  /////////
-void transmit(int* i, char* bufferDistance, char* bufferAngle, int distance, int angle){  /////transmission vers pc
+
+/////transmit modifie a retoucher
+
+/*void transmit(int* i, char* bufferDistance, char* bufferAngle, int distance, int angle){  /////transmission vers pc
     char dataDistance[10];                                /////variable stockage de la valeur du capteur
     char dataAngle[10];
     char ligne[2];                                /////variable stockage du separateur \n
@@ -569,8 +572,20 @@ void transmit(int* i, char* bufferDistance, char* bufferAngle, int distance, int
         sprintf(bufferAngle, "");
         HAL_Delay(Delay);         //////necessaire pour le graphique
     }
-}
+}*/
 
+void Variation2Angle_maison(XL servo, int* ptr_angle){ ///test fonctionne
+		uint16_t position;
+		if(*ptr_angle<1000 && *ptr_angle>=0){
+				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+				*ptr_angle+=5;
+		} else {
+				*ptr_angle=50;
+				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+		}
+		//XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+		XL_Get_Current_Position(&servo, &position);
+}
 
 /**
  * Implement the ranging demo with all modes managed through the blue button (short and long press)
@@ -578,7 +593,10 @@ void transmit(int* i, char* bufferDistance, char* bufferAngle, int distance, int
  * @param UseSensorsMask Mask of any sensors to use if not only one present
  * @param rangingConfig Ranging configuration to be used (same for all sensors)
  */
-void VariationAngle(XL * servo, int* compteurAngle){
+
+/*void VariationAngle(XL * servo, int* ptr_compteurAngle){ /////fonction de raph bugge
+    *ptr_compteurAngle=60;
+    XL_Set_Goal_Position(servo, *ptr_compteurAngle, 1);
     if(*compteurAngle<621 && *compteurAngle>=0){
         XL_Set_Goal_Position(servo, *compteurAngle, 1);
         *compteurAngle++;
@@ -591,9 +609,9 @@ void VariationAngle(XL * servo, int* compteurAngle){
         XL_Set_Goal_Position(servo, *compteurAngle, 1);
         *compteurAngle--;
     }
-}
+}*/
 
-int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
+int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL servo){
     int over=0;
     int status;
     char StrDisplay[5];
@@ -602,17 +620,20 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     int nSensorToUse;
     int SingleSensorNo=0;
     int distance;     ///creation variable distance
-    int angle;        ///creation variable angle
-    int s=0;                ///creation compteur
-    int* compteur = NULL;   ///creation pointeur sur compteur
-    compteur=&s;
-    int d=0;                 ///creation compteur2
-    int* compteur2 = NULL;   ///creation pointeur sur compteur2
-    compteur2=&d;
+    /*unsigned int angle;        ///creation variable angle*/ //necessaire ?
+    int compteur_blink = 0;                ///creation compteur
+    int* ptr_compteur_blink = NULL;   ///creation pointeur sur compteur
+    ptr_compteur_blink = &compteur_blink;
+    int compteur_d = 0;                 ///creation compteur
+    int* ptr_compteur_d = NULL;   ///creation pointeur sur compteur
+    ptr_compteur_d = &compteur_d;
     char buffer[Maxi_char_transmit*4]; /////creation du buffer
-    char buffer1[Maxi_char_transmit*4];
+    /*char buffer1[Maxi_char_transmit*4];*/ //necessaire ?
+    int len;
     sprintf(buffer, "");               /////mise a zero du buffer
-    sprintf(buffer1, "");
+    /*sprintf(buffer1, "");*/ //necessaire ?
+		int compteur_angle=10;              ////creation
+	  int* ptr_compteur_angle = &compteur_angle;
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
@@ -631,7 +652,8 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     }
 
     /* Start ranging until blue button is pressed */
-    do{    
+    do{
+				Variation2Angle_maison(servo, ptr_compteur_angle); ////fait bouger le servo
         if( nSensorToUse >1 ){
         	/* Multiple devices */
             strcpy(StrDisplay, "    ");
@@ -662,13 +684,24 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
             	Sensor_SetNewRange(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
                 /* Display distance in cm */
             	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
-                    *compteur+=1;                               /////incrementation du compteur
+                    *ptr_compteur_blink+=1;                      /////incrementation du compteur
                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
-                    distance=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
-                    XL_Get_Current_Position(servo, angle);
-                    blink_led(distance, compteur);                 /////fonction blink_led
-                    transmit(compteur2, buffer, buffer1, distance, angle);        /////fonction transmit vers pc
-                    *compteur2+=1;                              /////incrementation du compteur2
+                    distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
+                    //XL_Get_Current_Position(servo, &angle); necessaire ?
+                    blink_led(distance, ptr_compteur_blink);         /////fonction blink_led
+                    //transmit(compteur2, buffer, buffer1, distance, angle);        /////fonction transmit vers pc modifie donc buggee
+                    *ptr_compteur_d+=1;                              /////incrementation du compteur
+
+										//transmit theta a faire
+
+//////esquisse de test pas testee
+/*
+                    //unsigned int angle;
+                    //char dataAngle[10];
+                    //XL_Set_Goal_Position(servo, 60, 1);
+                    //sprintf(dataAngle, "%d,",angle);
+                    //len=strlen(dataAngle);
+                    //HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
                 }
                 else{                                           /////boucle de mesures incorrectes
                     sprintf(StrDisplay, "----");
@@ -830,7 +863,7 @@ void ResetAndDetectSensor(int SetDisplay){
     }
 }
 
-//XL maintenance
+//////XL maintenance
 XL_Interface interface;
 
 uint8_t XL_320_Send_HAL(uint8_t *data, uint16_t size, uint32_t timeout){
@@ -890,7 +923,7 @@ int main(void)
   VL53L0X_trace_config(NULL, TRACE_MODULE_NONE, TRACE_LEVEL_NONE, TRACE_FUNCTION_NONE); // No Trace
   //VL53L0X_trace_config(NULL,TRACE_MODULE_ALL, TRACE_LEVEL_ALL, TRACE_FUNCTION_ALL); // Full trace
 
-  //XL maintenance ----------------------
+  //////XL maintenance ----------------------
   interface.send = XL_320_Send_HAL;
   interface.set_direction = XL_320_Set_Direction_HAL;
   interface.receive = XL_320_Receive_HAL;
@@ -902,11 +935,11 @@ int main(void)
 
   XL servo;
   uint16_t nb_servos = 0;
-  int compteurAngle=0;      //compteur de variation d'angle
+  /*int compteurAngle=100;      //compteur de variation d'angle*/
 
   XL_Discover(&interface, &servo, 1, &nb_servos);
   #if CONFIG==1
-    XL_Configure_ID(&servo[0],3);
+  XL_Configure_ID(&servo[0],3);
   #endif
   XL_Say_Hello(&servo);
   HAL_Delay(1000);
@@ -939,10 +972,24 @@ int main(void)
       ResetAndDetectSensor(0);
       AlarmDemo();
 #else
-      VariationAngle(&servo, &compteurAngle);
+
+//////phase de tests simples
+
+      /*XL_Set_Goal_Position(&servo, 60, 1); ///test position fonctionne
+      uint16_t position;
+      XL_Get_Current_Position(&servo, &position);
+			position;*/
+
+			/*void VariationAngle_maison(XL servo, int Angle){ ///test fonctionne
+					uint16_t position;
+					XL_Set_Goal_Position(&servo, Angle, 1);
+					XL_Get_Current_Position(&servo, &position);
+			}
+
+			VariationAngle_maison(servo, compteurAngle);*/
 
       /* Start Ranging demo */
-      ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig, &servo);
+      ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig, servo);
 
       /* Blue button has been pressed (long or short press) */
       if(ExitWithLongPress){
@@ -1066,13 +1113,13 @@ void MX_USART2_UART_Init(void)
 
 }
 
-/** Configure pins as 
-        * Analog 
-        * Input 
+/** Configure pins as
+        * Analog
+        * Input
         * Output
         * EVENT_OUT
         * EXTI
-        * Free pins are configured automatically as Analog (this feature is enabled through 
+        * Free pins are configured automatically as Analog (this feature is enabled through
         * the Code Generation settings)
 */
 void MX_GPIO_Init(void)
@@ -1093,11 +1140,11 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PC0 PC1 PC2 PC3 
-                           PC4 PC5 PC6 PC7 
+  /*Configure GPIO pins : PC0 PC1 PC2 PC3
+                           PC4 PC5 PC6 PC7
                            PC8 PC10 PC11 PC12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
-                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7
                           |GPIO_PIN_8|GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -1106,11 +1153,11 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USART1_DIR_GPIO_Port, USART1_DIR_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PA0 PA1 PA4 PA6 
-                           PA7 PA8 PA11 PA12 
+  /*Configure GPIO pins : PA0 PA1 PA4 PA6
+                           PA7 PA8 PA11 PA12
                            PA15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_6 
-                          |GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_11|GPIO_PIN_12 
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_6
+                          |GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_11|GPIO_PIN_12
                           |GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -1123,11 +1170,11 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB0 PB1 PB2 PB10 
-                           PB12 PB13 PB14 PB15 
+  /*Configure GPIO pins : PB0 PB1 PB2 PB10
+                           PB12 PB13 PB14 PB15
                            PB4 PB5 PB6 PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10 
-                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15 
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10
+                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -1180,10 +1227,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-*/ 
+*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
