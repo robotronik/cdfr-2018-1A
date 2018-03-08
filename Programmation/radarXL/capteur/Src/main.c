@@ -49,6 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "xl_320.h"
+#include "servo.h"
 
 /**
  * @defgroup Configuration Static configuration
@@ -592,12 +593,6 @@ void Variation2Angle_maison(XL servo, int* ptr_angle){ ///test fonctionne
 				*ptr_angle=50;
 				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
 		}
-		//XL_Set_Goal_Position(&servo, *ptr_angle, 1);   /////test fonctionne Db=115200
-		/*HAL_Delay(1000);
-		XL_Get_Current_Position(&servo, &position);
-		sprintf(dataAngle, "%d,",position);
-		len=strlen(dataAngle);
-		HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
 }
 
 void Variation3Angle_maison(XL servo, int* ptr_angle, char* buffer, int* i){ ///test fonctionne
@@ -918,26 +913,6 @@ void ResetAndDetectSensor(int SetDisplay){
     }
 }
 
-//////XL maintenance
-XL_Interface interface;
-
-uint8_t XL_320_Send_HAL(uint8_t *data, uint16_t size, uint32_t timeout){
-  HAL_StatusTypeDef status = HAL_UART_Transmit(&huart1, data, size, timeout);
-  return (status==HAL_OK)?0:1;
-}
-
-void XL_320_Set_Direction_HAL(XL_Direction dir){
-  HAL_GPIO_WritePin(USART1_DIR_GPIO_Port, USART1_DIR_Pin, (dir==XL_SEND)?GPIO_PIN_SET:GPIO_PIN_RESET);
-}
-
-uint8_t XL_320_Receive_HAL(uint8_t *buffer, uint16_t size, uint32_t timeout){
-  HAL_StatusTypeDef status = HAL_UART_Receive(&huart1, buffer, size, timeout);
-  return (status==HAL_OK)?0:1;
-}
-
-void XL_320_Delay_HAL(uint32_t t){
-  HAL_Delay(t);
-}
 /* USER CODE END 0 */
 
 int main(void)
@@ -979,26 +954,20 @@ int main(void)
   //VL53L0X_trace_config(NULL,TRACE_MODULE_ALL, TRACE_LEVEL_ALL, TRACE_FUNCTION_ALL); // Full trace
 
   //////XL maintenance ----------------------
-  interface.send = XL_320_Send_HAL;
-  interface.set_direction = XL_320_Set_Direction_HAL;
-  interface.receive = XL_320_Receive_HAL;
-  interface.delay = XL_320_Delay_HAL;
+  XL_Interface interface;
+  XL320InterfaceDefine(&interface);
 
   HAL_Delay(1000);
 
-  XL broadcast = (XL) {.interface = &interface, .id = XL_BROADCAST};
-
   XL servo;
-  uint16_t nb_servos = 0;
-  /*int compteurAngle=100;      //compteur de variation d'angle*/
+  uint16_t nbServos; //number of detected servos
+  uint8_t nbmServosWanted; //number max of servos controle
+  XL320ServosActivation(&interface, &servo, nbmServosWanted, &nbServos);
 
-  XL_Discover(&interface, &servo, 1, &nb_servos);
   #if CONFIG==1
   XL_Configure_ID(&servo[0],3);
   #endif
-  XL_Say_Hello(&servo);
-  HAL_Delay(1000);
-  XL_Power_On(&broadcast, XL_NOW);
+  
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN 3 */

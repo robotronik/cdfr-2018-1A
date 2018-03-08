@@ -1,4 +1,4 @@
-build/main.d: ../Src/main.c \
+build/servo.d: ../Src/servo.c ../Inc/servo.h ../Inc/xl_320.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -25,17 +25,11 @@ build/main.d: ../Src/main.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.h ../Inc/stm32xxx_hal.h \
- ../Inc/mxconstants.h ../Drivers/BSP/Components/vl53l0x/vl53l0x_api.h \
- ../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.h \
- ../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h \
- ../Drivers/BSP/Components/vl53l0x/vl53l0x_device.h \
- ../Drivers/BSP/Components/vl53l0x/vl53l0x_types.h \
- ../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.h \
- ../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h \
- ../Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.h ../Inc/xl_320.h \
- ../Inc/servo.h ../Inc/xl_320.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+
+../Inc/servo.h:
+
+../Inc/xl_320.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -90,31 +84,3 @@ build/main.d: ../Src/main.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-
-../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.h:
-
-../Inc/stm32xxx_hal.h:
-
-../Inc/mxconstants.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_api.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_device.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_types.h:
-
-../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h:
-
-../Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.h:
-
-../Inc/xl_320.h:
-
-../Inc/servo.h:
-
-../Inc/xl_320.h:

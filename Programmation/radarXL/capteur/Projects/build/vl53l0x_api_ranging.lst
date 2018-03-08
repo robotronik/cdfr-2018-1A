@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccZAuZeA.s 			page 1
+ARM GAS  /tmp/ccoFyoFX.s 			page 1
 
 
    1              		.syntax unified
@@ -16,18 +16,19 @@ ARM GAS  /tmp/ccZAuZeA.s 			page 1
   13              		.eabi_attribute 34, 1
   14              		.eabi_attribute 18, 4
   15              		.thumb
-  16              		.file	"vl53l0x_api_ranging.c"
-  17              		.text
-  18              	.Ltext0:
-  19              		.cfi_sections	.debug_frame
-  20              	.Letext0:
-  21              		.file 1 "/usr/include/newlib/machine/_default_types.h"
-  22              		.file 2 "/usr/include/newlib/sys/_stdint.h"
-  23              		.file 3 "../Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccZAuZeA.s 			page 2
+  16              		.syntax unified
+  17              		.file	"vl53l0x_api_ranging.c"
+  18              		.text
+  19              	.Ltext0:
+  20              		.cfi_sections	.debug_frame
+  21              	.Letext0:
+  22              		.file 1 "/usr/include/newlib/machine/_default_types.h"
+  23              		.file 2 "/usr/include/newlib/sys/_stdint.h"
+  24              		.file 3 "../Drivers/CMSIS/Include/core_cm4.h"
+ARM GAS  /tmp/ccoFyoFX.s 			page 2
 
 
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 vl53l0x_api_ranging.c
+                            *ABS*:00000000 vl53l0x_api_ranging.c
 
 NO UNDEFINED SYMBOLS

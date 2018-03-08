@@ -50,6 +50,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+../Src/servo.c \
 ../Src/xl_320.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
