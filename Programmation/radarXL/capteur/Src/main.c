@@ -1,3 +1,9 @@
+/*!!!!!WARNING : ALIMENTATION!!!!!
+~> Nucleo : 5V ?(ordi)
+-> Servo : 7.40V / 500mA ?
+*/
+
+
 /**
   ******************************************************************************
   * File Name          : main.c
@@ -541,8 +547,9 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
     }
 }
 
-#define Maxi_char_transmit 40  /////////
+#define Maxi_char_transmit 10  /////////
 #define Delay 1000  /////////
+#define Delay2 10//////
 
 /////transmit modifie a retoucher
 
@@ -576,6 +583,8 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
 
 void Variation2Angle_maison(XL servo, int* ptr_angle){ ///test fonctionne
 		uint16_t position;
+		char dataAngle[10];
+		int len;
 		if(*ptr_angle<1000 && *ptr_angle>=0){
 				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
 				*ptr_angle+=5;
@@ -583,8 +592,54 @@ void Variation2Angle_maison(XL servo, int* ptr_angle){ ///test fonctionne
 				*ptr_angle=50;
 				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
 		}
-		//XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+		//XL_Set_Goal_Position(&servo, *ptr_angle, 1);   /////test fonctionne Db=115200
+		/*HAL_Delay(1000);
 		XL_Get_Current_Position(&servo, &position);
+		sprintf(dataAngle, "%d,",position);
+		len=strlen(dataAngle);
+		HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
+}
+
+void Variation3Angle_maison(XL servo, int* ptr_angle, char* buffer, int* i){ ///test fonctionne
+		uint16_t position;
+		char dataAngle[10];
+		char ligne[2];
+		int len;
+		if(*ptr_angle<1000 && *ptr_angle>=0){
+				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+				*ptr_angle+=5;
+		} else {
+				*ptr_angle=50;
+				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+		}
+		XL_Set_Goal_Position(&servo, *ptr_angle, 1);
+		/*HAL_Delay(1000);
+		XL_Get_Current_Position(&servo, &position);   /////test fonctionne Db=115200
+		sprintf(dataAngle, "%d,",position);
+		len=strlen(dataAngle);
+		HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000); */
+		HAL_Delay(Delay2);
+		XL_Get_Current_Position(&servo, &position);
+		HAL_Delay(Delay2);
+    if (*i<Maxi_char_transmit-1){                 /////ajout valeur, dans data
+        sprintf(dataAngle, "%d,",position);
+				/*len=strlen(dataAngle);
+				HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
+    }  else if (*i==Maxi_char_transmit-1){           /////ajout valeur dans data -> pour cloturer la sequence
+        sprintf(dataAngle, "%d",position);
+				/*len=strlen(dataAngle);
+				HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
+    }
+    strcat(buffer,dataAngle);                          /////ajout valeur au buffer
+    if (*i==Maxi_char_transmit-1){
+        len=strlen(buffer);                       /////longueur du buffer
+        HAL_UART_Transmit(&huart2, (uint8_t*)(buffer), len, 1000); /////transmission du buffer
+        sprintf(ligne, "\n");                                     /////ajout \n a ligne
+        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne
+        (*i)=-1;                                                  /////remise a zero du compteur
+        sprintf(buffer, "");                                      /////remise a zero du buffer
+        HAL_Delay(Delay);         //////necessaire pour le graphique
+    }
 }
 
 /**
@@ -625,15 +680,15 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL servo){
     int* ptr_compteur_blink = NULL;   ///creation pointeur sur compteur
     ptr_compteur_blink = &compteur_blink;
     int compteur_d = 0;                 ///creation compteur
-    int* ptr_compteur_d = NULL;   ///creation pointeur sur compteur
-    ptr_compteur_d = &compteur_d;
+    int* ptr_compteur = NULL;   ///creation pointeur sur compteur
+    ptr_compteur = &compteur_d;
     char buffer[Maxi_char_transmit*4]; /////creation du buffer
-    /*char buffer1[Maxi_char_transmit*4];*/ //necessaire ?
+    char buffer1[Maxi_char_transmit*5];
     int len;
     sprintf(buffer, "");               /////mise a zero du buffer
-    /*sprintf(buffer1, "");*/ //necessaire ?
-		int compteur_angle=10;              ////creation
-	  int* ptr_compteur_angle = &compteur_angle;
+    sprintf(buffer1, "");
+		int angle=10;              ////creation
+	  int* ptr_angle = &angle;
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
@@ -653,7 +708,7 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL servo){
 
     /* Start ranging until blue button is pressed */
     do{
-				Variation2Angle_maison(servo, ptr_compteur_angle); ////fait bouger le servo
+				//Variation2Angle_maison(servo, ptr_angle); ////fait bouger le servo
         if( nSensorToUse >1 ){
         	/* Multiple devices */
             strcpy(StrDisplay, "    ");
@@ -689,12 +744,12 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL servo){
                     distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
                     //XL_Get_Current_Position(servo, &angle); necessaire ?
                     blink_led(distance, ptr_compteur_blink);         /////fonction blink_led
+										Variation3Angle_maison(servo, ptr_angle, buffer1, ptr_compteur);
                     //transmit(compteur2, buffer, buffer1, distance, angle);        /////fonction transmit vers pc modifie donc buggee
-                    *ptr_compteur_d+=1;                              /////incrementation du compteur
+                    *ptr_compteur+=1;                              /////incrementation du compteur
 
-										//transmit theta a faire
 
-//////esquisse de test pas testee
+//////bloc structure (je me comprends)
 /*
                     //unsigned int angle;
                     //char dataAngle[10];

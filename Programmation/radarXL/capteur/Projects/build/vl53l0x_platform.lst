@@ -1,0 +1,1061 @@
+ARM GAS  /tmp/cciQrpYM.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.file	"vl53l0x_platform.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text._I2CWrite,"ax",%progbits
+  21              		.align	2
+  22              		.global	_I2CWrite
+  23              		.thumb
+  24              		.thumb_func
+  26              	_I2CWrite:
+  27              	.LFB112:
+  28              		.file 1 "../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c"
+   1:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** //?????#include "hal.h"
+   2:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #include "vl53l0x_platform.h"
+   3:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #include "vl53l0x_api.h"
+   4:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+   5:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #include "stm32xxx_hal.h"
+   6:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #include <string.h>
+   7:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+   8:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #define I2C_TIME_OUT_BASE   10
+   9:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #define I2C_TIME_OUT_BYTE   1
+  10:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #define VL53L0X_OsDelay(...) HAL_Delay(2)
+  11:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  12:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  13:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #ifndef HAL_I2C_MODULE_ENABLED
+  14:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #warning "HAL I2C module must be enable "
+  15:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #endif
+  16:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** //extern I2C_HandleTypeDef hi2c1;
+  17:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** //#define VL53L0X_pI2cHandle    (&hi2c1)
+  18:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  19:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** /* when not customized by application define dummy one */
+  20:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #ifndef VL53L0X_GetI2cBus
+  21:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** /** This macro can be overloaded by user to enforce i2c sharing in RTOS context
+  22:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****  */
+  23:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #   define VL53L0X_GetI2cBus(...) (void)0
+  24:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #endif
+  25:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  26:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #ifndef VL53L0X_PutI2cBus
+  27:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** /** This macro can be overloaded by user to enforce i2c sharing in RTOS context
+  28:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****  */
+  29:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #   define VL53L0X_PutI2cBus(...) (void)0
+  30:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #endif
+ARM GAS  /tmp/cciQrpYM.s 			page 2
+
+
+  31:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  32:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #ifndef VL53L0X_OsDelay
+  33:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #   define  VL53L0X_OsDelay(...) (void)0
+  34:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** #endif
+  35:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  36:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  37:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** uint8_t _I2CBuffer[64];
+  38:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  39:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** int _I2CWrite(VL53L0X_DEV Dev, uint8_t *pdata, uint32_t count) {
+  29              		.loc 1 39 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 30B5     		push	{r4, r5, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 12
+  37              		.cfi_offset 4, -12
+  38              		.cfi_offset 5, -8
+  39              		.cfi_offset 14, -4
+  40 0002 83B0     		sub	sp, sp, #12
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 24
+  43 0004 0C46     		mov	r4, r1
+  44 0006 1346     		mov	r3, r2
+  40:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int status;
+  41:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int i2c_time_out = I2C_TIME_OUT_BASE+ count* I2C_TIME_OUT_BYTE;
+  45              		.loc 1 41 0
+  46 0008 02F10A05 		add	r5, r2, #10
+  47              	.LVL1:
+  42:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  43:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status = HAL_I2C_Master_Transmit(Dev->I2cHandle, Dev->I2cDevAddr, pdata, count, i2c_time_out);
+  48              		.loc 1 43 0
+  49 000c D0F85C21 		ldr	r2, [r0, #348]
+  50              	.LVL2:
+  51 0010 90F86011 		ldrb	r1, [r0, #352]	@ zero_extendqisi2
+  52              	.LVL3:
+  53 0014 0095     		str	r5, [sp]
+  54 0016 1046     		mov	r0, r2
+  55              	.LVL4:
+  56 0018 2246     		mov	r2, r4
+  57 001a 9BB2     		uxth	r3, r3
+  58              	.LVL5:
+  59 001c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+  60              	.LVL6:
+  44:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status) {
+  45:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         //VL6180x_ErrLog("I2C error 0x%x %d len", dev->I2cAddr, len);
+  46:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         //XNUCLEO6180XA1_I2C1_Init(&hi2c1);
+  47:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+  48:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return status;
+  49:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+  61              		.loc 1 49 0
+  62 0020 03B0     		add	sp, sp, #12
+  63              	.LCFI2:
+  64              		.cfi_def_cfa_offset 12
+  65              		@ sp needed
+  66 0022 30BD     		pop	{r4, r5, pc}
+ARM GAS  /tmp/cciQrpYM.s 			page 3
+
+
+  67              		.cfi_endproc
+  68              	.LFE112:
+  70              		.section	.text._I2CRead,"ax",%progbits
+  71              		.align	2
+  72              		.global	_I2CRead
+  73              		.thumb
+  74              		.thumb_func
+  76              	_I2CRead:
+  77              	.LFB113:
+  50:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  51:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** int _I2CRead(VL53L0X_DEV Dev, uint8_t *pdata, uint32_t count) {
+  78              		.loc 1 51 0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              	.LVL7:
+  83 0000 10B5     		push	{r4, lr}
+  84              	.LCFI3:
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 4, -8
+  87              		.cfi_offset 14, -4
+  88 0002 82B0     		sub	sp, sp, #8
+  89              	.LCFI4:
+  90              		.cfi_def_cfa_offset 16
+  91 0004 0C46     		mov	r4, r1
+  92 0006 1346     		mov	r3, r2
+  52:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int status;
+  53:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int i2c_time_out = I2C_TIME_OUT_BASE+ count* I2C_TIME_OUT_BYTE;
+  93              		.loc 1 53 0
+  94 0008 0A32     		adds	r2, r2, #10
+  95              	.LVL8:
+  54:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  55:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status = HAL_I2C_Master_Receive(Dev->I2cHandle, Dev->I2cDevAddr|1, pdata, count, i2c_time_out);
+  96              		.loc 1 55 0
+  97 000a 90F86011 		ldrb	r1, [r0, #352]	@ zero_extendqisi2
+  98              	.LVL9:
+  99 000e D0F85C01 		ldr	r0, [r0, #348]
+ 100              	.LVL10:
+ 101 0012 0092     		str	r2, [sp]
+ 102 0014 41F00101 		orr	r1, r1, #1
+ 103 0018 2246     		mov	r2, r4
+ 104              	.LVL11:
+ 105 001a 9BB2     		uxth	r3, r3
+ 106              	.LVL12:
+ 107 001c FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 108              	.LVL13:
+  56:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status) {
+  57:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         //VL6180x_ErrLog("I2C error 0x%x %d len", dev->I2cAddr, len);
+  58:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         //XNUCLEO6180XA1_I2C1_Init(&hi2c1);
+  59:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+  60:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return status;
+  61:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 109              		.loc 1 61 0
+ 110 0020 02B0     		add	sp, sp, #8
+ 111              	.LCFI5:
+ 112              		.cfi_def_cfa_offset 8
+ 113              		@ sp needed
+ARM GAS  /tmp/cciQrpYM.s 			page 4
+
+
+ 114 0022 10BD     		pop	{r4, pc}
+ 115              		.cfi_endproc
+ 116              	.LFE113:
+ 118              		.section	.text.VL53L0X_WriteMulti,"ax",%progbits
+ 119              		.align	2
+ 120              		.global	VL53L0X_WriteMulti
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	VL53L0X_WriteMulti:
+ 125              	.LFB114:
+  62:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  63:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** // the ranging_sensor_comms.dll will take care of the page selection
+  64:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_WriteMulti(VL53L0X_DEV Dev, uint8_t index, uint8_t *pdata, uint32_t count) {
+ 126              		.loc 1 64 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              	.LVL14:
+ 131 0000 70B5     		push	{r4, r5, r6, lr}
+ 132              	.LCFI6:
+ 133              		.cfi_def_cfa_offset 16
+ 134              		.cfi_offset 4, -16
+ 135              		.cfi_offset 5, -12
+ 136              		.cfi_offset 6, -8
+ 137              		.cfi_offset 14, -4
+ 138 0002 1C46     		mov	r4, r3
+ 139              	.LVL15:
+  65:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int status_int;
+  66:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+  67:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (count > sizeof(_I2CBuffer) - 1) {
+ 140              		.loc 1 67 0
+ 141 0004 3F2B     		cmp	r3, #63
+ 142 0006 10D8     		bhi	.L8
+ 143 0008 0646     		mov	r6, r0
+  68:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         return VL53L0X_ERROR_INVALID_PARAMS;
+  69:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+  70:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[0] = index;
+ 144              		.loc 1 70 0
+ 145 000a 094D     		ldr	r5, .L11
+ 146 000c 2846     		mov	r0, r5
+ 147              	.LVL16:
+ 148 000e 00F8011B 		strb	r1, [r0], #1
+  71:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     memcpy(&_I2CBuffer[1], pdata, count);
+ 149              		.loc 1 71 0
+ 150 0012 1146     		mov	r1, r2
+ 151              	.LVL17:
+ 152 0014 1A46     		mov	r2, r3
+ 153              	.LVL18:
+ 154 0016 FFF7FEFF 		bl	memcpy
+ 155              	.LVL19:
+  72:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+  73:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, count + 1);
+ 156              		.loc 1 73 0
+ 157 001a 3046     		mov	r0, r6
+ 158 001c 2946     		mov	r1, r5
+ 159 001e 621C     		adds	r2, r4, #1
+ 160 0020 FFF7FEFF 		bl	_I2CWrite
+ARM GAS  /tmp/cciQrpYM.s 			page 5
+
+
+ 161              	.LVL20:
+  74:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 162              		.loc 1 74 0
+ 163 0024 10B1     		cbz	r0, .L6
+  75:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 164              		.loc 1 75 0
+ 165 0026 EC20     		movs	r0, #236
+ 166              	.LVL21:
+  76:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+  77:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+  78:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 167              		.loc 1 78 0
+ 168 0028 00E0     		b	.L6
+ 169              	.LVL22:
+ 170              	.L8:
+  68:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 171              		.loc 1 68 0
+ 172 002a FC20     		movs	r0, #252
+ 173              	.LVL23:
+ 174              	.L6:
+  79:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 175              		.loc 1 79 0
+ 176 002c 40B2     		sxtb	r0, r0
+ 177 002e 70BD     		pop	{r4, r5, r6, pc}
+ 178              	.LVL24:
+ 179              	.L12:
+ 180              		.align	2
+ 181              	.L11:
+ 182 0030 00000000 		.word	_I2CBuffer
+ 183              		.cfi_endproc
+ 184              	.LFE114:
+ 186              		.section	.text.VL53L0X_ReadMulti,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	VL53L0X_ReadMulti
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	VL53L0X_ReadMulti:
+ 193              	.LFB115:
+  80:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+  81:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** // the ranging_sensor_comms.dll will take care of the page selection
+  82:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_ReadMulti(VL53L0X_DEV Dev, uint8_t index, uint8_t *pdata, uint32_t count) {
+ 194              		.loc 1 82 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198              	.LVL25:
+ 199 0000 70B5     		push	{r4, r5, r6, lr}
+ 200              	.LCFI7:
+ 201              		.cfi_def_cfa_offset 16
+ 202              		.cfi_offset 4, -16
+ 203              		.cfi_offset 5, -12
+ 204              		.cfi_offset 6, -8
+ 205              		.cfi_offset 14, -4
+ 206 0002 82B0     		sub	sp, sp, #8
+ 207              	.LCFI8:
+ 208              		.cfi_def_cfa_offset 24
+ 209 0004 0646     		mov	r6, r0
+ARM GAS  /tmp/cciQrpYM.s 			page 6
+
+
+ 210 0006 1546     		mov	r5, r2
+ 211 0008 1C46     		mov	r4, r3
+ 212 000a 02AB     		add	r3, sp, #8
+ 213              	.LVL26:
+ 214 000c 03F8011D 		strb	r1, [r3, #-1]!
+ 215              	.LVL27:
+  83:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+  84:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+  85:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+  86:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, &index, 1);
+ 216              		.loc 1 86 0
+ 217 0010 1946     		mov	r1, r3
+ 218              	.LVL28:
+ 219 0012 0122     		movs	r2, #1
+ 220              	.LVL29:
+ 221 0014 FFF7FEFF 		bl	_I2CWrite
+ 222              	.LVL30:
+  87:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 223              		.loc 1 87 0
+ 224 0018 30B9     		cbnz	r0, .L15
+  88:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+  89:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+  90:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+  91:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CRead(Dev, pdata, count);
+ 225              		.loc 1 91 0
+ 226 001a 3046     		mov	r0, r6
+ 227              	.LVL31:
+ 228 001c 2946     		mov	r1, r5
+ 229 001e 2246     		mov	r2, r4
+ 230 0020 FFF7FEFF 		bl	_I2CRead
+ 231              	.LVL32:
+  92:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 232              		.loc 1 92 0
+ 233 0024 10B9     		cbnz	r0, .L16
+ 234 0026 02E0     		b	.L14
+ 235              	.L15:
+  88:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 236              		.loc 1 88 0
+ 237 0028 EC20     		movs	r0, #236
+ 238              	.LVL33:
+ 239 002a 00E0     		b	.L14
+ 240              	.LVL34:
+ 241              	.L16:
+  93:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 242              		.loc 1 93 0
+ 243 002c EC20     		movs	r0, #236
+ 244              	.LVL35:
+ 245              	.L14:
+  94:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+  95:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** done:
+  96:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+  97:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+  98:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 246              		.loc 1 98 0
+ 247 002e 40B2     		sxtb	r0, r0
+ 248 0030 02B0     		add	sp, sp, #8
+ 249              	.LCFI9:
+ARM GAS  /tmp/cciQrpYM.s 			page 7
+
+
+ 250              		.cfi_def_cfa_offset 16
+ 251              	.LVL36:
+ 252              		@ sp needed
+ 253 0032 70BD     		pop	{r4, r5, r6, pc}
+ 254              		.cfi_endproc
+ 255              	.LFE115:
+ 257              		.section	.text.VL53L0X_WrByte,"ax",%progbits
+ 258              		.align	2
+ 259              		.global	VL53L0X_WrByte
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	VL53L0X_WrByte:
+ 264              	.LFB116:
+  99:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 100:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_WrByte(VL53L0X_DEV Dev, uint8_t index, uint8_t data) {
+ 265              		.loc 1 100 0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 269              	.LVL37:
+ 270 0000 08B5     		push	{r3, lr}
+ 271              	.LCFI10:
+ 272              		.cfi_def_cfa_offset 8
+ 273              		.cfi_offset 3, -8
+ 274              		.cfi_offset 14, -4
+ 275              	.LVL38:
+ 101:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 102:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+ 103:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 104:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[0] = index;
+ 276              		.loc 1 104 0
+ 277 0002 054B     		ldr	r3, .L22
+ 278 0004 1970     		strb	r1, [r3]
+ 105:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[1] = data;
+ 279              		.loc 1 105 0
+ 280 0006 5A70     		strb	r2, [r3, #1]
+ 106:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 107:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+ 108:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 281              		.loc 1 108 0
+ 282 0008 1946     		mov	r1, r3
+ 283              	.LVL39:
+ 284 000a 0222     		movs	r2, #2
+ 285              	.LVL40:
+ 286 000c FFF7FEFF 		bl	_I2CWrite
+ 287              	.LVL41:
+ 109:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 288              		.loc 1 109 0
+ 289 0010 00B1     		cbz	r0, .L19
+ 110:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 290              		.loc 1 110 0
+ 291 0012 EC20     		movs	r0, #236
+ 292              	.LVL42:
+ 293              	.L19:
+ 111:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 112:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+ 113:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ARM GAS  /tmp/cciQrpYM.s 			page 8
+
+
+ 114:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 294              		.loc 1 114 0
+ 295 0014 40B2     		sxtb	r0, r0
+ 296 0016 08BD     		pop	{r3, pc}
+ 297              	.L23:
+ 298              		.align	2
+ 299              	.L22:
+ 300 0018 00000000 		.word	_I2CBuffer
+ 301              		.cfi_endproc
+ 302              	.LFE116:
+ 304              		.section	.text.VL53L0X_WrWord,"ax",%progbits
+ 305              		.align	2
+ 306              		.global	VL53L0X_WrWord
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	VL53L0X_WrWord:
+ 311              	.LFB117:
+ 115:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 116:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_WrWord(VL53L0X_DEV Dev, uint8_t index, uint16_t data) {
+ 312              		.loc 1 116 0
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 0
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 316              	.LVL43:
+ 317 0000 08B5     		push	{r3, lr}
+ 318              	.LCFI11:
+ 319              		.cfi_def_cfa_offset 8
+ 320              		.cfi_offset 3, -8
+ 321              		.cfi_offset 14, -4
+ 322              	.LVL44:
+ 117:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 118:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+ 119:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 120:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[0] = index;
+ 323              		.loc 1 120 0
+ 324 0002 064B     		ldr	r3, .L28
+ 325 0004 1970     		strb	r1, [r3]
+ 121:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[1] = data >> 8;
+ 326              		.loc 1 121 0
+ 327 0006 110A     		lsrs	r1, r2, #8
+ 328              	.LVL45:
+ 329 0008 5970     		strb	r1, [r3, #1]
+ 122:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[2] = data & 0x00FF;
+ 330              		.loc 1 122 0
+ 331 000a 9A70     		strb	r2, [r3, #2]
+ 123:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 124:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+ 125:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 3);
+ 332              		.loc 1 125 0
+ 333 000c 1946     		mov	r1, r3
+ 334 000e 0322     		movs	r2, #3
+ 335              	.LVL46:
+ 336 0010 FFF7FEFF 		bl	_I2CWrite
+ 337              	.LVL47:
+ 126:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 338              		.loc 1 126 0
+ 339 0014 00B1     		cbz	r0, .L25
+ARM GAS  /tmp/cciQrpYM.s 			page 9
+
+
+ 127:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 340              		.loc 1 127 0
+ 341 0016 EC20     		movs	r0, #236
+ 342              	.LVL48:
+ 343              	.L25:
+ 128:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 129:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+ 130:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 131:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 344              		.loc 1 131 0
+ 345 0018 40B2     		sxtb	r0, r0
+ 346 001a 08BD     		pop	{r3, pc}
+ 347              	.L29:
+ 348              		.align	2
+ 349              	.L28:
+ 350 001c 00000000 		.word	_I2CBuffer
+ 351              		.cfi_endproc
+ 352              	.LFE117:
+ 354              		.section	.text.VL53L0X_WrDWord,"ax",%progbits
+ 355              		.align	2
+ 356              		.global	VL53L0X_WrDWord
+ 357              		.thumb
+ 358              		.thumb_func
+ 360              	VL53L0X_WrDWord:
+ 361              	.LFB118:
+ 132:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 133:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_WrDWord(VL53L0X_DEV Dev, uint8_t index, uint32_t data) {
+ 362              		.loc 1 133 0
+ 363              		.cfi_startproc
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 366              	.LVL49:
+ 367 0000 08B5     		push	{r3, lr}
+ 368              	.LCFI12:
+ 369              		.cfi_def_cfa_offset 8
+ 370              		.cfi_offset 3, -8
+ 371              		.cfi_offset 14, -4
+ 372              	.LVL50:
+ 134:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 135:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+ 136:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[0] = index;
+ 373              		.loc 1 136 0
+ 374 0002 084B     		ldr	r3, .L34
+ 375 0004 1970     		strb	r1, [r3]
+ 137:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[1] = (data >> 24) & 0xFF;
+ 376              		.loc 1 137 0
+ 377 0006 110E     		lsrs	r1, r2, #24
+ 378              	.LVL51:
+ 379 0008 5970     		strb	r1, [r3, #1]
+ 138:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[2] = (data >> 16) & 0xFF;
+ 380              		.loc 1 138 0
+ 381 000a 110C     		lsrs	r1, r2, #16
+ 382 000c 9970     		strb	r1, [r3, #2]
+ 139:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[3] = (data >> 8)  & 0xFF;
+ 383              		.loc 1 139 0
+ 384 000e 110A     		lsrs	r1, r2, #8
+ 385 0010 D970     		strb	r1, [r3, #3]
+ARM GAS  /tmp/cciQrpYM.s 			page 10
+
+
+ 140:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     _I2CBuffer[4] = (data >> 0 ) & 0xFF;
+ 386              		.loc 1 140 0
+ 387 0012 1A71     		strb	r2, [r3, #4]
+ 141:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+ 142:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 5);
+ 388              		.loc 1 142 0
+ 389 0014 1946     		mov	r1, r3
+ 390 0016 0522     		movs	r2, #5
+ 391              	.LVL52:
+ 392 0018 FFF7FEFF 		bl	_I2CWrite
+ 393              	.LVL53:
+ 143:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 394              		.loc 1 143 0
+ 395 001c 00B1     		cbz	r0, .L31
+ 144:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 396              		.loc 1 144 0
+ 397 001e EC20     		movs	r0, #236
+ 398              	.LVL54:
+ 399              	.L31:
+ 145:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 146:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+ 147:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 148:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 400              		.loc 1 148 0
+ 401 0020 40B2     		sxtb	r0, r0
+ 402 0022 08BD     		pop	{r3, pc}
+ 403              	.L35:
+ 404              		.align	2
+ 405              	.L34:
+ 406 0024 00000000 		.word	_I2CBuffer
+ 407              		.cfi_endproc
+ 408              	.LFE118:
+ 410              		.section	.text.VL53L0X_RdByte,"ax",%progbits
+ 411              		.align	2
+ 412              		.global	VL53L0X_RdByte
+ 413              		.thumb
+ 414              		.thumb_func
+ 416              	VL53L0X_RdByte:
+ 417              	.LFB120:
+ 149:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 150:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_UpdateByte(VL53L0X_DEV Dev, uint8_t index, uint8_t AndData, uint8_t OrData) {
+ 151:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 152:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     uint8_t data;
+ 153:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 154:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     Status = VL53L0X_RdByte(Dev, index, &data);
+ 155:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (Status) {
+ 156:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 157:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 158:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     data = (data & AndData) | OrData;
+ 159:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     Status = VL53L0X_WrByte(Dev, index, data);
+ 160:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** done:
+ 161:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 162:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 163:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 164:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_RdByte(VL53L0X_DEV Dev, uint8_t index, uint8_t *data) {
+ 418              		.loc 1 164 0
+ 419              		.cfi_startproc
+ARM GAS  /tmp/cciQrpYM.s 			page 11
+
+
+ 420              		@ args = 0, pretend = 0, frame = 8
+ 421              		@ frame_needed = 0, uses_anonymous_args = 0
+ 422              	.LVL55:
+ 423 0000 30B5     		push	{r4, r5, lr}
+ 424              	.LCFI13:
+ 425              		.cfi_def_cfa_offset 12
+ 426              		.cfi_offset 4, -12
+ 427              		.cfi_offset 5, -8
+ 428              		.cfi_offset 14, -4
+ 429 0002 83B0     		sub	sp, sp, #12
+ 430              	.LCFI14:
+ 431              		.cfi_def_cfa_offset 24
+ 432 0004 0546     		mov	r5, r0
+ 433 0006 1446     		mov	r4, r2
+ 434 0008 02AB     		add	r3, sp, #8
+ 435 000a 03F8011D 		strb	r1, [r3, #-1]!
+ 436              	.LVL56:
+ 165:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 166:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+ 167:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 168:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+ 169:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, &index, 1);
+ 437              		.loc 1 169 0
+ 438 000e 1946     		mov	r1, r3
+ 439              	.LVL57:
+ 440 0010 0122     		movs	r2, #1
+ 441              	.LVL58:
+ 442 0012 FFF7FEFF 		bl	_I2CWrite
+ 443              	.LVL59:
+ 170:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if( status_int ){
+ 444              		.loc 1 170 0
+ 445 0016 30B9     		cbnz	r0, .L38
+ 171:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 172:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 173:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 174:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CRead(Dev, data, 1);
+ 446              		.loc 1 174 0
+ 447 0018 2846     		mov	r0, r5
+ 448              	.LVL60:
+ 449 001a 2146     		mov	r1, r4
+ 450 001c 0122     		movs	r2, #1
+ 451 001e FFF7FEFF 		bl	_I2CRead
+ 452              	.LVL61:
+ 175:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 453              		.loc 1 175 0
+ 454 0022 10B9     		cbnz	r0, .L39
+ 455 0024 02E0     		b	.L37
+ 456              	.L38:
+ 171:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 457              		.loc 1 171 0
+ 458 0026 EC20     		movs	r0, #236
+ 459              	.LVL62:
+ 460 0028 00E0     		b	.L37
+ 461              	.LVL63:
+ 462              	.L39:
+ 176:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 463              		.loc 1 176 0
+ARM GAS  /tmp/cciQrpYM.s 			page 12
+
+
+ 464 002a EC20     		movs	r0, #236
+ 465              	.LVL64:
+ 466              	.L37:
+ 177:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 178:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** done:
+ 179:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+ 180:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 181:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 467              		.loc 1 181 0
+ 468 002c 40B2     		sxtb	r0, r0
+ 469 002e 03B0     		add	sp, sp, #12
+ 470              	.LCFI15:
+ 471              		.cfi_def_cfa_offset 12
+ 472              		@ sp needed
+ 473 0030 30BD     		pop	{r4, r5, pc}
+ 474              		.cfi_endproc
+ 475              	.LFE120:
+ 477 0032 00BF     		.section	.text.VL53L0X_UpdateByte,"ax",%progbits
+ 478              		.align	2
+ 479              		.global	VL53L0X_UpdateByte
+ 480              		.thumb
+ 481              		.thumb_func
+ 483              	VL53L0X_UpdateByte:
+ 484              	.LFB119:
+ 150:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 485              		.loc 1 150 0
+ 486              		.cfi_startproc
+ 487              		@ args = 0, pretend = 0, frame = 8
+ 488              		@ frame_needed = 0, uses_anonymous_args = 0
+ 489              	.LVL65:
+ 490 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 491              	.LCFI16:
+ 492              		.cfi_def_cfa_offset 20
+ 493              		.cfi_offset 4, -20
+ 494              		.cfi_offset 5, -16
+ 495              		.cfi_offset 6, -12
+ 496              		.cfi_offset 7, -8
+ 497              		.cfi_offset 14, -4
+ 498 0002 83B0     		sub	sp, sp, #12
+ 499              	.LCFI17:
+ 500              		.cfi_def_cfa_offset 32
+ 501 0004 0546     		mov	r5, r0
+ 502 0006 0C46     		mov	r4, r1
+ 503 0008 1746     		mov	r7, r2
+ 504 000a 1E46     		mov	r6, r3
+ 505              	.LVL66:
+ 154:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (Status) {
+ 506              		.loc 1 154 0
+ 507 000c 0DF10702 		add	r2, sp, #7
+ 508              	.LVL67:
+ 509 0010 FFF7FEFF 		bl	VL53L0X_RdByte
+ 510              	.LVL68:
+ 155:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 511              		.loc 1 155 0
+ 512 0014 0346     		mov	r3, r0
+ 513 0016 50B9     		cbnz	r0, .L42
+ 158:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     Status = VL53L0X_WrByte(Dev, index, data);
+ARM GAS  /tmp/cciQrpYM.s 			page 13
+
+
+ 514              		.loc 1 158 0
+ 515 0018 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 516 001c 3A40     		ands	r2, r2, r7
+ 517 001e 3243     		orrs	r2, r2, r6
+ 518 0020 8DF80720 		strb	r2, [sp, #7]
+ 159:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** done:
+ 519              		.loc 1 159 0
+ 520 0024 2846     		mov	r0, r5
+ 521              	.LVL69:
+ 522 0026 2146     		mov	r1, r4
+ 523 0028 FFF7FEFF 		bl	VL53L0X_WrByte
+ 524              	.LVL70:
+ 525 002c 0346     		mov	r3, r0
+ 526              	.LVL71:
+ 527              	.L42:
+ 162:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 528              		.loc 1 162 0
+ 529 002e 58B2     		sxtb	r0, r3
+ 530 0030 03B0     		add	sp, sp, #12
+ 531              	.LCFI18:
+ 532              		.cfi_def_cfa_offset 20
+ 533              		@ sp needed
+ 534 0032 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 535              		.cfi_endproc
+ 536              	.LFE119:
+ 538              		.section	.text.VL53L0X_RdWord,"ax",%progbits
+ 539              		.align	2
+ 540              		.global	VL53L0X_RdWord
+ 541              		.thumb
+ 542              		.thumb_func
+ 544              	VL53L0X_RdWord:
+ 545              	.LFB121:
+ 182:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 183:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_RdWord(VL53L0X_DEV Dev, uint8_t index, uint16_t *data) {
+ 546              		.loc 1 183 0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 8
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550              	.LVL72:
+ 551 0000 30B5     		push	{r4, r5, lr}
+ 552              	.LCFI19:
+ 553              		.cfi_def_cfa_offset 12
+ 554              		.cfi_offset 4, -12
+ 555              		.cfi_offset 5, -8
+ 556              		.cfi_offset 14, -4
+ 557 0002 83B0     		sub	sp, sp, #12
+ 558              	.LCFI20:
+ 559              		.cfi_def_cfa_offset 24
+ 560 0004 0446     		mov	r4, r0
+ 561 0006 1546     		mov	r5, r2
+ 562 0008 02AB     		add	r3, sp, #8
+ 563 000a 03F8011D 		strb	r1, [r3, #-1]!
+ 564              	.LVL73:
+ 184:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 185:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+ 186:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 187:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+ARM GAS  /tmp/cciQrpYM.s 			page 14
+
+
+ 188:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, &index, 1);
+ 565              		.loc 1 188 0
+ 566 000e 1946     		mov	r1, r3
+ 567              	.LVL74:
+ 568 0010 0122     		movs	r2, #1
+ 569              	.LVL75:
+ 570 0012 FFF7FEFF 		bl	_I2CWrite
+ 571              	.LVL76:
+ 189:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 190:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if( status_int ){
+ 572              		.loc 1 190 0
+ 573 0016 60B9     		cbnz	r0, .L46
+ 191:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 192:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 193:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 194:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CRead(Dev, _I2CBuffer, 2);
+ 574              		.loc 1 194 0
+ 575 0018 2046     		mov	r0, r4
+ 576              	.LVL77:
+ 577 001a 0949     		ldr	r1, .L49
+ 578 001c 0222     		movs	r2, #2
+ 579 001e FFF7FEFF 		bl	_I2CRead
+ 580              	.LVL78:
+ 195:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 581              		.loc 1 195 0
+ 582 0022 40B9     		cbnz	r0, .L47
+ 196:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 197:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 198:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 199:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 200:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     *data = ((uint16_t)_I2CBuffer[0]<<8) + (uint16_t)_I2CBuffer[1];
+ 583              		.loc 1 200 0
+ 584 0024 064A     		ldr	r2, .L49
+ 585 0026 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 586 0028 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 587 002a 03EB0123 		add	r3, r3, r1, lsl #8
+ 588 002e 2B80     		strh	r3, [r5]	@ movhi
+ 589 0030 02E0     		b	.L45
+ 590              	.L46:
+ 191:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 591              		.loc 1 191 0
+ 592 0032 EC20     		movs	r0, #236
+ 593              	.LVL79:
+ 594 0034 00E0     		b	.L45
+ 595              	.LVL80:
+ 596              	.L47:
+ 196:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 597              		.loc 1 196 0
+ 598 0036 EC20     		movs	r0, #236
+ 599              	.LVL81:
+ 600              	.L45:
+ 201:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** done:
+ 202:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+ 203:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 204:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 601              		.loc 1 204 0
+ 602 0038 40B2     		sxtb	r0, r0
+ARM GAS  /tmp/cciQrpYM.s 			page 15
+
+
+ 603 003a 03B0     		add	sp, sp, #12
+ 604              	.LCFI21:
+ 605              		.cfi_def_cfa_offset 12
+ 606              		@ sp needed
+ 607 003c 30BD     		pop	{r4, r5, pc}
+ 608              	.LVL82:
+ 609              	.L50:
+ 610 003e 00BF     		.align	2
+ 611              	.L49:
+ 612 0040 00000000 		.word	_I2CBuffer
+ 613              		.cfi_endproc
+ 614              	.LFE121:
+ 616              		.section	.text.VL53L0X_RdDWord,"ax",%progbits
+ 617              		.align	2
+ 618              		.global	VL53L0X_RdDWord
+ 619              		.thumb
+ 620              		.thumb_func
+ 622              	VL53L0X_RdDWord:
+ 623              	.LFB122:
+ 205:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 206:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_RdDWord(VL53L0X_DEV Dev, uint8_t index, uint32_t *data) {
+ 624              		.loc 1 206 0
+ 625              		.cfi_startproc
+ 626              		@ args = 0, pretend = 0, frame = 8
+ 627              		@ frame_needed = 0, uses_anonymous_args = 0
+ 628              	.LVL83:
+ 629 0000 30B5     		push	{r4, r5, lr}
+ 630              	.LCFI22:
+ 631              		.cfi_def_cfa_offset 12
+ 632              		.cfi_offset 4, -12
+ 633              		.cfi_offset 5, -8
+ 634              		.cfi_offset 14, -4
+ 635 0002 83B0     		sub	sp, sp, #12
+ 636              	.LCFI23:
+ 637              		.cfi_def_cfa_offset 24
+ 638 0004 0546     		mov	r5, r0
+ 639 0006 1446     		mov	r4, r2
+ 640 0008 02AB     		add	r3, sp, #8
+ 641 000a 03F8011D 		strb	r1, [r3, #-1]!
+ 642              	.LVL84:
+ 207:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 208:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     int32_t status_int;
+ 209:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 210:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_GetI2cBus();
+ 211:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CWrite(Dev, &index, 1);
+ 643              		.loc 1 211 0
+ 644 000e 1946     		mov	r1, r3
+ 645              	.LVL85:
+ 646 0010 0122     		movs	r2, #1
+ 647              	.LVL86:
+ 648 0012 FFF7FEFF 		bl	_I2CWrite
+ 649              	.LVL87:
+ 212:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 650              		.loc 1 212 0
+ 651 0016 90B9     		cbnz	r0, .L53
+ 213:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 214:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ARM GAS  /tmp/cciQrpYM.s 			page 16
+
+
+ 215:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 216:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     status_int = _I2CRead(Dev, _I2CBuffer, 4);
+ 652              		.loc 1 216 0
+ 653 0018 2846     		mov	r0, r5
+ 654              	.LVL88:
+ 655 001a 0C49     		ldr	r1, .L56
+ 656 001c 0422     		movs	r2, #4
+ 657 001e FFF7FEFF 		bl	_I2CRead
+ 658              	.LVL89:
+ 217:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     if (status_int != 0) {
+ 659              		.loc 1 217 0
+ 660 0022 70B9     		cbnz	r0, .L54
+ 218:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 219:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 220:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     }
+ 221:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 222:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     *data = ((uint32_t)_I2CBuffer[0]<<24) + ((uint32_t)_I2CBuffer[1]<<16) + ((uint32_t)_I2CBuffer[2
+ 661              		.loc 1 222 0
+ 662 0024 094A     		ldr	r2, .L56
+ 663 0026 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 664 0028 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 665 002a 1B04     		lsls	r3, r3, #16
+ 666 002c 03EB0163 		add	r3, r3, r1, lsl #24
+ 667 0030 9178     		ldrb	r1, [r2, #2]	@ zero_extendqisi2
+ 668 0032 03EB0123 		add	r3, r3, r1, lsl #8
+ 669 0036 D278     		ldrb	r2, [r2, #3]	@ zero_extendqisi2
+ 670 0038 1344     		add	r3, r3, r2
+ 671 003a 2360     		str	r3, [r4]
+ 672 003c 02E0     		b	.L52
+ 673              	.L53:
+ 213:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         goto done;
+ 674              		.loc 1 213 0
+ 675 003e EC20     		movs	r0, #236
+ 676              	.LVL90:
+ 677 0040 00E0     		b	.L52
+ 678              	.LVL91:
+ 679              	.L54:
+ 218:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****         Status = VL53L0X_ERROR_CONTROL_INTERFACE;
+ 680              		.loc 1 218 0
+ 681 0042 EC20     		movs	r0, #236
+ 682              	.LVL92:
+ 683              	.L52:
+ 223:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 224:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** done:
+ 225:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_PutI2cBus();
+ 226:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return Status;
+ 227:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 684              		.loc 1 227 0
+ 685 0044 40B2     		sxtb	r0, r0
+ 686 0046 03B0     		add	sp, sp, #12
+ 687              	.LCFI24:
+ 688              		.cfi_def_cfa_offset 12
+ 689              		@ sp needed
+ 690 0048 30BD     		pop	{r4, r5, pc}
+ 691              	.LVL93:
+ 692              	.L57:
+ 693 004a 00BF     		.align	2
+ARM GAS  /tmp/cciQrpYM.s 			page 17
+
+
+ 694              	.L56:
+ 695 004c 00000000 		.word	_I2CBuffer
+ 696              		.cfi_endproc
+ 697              	.LFE122:
+ 699              		.section	.text.VL53L0X_PollingDelay,"ax",%progbits
+ 700              		.align	2
+ 701              		.global	VL53L0X_PollingDelay
+ 702              		.thumb
+ 703              		.thumb_func
+ 705              	VL53L0X_PollingDelay:
+ 706              	.LFB123:
+ 228:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 229:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** VL53L0X_Error VL53L0X_PollingDelay(VL53L0X_DEV Dev) {
+ 707              		.loc 1 229 0
+ 708              		.cfi_startproc
+ 709              		@ args = 0, pretend = 0, frame = 0
+ 710              		@ frame_needed = 0, uses_anonymous_args = 0
+ 711              	.LVL94:
+ 712 0000 08B5     		push	{r3, lr}
+ 713              	.LCFI25:
+ 714              		.cfi_def_cfa_offset 8
+ 715              		.cfi_offset 3, -8
+ 716              		.cfi_offset 14, -4
+ 717              	.LVL95:
+ 230:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_Error status = VL53L0X_ERROR_NONE;
+ 231:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** 
+ 232:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     // do nothing
+ 233:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     VL53L0X_OsDelay();
+ 718              		.loc 1 233 0
+ 719 0002 0220     		movs	r0, #2
+ 720              	.LVL96:
+ 721 0004 FFF7FEFF 		bl	HAL_Delay
+ 722              	.LVL97:
+ 234:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c ****     return status;
+ 235:../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.c **** }
+ 723              		.loc 1 235 0
+ 724 0008 0020     		movs	r0, #0
+ 725 000a 08BD     		pop	{r3, pc}
+ 726              		.cfi_endproc
+ 727              	.LFE123:
+ 729              		.comm	_I2CBuffer,64,4
+ 730              		.text
+ 731              	.Letext0:
+ 732              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 733              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 734              		.file 4 "../Drivers/BSP/Components/vl53l0x/vl53l0x_types.h"
+ 735              		.file 5 "../Drivers/BSP/Components/vl53l0x/vl53l0x_device.h"
+ 736              		.file 6 "../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h"
+ 737              		.file 7 "../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
+ 738              		.file 8 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 739              		.file 9 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 740              		.file 10 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 741              		.file 11 "../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.h"
+ 742              		.file 12 "../Drivers/CMSIS/Include/core_cm4.h"
+ 743              		.file 13 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/cciQrpYM.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 vl53l0x_platform.c
+     /tmp/cciQrpYM.s:21     .text._I2CWrite:0000000000000000 $t
+     /tmp/cciQrpYM.s:26     .text._I2CWrite:0000000000000000 _I2CWrite
+     /tmp/cciQrpYM.s:71     .text._I2CRead:0000000000000000 $t
+     /tmp/cciQrpYM.s:76     .text._I2CRead:0000000000000000 _I2CRead
+     /tmp/cciQrpYM.s:119    .text.VL53L0X_WriteMulti:0000000000000000 $t
+     /tmp/cciQrpYM.s:124    .text.VL53L0X_WriteMulti:0000000000000000 VL53L0X_WriteMulti
+     /tmp/cciQrpYM.s:182    .text.VL53L0X_WriteMulti:0000000000000030 $d
+                            *COM*:0000000000000040 _I2CBuffer
+     /tmp/cciQrpYM.s:187    .text.VL53L0X_ReadMulti:0000000000000000 $t
+     /tmp/cciQrpYM.s:192    .text.VL53L0X_ReadMulti:0000000000000000 VL53L0X_ReadMulti
+     /tmp/cciQrpYM.s:258    .text.VL53L0X_WrByte:0000000000000000 $t
+     /tmp/cciQrpYM.s:263    .text.VL53L0X_WrByte:0000000000000000 VL53L0X_WrByte
+     /tmp/cciQrpYM.s:300    .text.VL53L0X_WrByte:0000000000000018 $d
+     /tmp/cciQrpYM.s:305    .text.VL53L0X_WrWord:0000000000000000 $t
+     /tmp/cciQrpYM.s:310    .text.VL53L0X_WrWord:0000000000000000 VL53L0X_WrWord
+     /tmp/cciQrpYM.s:350    .text.VL53L0X_WrWord:000000000000001c $d
+     /tmp/cciQrpYM.s:355    .text.VL53L0X_WrDWord:0000000000000000 $t
+     /tmp/cciQrpYM.s:360    .text.VL53L0X_WrDWord:0000000000000000 VL53L0X_WrDWord
+     /tmp/cciQrpYM.s:406    .text.VL53L0X_WrDWord:0000000000000024 $d
+     /tmp/cciQrpYM.s:411    .text.VL53L0X_RdByte:0000000000000000 $t
+     /tmp/cciQrpYM.s:416    .text.VL53L0X_RdByte:0000000000000000 VL53L0X_RdByte
+     /tmp/cciQrpYM.s:478    .text.VL53L0X_UpdateByte:0000000000000000 $t
+     /tmp/cciQrpYM.s:483    .text.VL53L0X_UpdateByte:0000000000000000 VL53L0X_UpdateByte
+     /tmp/cciQrpYM.s:539    .text.VL53L0X_RdWord:0000000000000000 $t
+     /tmp/cciQrpYM.s:544    .text.VL53L0X_RdWord:0000000000000000 VL53L0X_RdWord
+     /tmp/cciQrpYM.s:612    .text.VL53L0X_RdWord:0000000000000040 $d
+     /tmp/cciQrpYM.s:617    .text.VL53L0X_RdDWord:0000000000000000 $t
+     /tmp/cciQrpYM.s:622    .text.VL53L0X_RdDWord:0000000000000000 VL53L0X_RdDWord
+     /tmp/cciQrpYM.s:695    .text.VL53L0X_RdDWord:000000000000004c $d
+     /tmp/cciQrpYM.s:700    .text.VL53L0X_PollingDelay:0000000000000000 $t
+     /tmp/cciQrpYM.s:705    .text.VL53L0X_PollingDelay:0000000000000000 VL53L0X_PollingDelay
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+memcpy
+HAL_Delay
