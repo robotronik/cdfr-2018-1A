@@ -43,13 +43,14 @@
 
 /* USER CODE BEGIN Includes */
 #include <string.h>
-#include "X-NUCLEO-53L0A1.h"
 #include "vl53l0x_api.h"
+#include "X-NUCLEO-53L0A1.h"
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "xl_320.h"
 #include "servo.h"
+#include "capteur.h"
 
 /**
  * @defgroup Configuration Static configuration
@@ -82,6 +83,7 @@
 #define USART1_DIR_GPIO_Port GPIOC
 
 
+
 #ifndef ARRAY_SIZE
 #   define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
 #endif
@@ -102,6 +104,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
+#define CONFIG 0
 
 TIM_HandleTypeDef htim3;
 
@@ -118,11 +121,6 @@ const char TxtAlarm[]       = "Alr";
 #endif
 
 
-typedef enum {
-	LONG_RANGE 		= 0, /*!< Long range mode */
-	HIGH_SPEED 		= 1, /*!< High speed mode */
-	HIGH_ACCURACY	= 2, /*!< High accuracy mode */
-} RangingConfig_e;
 char *RangingConfigTxt[3] = {"LR", "HS", "HA"};
 
 typedef enum {
@@ -147,7 +145,6 @@ int LeakyFactorFix8 = (int)( 0.6 *256);
 int nDevPresent=0;
 /** bit is index in VL53L0XDevs that is not necessary the dev id of the BSP */
 int nDevMask;
-
 
 VL53L0X_Dev_t VL53L0XDevs[]={
         {.Id=XNUCLEO53L0A1_DEV_LEFT, .DevLetter='l', .I2cHandle=&XNUCLEO53L0A1_hi2c, .I2cDevAddr=0x52},
@@ -288,255 +285,7 @@ void VL53L0A1_EXTI_Callback(int DevNo, int GPIO_Pin){
 #endif
 
 
-/**
- * Handle Error
- *
- * Set err on display and loop forever
- * @param err Error case code
- */
-void HandleError(int err){
-    char msg[16];
-    sprintf(msg,"Er%d", err);
-    XNUCLEO53L0A1_SetDisplayString(msg);
-    while(1){};
-}
 
-/**
- * Reset all sensor then do presence detection
- *
- * All present devices are data initiated and assigned to their final I2C address
- * @return
- */
-int DetectSensors(int SetDisplay) {
-    int i;
-    uint16_t Id;
-    int status;
-    int FinalAddress;
-
-    char PresentMsg[5]="    ";
-    /* Reset all */
-    nDevPresent = 0;
-    for (i = 0; i < 3; i++)
-        status = XNUCLEO53L0A1_ResetId(i, 0);
-
-    /* detect all sensors (even on-board)*/
-    for (i = 0; i < 3; i++) {
-        VL53L0X_Dev_t *pDev;
-        pDev = &VL53L0XDevs[i];
-        pDev->I2cDevAddr = 0x52;
-        pDev->Present = 0;
-        status = XNUCLEO53L0A1_ResetId( pDev->Id, 1);
-        HAL_Delay(2);
-        FinalAddress=0x52+(i+1)*2;
-
-        do {
-        	/* Set I2C standard mode (400 KHz) before doing the first register access */
-        	if (status == VL53L0X_ERROR_NONE)
-        		status = VL53L0X_WrByte(pDev, 0x88, 0x00);
-
-        	/* Try to read one register using default 0x52 address */
-            status = VL53L0X_RdWord(pDev, VL53L0X_REG_IDENTIFICATION_MODEL_ID, &Id);
-            if (status) {
-                debug_printf("#%d Read id fail\n", i);
-                break;
-            }
-            if (Id == 0xEEAA) {
-				/* Sensor is found => Change its I2C address to final one */
-                status = VL53L0X_SetDeviceAddress(pDev,FinalAddress);
-                if (status != 0) {
-                    debug_printf("#i VL53L0X_SetDeviceAddress fail\n", i);
-                    break;
-                }
-                pDev->I2cDevAddr = FinalAddress;
-                /* Check all is OK with the new I2C address and initialize the sensor */
-                status = VL53L0X_RdWord(pDev, VL53L0X_REG_IDENTIFICATION_MODEL_ID, &Id);
-                if (status != 0) {
-					debug_printf("#i VL53L0X_RdWord fail\n", i);
-					break;
-				}
-
-                status = VL53L0X_DataInit(pDev);
-                if( status == 0 ){
-                    pDev->Present = 1;
-                }
-                else{
-                    debug_printf("VL53L0X_DataInit %d fail\n", i);
-                    break;
-                }
-                trace_printf("VL53L0X %d Present and initiated to final 0x%x\n", pDev->Id, pDev->I2cDevAddr);
-                nDevPresent++;
-                nDevMask |= 1 << i;
-                pDev->Present = 1;
-            }
-            else {
-                debug_printf("#%d unknown ID %x\n", i, Id);
-                status = 1;
-            }
-        } while (0);
-        /* if fail r can't use for any reason then put the  device back to reset */
-        if (status) {
-            XNUCLEO53L0A1_ResetId(i, 0);
-        }
-    }
-    /* Display detected sensor(s) */
-    if( SetDisplay ){
-        for(i=0; i<3; i++){
-            if( VL53L0XDevs[i].Present ){
-                PresentMsg[i+1]=VL53L0XDevs[i].DevLetter;
-            }
-        }
-        PresentMsg[0]=' ';
-        XNUCLEO53L0A1_SetDisplayString(PresentMsg);
-        HAL_Delay(1000);
-    }
-
-    return nDevPresent;
-}
-
-/**
- *  Setup all detected sensors for single shot mode and setup ranging configuration
- */
-void SetupSingleShot(RangingConfig_e rangingConfig){
-    int i;
-    int status;
-    uint8_t VhvSettings;
-    uint8_t PhaseCal;
-    uint32_t refSpadCount;
-	uint8_t isApertureSpads;
-	FixPoint1616_t signalLimit = (FixPoint1616_t)(0.25*65536);
-	FixPoint1616_t sigmaLimit = (FixPoint1616_t)(18*65536);
-	uint32_t timingBudget = 33000;
-	uint8_t preRangeVcselPeriod = 14;
-	uint8_t finalRangeVcselPeriod = 10;
-
-    for( i=0; i<3; i++){
-        if( VL53L0XDevs[i].Present){
-            status=VL53L0X_StaticInit(&VL53L0XDevs[i]);
-            if( status ){
-                debug_printf("VL53L0X_StaticInit %d failed\n",i);
-            }
-
-            status = VL53L0X_PerformRefCalibration(&VL53L0XDevs[i], &VhvSettings, &PhaseCal);
-			if( status ){
-			   debug_printf("VL53L0X_PerformRefCalibration failed\n");
-			}
-
-			status = VL53L0X_PerformRefSpadManagement(&VL53L0XDevs[i], &refSpadCount, &isApertureSpads);
-			if( status ){
-			   debug_printf("VL53L0X_PerformRefSpadManagement failed\n");
-			}
-
-            status = VL53L0X_SetDeviceMode(&VL53L0XDevs[i], VL53L0X_DEVICEMODE_SINGLE_RANGING); // Setup in single ranging mode
-            if( status ){
-               debug_printf("VL53L0X_SetDeviceMode failed\n");
-            }
-
-            status = VL53L0X_SetLimitCheckEnable(&VL53L0XDevs[i], VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1); // Enable Sigma limit
-			if( status ){
-			   debug_printf("VL53L0X_SetLimitCheckEnable failed\n");
-			}
-
-			status = VL53L0X_SetLimitCheckEnable(&VL53L0XDevs[i], VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1); // Enable Signa limit
-			if( status ){
-			   debug_printf("VL53L0X_SetLimitCheckEnable failed\n");
-			}
-			/* Ranging configuration */
-            switch(rangingConfig) {
-            case LONG_RANGE:
-            	signalLimit = (FixPoint1616_t)(0.1*65536);
-            	sigmaLimit = (FixPoint1616_t)(60*65536);
-            	timingBudget = 33000; //33ms
-            	preRangeVcselPeriod = 18;
-            	finalRangeVcselPeriod = 14;
-            	break;
-            case HIGH_ACCURACY:
-				signalLimit = (FixPoint1616_t)(0.25*65536); //the return signal rate limit in MCPS
-				sigmaLimit = (FixPoint1616_t)(18*65536);
-				timingBudget = 200000; //200ms
-				preRangeVcselPeriod = 14; //laser pulse periods
-				finalRangeVcselPeriod = 10;
-				break;
-            case HIGH_SPEED:
-				signalLimit = (FixPoint1616_t)(0.25*65536);
-				sigmaLimit = (FixPoint1616_t)(32*65536);
-				timingBudget = 20000; //20ms
-				preRangeVcselPeriod = 14;
-				finalRangeVcselPeriod = 10;
-				break;
-            default:
-            	debug_printf("Not Supported");
-            }
-
-            status = VL53L0X_SetLimitCheckValue(&VL53L0XDevs[i],  VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, signalLimit);
-			if( status ){
-			   debug_printf("VL53L0X_SetLimitCheckValue failed\n");
-			}
-
-			status = VL53L0X_SetLimitCheckValue(&VL53L0XDevs[i],  VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, sigmaLimit);
-			if( status ){
-			   debug_printf("VL53L0X_SetLimitCheckValue failed\n");
-			}
-
-            status = VL53L0X_SetMeasurementTimingBudgetMicroSeconds(&VL53L0XDevs[i],  timingBudget);
-            if( status ){
-               debug_printf("VL53L0X_SetMeasurementTimingBudgetMicroSeconds failed\n");
-            }
-
-            status = VL53L0X_SetVcselPulsePeriod(&VL53L0XDevs[i],  VL53L0X_VCSEL_PERIOD_PRE_RANGE, preRangeVcselPeriod);
-			if( status ){
-			   debug_printf("VL53L0X_SetVcselPulsePeriod failed\n");
-			}
-
-            status = VL53L0X_SetVcselPulsePeriod(&VL53L0XDevs[i],  VL53L0X_VCSEL_PERIOD_FINAL_RANGE, finalRangeVcselPeriod);
-			if( status ){
-			   debug_printf("VL53L0X_SetVcselPulsePeriod failed\n");
-			}
-
-			status = VL53L0X_PerformRefCalibration(&VL53L0XDevs[i], &VhvSettings, &PhaseCal);
-			if( status ){
-			   debug_printf("VL53L0X_PerformRefCalibration failed\n");
-			}
-
-            VL53L0XDevs[i].LeakyFirst=1;
-        }
-    }
-}
-
-char RangeToLetter(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange){
-    char c;
-    if( pRange->RangeStatus == 0 ){
-        if( pDev->LeakyRange < RangeLow ){
-            c='_';
-        }
-        else if( pDev->LeakyRange < RangeMedium ){
-                c='=';
-        }
-        else {
-            c = '~';
-        }
-
-    }
-    else{
-        c='-';
-    }
-    return c;
-}
-
-/* Store new ranging data into the device structure, apply leaky integrator if needed */
-void Sensor_SetNewRange(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange){
-    if( pRange->RangeStatus == 0 ){
-        if( pDev->LeakyFirst ){
-            pDev->LeakyFirst = 0;
-            pDev->LeakyRange = pRange->RangeMilliMeter;
-        }
-        else{
-            pDev->LeakyRange = (pDev->LeakyRange*LeakyFactorFix8 + (256-LeakyFactorFix8)*pRange->RangeMilliMeter)>>8;
-        }
-    }
-    else{
-        pDev->LeakyFirst = 1;
-    }
-}
 
 void blink_led(int valeur, int* compteur){     /////modification de la led
     if (*compteur == 6){                       /////modification toutes les 6 mesures correctes du capteur (valeur limite ?)
@@ -554,89 +303,6 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
 
 /////transmit modifie a retoucher
 
-/*void transmit(int* i, char* bufferDistance, char* bufferAngle, int distance, int angle){  /////transmission vers pc
-    char dataDistance[10];                                /////variable stockage de la valeur du capteur
-    char dataAngle[10];
-    char ligne[2];                                /////variable stockage du separateur \n
-    int len;                                      /////variable longueur du buffer
-    if (*i<Maxi_char_transmit-1){                 /////ajout valeur, dans data
-        sprintf(dataDistance, "%d,",distance);
-        sprintf(dataAngle, "%d,",angle);
-    }
-    else if (*i==Maxi_char_transmit-1){           /////ajout valeur dans data -> pour cloturer la sequence
-        sprintf(dataDistance, "%d",distance);
-        sprintf(dataAngle, "%d",angle);
-    }
-    strcat(bufferDistance,dataDistance);                          /////ajout valeur au buffer
-    strcat(bufferAngle, dataAngle);
-    if (*i==Maxi_char_transmit-1){
-        len=strlen(bufferDistance);                       /////longueur du buffer
-        HAL_UART_Transmit(&huart2, (uint8_t*)(strcat(bufferDistance,";")), len, 1000); /////transmission du buffer
-        HAL_UART_Transmit(&huart2, (uint8_t*)(bufferAngle), len, 1000);
-        sprintf(ligne, "\n");                                     /////ajout \n a ligne
-        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne
-        (*i)=-1;                                                  /////remise a zero du compteur
-        sprintf(bufferDistance, "");                                      /////remise a zero du buffer
-        sprintf(bufferAngle, "");
-        HAL_Delay(Delay);         //////necessaire pour le graphique
-    }
-}*/
-
-void Variation2Angle_maison(XL servo, int* ptr_angle){ ///test fonctionne
-		uint16_t position;
-		char dataAngle[10];
-		int len;
-		if(*ptr_angle<1000 && *ptr_angle>=0){
-				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
-				*ptr_angle+=5;
-		} else {
-				*ptr_angle=50;
-				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
-		}
-}
-
-void Variation3Angle_maison(XL servo, int* ptr_angle, char* buffer, int* i){ ///test fonctionne
-		uint16_t position;
-		char dataAngle[10];
-		char ligne[2];
-		int len;
-		if(*ptr_angle<1000 && *ptr_angle>=0){
-				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
-				*ptr_angle+=5;
-		} else {
-				*ptr_angle=50;
-				XL_Set_Goal_Position(&servo, *ptr_angle, 1);
-		}
-		XL_Set_Goal_Position(&servo, *ptr_angle, 1);
-		/*HAL_Delay(1000);
-		XL_Get_Current_Position(&servo, &position);   /////test fonctionne Db=115200
-		sprintf(dataAngle, "%d,",position);
-		len=strlen(dataAngle);
-		HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000); */
-		HAL_Delay(Delay2);
-		XL_Get_Current_Position(&servo, &position);
-		HAL_Delay(Delay2);
-    if (*i<Maxi_char_transmit-1){                 /////ajout valeur, dans data
-        sprintf(dataAngle, "%d,",position);
-				/*len=strlen(dataAngle);
-				HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
-    }  else if (*i==Maxi_char_transmit-1){           /////ajout valeur dans data -> pour cloturer la sequence
-        sprintf(dataAngle, "%d",position);
-				/*len=strlen(dataAngle);
-				HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
-    }
-    strcat(buffer,dataAngle);                          /////ajout valeur au buffer
-    if (*i==Maxi_char_transmit-1){
-        len=strlen(buffer);                       /////longueur du buffer
-        HAL_UART_Transmit(&huart2, (uint8_t*)(buffer), len, 1000); /////transmission du buffer
-        sprintf(ligne, "\n");                                     /////ajout \n a ligne
-        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne
-        (*i)=-1;                                                  /////remise a zero du compteur
-        sprintf(buffer, "");                                      /////remise a zero du buffer
-        HAL_Delay(Delay);         //////necessaire pour le graphique
-    }
-}
-
 /**
  * Implement the ranging demo with all modes managed through the blue button (short and long press)
  * This function implements a while loop until the blue button is pressed
@@ -644,139 +310,7 @@ void Variation3Angle_maison(XL servo, int* ptr_angle, char* buffer, int* i){ ///
  * @param rangingConfig Ranging configuration to be used (same for all sensors)
  */
 
-/*void VariationAngle(XL * servo, int* ptr_compteurAngle){ /////fonction de raph bugge
-    *ptr_compteurAngle=60;
-    XL_Set_Goal_Position(servo, *ptr_compteurAngle, 1);
-    if(*compteurAngle<621 && *compteurAngle>=0){
-        XL_Set_Goal_Position(servo, *compteurAngle, 1);
-        *compteurAngle++;
-    }
-    else if(*compteurAngle == 620){
-        *compteurAngle --;
-        XL_Set_Goal_Position(servo, *compteurAngle, 1);
-    }
-    else{
-        XL_Set_Goal_Position(servo, *compteurAngle, 1);
-        *compteurAngle--;
-    }
-}*/
 
-int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL servo){
-    int over=0;
-    int status;
-    char StrDisplay[5];
-    char c;
-    int i;
-    int nSensorToUse;
-    int SingleSensorNo=0;
-    int distance;     ///creation variable distance
-    /*unsigned int angle;        ///creation variable angle*/ //necessaire ?
-    int compteur_blink = 0;                ///creation compteur
-    int* ptr_compteur_blink = NULL;   ///creation pointeur sur compteur
-    ptr_compteur_blink = &compteur_blink;
-    int compteur_d = 0;                 ///creation compteur
-    int* ptr_compteur = NULL;   ///creation pointeur sur compteur
-    ptr_compteur = &compteur_d;
-    char buffer[Maxi_char_transmit*4]; /////creation du buffer
-    char buffer1[Maxi_char_transmit*5];
-    int len;
-    sprintf(buffer, "");               /////mise a zero du buffer
-    sprintf(buffer1, "");
-		int angle=10;              ////creation
-	  int* ptr_angle = &angle;
-
-    /* Setup all sensors in Single Shot mode */
-    SetupSingleShot(rangingConfig);
-
-
-    /* Which sensor to use ? */
-    for(i=0, nSensorToUse=0; i<3; i++){
-        if(( UseSensorsMask& (1<<i) ) && VL53L0XDevs[i].Present ){
-            nSensorToUse++;
-            if( nSensorToUse==1 )
-                SingleSensorNo=i;
-        }
-    }
-    if( nSensorToUse == 0 ){
-        return -1;
-    }
-
-    /* Start ranging until blue button is pressed */
-    do{
-				//Variation2Angle_maison(servo, ptr_angle); ////fait bouger le servo
-        if( nSensorToUse >1 ){
-        	/* Multiple devices */
-            strcpy(StrDisplay, "    ");
-            for( i=0; i<3; i++){
-                if( ! VL53L0XDevs[i].Present  || (UseSensorsMask & (1<<i))==0 )
-                    continue;
-                /* Call All-In-One blocking API function */
-                status = VL53L0X_PerformSingleRangingMeasurement(&VL53L0XDevs[i],&RangingMeasurementData);
-                if( status ){
-                    HandleError(ERR_DEMO_RANGE_MULTI);
-                }
-                /* Push data logging to UART */
-                trace_printf("%d,%u,%d,%d,%d\n", VL53L0XDevs[i].Id, TimeStamp_Get(), RangingMeasurementData.RangeStatus, RangingMeasurementData.RangeMilliMeter, RangingMeasurementData.SignalRateRtnMegaCps);
-                /* Store new ranging distance */
-                Sensor_SetNewRange(&VL53L0XDevs[i],&RangingMeasurementData);
-                /* Translate distance in bar graph (multiple device) */
-                c = RangeToLetter(&VL53L0XDevs[i],&RangingMeasurementData);
-                StrDisplay[i+1]=c;
-            }
-        }
-        else{
-            /* only one sensor */
-        	/* Call All-In-One blocking API function */
-            status = VL53L0X_PerformSingleRangingMeasurement(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
-            if( status ==0 ){
-            	/* Push data logging to UART */
-            	trace_printf("%d,%u,%d,%d,%d\n", VL53L0XDevs[SingleSensorNo].Id, TimeStamp_Get(), RangingMeasurementData.RangeStatus, RangingMeasurementData.RangeMilliMeter, RangingMeasurementData.SignalRateRtnMegaCps);
-            	Sensor_SetNewRange(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
-                /* Display distance in cm */
-            	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
-                    *ptr_compteur_blink+=1;                      /////incrementation du compteur
-                    sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
-                    distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
-                    //XL_Get_Current_Position(servo, &angle); necessaire ?
-                    blink_led(distance, ptr_compteur_blink);         /////fonction blink_led
-										Variation3Angle_maison(servo, ptr_angle, buffer1, ptr_compteur);
-                    //transmit(compteur2, buffer, buffer1, distance, angle);        /////fonction transmit vers pc modifie donc buggee
-                    *ptr_compteur+=1;                              /////incrementation du compteur
-
-
-//////bloc structure (je me comprends)
-/*
-                    //unsigned int angle;
-                    //char dataAngle[10];
-                    //XL_Set_Goal_Position(servo, 60, 1);
-                    //sprintf(dataAngle, "%d,",angle);
-                    //len=strlen(dataAngle);
-                    //HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
-                }
-                else{                                           /////boucle de mesures incorrectes
-                    sprintf(StrDisplay, "----");
-                    StrDisplay[0]=VL53L0XDevs[SingleSensorNo].DevLetter;
-                    //HAL_TIM_Base_Stop_IT(&htim3);             /////version courante : memoire de la frequence de la led
-                    //htim3.Instance->ARR=2000;
-                    //HAL_TIM_Base_Start_IT(&htim3);
-                }
-            }
-            else{
-                HandleError(ERR_DEMO_RANGE_ONE);
-            }
-        }
-        XNUCLEO53L0A1_SetDisplayString(StrDisplay);
-        /* Check blue button */
-        if( !BSP_GetPushButton() ){
-            over=1;
-            break;
-        }
-    }while( !over);
-    /* Wait button to be un-pressed to decide if it is a short or long press */
-    status=PusbButton_WaitUnPress();
-    htim3.Instance->CNT=0;       /////remise a zero du timer de la led
-    return status;
-}
 
 #if HAVE_ALARM_DEMO
 struct AlrmMode_t {
@@ -904,15 +438,6 @@ void AlarmDemo(void){
 }
 #endif
 
-void ResetAndDetectSensor(int SetDisplay){
-    int nSensor;
-    nSensor = DetectSensors(SetDisplay);
-    /* at least one sensor and if one it must be the built-in one  */
-    if( (nSensor <=0) ||  (nSensor ==1 && VL53L0XDevs[1].Present==0) ){
-        HandleError(ERR_DETECT);
-    }
-}
-
 /* USER CODE END 0 */
 
 int main(void)
@@ -959,10 +484,11 @@ int main(void)
 
   HAL_Delay(1000);
 
-  XL servo;
+  XL servo[2];
   uint16_t nbServos; //number of detected servos
-  uint8_t nbmServosWanted; //number max of servos controle
-  XL320ServosActivation(&interface, &servo, nbmServosWanted, &nbServos);
+  uint8_t nbmServosWanted = 2; //number max of servos controle
+  XL320ServosActivation(&interface, servo, nbmServosWanted, &nbServos);
+
 
   #if CONFIG==1
   XL_Configure_ID(&servo[0],3);
@@ -996,21 +522,6 @@ int main(void)
       ResetAndDetectSensor(0);
       AlarmDemo();
 #else
-
-//////phase de tests simples
-
-      /*XL_Set_Goal_Position(&servo, 60, 1); ///test position fonctionne
-      uint16_t position;
-      XL_Get_Current_Position(&servo, &position);
-			position;*/
-
-			/*void VariationAngle_maison(XL servo, int Angle){ ///test fonctionne
-					uint16_t position;
-					XL_Set_Goal_Position(&servo, Angle, 1);
-					XL_Get_Current_Position(&servo, &position);
-			}
-
-			VariationAngle_maison(servo, compteurAngle);*/
 
       /* Start Ranging demo */
       ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig, servo);
