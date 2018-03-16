@@ -1,6 +1,6 @@
 #include "capteur.h"
 
-int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
+void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     int over=0;
     int status;
     char StrDisplay[5];
@@ -17,11 +17,10 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     ptr_compteur = &compteur_d;
     char buffer[Maxi_char_transmit*4]; /////creation du buffer
     char buffer1[Maxi_char_transmit*5];
-    int len;
     sprintf(buffer, "");               /////mise a zero du buffer
     sprintf(buffer1, "");
-	int angle=10;              ////creation
-	int* ptr_angle = &angle;
+	  int angle=10;              ////creation
+	  int* ptr_angle = &angle;
     int sens=1;
 
     /* Setup all sensors in Single Shot mode */
@@ -37,7 +36,7 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
         }
     }
     if( nSensorToUse == 0 ){
-        return -1;
+        return;
     }
 
     /* Start ranging until blue button is pressed */
@@ -77,11 +76,8 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
                     distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
                     blink_led(distance, ptr_compteur_blink);         /////fonction blink_led
-					AngleTransmit(servo, ptr_angle, buffer1, ptr_compteur, &sens);
+					          AngleTransmit(servo, ptr_angle, buffer1, ptr_compteur, &sens);
                     *ptr_compteur+=1;                              /////incrementation du compteur
-
-
-
                 }
                 else{                                           /////boucle de mesures incorrectes
                     sprintf(StrDisplay, "----");
@@ -102,10 +98,8 @@ int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
             break;
         }
     }while( !over);
-    /* Wait button to be un-pressed to decide if it is a short or long press */
-    status=PusbButton_WaitUnPress();
+    /* Wait button to be un-pressed*/
     htim3.Instance->CNT=0;       /////remise a zero du timer de la led
-    return status;
 }
 
 void HandleError(int err){
@@ -207,12 +201,12 @@ void SetupSingleShot(RangingConfig_e rangingConfig){
     uint8_t VhvSettings;
     uint8_t PhaseCal;
     uint32_t refSpadCount;
-	uint8_t isApertureSpads;
-	FixPoint1616_t signalLimit = (FixPoint1616_t)(0.25*65536);
-	FixPoint1616_t sigmaLimit = (FixPoint1616_t)(18*65536);
-	uint32_t timingBudget = 33000;
-	uint8_t preRangeVcselPeriod = 14;
-	uint8_t finalRangeVcselPeriod = 10;
+	  uint8_t isApertureSpads;
+	  FixPoint1616_t signalLimit = (FixPoint1616_t)(0.1*65536); //return signal rate limit in MCPS
+	  FixPoint1616_t sigmaLimit = (FixPoint1616_t)(60*65536);
+	  uint32_t timingBudget = 20000; //20ms
+	  uint8_t preRangeVcselPeriod = 18; //laser pulse periods
+	  uint8_t finalRangeVcselPeriod = 14;
 
     for( i=0; i<3; i++){
         if( VL53L0XDevs[i].Present){
@@ -245,32 +239,6 @@ void SetupSingleShot(RangingConfig_e rangingConfig){
 			if( status ){
 			   debug_printf("VL53L0X_SetLimitCheckEnable failed\n");
 			}
-			/* Ranging configuration */
-            switch(rangingConfig) {
-            case LONG_RANGE:
-            	signalLimit = (FixPoint1616_t)(0.1*65536);
-            	sigmaLimit = (FixPoint1616_t)(60*65536);
-            	timingBudget = 33000; //33ms
-            	preRangeVcselPeriod = 18;
-            	finalRangeVcselPeriod = 14;
-            	break;
-            case HIGH_ACCURACY:
-				signalLimit = (FixPoint1616_t)(0.25*65536); //the return signal rate limit in MCPS
-				sigmaLimit = (FixPoint1616_t)(18*65536);
-				timingBudget = 200000; //200ms
-				preRangeVcselPeriod = 14; //laser pulse periods
-				finalRangeVcselPeriod = 10;
-				break;
-            case HIGH_SPEED:
-				signalLimit = (FixPoint1616_t)(0.25*65536);
-				sigmaLimit = (FixPoint1616_t)(32*65536);
-				timingBudget = 20000; //20ms
-				preRangeVcselPeriod = 14;
-				finalRangeVcselPeriod = 10;
-				break;
-            default:
-            	debug_printf("Not Supported");
-            }
 
             status = VL53L0X_SetLimitCheckValue(&VL53L0XDevs[i],  VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, signalLimit);
 			if( status ){
@@ -350,4 +318,3 @@ void ResetAndDetectSensor(int SetDisplay){
         HandleError(ERR_DETECT);
     }
 }
-

@@ -42,11 +42,9 @@
 #include "stm32f4xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-#include <string.h>
 #include "vl53l0x_api.h"
 #include "X-NUCLEO-53L0A1.h"
 #include <limits.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "xl_320.h"
 #include "servo.h"
@@ -113,16 +111,15 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 
-const char TxtRangeValue[]  = "rng";
-const char TxtBarGraph[]    = "bar";
+const char TxtRangeValue[]  = " HI ";
 
-char *RangingConfigTxt[3] = {"LR", "HS", "HA"};
+char *RangingConfigTxt[1] = {" LR "};
 
 typedef enum {
 	RANGE_VALUE 	= 0, /*!< Range displayed in cm */
 	BAR_GRAPH 		= 1, /*!< Range displayed as a bar graph : one bar per sensor */
 } DemoMode_e;
-char *DemoModeTxt[2] = {"rng", "bar"};
+char *DemoModeTxt[1] = {" HI "};
 
 /**
  * Global ranging struct
@@ -244,17 +241,6 @@ int BSP_GetPushButton(void){
  *
  * @return True if button remains pressed more than specified time
  */
-int PusbButton_WaitUnPress(void){
-    uint32_t TimeStarted;
-    TimeStarted = HAL_GetTick();
-    while( !BSP_GetPushButton() ){ ; /* debounce */
-        if(HAL_GetTick()- TimeStarted> PressBPSwicthTime){
-            XNUCLEO53L0A1_SetDisplayString (" rb ");
-        }
-    }
-    return  HAL_GetTick() - TimeStarted>PressBPSwicthTime;
-
-}
 
 void blink_led(int valeur, int* compteur){     /////modification de la led
     if (*compteur == 6){                       /////modification toutes les 6 mesures correctes du capteur (valeur limite ?)
@@ -272,7 +258,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  int ExitWithLongPress;
   RangingConfig_e RangingConfig = LONG_RANGE;
   DemoMode_e DemoMode = RANGE_VALUE;
   int UseSensorsMask = 1<<XNUCLEO53L0A1_DEV_CENTER;
@@ -310,18 +295,17 @@ int main(void)
   XL_Interface interface;
   XL320InterfaceDefine(&interface);
 
-  HAL_Delay(1000);
+  HAL_Delay(100);
 
   XL servo[2];
   uint16_t nbServos; //number of detected servos
   uint8_t nbmServosWanted = 2; //number max of servos controle
   XL320ServosActivation(&interface, servo, nbmServosWanted, &nbServos);
 
-
   #if CONFIG==1
   XL_Configure_ID(&servo[0],3);
   #endif
-  
+
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN 3 */
@@ -347,20 +331,7 @@ int main(void)
 
 
     /* Start Ranging demo */
-    ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig, servo);
-
-    /* Blue button has been pressed (long or short press) */
-    if(ExitWithLongPress){
-        /* Long press : change demo mode if multiple sensors present*/
-        if( nDevPresent >1 ){
-            /* If more than one sensor is present then toggle demo mode */
-            DemoMode = (DemoMode == RANGE_VALUE) ? BAR_GRAPH : RANGE_VALUE;
-            UseSensorsMask = (DemoMode == BAR_GRAPH) ? 0x7 : 1<<XNUCLEO53L0A1_DEV_CENTER;
-        }
-    } else {
-        /* Short press : change ranging config */
-        RangingConfig = (RangingConfig == LONG_RANGE) ? HIGH_SPEED : ((RangingConfig == HIGH_SPEED) ? HIGH_ACCURACY : LONG_RANGE);
-    }
+    RangeDemo(UseSensorsMask, RangingConfig, servo);
   }
   /* USER CODE END 3 */
 

@@ -1,4 +1,6 @@
 #include "servo.h"
+#include <string.h>
+#include <stdlib.h>
 
 uint8_t XL_320_Send_HAL(uint8_t *data, uint16_t size, uint32_t timeout){
   HAL_StatusTypeDef status = HAL_UART_Transmit(&huart1, data, size, timeout);
@@ -30,7 +32,7 @@ void XL320ServosActivation(XL_Interface* interface, XL* servo, uint8_t nbmServos
   XL_Discover(interface, servo, nbmServosWanted, nbServos);
   for (i=0; i<*nbServos;i++){
     XL_Say_Hello(&servo[i]);
-    HAL_Delay(1000);
+    HAL_Delay(100);
     XL_Power_On(&servo[i], XL_NOW);
   }
 }

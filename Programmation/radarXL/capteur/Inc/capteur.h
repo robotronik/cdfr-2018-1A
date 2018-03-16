@@ -35,7 +35,7 @@ extern int nDevMask;
 extern int RangeLow;
 extern int RangeMedium;
 
-int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo);
+void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo);
 
 /* Store new ranging data into the device structure, apply leaky integrator if needed */
 void Sensor_SetNewRange(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange);
