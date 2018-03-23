@@ -205,7 +205,7 @@ uint8_t XL_Extract_Status_Packet(XL_Status_Packet *packet, uint8_t frame[XL_BUFF
       }
     }
   }
-  
+
   return 0;
 }
 
@@ -215,10 +215,10 @@ uint8_t XL_Receive(XL_Interface *interface, uint16_t packet_size, uint32_t timeo
     err = XL_ERR_INTERNAL | XL_ERR_BUFFER_OVERFLOW;
     return 1;
   }
-  
+
   //Préparation de la réception
   interface->set_direction(XL_RECEIVE);
-  
+
   interface->fsm.update_state = XL_FSM_HEADER_0;
   interface->fsm.remaining_bytes = 0;
   interface->fsm.buffer = interface->buffer;
@@ -260,7 +260,7 @@ uint8_t XL_Receive(XL_Interface *interface, uint16_t packet_size, uint32_t timeo
 }
 
 //======================================
-//           FONCTIONS D'ENVOI          
+//           FONCTIONS D'ENVOI
 //======================================
 uint8_t XL_Build_Frame(XL_Instruction_Packet *packet, uint8_t buffer[XL_BUFFER_SIZE]){
   //Vérification des arguments
@@ -321,8 +321,8 @@ uint8_t XL_Build_Frame(XL_Instruction_Packet *packet, uint8_t buffer[XL_BUFFER_S
   uint16_t crc = XL_Update_CRC(0, buffer, packet_length+7-2);
   *(p_buffer++) = crc & 0x00FF;
   *(p_buffer++) = crc >> 8;
-  
-  return p_buffer-buffer;    
+
+  return p_buffer-buffer;
 }
 
 uint8_t XL_Send(XL_Interface *interface, XL_Instruction_Packet *packet, uint32_t timeout){
@@ -386,7 +386,7 @@ uint16_t XL_Update_CRC(uint16_t crc_accum, uint8_t *data_blk_ptr, uint16_t data_
 }
 
 //======================================
-//         GESTION DES ERREURS      
+//         GESTION DES ERREURS
 //======================================
 uint16_t XL_Get_Error(){
   return err;
@@ -414,14 +414,14 @@ uint8_t XL_Check_Alert(XL *servo){
 
 
 //======================================
-//         JEU D'INSTRUCTIONS      
+//         JEU D'INSTRUCTIONS
 //======================================
 uint8_t XL_Ping(XL *servo){
   if(servo == 0){
     err = XL_ERR_INTERNAL | XL_ERR_ILLEGAL_ARGUMENTS;
     return 1;
   }
-  
+
   XL_Instruction_Packet packet;
   packet.id = servo->id;
   packet.instruction = XL_PING;
@@ -452,7 +452,7 @@ uint8_t XL_Discover(XL_Interface *interface, XL *buffer_servos, uint8_t len_buff
       buffer_servos[(*nb_servos)++] = servo;
     }
   }
-  
+
   return (*nb_servos > 0)?0:1;
 }
 
@@ -478,7 +478,7 @@ uint8_t XL_Read(XL *servo, XL_Field field, uint16_t *data){
     err = XL_ERR_INTERNAL | XL_ERR_ILLEGAL_ARGUMENTS;
     return 1;
   }
-  
+
   //Préparation de l'instruction READ
   XL_Instruction_Packet packet;
   packet.id = servo->id;
@@ -491,7 +491,7 @@ uint8_t XL_Read(XL *servo, XL_Field field, uint16_t *data){
   if(XL_Send(servo->interface, &packet, XL_DEFAULT_TIMEOUT) == 1){
     return 1;
   }
-  
+
   //Réception de la réponse
   if(XL_Receive(servo->interface, 11+field_length[field], XL_DEFAULT_TIMEOUT) == 1){
     return 1;
@@ -501,7 +501,7 @@ uint8_t XL_Read(XL *servo, XL_Field field, uint16_t *data){
   if(XL_Check_Status(servo) == 1){
     return 1;
   }
-  
+
   //Récupération de la donnée
   *data = servo->interface->status.params[0];
   if(field_length[field] == 2){
@@ -557,7 +557,7 @@ uint8_t XL_Factory_Reset(XL *servo){
 
   //Attente de la réinitialisation
   servo->interface->delay(5000);
-  
+
   return 0;
 }
 
@@ -575,7 +575,7 @@ uint8_t XL_Reboot(XL *servo){
 
   //Attente du redémarrage
   servo->interface->delay(5000);
-  
+
   return 0;
 }
 
@@ -621,7 +621,7 @@ uint8_t XL_Write(XL *servo, XL_Field field, uint16_t data, uint8_t size, uint8_t
 }
 
 //======================================
-//         CONFIGURATION EEPROM       
+//         CONFIGURATION EEPROM
 //======================================
 uint8_t XL_Configure_ID(XL *servo, uint8_t id){
   if(id > 252){
@@ -632,7 +632,7 @@ uint8_t XL_Configure_ID(XL *servo, uint8_t id){
 }
 
 uint8_t XL_Configure_Baud_Rate(XL *servo, XL_Baud_Rate baud_rate){
-  if(baud_rate != XL_BAUD_RATE_9600 || baud_rate != XL_BAUD_RATE_57600 || baud_rate != XL_BAUD_RATE_115200 || baud_rate != XL_BAUD_RATE_1MBPS){
+  if(baud_rate != XL_BAUD_RATE_9600 && baud_rate != XL_BAUD_RATE_57600 && baud_rate != XL_BAUD_RATE_115200 && baud_rate != XL_BAUD_RATE_1MBPS){
     err = XL_ERR_INTERNAL | XL_ERR_ILLEGAL_ARGUMENTS;
     return 1;
   }
@@ -662,7 +662,7 @@ uint8_t XL_Configure_CCW_Angle_Limit(XL *servo, uint16_t angle){
   }
   return XL_Write(servo, XL_CCW_ANGLE_LIMIT, angle, 2, XL_NOW);
 }
-  
+
 uint8_t XL_Configure_Control_Mode(XL *servo, XL_Mode mode){
   if(mode != XL_JOIN_MODE || mode != XL_WHEEL_MODE){
     err = XL_ERR_INTERNAL | XL_ERR_ILLEGAL_ARGUMENTS;
@@ -721,7 +721,7 @@ uint8_t XL_Configure_Alarm_Shutdown(XL *servo, XL_Alarm_Shutdown alarm){
 
 
 //======================================
-//       COMMANDES SERVOMOTEUR       
+//       COMMANDES SERVOMOTEUR
 //======================================
 
 uint8_t XL_Power_On(XL *servo, uint8_t now){
@@ -777,7 +777,7 @@ uint8_t XL_Set_Goal_Speed_Join(XL *servo, uint16_t speed, uint8_t now){
     err = XL_ERR_INTERNAL | XL_ERR_ILLEGAL_ARGUMENTS;
     return 1;
   }
-  return XL_Write(servo, XL_MOVING_SPEED, speed, 2, now); 
+  return XL_Write(servo, XL_MOVING_SPEED, speed, 2, now);
 }
 
 uint8_t XL_Set_Goal_Speed_Wheel(XL *servo, uint16_t speed, XL_Wheel_Direction dir, uint8_t now){

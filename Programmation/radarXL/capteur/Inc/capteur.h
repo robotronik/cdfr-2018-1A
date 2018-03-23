@@ -16,7 +16,7 @@
 #define ERR_DETECT             -1
 #define ERR_DEMO_RANGE_ONE     1
 #define ERR_DEMO_RANGE_MULTI   2
-#define Maxi_char_transmit 10
+#define MAXI_CHAR_TRANSMIT 20
 #define debug_printf    trace_printf
 
 typedef enum {

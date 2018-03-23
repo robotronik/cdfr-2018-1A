@@ -80,7 +80,6 @@
 #define USART1_DIR_GPIO_Port GPIOC
 
 
-
 #ifndef ARRAY_SIZE
 #   define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
 #endif
@@ -101,7 +100,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
-#define CONFIG 0
 
 TIM_HandleTypeDef htim3;
 
@@ -251,7 +249,6 @@ void blink_led(int valeur, int* compteur){     /////modification de la led
         *compteur = 0;                         /////remise a zero du compteur
     }
 }
-
 /* USER CODE END 0 */
 
 int main(void)
@@ -299,12 +296,9 @@ int main(void)
 
   XL servo[2];
   uint16_t nbServos; //number of detected servos
-  uint8_t nbmServosWanted = 2; //number max of servos controle
-  XL320ServosActivation(&interface, servo, nbmServosWanted, &nbServos);
+  uint8_t nbmaxServosWanted = 2; //number max of servos controle
+  XL320ServosActivation(&interface, servo, nbmaxServosWanted, &nbServos);
 
-  #if CONFIG==1
-  XL_Configure_ID(&servo[0],3);
-  #endif
 
   /* USER CODE END 2 */
 
@@ -327,7 +321,6 @@ int main(void)
 
     /* Reset Timestamping */
     TimeStamp_Reset();
-
 
 
     /* Start Ranging demo */

@@ -12,16 +12,18 @@ void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     int compteur_blink = 0;                ///creation compteur
     int* ptr_compteur_blink = NULL;   ///creation pointeur sur compteur
     ptr_compteur_blink = &compteur_blink;
-    int compteur_d = 0;                 ///creation compteur
+    int compteur = 0;                 ///creation compteur
     int* ptr_compteur = NULL;   ///creation pointeur sur compteur
-    ptr_compteur = &compteur_d;
-    char buffer[Maxi_char_transmit*4]; /////creation du buffer
-    char buffer1[Maxi_char_transmit*5];
-    sprintf(buffer, "");               /////mise a zero du buffer
-    sprintf(buffer1, "");
-	  int angle=10;              ////creation
+    ptr_compteur = &compteur;
+    char buffer_distance[MAXI_CHAR_TRANSMIT*10]; /////creation du buffer
+    char buffer_angle[MAXI_CHAR_TRANSMIT*5];
+    sprintf(buffer_distance, "");               /////mise a zero du buffer
+    sprintf(buffer_angle, "");
+	  int angle=0;              ////creation
 	  int* ptr_angle = &angle;
     int sens=1;
+    char ligne[2];
+    int len;
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
@@ -41,7 +43,6 @@ void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
 
     /* Start ranging until blue button is pressed */
     do{
-				//Variation2Angle_maison(servo, ptr_angle); ////fait bouger le servo
         if( nSensorToUse >1 ){
         	/* Multiple devices */
             strcpy(StrDisplay, "    ");
@@ -66,18 +67,30 @@ void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
             /* only one sensor */
         	/* Call All-In-One blocking API function */
             status = VL53L0X_PerformSingleRangingMeasurement(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
-            if( status ==0 ){
+            if( status == 0 ){
             	/* Push data logging to UART */
             	trace_printf("%d,%u,%d,%d,%d\n", VL53L0XDevs[SingleSensorNo].Id, TimeStamp_Get(), RangingMeasurementData.RangeStatus, RangingMeasurementData.RangeMilliMeter, RangingMeasurementData.SignalRateRtnMegaCps);
             	Sensor_SetNewRange(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
                 /* Display distance in cm */
             	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
                     *ptr_compteur_blink+=1;                      /////incrementation du compteur
+                    *ptr_compteur+=1;
                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  /////affichage sur le capteur
                     distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
                     blink_led(distance, ptr_compteur_blink);         /////fonction blink_led
-					          AngleTransmit(servo, ptr_angle, buffer1, ptr_compteur, &sens);
-                    *ptr_compteur+=1;                              /////incrementation du compteur
+					          angle_transmit(servo, ptr_angle, buffer_angle, ptr_compteur, &sens);
+                    distance_transmit(distance, buffer_distance, ptr_compteur);
+                    if (*ptr_compteur==MAXI_CHAR_TRANSMIT) {
+                        strcat(buffer_distance,buffer_angle);
+                        len=strlen(buffer_distance);                       /////longueur du buffer
+                        HAL_UART_Transmit(&huart2, (uint8_t*)(buffer_distance), len, 1000); /////transmission du buffer
+                        sprintf(ligne, "\n");                                     /////ajout \n a ligne
+                        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne                                                  /////remise a zero du compteur
+                        sprintf(buffer_distance, "");
+                        sprintf(buffer_angle, "");
+                        *ptr_compteur=0;
+                        HAL_Delay(1000);         //////necessaire pour le graphique
+                    }
                 }
                 else{                                           /////boucle de mesures incorrectes
                     sprintf(StrDisplay, "----");

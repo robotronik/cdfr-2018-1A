@@ -30,6 +30,10 @@ void XL320InterfaceDefine(XL_Interface* interface){
 void XL320ServosActivation(XL_Interface* interface, XL* servo, uint8_t nbmServosWanted, uint16_t* nbServos){
   int i;
   XL_Discover(interface, servo, nbmServosWanted, nbServos);
+  //HAL_Delay(10);
+  //XL_Configure_Baud_Rate(servo, 2); ////warning
+  //while(1)
+  //{HAL_Delay(10);}
   for (i=0; i<*nbServos;i++){
     XL_Say_Hello(&servo[i]);
     HAL_Delay(100);
@@ -37,7 +41,7 @@ void XL320ServosActivation(XL_Interface* interface, XL* servo, uint8_t nbmServos
   }
 }
 
-void AngleVariation(XL* servo, int* angle, int pas, int maxAngle, int* sens){
+void angle_variation(XL* servo, int* angle, int pas, int maxAngle, int* sens){
   if (*sens){
     if(*angle<maxAngle){
       XL_Set_Goal_Position(servo, *angle, 1);
@@ -56,12 +60,12 @@ void AngleVariation(XL* servo, int* angle, int pas, int maxAngle, int* sens){
   }
 }
 
-void AngleTransmit(XL* servo, int* ptr_angle, char* buffer, int* i, int* sens){ ///test fonctionne
+void angle_transmit(XL* servo, int* ptr_angle, char* buffer, int* i, int* sens){ ///test fonctionne
 		uint16_t position;
 		char dataAngle[10];
 		char ligne[2];
 		int len;
-		AngleVariation(&servo[0], ptr_angle, 30, 1000, sens);
+		angle_variation(&servo[0], ptr_angle, 30, 1000, sens);
 		/*HAL_Delay(1000);
 		XL_Get_Current_Position(&servo, &position);   /////test fonctionne Db=115200
 		sprintf(dataAngle, "%d,",position);
@@ -70,23 +74,34 @@ void AngleTransmit(XL* servo, int* ptr_angle, char* buffer, int* i, int* sens){ 
 		HAL_Delay(10);
 		XL_Get_Current_Position(servo, &position);
 		HAL_Delay(10);
-    if (*i<10-1){                 /////ajout valeur, dans data
-        sprintf(dataAngle, "%d,",position);
+    if (*i<MAXI_CHAR){                 /////ajout valeur, dans data
+        if (position == 2048) {
+          sprintf(dataAngle, "-1,");
+        } else {
+          sprintf(dataAngle, "%d,",position);
+        }
         /*len=strlen(dataAngle);
         HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
-    }  else if (*i==10-1){           /////ajout valeur dans data -> pour cloturer la sequence
-        sprintf(dataAngle, "%d",position);
+    }  else if (*i==MAXI_CHAR){           /////ajout valeur dans data -> pour cloturer la sequence
+        if (position == 2048) {
+          sprintf(dataAngle, "-1");
+        } else {
+          sprintf(dataAngle, "%d",position);
+        }
         /*len=strlen(dataAngle);
         HAL_UART_Transmit(&huart2, (uint8_t*)(dataAngle), len, 1000);*/
     }
     strcat(buffer,dataAngle);                          /////ajout valeur au buffer
-    if (*i==10-1){
-        len=strlen(buffer);                       /////longueur du buffer
-        HAL_UART_Transmit(&huart2, (uint8_t*)(buffer), len, 1000); /////transmission du buffer
-        sprintf(ligne, "\n");                                     /////ajout \n a ligne
-        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne
-        (*i)=-1;                                                  /////remise a zero du compteur
-        sprintf(buffer, "");                                      /////remise a zero du buffer
-        HAL_Delay(1000);         //////necessaire pour le graphique
+}
+
+void distance_transmit(int valeur, char* buffer, int* i){ ///test fonctionne
+		char data[10];
+		char ligne[2];
+		int len;
+    if (*i<MAXI_CHAR){                 /////ajout valeur, dans data
+        sprintf(data, "%d,",valeur);
+    } else if (*i==MAXI_CHAR){           /////ajout valeur dans data -> pour cloturer la sequence
+        sprintf(data, "%d|",valeur);
     }
+    strcat(buffer,data);                          /////ajout valeur au buffer
 }
