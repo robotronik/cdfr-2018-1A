@@ -1,4 +1,4 @@
-update=dim. 21 janv. 2018 15:40:26 CET
+update=jeu. 05 avril 2018 15:02:34 CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,6 @@ LibName29=opto
 LibName30=atmel
 LibName31=contrib
 LibName32=valves
+LibName33=lib/2
+LibName34=lib/mcp2562
+LibName35=dsn2596

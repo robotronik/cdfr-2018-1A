@@ -31,12 +31,15 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:2
+LIBS:mcp2562
+LIBS:dsn2596
 LIBS:carte_1A_cdfr2018-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 2
+Sheet 2 3
 Title ""
 Date ""
 Rev ""
@@ -301,4 +304,174 @@ Wire Wire Line
 	7800 2950 7800 3100
 Wire Wire Line
 	7800 3400 7800 3800
+$Comp
+L Fuse F4
+U 1 1 5AC0B950
+P 3600 4950
+F 0 "F4" V 3680 4950 50  0000 C CNN
+F 1 "Fuse_+12V" V 3525 4950 50  0000 C CNN
+F 2 "Fuse_Holders_and_Fuses:Fuseholder5x20_horiz_SemiClosed_Casing10x25mm" V 3530 4950 50  0001 C CNN
+F 3 "" H 3600 4950 50  0001 C CNN
+	1    3600 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED-RESCUE-carte_centrale D7
+U 1 1 5AC0B956
+P 2700 5250
+F 0 "D7" H 2700 5350 50  0000 C CNN
+F 1 "LED" H 2700 5150 50  0000 C CNN
+F 2 "LEDs:LED_D5.0mm" H 2700 5250 50  0001 C CNN
+F 3 "" H 2700 5250 50  0001 C CNN
+	1    2700 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R4
+U 1 1 5AC0B95C
+P 3150 5250
+F 0 "R4" V 3230 5250 50  0000 C CNN
+F 1 "1.7k" V 3150 5250 50  0000 C CNN
+F 2 "Discret:R4" V 3080 5250 50  0001 C CNN
+F 3 "" H 3150 5250 50  0001 C CNN
+	1    3150 5250
+	0    1    1    0   
+$EndComp
+Text GLabel 3600 4650 1    60   Input ~ 0
++12V
+Text GLabel 2250 5250 0    60   Input ~ 0
+GND
+Text GLabel 3600 5500 3    60   Input ~ 0
++12V_P
+Wire Wire Line
+	2250 5250 2550 5250
+Wire Wire Line
+	2850 5250 3000 5250
+Connection ~ 3600 5250
+$Comp
+L D D8
+U 1 1 5AC0B968
+P 2900 5450
+F 0 "D8" H 2900 5550 50  0000 C CNN
+F 1 "D" H 2900 5350 50  0000 C CNN
+F 2 "Discret:D4" H 2900 5450 50  0001 C CNN
+F 3 "" H 2900 5450 50  0001 C CNN
+	1    2900 5450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2400 5250 2400 5450
+Wire Wire Line
+	2400 5450 2750 5450
+Connection ~ 2400 5250
+Wire Wire Line
+	3050 5450 3450 5450
+$Comp
+L PWR_FLAG #FLG?
+U 1 1 5AC0B972
+P 3750 5350
+F 0 "#FLG?" H 3750 5425 50  0001 C CNN
+F 1 "PWR_FLAG" H 3750 5500 50  0000 C CNN
+F 2 "" H 3750 5350 50  0001 C CNN
+F 3 "" H 3750 5350 50  0001 C CNN
+	1    3750 5350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3600 5350 3750 5350
+Connection ~ 3600 5350
+Wire Wire Line
+	3450 5450 3450 5250
+Wire Wire Line
+	3300 5250 3600 5250
+Connection ~ 3450 5250
+Wire Wire Line
+	3600 4650 3600 4800
+Wire Wire Line
+	3600 5100 3600 5500
+$Comp
+L Fuse F5
+U 1 1 5AC0BAC7
+P 5700 4950
+F 0 "F5" V 5780 4950 50  0000 C CNN
+F 1 "Fuse_+15V" V 5625 4950 50  0000 C CNN
+F 2 "Fuse_Holders_and_Fuses:Fuseholder5x20_horiz_SemiClosed_Casing10x25mm" V 5630 4950 50  0001 C CNN
+F 3 "" H 5700 4950 50  0001 C CNN
+	1    5700 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED-RESCUE-carte_centrale D9
+U 1 1 5AC0BACD
+P 4800 5250
+F 0 "D9" H 4800 5350 50  0000 C CNN
+F 1 "LED" H 4800 5150 50  0000 C CNN
+F 2 "LEDs:LED_D5.0mm" H 4800 5250 50  0001 C CNN
+F 3 "" H 4800 5250 50  0001 C CNN
+	1    4800 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R5
+U 1 1 5AC0BAD3
+P 5250 5250
+F 0 "R5" V 5330 5250 50  0000 C CNN
+F 1 "2.1k" V 5250 5250 50  0000 C CNN
+F 2 "Discret:R4" V 5180 5250 50  0001 C CNN
+F 3 "" H 5250 5250 50  0001 C CNN
+	1    5250 5250
+	0    1    1    0   
+$EndComp
+Text GLabel 5700 4650 1    60   Input ~ 0
++15V
+Text GLabel 4350 5250 0    60   Input ~ 0
+GND
+Text GLabel 5700 5500 3    60   Input ~ 0
++15V_P
+Wire Wire Line
+	4350 5250 4650 5250
+Wire Wire Line
+	4950 5250 5100 5250
+Connection ~ 5700 5250
+$Comp
+L D D10
+U 1 1 5AC0BADF
+P 5000 5450
+F 0 "D10" H 5000 5550 50  0000 C CNN
+F 1 "D" H 5000 5350 50  0000 C CNN
+F 2 "Discret:D4" H 5000 5450 50  0001 C CNN
+F 3 "" H 5000 5450 50  0001 C CNN
+	1    5000 5450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4500 5250 4500 5450
+Wire Wire Line
+	4500 5450 4850 5450
+Connection ~ 4500 5250
+Wire Wire Line
+	5150 5450 5550 5450
+$Comp
+L PWR_FLAG #FLG?
+U 1 1 5AC0BAE9
+P 5850 5350
+F 0 "#FLG?" H 5850 5425 50  0001 C CNN
+F 1 "PWR_FLAG" H 5850 5500 50  0000 C CNN
+F 2 "" H 5850 5350 50  0001 C CNN
+F 3 "" H 5850 5350 50  0001 C CNN
+	1    5850 5350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5700 5350 5850 5350
+Connection ~ 5700 5350
+Wire Wire Line
+	5550 5450 5550 5250
+Wire Wire Line
+	5400 5250 5700 5250
+Connection ~ 5550 5250
+Wire Wire Line
+	5700 4650 5700 4800
+Wire Wire Line
+	5700 5100 5700 5500
 $EndSCHEMATC
