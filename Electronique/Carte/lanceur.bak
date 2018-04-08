@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:central-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,11 +28,13 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:Nucleo_64
 LIBS:2
+LIBS:mcp2562
 LIBS:dsn2596
-LIBS:raspberry_pi_3
+LIBS:1A_cdfr2017
 LIBS:central-cache
+LIBS:central-rescue
+LIBS:carte_1A_cdfr2018-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268

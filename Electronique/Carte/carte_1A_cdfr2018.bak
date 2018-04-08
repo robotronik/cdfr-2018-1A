@@ -361,8 +361,6 @@ F 3 "" H 10050 7150 50  0001 C CNN
 	1    10050 7150
 	1    0    0    -1  
 $EndComp
-Text GLabel 10200 4950 0    60   Input ~ 0
-ultrason2
 $Comp
 L CONN_01X01 J5
 U 1 1 5AC0B6B9
@@ -969,7 +967,8 @@ Connection ~ 17450 6150
 $Sheet
 S 3650 4150 2400 1200
 U 5ACA96A3
-F0 "Sheet5ACA96A2" 60
-F1 "file5ACA96A2.sch" 60
+F0 "lanceur" 60
+F1 "lanceur.sch" 60
 $EndSheet
+NoConn ~ 10200 4950
 $EndSCHEMATC
