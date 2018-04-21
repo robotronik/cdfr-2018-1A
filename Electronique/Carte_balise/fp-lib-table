@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name Balise)(type KiCad)(uri "$(KIPRJMOD)/Empreintes.pretty")(options "")(descr "Librairie de la balise"))
+)
