@@ -43,7 +43,7 @@ typedef struct{
 } Lancer;
 
 /*
-Initialise tout les parametres globaux du jeu
+Initialise tous les parametres globaux du jeu
 */
 void InitialisationParametresGlobaux();
 
