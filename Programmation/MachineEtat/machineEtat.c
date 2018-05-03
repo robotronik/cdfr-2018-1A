@@ -25,6 +25,7 @@ void TransitionEtats(MachineEtat* machineEtat){
             /* Passe au deplacement si le tri actuel est fini */
             else if ((machineEtat->triage).tri > (machineEtat->triage).triPrecedent){
                 machineEtat->etatActuel = DEPLACEMENT;
+                (machineEtat->triage).nombreBallesTri1 = (machineEtat->triage).nombreBallesDetecte;
                 (machineEtat->triage).triPrecedent++;
             }
             break;
@@ -52,6 +53,10 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->deplacement).deverouillage = 0;
     (machineEtat->deplacement).deverouillageValide = 0;
     (machineEtat->deplacement).deverouillagePrecedent = 0;
+    (machineEtat->triage).secouer = 0;
+    (machineEtat->triage).secouerPrecedent = 0;
+    (machineEtat->triage).nombreBallesDetecte = 0;
+    (machineEtat->triage).nombreBallesTri1 = 0;
 
     if ((machineEtat->triage).maCouleur == 1){
         (machineEtat->deplacement).positionRobot.x = xRobotDepartO;

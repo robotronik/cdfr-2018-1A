@@ -45,6 +45,9 @@ typedef struct{
   int maCouleur; // 1 orange, -1 vert
   int couleurDetecte; // 0 sinon
   int secouer;
+  int secouerPrecedent;
+  int nombreBallesDetecte;
+  int nombreBallesTri1;
   int tri; //prend la valeur 1 si le premier tri a bugue ou s'il est fini, 2 au deuxième tri
   int triPrecedent; // cest un peu iconoclaste
   XL_ME_Wrapper xl_porte_entre;

@@ -22,3 +22,13 @@ void ControleSortieBalle(MachineEtat* machineEtat,int sens){
 
     XL_Set_Goal_Position( &((machineEtat->triage).xl_porte_sortie.servo) , pos, 1);
 }
+
+char ReceptionArduinoCouleur(UART_HandleTypeDef* huart){
+    return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3);
+}
+
+void TestFinTri(MachineEtat* machineEtat){
+    if ((machineEtat->triage).secouer > (machineEtat->triage).secouerPrecedent || (machineEtat->triage).nombreBallesDetecter == 8 + (machineEtat->triage).nombreBallesTri1){
+        (machineEtat->triage).tri++;
+    }
+}
