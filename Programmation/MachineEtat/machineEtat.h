@@ -2,6 +2,7 @@
 #define MACHINEETAT_H
 
 #include "XL_320.h"
+
 typedef enum{
   DEPLACEMENT,
   TRIAGE,

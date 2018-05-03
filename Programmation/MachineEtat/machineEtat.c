@@ -48,17 +48,32 @@ void TransitionEtats(MachineEtat* machineEtat){
 
 void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->deplacement).dimTerrain.x = xTerrain;
-    (machineEtat->deplacement).dimTerrain.y  = yTerrain;
-    (machineEtat->deplacement).positionRobot.x = xRobotDepart*(machineEtat->triage).couleurDetecte;
-    (machineEtat->deplacement).positionRobot.y = yRobotDepart*(machineEtat->triage).couleurDetecte;
-    (machineEtat->deplacement).positionContainer1.x = xContainer1*(machineEtat->triage).couleurDetecte;
-    (machineEtat->deplacement).positionContainer1.y = yContainer1*(machineEtat->triage).couleurDetecte;
-    (machineEtat->deplacement).positionContainer2.x = xContainer2*(machineEtat->triage).couleurDetecte;
-    (machineEtat->deplacement).positionContainer1.y = yContainer2*(machineEtat->triage).couleurDetecte;
-    (machineEtat->deplacement).positionTir.y = yContainer2*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).dimTerrain.y = yTerrain;
     (machineEtat->attente).deltaT = tempsAttente;
     (machineEtat->attente).finAttente = 1;
+    (machineEtat->deplacement).deverouillage = 0;
+    (machineEtat->deplacement).deverouillageValide = 0;
+    (machineEtat->deplacement).deverouillagePrecedent = 0;
 
-    
+    if ((machineEtat->triage).maCouleur == 1){
+        (machineEtat->deplacement).positionRobot.x = xRobotDepartO;
+        (machineEtat->deplacement).positionRobot.y = yRobotDepartO;
+        (machineEtat->deplacement).positionContainer1.x = xContainer1O;
+        (machineEtat->deplacement).positionContainer1.y = yContainer1O;
+        (machineEtat->deplacement).positionContainer2.x = xContainer2O;
+        (machineEtat->deplacement).positionContainer2.y = yContainer2O;
+        (machineEtat->deplacement).positionTir.x = xTirO;
+        (machineEtat->deplacement).positionTir.y = yTirO;
+    }
 
+    else{
+        (machineEtat->deplacement).positionRobot.x = xRobotDepartV;
+        (machineEtat->deplacement).positionRobot.y = yRobotDepartV;
+        (machineEtat->deplacement).positionContainer1.x = xContainer1V;
+        (machineEtat->deplacement).positionContainer1.y = yContainer1V;
+        (machineEtat->deplacement).positionContainer2.x = xContainer2V;
+        (machineEtat->deplacement).positionContainer2.y = yContainer2V;
+        (machineEtat->deplacement).positionTir.x = xTirV;
+        (machineEtat->deplacement).positionTir.y = yTirV;
+    }
 }
