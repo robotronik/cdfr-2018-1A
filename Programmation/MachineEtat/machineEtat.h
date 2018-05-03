@@ -53,6 +53,7 @@ typedef struct{
 
 typedef struct{
   int tir;
+  XL_ME_Wrapper accelerateur;
 } Lancer;
 
 typedef struct{

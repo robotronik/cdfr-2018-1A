@@ -8,11 +8,11 @@
 /*
 Met en marche le moteur de lancement
 */
-void ActivationMoteur(Lancer lancer);
+void ActivationMoteur(MachineEtat* machineEtat);
 
 /*
 Test si la demande de tir est faite et active un servo pour assister la balle dans la propulsion
 */
-void AccelerateurBalle(Lancer lancer);
+void AccelerateurBalle(MachineEtat* machineEtat);
 
 #endif
