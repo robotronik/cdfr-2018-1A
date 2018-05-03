@@ -1,0 +1,6 @@
+#ignore flashing files
+*.lst
+*.bin
+*.elf
+*.map
+*.hex

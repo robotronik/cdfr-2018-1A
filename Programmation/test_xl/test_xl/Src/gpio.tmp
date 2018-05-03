@@ -1,0 +1,66 @@
+
+#n/** Configure pins as #n #t#t #t* Analog #n #t#t #t* Input #n #t#t #t* Output#n #t#t #t* EVENT_OUT#n #t#t #t* EXTI#n #t#t #t* Free pins are configured automatically as Analog (this feature is enabled through #n #t#t #t* the Code Generation settings)
+#t#t PA2#t ------> USART2_TX
+#t#t PA3#t ------> USART2_RX
+*/
+static void MX_GPIO_Init(void)
+{
+#n
+#tGPIO_InitTypeDef GPIO_InitStruct;
+#n#t/* GPIO Ports Clock Enable */
+#t__HAL_RCC_GPIOC_CLK_ENABLE();
+#t__HAL_RCC_GPIOH_CLK_ENABLE();
+#t__HAL_RCC_GPIOA_CLK_ENABLE();
+#t__HAL_RCC_GPIOB_CLK_ENABLE();
+#t__HAL_RCC_GPIOD_CLK_ENABLE();
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(USART1_DIR_GPIO_Port, USART1_DIR_Pin, GPIO_PIN_RESET);
+#n#t/*Configure GPIO pin : B1_Pin */
+#tGPIO_InitStruct.Pin = B1_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tHAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : PC0 PC1 PC2 PC3 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PC4 PC5 PC6 PC7 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PC8 PC10 PC11 PC12 */
+#tGPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_8|GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12;
+#tGPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tHAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : PA0 PA1 PA4 PA6 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PA7 PA8 PA11 PA12 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PA15 */
+#tGPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_6 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_11|GPIO_PIN_12 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_15;
+#tGPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tHAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : USART_TX_Pin USART_RX_Pin */
+#tGPIO_InitStruct.Pin = USART_TX_Pin|USART_RX_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tGPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+#tHAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#n#t/*Configure GPIO pin : LD2_Pin */
+#tGPIO_InitStruct.Pin = LD2_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tHAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : PB0 PB1 PB2 PB10 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PB12 PB13 PB14 PB15 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PB4 PB5 PB6 PB7 #n#t#t#t#t#t#t#t#t#t#t#t#t#t PB8 PB9 */
+#tGPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 #n#t#t#t#t#t#t#t#t#t#t#t#t#t|GPIO_PIN_8|GPIO_PIN_9;
+#tGPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tHAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+#n#t/*Configure GPIO pin : USART1_DIR_Pin */
+#tGPIO_InitStruct.Pin = USART1_DIR_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tHAL_GPIO_Init(USART1_DIR_GPIO_Port, &GPIO_InitStruct);
+#n#t/*Configure GPIO pin : PD2 */
+#tGPIO_InitStruct.Pin = GPIO_PIN_2;
+#tGPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tHAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+#n
+}
+#n

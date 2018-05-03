@@ -1,0 +1,3707 @@
+ARM GAS  /tmp/ccws6er7.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.file	"main.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.MX_GPIO_Init,"ax",%progbits
+  21              		.align	2
+  22              		.thumb
+  23              		.thumb_func
+  25              	MX_GPIO_Init:
+  26              	.LFB132:
+  27              		.file 1 "../Src/main.c"
+   1:../Src/main.c **** /**
+   2:../Src/main.c ****   ******************************************************************************
+   3:../Src/main.c ****   * File Name          : main.c
+   4:../Src/main.c ****   * Date               : 24/02/2018 11:39:58
+   5:../Src/main.c ****   * Description        : Main program body
+   6:../Src/main.c ****   ******************************************************************************
+   7:../Src/main.c ****   *
+   8:../Src/main.c ****   * COPYRIGHT(c) 2018 STMicroelectronics
+   9:../Src/main.c ****   *
+  10:../Src/main.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  11:../Src/main.c ****   * are permitted provided that the following conditions are met:
+  12:../Src/main.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  13:../Src/main.c ****   *      this list of conditions and the following disclaimer.
+  14:../Src/main.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  15:../Src/main.c ****   *      this list of conditions and the following disclaimer in the documentation
+  16:../Src/main.c ****   *      and/or other materials provided with the distribution.
+  17:../Src/main.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  18:../Src/main.c ****   *      may be used to endorse or promote products derived from this software
+  19:../Src/main.c ****   *      without specific prior written permission.
+  20:../Src/main.c ****   *
+  21:../Src/main.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:../Src/main.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23:../Src/main.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  24:../Src/main.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  25:../Src/main.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  26:../Src/main.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  27:../Src/main.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  28:../Src/main.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  29:../Src/main.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  30:../Src/main.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  31:../Src/main.c ****   *
+ARM GAS  /tmp/ccws6er7.s 			page 2
+
+
+  32:../Src/main.c ****   ******************************************************************************
+  33:../Src/main.c ****   */
+  34:../Src/main.c **** 
+  35:../Src/main.c **** /* Includes ------------------------------------------------------------------*/
+  36:../Src/main.c **** #include "stm32f4xx_hal.h"
+  37:../Src/main.c **** 
+  38:../Src/main.c **** /* USER CODE BEGIN Includes */
+  39:../Src/main.c **** #include <string.h>
+  40:../Src/main.c **** #include "X-NUCLEO-53L0A1.h"
+  41:../Src/main.c **** #include "vl53l0x_api.h"
+  42:../Src/main.c **** #include <limits.h>
+  43:../Src/main.c **** #include <stdio.h>
+  44:../Src/main.c **** #include <stdlib.h>
+  45:../Src/main.c **** 
+  46:../Src/main.c **** /**
+  47:../Src/main.c ****  * @defgroup Configuration Static configuration
+  48:../Src/main.c ****  * @{
+  49:../Src/main.c ****  */
+  50:../Src/main.c **** #define HAVE_ALARM_DEMO 0
+  51:../Src/main.c **** 
+  52:../Src/main.c **** /** Time the initial 53L0 message is shown at power up */
+  53:../Src/main.c **** #define WelcomeTime 660
+  54:../Src/main.c **** 
+  55:../Src/main.c **** /** Time the initial 53L0 message is shown at power up */
+  56:../Src/main.c **** #define ModeChangeDispTime  500
+  57:../Src/main.c **** 
+  58:../Src/main.c **** /**
+  59:../Src/main.c ****  * Time considered as  a "long push" on push button
+  60:../Src/main.c ****  */
+  61:../Src/main.c **** #define PressBPSwicthTime   1000
+  62:../Src/main.c **** 
+  63:../Src/main.c **** /** @}  */ /* config group */
+  64:../Src/main.c **** 
+  65:../Src/main.c **** #ifndef MIN
+  66:../Src/main.c **** #   define MIN(a,b) ((a) < (b) ? (a) : (b))
+  67:../Src/main.c **** #endif
+  68:../Src/main.c **** 
+  69:../Src/main.c **** #define B1_Pin GPIO_PIN_13
+  70:../Src/main.c **** #define B1_GPIO_Port GPIOC
+  71:../Src/main.c **** #define LD2_Pin GPIO_PIN_5
+  72:../Src/main.c **** #define LD2_GPIO_Port GPIOA
+  73:../Src/main.c **** 
+  74:../Src/main.c **** #ifndef ARRAY_SIZE
+  75:../Src/main.c **** #   define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
+  76:../Src/main.c **** #endif
+  77:../Src/main.c **** 
+  78:../Src/main.c **** /**
+  79:../Src/main.c ****  * @defgroup ErrCode Errors code shown on display
+  80:../Src/main.c ****  * @{
+  81:../Src/main.c ****  */
+  82:../Src/main.c **** #define ERR_DETECT             -1
+  83:../Src/main.c **** #define ERR_DEMO_RANGE_ONE     1
+  84:../Src/main.c **** #define ERR_DEMO_RANGE_MULTI   2
+  85:../Src/main.c **** 
+  86:../Src/main.c **** 
+  87:../Src/main.c **** /** }@} */ /* defgroup ErrCode */
+  88:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 3
+
+
+  89:../Src/main.c **** 
+  90:../Src/main.c **** /* USER CODE END Includes */
+  91:../Src/main.c **** 
+  92:../Src/main.c **** /* Private variables ---------------------------------------------------------*/
+  93:../Src/main.c **** I2C_HandleTypeDef hi2c1;
+  94:../Src/main.c **** 
+  95:../Src/main.c **** TIM_HandleTypeDef htim3;
+  96:../Src/main.c **** 
+  97:../Src/main.c **** UART_HandleTypeDef huart2;
+  98:../Src/main.c **** 
+  99:../Src/main.c **** /* USER CODE BEGIN PV */
+ 100:../Src/main.c **** /* Private variables ---------------------------------------------------------*/
+ 101:../Src/main.c **** 
+ 102:../Src/main.c **** const char TxtRangeValue[]  = "rng";
+ 103:../Src/main.c **** const char TxtBarGraph[]    = "bar";
+ 104:../Src/main.c **** #if HAVE_ALARM_DEMO
+ 105:../Src/main.c **** const char TxtAlarm[]       = "Alr";
+ 106:../Src/main.c **** #endif
+ 107:../Src/main.c **** 
+ 108:../Src/main.c **** 
+ 109:../Src/main.c **** typedef enum {
+ 110:../Src/main.c **** 	LONG_RANGE 		= 0, /*!< Long range mode */
+ 111:../Src/main.c **** 	HIGH_SPEED 		= 1, /*!< High speed mode */
+ 112:../Src/main.c **** 	HIGH_ACCURACY	= 2, /*!< High accuracy mode */
+ 113:../Src/main.c **** } RangingConfig_e;
+ 114:../Src/main.c **** char *RangingConfigTxt[3] = {"LR", "HS", "HA"};
+ 115:../Src/main.c **** 
+ 116:../Src/main.c **** typedef enum {
+ 117:../Src/main.c **** 	RANGE_VALUE 	= 0, /*!< Range displayed in cm */
+ 118:../Src/main.c **** 	BAR_GRAPH 		= 1, /*!< Range displayed as a bar graph : one bar per sensor */
+ 119:../Src/main.c **** } DemoMode_e;
+ 120:../Src/main.c **** char *DemoModeTxt[2] = {"rng", "bar"};
+ 121:../Src/main.c **** 
+ 122:../Src/main.c **** /**
+ 123:../Src/main.c ****  * Global ranging struct
+ 124:../Src/main.c ****  */
+ 125:../Src/main.c **** VL53L0X_RangingMeasurementData_t RangingMeasurementData;
+ 126:../Src/main.c **** 
+ 127:../Src/main.c **** 
+ 128:../Src/main.c **** /** leaky factor for filtered range
+ 129:../Src/main.c ****  *
+ 130:../Src/main.c ****  * r(n) = averaged_r(n-1)*leaky +r(n)(1-leaky)
+ 131:../Src/main.c ****  *
+ 132:../Src/main.c ****  * */
+ 133:../Src/main.c **** int LeakyFactorFix8 = (int)( 0.6 *256);
+ 134:../Src/main.c **** /** How many device detect set by @a DetectSensors()*/
+ 135:../Src/main.c **** int nDevPresent=0;
+ 136:../Src/main.c **** /** bit is index in VL53L0XDevs that is not necessary the dev id of the BSP */
+ 137:../Src/main.c **** int nDevMask;
+ 138:../Src/main.c **** 
+ 139:../Src/main.c **** 
+ 140:../Src/main.c **** VL53L0X_Dev_t VL53L0XDevs[]={
+ 141:../Src/main.c ****         {.Id=XNUCLEO53L0A1_DEV_LEFT, .DevLetter='l', .I2cHandle=&XNUCLEO53L0A1_hi2c, .I2cDevAddr=0x
+ 142:../Src/main.c ****         {.Id=XNUCLEO53L0A1_DEV_CENTER, .DevLetter='c', .I2cHandle=&XNUCLEO53L0A1_hi2c, .I2cDevAddr=
+ 143:../Src/main.c ****         {.Id=XNUCLEO53L0A1_DEV_RIGHT, .DevLetter='r', .I2cHandle=&XNUCLEO53L0A1_hi2c, .I2cDevAddr=0
+ 144:../Src/main.c **** };
+ 145:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 4
+
+
+ 146:../Src/main.c **** /** range low (and high) in @a RangeToLetter()
+ 147:../Src/main.c ****  *
+ 148:../Src/main.c ****  * used for displaying  multiple sensor as bar graph
+ 149:../Src/main.c ****  */
+ 150:../Src/main.c **** int RangeLow=100;
+ 151:../Src/main.c **** 
+ 152:../Src/main.c **** /** range medium in @a RangeToLetter()
+ 153:../Src/main.c ****  *
+ 154:../Src/main.c ****  * used for displaying  multiple sensor as bar graph
+ 155:../Src/main.c ****  */
+ 156:../Src/main.c **** int RangeMedium=300;
+ 157:../Src/main.c **** 
+ 158:../Src/main.c **** /** Timer
+ 159:../Src/main.c ****  *
+ 160:../Src/main.c ****  * Used to get time stamp for UART logging
+ 161:../Src/main.c ****  */
+ 162:../Src/main.c **** TIM_HandleTypeDef htim5;
+ 163:../Src/main.c **** 
+ 164:../Src/main.c **** /* TIM5 init function */
+ 165:../Src/main.c **** void MX_TIM5_Init(void)
+ 166:../Src/main.c **** {
+ 167:../Src/main.c **** 
+ 168:../Src/main.c ****   TIM_MasterConfigTypeDef sMasterConfig;
+ 169:../Src/main.c ****   TIM_OC_InitTypeDef sConfigOC;
+ 170:../Src/main.c **** 
+ 171:../Src/main.c ****   htim5.Instance = TIM5;
+ 172:../Src/main.c ****   htim5.Init.Prescaler = 83;
+ 173:../Src/main.c ****   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 174:../Src/main.c ****   htim5.Init.Period = 0xFFFFFFFF;
+ 175:../Src/main.c ****   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 176:../Src/main.c ****   HAL_TIM_OC_Init(&htim5);
+ 177:../Src/main.c **** 
+ 178:../Src/main.c ****   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+ 179:../Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 180:../Src/main.c ****   HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig);
+ 181:../Src/main.c **** 
+ 182:../Src/main.c ****   sConfigOC.OCMode = TIM_OCMODE_TIMING;
+ 183:../Src/main.c ****   sConfigOC.Pulse = 0;
+ 184:../Src/main.c ****   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+ 185:../Src/main.c ****   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 186:../Src/main.c ****   HAL_TIM_OC_ConfigChannel(&htim5, &sConfigOC, TIM_CHANNEL_1);
+ 187:../Src/main.c **** 
+ 188:../Src/main.c **** }
+ 189:../Src/main.c **** 
+ 190:../Src/main.c **** void TimeStamp_Init(){
+ 191:../Src/main.c ****     MX_TIM5_Init();
+ 192:../Src/main.c **** }
+ 193:../Src/main.c **** 
+ 194:../Src/main.c **** void TimeStamp_Reset(){
+ 195:../Src/main.c ****     HAL_TIM_Base_Start(&htim5);
+ 196:../Src/main.c ****     htim5.Instance->CNT=0;
+ 197:../Src/main.c **** }
+ 198:../Src/main.c **** 
+ 199:../Src/main.c **** uint32_t TimeStamp_Get(){
+ 200:../Src/main.c ****     return htim5.Instance->CNT;
+ 201:../Src/main.c **** }
+ 202:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 5
+
+
+ 203:../Src/main.c **** /* USER CODE END PV */
+ 204:../Src/main.c **** 
+ 205:../Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+ 206:../Src/main.c **** static void MX_GPIO_Init(void);
+ 207:../Src/main.c **** static void SystemClock_Config(void);
+ 208:../Src/main.c **** static void MX_I2C1_Init(void);
+ 209:../Src/main.c **** static void MX_TIM3_Init(void);
+ 210:../Src/main.c **** static void MX_USART2_UART_Init(void);
+ 211:../Src/main.c **** 
+ 212:../Src/main.c **** /* USER CODE BEGIN PFP */
+ 213:../Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+ 214:../Src/main.c **** void ResetAndDetectSensor(int SetDisplay);
+ 215:../Src/main.c **** 
+ 216:../Src/main.c **** /* USER CODE END PFP */
+ 217:../Src/main.c **** 
+ 218:../Src/main.c **** /* USER CODE BEGIN 0 */
+ 219:../Src/main.c **** 
+ 220:../Src/main.c **** #define debug_printf    trace_printf
+ 221:../Src/main.c **** char WelcomeMsg[]="Hi I am Ranging VL53L0X mcu " MCU_NAME "\n";
+ 222:../Src/main.c **** 
+ 223:../Src/main.c **** #if HAVE_ALARM_DEMO
+ 224:../Src/main.c **** volatile int IntrCount;
+ 225:../Src/main.c **** volatile int LastIntrPin;
+ 226:../Src/main.c **** volatile int LastIntrId;
+ 227:../Src/main.c **** volatile int IntrCounts[3];
+ 228:../Src/main.c **** #endif
+ 229:../Src/main.c **** 
+ 230:../Src/main.c **** #define BSP_BP_PORT GPIOC
+ 231:../Src/main.c **** #define BSP_BP_PIN  GPIO_PIN_13
+ 232:../Src/main.c **** 
+ 233:../Src/main.c **** int BSP_GetPushButton(void){
+ 234:../Src/main.c ****     GPIO_PinState state ;
+ 235:../Src/main.c ****     state = HAL_GPIO_ReadPin(BSP_BP_PORT, BSP_BP_PIN);
+ 236:../Src/main.c ****     return state;
+ 237:../Src/main.c **** }
+ 238:../Src/main.c **** 
+ 239:../Src/main.c **** /**
+ 240:../Src/main.c ****  * When button is already pressed it waits for user to release it.
+ 241:../Src/main.c ****  * if button remains pressed for a given time it returns true.
+ 242:../Src/main.c ****  * This is used to detect mode switch by long press on blue Push Button
+ 243:../Src/main.c ****  *
+ 244:../Src/main.c ****  * As soon as time is elapsed -rb- is displayed to let user know the mode
+ 245:../Src/main.c ****  * switch is taken into account
+ 246:../Src/main.c ****  *
+ 247:../Src/main.c ****  * @return True if button remains pressed more than specified time
+ 248:../Src/main.c ****  */
+ 249:../Src/main.c **** int PusbButton_WaitUnPress(void){
+ 250:../Src/main.c ****     uint32_t TimeStarted;
+ 251:../Src/main.c ****     TimeStarted = HAL_GetTick();
+ 252:../Src/main.c ****     while( !BSP_GetPushButton() ){ ; /* debounce */
+ 253:../Src/main.c ****         if(HAL_GetTick()- TimeStarted> PressBPSwicthTime){
+ 254:../Src/main.c ****             XNUCLEO53L0A1_SetDisplayString (" rb ");
+ 255:../Src/main.c ****         }
+ 256:../Src/main.c ****     }
+ 257:../Src/main.c ****     return  HAL_GetTick() - TimeStarted>PressBPSwicthTime;
+ 258:../Src/main.c **** 
+ 259:../Src/main.c **** }
+ARM GAS  /tmp/ccws6er7.s 			page 6
+
+
+ 260:../Src/main.c **** 
+ 261:../Src/main.c **** #if HAVE_ALARM_DEMO
+ 262:../Src/main.c **** /**
+ 263:../Src/main.c ****  * Interrupt handler called each time an interrupt is produced by the ranging sensor (in ALARM mode
+ 264:../Src/main.c ****  * @param err
+ 265:../Src/main.c ****  */
+ 266:../Src/main.c **** void VL53L0A1_EXTI_Callback(int DevNo, int GPIO_Pin){
+ 267:../Src/main.c ****     IntrCount++;
+ 268:../Src/main.c ****     LastIntrPin=GPIO_Pin;
+ 269:../Src/main.c ****     LastIntrId=DevNo;
+ 270:../Src/main.c **** 
+ 271:../Src/main.c ****     if( DevNo< ARRAY_SIZE(IntrCounts)  ){
+ 272:../Src/main.c ****         IntrCounts[DevNo]++;
+ 273:../Src/main.c ****     }
+ 274:../Src/main.c **** }
+ 275:../Src/main.c **** #endif
+ 276:../Src/main.c **** 
+ 277:../Src/main.c **** 
+ 278:../Src/main.c **** /**
+ 279:../Src/main.c ****  * Handle Error
+ 280:../Src/main.c ****  *
+ 281:../Src/main.c ****  * Set err on display and loop forever
+ 282:../Src/main.c ****  * @param err Error case code
+ 283:../Src/main.c ****  */
+ 284:../Src/main.c **** void HandleError(int err){
+ 285:../Src/main.c ****     char msg[16];
+ 286:../Src/main.c ****     sprintf(msg,"Er%d", err);
+ 287:../Src/main.c ****     XNUCLEO53L0A1_SetDisplayString(msg);
+ 288:../Src/main.c ****     while(1){};
+ 289:../Src/main.c **** }
+ 290:../Src/main.c **** 
+ 291:../Src/main.c **** /**
+ 292:../Src/main.c ****  * Reset all sensor then do presence detection
+ 293:../Src/main.c ****  *
+ 294:../Src/main.c ****  * All present devices are data initiated and assigned to their final I2C address
+ 295:../Src/main.c ****  * @return
+ 296:../Src/main.c ****  */
+ 297:../Src/main.c **** int DetectSensors(int SetDisplay) {
+ 298:../Src/main.c ****     int i;
+ 299:../Src/main.c ****     uint16_t Id;
+ 300:../Src/main.c ****     int status;
+ 301:../Src/main.c ****     int FinalAddress;
+ 302:../Src/main.c **** 
+ 303:../Src/main.c ****     char PresentMsg[5]="    ";
+ 304:../Src/main.c ****     /* Reset all */
+ 305:../Src/main.c ****     nDevPresent = 0;
+ 306:../Src/main.c ****     for (i = 0; i < 3; i++)
+ 307:../Src/main.c ****         status = XNUCLEO53L0A1_ResetId(i, 0);
+ 308:../Src/main.c **** 
+ 309:../Src/main.c ****     /* detect all sensors (even on-board)*/
+ 310:../Src/main.c ****     for (i = 0; i < 3; i++) {
+ 311:../Src/main.c ****         VL53L0X_Dev_t *pDev;
+ 312:../Src/main.c ****         pDev = &VL53L0XDevs[i];
+ 313:../Src/main.c ****         pDev->I2cDevAddr = 0x52;
+ 314:../Src/main.c ****         pDev->Present = 0;
+ 315:../Src/main.c ****         status = XNUCLEO53L0A1_ResetId( pDev->Id, 1);
+ 316:../Src/main.c ****         HAL_Delay(2);
+ARM GAS  /tmp/ccws6er7.s 			page 7
+
+
+ 317:../Src/main.c ****         FinalAddress=0x52+(i+1)*2;
+ 318:../Src/main.c **** 
+ 319:../Src/main.c ****         do {
+ 320:../Src/main.c ****         	/* Set I2C standard mode (400 KHz) before doing the first register access */
+ 321:../Src/main.c ****         	if (status == VL53L0X_ERROR_NONE)
+ 322:../Src/main.c ****         		status = VL53L0X_WrByte(pDev, 0x88, 0x00);
+ 323:../Src/main.c **** 
+ 324:../Src/main.c ****         	/* Try to read one register using default 0x52 address */
+ 325:../Src/main.c ****             status = VL53L0X_RdWord(pDev, VL53L0X_REG_IDENTIFICATION_MODEL_ID, &Id);
+ 326:../Src/main.c ****             if (status) {
+ 327:../Src/main.c ****                 debug_printf("#%d Read id fail\n", i);
+ 328:../Src/main.c ****                 break;
+ 329:../Src/main.c ****             }
+ 330:../Src/main.c ****             if (Id == 0xEEAA) {
+ 331:../Src/main.c **** 				/* Sensor is found => Change its I2C address to final one */
+ 332:../Src/main.c ****                 status = VL53L0X_SetDeviceAddress(pDev,FinalAddress);
+ 333:../Src/main.c ****                 if (status != 0) {
+ 334:../Src/main.c ****                     debug_printf("#i VL53L0X_SetDeviceAddress fail\n", i);
+ 335:../Src/main.c ****                     break;
+ 336:../Src/main.c ****                 }
+ 337:../Src/main.c ****                 pDev->I2cDevAddr = FinalAddress;
+ 338:../Src/main.c ****                 /* Check all is OK with the new I2C address and initialize the sensor */
+ 339:../Src/main.c ****                 status = VL53L0X_RdWord(pDev, VL53L0X_REG_IDENTIFICATION_MODEL_ID, &Id);
+ 340:../Src/main.c ****                 if (status != 0) {
+ 341:../Src/main.c **** 					debug_printf("#i VL53L0X_RdWord fail\n", i);
+ 342:../Src/main.c **** 					break;
+ 343:../Src/main.c **** 				}
+ 344:../Src/main.c **** 
+ 345:../Src/main.c ****                 status = VL53L0X_DataInit(pDev);
+ 346:../Src/main.c ****                 if( status == 0 ){
+ 347:../Src/main.c ****                     pDev->Present = 1;
+ 348:../Src/main.c ****                 }
+ 349:../Src/main.c ****                 else{
+ 350:../Src/main.c ****                     debug_printf("VL53L0X_DataInit %d fail\n", i);
+ 351:../Src/main.c ****                     break;
+ 352:../Src/main.c ****                 }
+ 353:../Src/main.c ****                 trace_printf("VL53L0X %d Present and initiated to final 0x%x\n", pDev->Id, pDev->I2
+ 354:../Src/main.c ****                 nDevPresent++;
+ 355:../Src/main.c ****                 nDevMask |= 1 << i;
+ 356:../Src/main.c ****                 pDev->Present = 1;
+ 357:../Src/main.c ****             }
+ 358:../Src/main.c ****             else {
+ 359:../Src/main.c ****                 debug_printf("#%d unknown ID %x\n", i, Id);
+ 360:../Src/main.c ****                 status = 1;
+ 361:../Src/main.c ****             }
+ 362:../Src/main.c ****         } while (0);
+ 363:../Src/main.c ****         /* if fail r can't use for any reason then put the  device back to reset */
+ 364:../Src/main.c ****         if (status) {
+ 365:../Src/main.c ****             XNUCLEO53L0A1_ResetId(i, 0);
+ 366:../Src/main.c ****         }
+ 367:../Src/main.c ****     }
+ 368:../Src/main.c ****     /* Display detected sensor(s) */
+ 369:../Src/main.c ****     if( SetDisplay ){
+ 370:../Src/main.c ****         for(i=0; i<3; i++){
+ 371:../Src/main.c ****             if( VL53L0XDevs[i].Present ){
+ 372:../Src/main.c ****                 PresentMsg[i+1]=VL53L0XDevs[i].DevLetter;
+ 373:../Src/main.c ****             }
+ARM GAS  /tmp/ccws6er7.s 			page 8
+
+
+ 374:../Src/main.c ****         }
+ 375:../Src/main.c ****         PresentMsg[0]=' ';
+ 376:../Src/main.c ****         XNUCLEO53L0A1_SetDisplayString(PresentMsg);
+ 377:../Src/main.c ****         HAL_Delay(1000);
+ 378:../Src/main.c ****     }
+ 379:../Src/main.c **** 
+ 380:../Src/main.c ****     return nDevPresent;
+ 381:../Src/main.c **** }
+ 382:../Src/main.c **** 
+ 383:../Src/main.c **** /**
+ 384:../Src/main.c ****  *  Setup all detected sensors for single shot mode and setup ranging configuration
+ 385:../Src/main.c ****  */
+ 386:../Src/main.c **** void SetupSingleShot(RangingConfig_e rangingConfig){
+ 387:../Src/main.c ****     int i;
+ 388:../Src/main.c ****     int status;
+ 389:../Src/main.c ****     uint8_t VhvSettings;
+ 390:../Src/main.c ****     uint8_t PhaseCal;
+ 391:../Src/main.c ****     uint32_t refSpadCount;
+ 392:../Src/main.c **** 	uint8_t isApertureSpads;
+ 393:../Src/main.c **** 	FixPoint1616_t signalLimit = (FixPoint1616_t)(0.25*65536);
+ 394:../Src/main.c **** 	FixPoint1616_t sigmaLimit = (FixPoint1616_t)(18*65536);
+ 395:../Src/main.c **** 	uint32_t timingBudget = 33000;
+ 396:../Src/main.c **** 	uint8_t preRangeVcselPeriod = 14;
+ 397:../Src/main.c **** 	uint8_t finalRangeVcselPeriod = 10;
+ 398:../Src/main.c **** 
+ 399:../Src/main.c ****     for( i=0; i<3; i++){
+ 400:../Src/main.c ****         if( VL53L0XDevs[i].Present){
+ 401:../Src/main.c ****             status=VL53L0X_StaticInit(&VL53L0XDevs[i]);
+ 402:../Src/main.c ****             if( status ){
+ 403:../Src/main.c ****                 debug_printf("VL53L0X_StaticInit %d failed\n",i);
+ 404:../Src/main.c ****             }
+ 405:../Src/main.c **** 
+ 406:../Src/main.c ****             status = VL53L0X_PerformRefCalibration(&VL53L0XDevs[i], &VhvSettings, &PhaseCal);
+ 407:../Src/main.c **** 			if( status ){
+ 408:../Src/main.c **** 			   debug_printf("VL53L0X_PerformRefCalibration failed\n");
+ 409:../Src/main.c **** 			}
+ 410:../Src/main.c **** 
+ 411:../Src/main.c **** 			status = VL53L0X_PerformRefSpadManagement(&VL53L0XDevs[i], &refSpadCount, &isApertureSpads);
+ 412:../Src/main.c **** 			if( status ){
+ 413:../Src/main.c **** 			   debug_printf("VL53L0X_PerformRefSpadManagement failed\n");
+ 414:../Src/main.c **** 			}
+ 415:../Src/main.c **** 
+ 416:../Src/main.c ****             status = VL53L0X_SetDeviceMode(&VL53L0XDevs[i], VL53L0X_DEVICEMODE_SINGLE_RANGING); // 
+ 417:../Src/main.c ****             if( status ){
+ 418:../Src/main.c ****                debug_printf("VL53L0X_SetDeviceMode failed\n");
+ 419:../Src/main.c ****             }
+ 420:../Src/main.c **** 
+ 421:../Src/main.c ****             status = VL53L0X_SetLimitCheckEnable(&VL53L0XDevs[i], VL53L0X_CHECKENABLE_SIGMA_FINAL_R
+ 422:../Src/main.c **** 			if( status ){
+ 423:../Src/main.c **** 			   debug_printf("VL53L0X_SetLimitCheckEnable failed\n");
+ 424:../Src/main.c **** 			}
+ 425:../Src/main.c **** 
+ 426:../Src/main.c **** 			status = VL53L0X_SetLimitCheckEnable(&VL53L0XDevs[i], VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANG
+ 427:../Src/main.c **** 			if( status ){
+ 428:../Src/main.c **** 			   debug_printf("VL53L0X_SetLimitCheckEnable failed\n");
+ 429:../Src/main.c **** 			}
+ 430:../Src/main.c **** 			/* Ranging configuration */
+ARM GAS  /tmp/ccws6er7.s 			page 9
+
+
+ 431:../Src/main.c ****             switch(rangingConfig) {
+ 432:../Src/main.c ****             case LONG_RANGE:
+ 433:../Src/main.c ****             	signalLimit = (FixPoint1616_t)(0.1*65536);
+ 434:../Src/main.c ****             	sigmaLimit = (FixPoint1616_t)(60*65536);
+ 435:../Src/main.c ****             	timingBudget = 20000; //33ms
+ 436:../Src/main.c ****             	preRangeVcselPeriod = 18;
+ 437:../Src/main.c ****             	finalRangeVcselPeriod = 14;
+ 438:../Src/main.c ****             	break;
+ 439:../Src/main.c ****             case HIGH_ACCURACY:
+ 440:../Src/main.c **** 				signalLimit = (FixPoint1616_t)(0.25*65536); //the return signal rate limit in MCPS
+ 441:../Src/main.c **** 				sigmaLimit = (FixPoint1616_t)(18*65536);
+ 442:../Src/main.c **** 				timingBudget = 200000; //200ms
+ 443:../Src/main.c **** 				preRangeVcselPeriod = 14; //laser pulse periods
+ 444:../Src/main.c **** 				finalRangeVcselPeriod = 10;
+ 445:../Src/main.c **** 				break;
+ 446:../Src/main.c ****             case HIGH_SPEED:
+ 447:../Src/main.c **** 				signalLimit = (FixPoint1616_t)(0.25*65536);
+ 448:../Src/main.c **** 				sigmaLimit = (FixPoint1616_t)(32*65536);
+ 449:../Src/main.c **** 				timingBudget = 20000; //20ms
+ 450:../Src/main.c **** 				preRangeVcselPeriod = 14;
+ 451:../Src/main.c **** 				finalRangeVcselPeriod = 10;
+ 452:../Src/main.c **** 				break;
+ 453:../Src/main.c ****             default:
+ 454:../Src/main.c ****             	debug_printf("Not Supported");
+ 455:../Src/main.c ****             }
+ 456:../Src/main.c **** 
+ 457:../Src/main.c ****             status = VL53L0X_SetLimitCheckValue(&VL53L0XDevs[i],  VL53L0X_CHECKENABLE_SIGNAL_RATE_F
+ 458:../Src/main.c **** 			if( status ){
+ 459:../Src/main.c **** 			   debug_printf("VL53L0X_SetLimitCheckValue failed\n");
+ 460:../Src/main.c **** 			}
+ 461:../Src/main.c **** 
+ 462:../Src/main.c **** 			status = VL53L0X_SetLimitCheckValue(&VL53L0XDevs[i],  VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, sig
+ 463:../Src/main.c **** 			if( status ){
+ 464:../Src/main.c **** 			   debug_printf("VL53L0X_SetLimitCheckValue failed\n");
+ 465:../Src/main.c **** 			}
+ 466:../Src/main.c **** 
+ 467:../Src/main.c ****             status = VL53L0X_SetMeasurementTimingBudgetMicroSeconds(&VL53L0XDevs[i],  timingBudget)
+ 468:../Src/main.c ****             if( status ){
+ 469:../Src/main.c ****                debug_printf("VL53L0X_SetMeasurementTimingBudgetMicroSeconds failed\n");
+ 470:../Src/main.c ****             }
+ 471:../Src/main.c **** 
+ 472:../Src/main.c ****             status = VL53L0X_SetVcselPulsePeriod(&VL53L0XDevs[i],  VL53L0X_VCSEL_PERIOD_PRE_RANGE, 
+ 473:../Src/main.c **** 			if( status ){
+ 474:../Src/main.c **** 			   debug_printf("VL53L0X_SetVcselPulsePeriod failed\n");
+ 475:../Src/main.c **** 			}
+ 476:../Src/main.c **** 
+ 477:../Src/main.c ****             status = VL53L0X_SetVcselPulsePeriod(&VL53L0XDevs[i],  VL53L0X_VCSEL_PERIOD_FINAL_RANGE
+ 478:../Src/main.c **** 			if( status ){
+ 479:../Src/main.c **** 			   debug_printf("VL53L0X_SetVcselPulsePeriod failed\n");
+ 480:../Src/main.c **** 			}
+ 481:../Src/main.c **** 
+ 482:../Src/main.c **** 			status = VL53L0X_PerformRefCalibration(&VL53L0XDevs[i], &VhvSettings, &PhaseCal);
+ 483:../Src/main.c **** 			if( status ){
+ 484:../Src/main.c **** 			   debug_printf("VL53L0X_PerformRefCalibration failed\n");
+ 485:../Src/main.c **** 			}
+ 486:../Src/main.c **** 
+ 487:../Src/main.c ****             VL53L0XDevs[i].LeakyFirst=1;
+ARM GAS  /tmp/ccws6er7.s 			page 10
+
+
+ 488:../Src/main.c ****         }
+ 489:../Src/main.c ****     }
+ 490:../Src/main.c **** }
+ 491:../Src/main.c **** 
+ 492:../Src/main.c **** char RangeToLetter(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange){
+ 493:../Src/main.c ****     char c;
+ 494:../Src/main.c ****     if( pRange->RangeStatus == 0 ){
+ 495:../Src/main.c ****         if( pDev->LeakyRange < RangeLow ){
+ 496:../Src/main.c ****             c='_';
+ 497:../Src/main.c ****         }
+ 498:../Src/main.c ****         else if( pDev->LeakyRange < RangeMedium ){
+ 499:../Src/main.c ****                 c='=';
+ 500:../Src/main.c ****         }
+ 501:../Src/main.c ****         else {
+ 502:../Src/main.c ****             c = '~';
+ 503:../Src/main.c ****         }
+ 504:../Src/main.c **** 
+ 505:../Src/main.c ****     }
+ 506:../Src/main.c ****     else{
+ 507:../Src/main.c ****         c='-';
+ 508:../Src/main.c ****     }
+ 509:../Src/main.c ****     return c;
+ 510:../Src/main.c **** }
+ 511:../Src/main.c **** 
+ 512:../Src/main.c **** /* Store new ranging data into the device structure, apply leaky integrator if needed */
+ 513:../Src/main.c **** void Sensor_SetNewRange(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange){
+ 514:../Src/main.c ****     if( pRange->RangeStatus == 0 ){
+ 515:../Src/main.c ****         if( pDev->LeakyFirst ){
+ 516:../Src/main.c ****             pDev->LeakyFirst = 0;
+ 517:../Src/main.c ****             pDev->LeakyRange = pRange->RangeMilliMeter;
+ 518:../Src/main.c ****         }
+ 519:../Src/main.c ****         else{
+ 520:../Src/main.c ****             pDev->LeakyRange = (pDev->LeakyRange*LeakyFactorFix8 + (256-LeakyFactorFix8)*pRange->Ra
+ 521:../Src/main.c ****         }
+ 522:../Src/main.c ****     }
+ 523:../Src/main.c ****     else{
+ 524:../Src/main.c ****         pDev->LeakyFirst = 1;
+ 525:../Src/main.c ****     }
+ 526:../Src/main.c **** }
+ 527:../Src/main.c **** 
+ 528:../Src/main.c **** void blink_led(int valeur, int* compteur){     /////modification de la led
+ 529:../Src/main.c ****     if (*compteur == 10){                 /////modification toutes les 6 mesures correctes du capte
+ 530:../Src/main.c ****         HAL_TIM_Base_Stop_IT(&htim3);
+ 531:../Src/main.c ****         htim3.Instance->ARR = 2*valeur-1+20;   /////modification de la periode du capteur (voir wik
+ 532:../Src/main.c ****         HAL_TIM_Base_Start_IT(&htim3);  
+ 533:../Src/main.c ****         htim3.Instance->CNT = 0;               /////remise a zero du timer de la led
+ 534:../Src/main.c ****         *compteur = 0;                         /////remise a zero du compteur
+ 535:../Src/main.c ****     }
+ 536:../Src/main.c **** }
+ 537:../Src/main.c **** 
+ 538:../Src/main.c **** #define Maxi_char_transmit 50  /////////          
+ 539:../Src/main.c **** #define Delay 3550  /////////
+ 540:../Src/main.c **** void transmit(int* i, char* buffer, int valeur){  /////transmission vers pc
+ 541:../Src/main.c ****     char data[10];                                /////variable stockage de la valeur du capteur
+ 542:../Src/main.c ****     char ligne[2];                                /////variable stockage du separateur \n
+ 543:../Src/main.c ****     int len;                                      /////variable longueur du buffer
+ 544:../Src/main.c ****     if (*i<Maxi_char_transmit-1){                 /////ajout valeur, dans data
+ARM GAS  /tmp/ccws6er7.s 			page 11
+
+
+ 545:../Src/main.c ****         sprintf(data, "%d,",valeur);
+ 546:../Src/main.c ****     }
+ 547:../Src/main.c ****     else if (*i==Maxi_char_transmit-1){           /////ajout valeur dans data -> pour cloturer la s
+ 548:../Src/main.c ****         sprintf(data, "%d",valeur);
+ 549:../Src/main.c ****     }
+ 550:../Src/main.c ****     strcat(buffer,data);                          /////ajout valeur au buffer
+ 551:../Src/main.c ****     if (*i==Maxi_char_transmit-1){
+ 552:../Src/main.c ****         len=strlen(buffer);                       /////longueur du buffer
+ 553:../Src/main.c ****         HAL_UART_Transmit(&huart2, (uint8_t*)(buffer), len, 1000); /////transmission du buffer
+ 554:../Src/main.c ****         sprintf(ligne, "\n");                                     /////ajout \n a ligne
+ 555:../Src/main.c ****         HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer l
+ 556:../Src/main.c ****         (*i)=-1;                                                  /////remise a zero du compteur
+ 557:../Src/main.c ****         sprintf(buffer, "");                                      /////remise a zero du buffer
+ 558:../Src/main.c ****         HAL_Delay(Delay);         //////necessaire pour le graphique
+ 559:../Src/main.c ****     }
+ 560:../Src/main.c **** }
+ 561:../Src/main.c **** 
+ 562:../Src/main.c **** 
+ 563:../Src/main.c **** /**
+ 564:../Src/main.c ****  * Implement the ranging demo with all modes managed through the blue button (short and long press)
+ 565:../Src/main.c ****  * This function implements a while loop until the blue button is pressed
+ 566:../Src/main.c ****  * @param UseSensorsMask Mask of any sensors to use if not only one present
+ 567:../Src/main.c ****  * @param rangingConfig Ranging configuration to be used (same for all sensors)
+ 568:../Src/main.c ****  */
+ 569:../Src/main.c **** int RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig){
+ 570:../Src/main.c ****     int over=0;
+ 571:../Src/main.c ****     int status;
+ 572:../Src/main.c ****     char StrDisplay[5];
+ 573:../Src/main.c ****     char c;
+ 574:../Src/main.c ****     int i;
+ 575:../Src/main.c ****     int nSensorToUse;
+ 576:../Src/main.c ****     int SingleSensorNo=0;
+ 577:../Src/main.c ****     int valeur;             ///creation variable valeur
+ 578:../Src/main.c ****     int s=0;                ///creation compteur
+ 579:../Src/main.c ****     int* compteur = NULL;   ///creation pointeur sur compteur
+ 580:../Src/main.c ****     compteur=&s;
+ 581:../Src/main.c ****     int d=0;                 ///creation compteur2
+ 582:../Src/main.c ****     int* compteur2 = NULL;   ///creation pointeur sur compteur2
+ 583:../Src/main.c ****     compteur2=&d;
+ 584:../Src/main.c ****     char buffer[Maxi_char_transmit*4]; /////creation du buffer
+ 585:../Src/main.c ****     sprintf(buffer, "");               /////mise a zero du buffer
+ 586:../Src/main.c **** 
+ 587:../Src/main.c ****     /* Setup all sensors in Single Shot mode */
+ 588:../Src/main.c ****     SetupSingleShot(rangingConfig);
+ 589:../Src/main.c **** 
+ 590:../Src/main.c ****     /* Which sensor to use ? */
+ 591:../Src/main.c ****     for(i=0, nSensorToUse=0; i<3; i++){
+ 592:../Src/main.c ****         if(( UseSensorsMask& (1<<i) ) && VL53L0XDevs[i].Present ){
+ 593:../Src/main.c ****             nSensorToUse++;
+ 594:../Src/main.c ****             if( nSensorToUse==1 )
+ 595:../Src/main.c ****                 SingleSensorNo=i;
+ 596:../Src/main.c ****         }
+ 597:../Src/main.c ****     }
+ 598:../Src/main.c ****     if( nSensorToUse == 0 ){
+ 599:../Src/main.c ****         return -1;
+ 600:../Src/main.c ****     }
+ 601:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 12
+
+
+ 602:../Src/main.c ****     /* Start ranging until blue button is pressed */
+ 603:../Src/main.c ****     do{    
+ 604:../Src/main.c ****         if( nSensorToUse >1 ){
+ 605:../Src/main.c ****         	/* Multiple devices */
+ 606:../Src/main.c ****             strcpy(StrDisplay, "    ");
+ 607:../Src/main.c ****             for( i=0; i<3; i++){
+ 608:../Src/main.c ****                 if( ! VL53L0XDevs[i].Present  || (UseSensorsMask & (1<<i))==0 )
+ 609:../Src/main.c ****                     continue;
+ 610:../Src/main.c ****                 /* Call All-In-One blocking API function */
+ 611:../Src/main.c ****                 status = VL53L0X_PerformSingleRangingMeasurement(&VL53L0XDevs[i],&RangingMeasuremen
+ 612:../Src/main.c ****                 if( status ){
+ 613:../Src/main.c ****                     HandleError(ERR_DEMO_RANGE_MULTI);
+ 614:../Src/main.c ****                 }
+ 615:../Src/main.c ****                 /* Push data logging to UART */
+ 616:../Src/main.c ****                 trace_printf("%d,%u,%d,%d,%d\n", VL53L0XDevs[i].Id, TimeStamp_Get(), RangingMeasure
+ 617:../Src/main.c ****                 /* Store new ranging distance */
+ 618:../Src/main.c ****                 Sensor_SetNewRange(&VL53L0XDevs[i],&RangingMeasurementData);
+ 619:../Src/main.c ****                 /* Translate distance in bar graph (multiple device) */
+ 620:../Src/main.c ****                 c = RangeToLetter(&VL53L0XDevs[i],&RangingMeasurementData);
+ 621:../Src/main.c ****                 StrDisplay[i+1]=c;
+ 622:../Src/main.c ****             }
+ 623:../Src/main.c ****         }
+ 624:../Src/main.c ****         else{
+ 625:../Src/main.c ****             /* only one sensor */
+ 626:../Src/main.c ****         	/* Call All-In-One blocking API function */
+ 627:../Src/main.c ****             status = VL53L0X_PerformSingleRangingMeasurement(&VL53L0XDevs[SingleSensorNo],&RangingM
+ 628:../Src/main.c ****             if( status ==0 ){
+ 629:../Src/main.c ****             	/* Push data logging to UART */
+ 630:../Src/main.c ****             	trace_printf("%d,%u,%d,%d,%d\n", VL53L0XDevs[SingleSensorNo].Id, TimeStamp_Get(), Rang
+ 631:../Src/main.c ****             	Sensor_SetNewRange(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
+ 632:../Src/main.c ****                 /* Display distance in cm */
+ 633:../Src/main.c ****             	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
+ 634:../Src/main.c ****                     *compteur+=1;                               /////incrementation du compteur
+ 635:../Src/main.c ****                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  //
+ 636:../Src/main.c ****                     valeur=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////valeur lue par le
+ 637:../Src/main.c ****                     blink_led(valeur, compteur);                 /////fonction blink_led
+ 638:../Src/main.c ****                     transmit(compteur2, buffer, valeur);        /////fonction transmit vers pc
+ 639:../Src/main.c ****                     *compteur2+=1;                              /////incrementation du compteur2
+ 640:../Src/main.c ****                 }
+ 641:../Src/main.c ****                 else{                                           /////boucle de mesures incorrectes
+ 642:../Src/main.c ****                     sprintf(StrDisplay, "----");
+ 643:../Src/main.c ****                     StrDisplay[0]=VL53L0XDevs[SingleSensorNo].DevLetter;
+ 644:../Src/main.c ****                     //HAL_TIM_Base_Stop_IT(&htim3);             /////version courante : memoire de 
+ 645:../Src/main.c ****                     //htim3.Instance->ARR=2000;
+ 646:../Src/main.c ****                     //HAL_TIM_Base_Start_IT(&htim3);
+ 647:../Src/main.c ****                 }
+ 648:../Src/main.c ****             }
+ 649:../Src/main.c ****             else{
+ 650:../Src/main.c ****                 HandleError(ERR_DEMO_RANGE_ONE);
+ 651:../Src/main.c ****             }
+ 652:../Src/main.c ****         }
+ 653:../Src/main.c ****         XNUCLEO53L0A1_SetDisplayString(StrDisplay);
+ 654:../Src/main.c ****         /* Check blue button */
+ 655:../Src/main.c ****         if( !BSP_GetPushButton() ){
+ 656:../Src/main.c ****             over=1;
+ 657:../Src/main.c ****             break;
+ 658:../Src/main.c ****         }
+ARM GAS  /tmp/ccws6er7.s 			page 13
+
+
+ 659:../Src/main.c ****     }while( !over);
+ 660:../Src/main.c ****     /* Wait button to be un-pressed to decide if it is a short or long press */
+ 661:../Src/main.c ****     status=PusbButton_WaitUnPress();
+ 662:../Src/main.c ****     htim3.Instance->CNT=0;       /////remise a zero du timer de la led
+ 663:../Src/main.c ****     return status;
+ 664:../Src/main.c **** }
+ 665:../Src/main.c **** 
+ 666:../Src/main.c **** #if HAVE_ALARM_DEMO
+ 667:../Src/main.c **** struct AlrmMode_t {
+ 668:../Src/main.c ****     const int VL53L0X_Mode;
+ 669:../Src/main.c ****     const char *Name;
+ 670:../Src/main.c ****     uint32_t ThreshLow;
+ 671:../Src/main.c ****     uint32_t ThreshHigh;
+ 672:../Src/main.c **** };
+ 673:../Src/main.c **** 
+ 674:../Src/main.c **** struct AlrmMode_t AlarmModes[]={
+ 675:../Src/main.c ****         { .VL53L0X_Mode = VL53L0X_GPIOFUNCTIONALITY_THRESHOLD_CROSSED_LOW , .Name="Lo" , .ThreshLow
+ 676:../Src/main.c ****         { .VL53L0X_Mode = VL53L0X_GPIOFUNCTIONALITY_THRESHOLD_CROSSED_HIGH, .Name= "hi", .ThreshLow
+ 677:../Src/main.c ****         { .VL53L0X_Mode = VL53L0X_GPIOFUNCTIONALITY_THRESHOLD_CROSSED_OUT , .Name="out", .ThreshLow
+ 678:../Src/main.c **** };
+ 679:../Src/main.c **** 
+ 680:../Src/main.c **** VL53L0X_Error WaitStopCompleted(VL53L0X_DEV Dev) {
+ 681:../Src/main.c ****     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
+ 682:../Src/main.c ****     uint32_t StopCompleted=0;
+ 683:../Src/main.c ****     uint32_t LoopNb;
+ 684:../Src/main.c **** 
+ 685:../Src/main.c ****     // Wait until it finished
+ 686:../Src/main.c ****     // use timeout to avoid deadlock
+ 687:../Src/main.c ****     if (Status == VL53L0X_ERROR_NONE) {
+ 688:../Src/main.c ****         LoopNb = 0;
+ 689:../Src/main.c ****         do {
+ 690:../Src/main.c ****             Status = VL53L0X_GetStopCompletedStatus(Dev, &StopCompleted);
+ 691:../Src/main.c ****             if ((StopCompleted == 0x00) || Status != VL53L0X_ERROR_NONE) {
+ 692:../Src/main.c ****                 break;
+ 693:../Src/main.c ****             }
+ 694:../Src/main.c ****             LoopNb = LoopNb + 1;
+ 695:../Src/main.c ****             VL53L0X_PollingDelay(Dev);
+ 696:../Src/main.c ****         } while (LoopNb < VL53L0X_DEFAULT_MAX_LOOP);
+ 697:../Src/main.c **** 
+ 698:../Src/main.c ****         if (LoopNb >= VL53L0X_DEFAULT_MAX_LOOP) {
+ 699:../Src/main.c ****             Status = VL53L0X_ERROR_TIME_OUT;
+ 700:../Src/main.c ****         }
+ 701:../Src/main.c **** 
+ 702:../Src/main.c ****     }
+ 703:../Src/main.c **** 
+ 704:../Src/main.c ****     return Status;
+ 705:../Src/main.c **** }
+ 706:../Src/main.c **** 
+ 707:../Src/main.c **** 
+ 708:../Src/main.c **** void AlarmDemo(void){
+ 709:../Src/main.c ****     VL53L0X_Dev_t *pDev;
+ 710:../Src/main.c ****     uint8_t VhvSettings;
+ 711:../Src/main.c ****     uint8_t PhaseCal;
+ 712:../Src/main.c ****     uint32_t refSpadCount;
+ 713:../Src/main.c **** 	uint8_t isApertureSpads;
+ 714:../Src/main.c **** 	VL53L0X_RangingMeasurementData_t RangingMeasurementData;
+ 715:../Src/main.c ****     int status;
+ARM GAS  /tmp/ccws6er7.s 			page 14
+
+
+ 716:../Src/main.c ****     int Over=0;
+ 717:../Src/main.c ****     int Mode=0;
+ 718:../Src/main.c ****     char StrDisplay[5]="----";
+ 719:../Src/main.c **** 
+ 720:../Src/main.c ****     /* Only center device is used */
+ 721:../Src/main.c ****     pDev=&VL53L0XDevs[1];
+ 722:../Src/main.c **** 
+ 723:../Src/main.c **** 
+ 724:../Src/main.c ****     /* configure BSP/MCU center sensor interrupt */
+ 725:../Src/main.c ****     VL53L0A1_EXTI_IOConfigure(XNUCLEO53L0A1_DEV_CENTER, 0, 0);
+ 726:../Src/main.c ****     XNUCLEO53L0A1_SetIntrStateId(1, XNUCLEO53L0A1_DEV_CENTER);
+ 727:../Src/main.c **** 
+ 728:../Src/main.c ****     /* Initialize the device in continuous ranging mode */
+ 729:../Src/main.c **** 	VL53L0X_StaticInit(pDev);
+ 730:../Src/main.c **** 	VL53L0X_PerformRefCalibration(pDev, &VhvSettings, &PhaseCal);
+ 731:../Src/main.c **** 	VL53L0X_PerformRefSpadManagement(pDev, &refSpadCount, &isApertureSpads);
+ 732:../Src/main.c **** 	VL53L0X_SetInterMeasurementPeriodMilliSeconds(pDev, 250);
+ 733:../Src/main.c **** 	VL53L0X_SetDeviceMode(pDev, VL53L0X_DEVICEMODE_CONTINUOUS_RANGING);
+ 734:../Src/main.c **** 
+ 735:../Src/main.c ****     do{
+ 736:../Src/main.c ****        /* set sensor interrupt mode */
+ 737:../Src/main.c ****        VL53L0X_StopMeasurement(pDev);           // it is safer to do this while sensor is stopped
+ 738:../Src/main.c ****        VL53L0X_SetInterruptThresholds(pDev, VL53L0X_DEVICEMODE_CONTINUOUS_RANGING ,  AlarmModes[Mod
+ 739:../Src/main.c ****        status = VL53L0X_SetGpioConfig(pDev, 0, VL53L0X_DEVICEMODE_CONTINUOUS_RANGING, AlarmModes[Mo
+ 740:../Src/main.c ****        status = VL53L0X_ClearInterruptMask(pDev, -1); // clear interrupt pending if any
+ 741:../Src/main.c **** 
+ 742:../Src/main.c ****        /* Start continuous ranging */
+ 743:../Src/main.c ****        VL53L0X_StartMeasurement(pDev);
+ 744:../Src/main.c ****        IntrCounts[1]=0;
+ 745:../Src/main.c **** 
+ 746:../Src/main.c ****        /* Check for interrupt */
+ 747:../Src/main.c ****        do{
+ 748:../Src/main.c ****            __WFI();
+ 749:../Src/main.c ****            /* Interrupt received */
+ 750:../Src/main.c ****            if( IntrCounts[1] !=0 ){
+ 751:../Src/main.c ****         	   /* Reset interrupt counter */
+ 752:../Src/main.c ****                IntrCounts[1]=0;
+ 753:../Src/main.c ****                /* Get ranging data and display distance*/
+ 754:../Src/main.c ****                VL53L0X_GetRangingMeasurementData(pDev, &RangingMeasurementData);
+ 755:../Src/main.c ****                sprintf(StrDisplay, "%3dc",(int)RangingMeasurementData.RangeMilliMeter/10);
+ 756:../Src/main.c ****                /* Clear interrupt */
+ 757:../Src/main.c ****                status = VL53L0X_ClearInterruptMask(pDev, -1);
+ 758:../Src/main.c ****                /* keep display for at least 100ms otherwise user may never see it on display*/
+ 759:../Src/main.c ****                XNUCLEO53L0A1_SetDisplayString(StrDisplay);
+ 760:../Src/main.c ****                HAL_Delay(100);
+ 761:../Src/main.c ****            }
+ 762:../Src/main.c ****            else{
+ 763:../Src/main.c ****         	   /* No interrupt received => Display alarm mode */
+ 764:../Src/main.c ****                XNUCLEO53L0A1_SetDisplayString(AlarmModes[Mode].Name);
+ 765:../Src/main.c ****            }
+ 766:../Src/main.c ****            /* Check blue button */
+ 767:../Src/main.c ****            if( !BSP_GetPushButton() ){
+ 768:../Src/main.c ****                break;
+ 769:../Src/main.c ****            }
+ 770:../Src/main.c ****        }while(1);
+ 771:../Src/main.c ****        /* Wait button to be released to decide if it is a short or long press */
+ 772:../Src/main.c ****        status=PusbButton_WaitUnPress();
+ARM GAS  /tmp/ccws6er7.s 			page 15
+
+
+ 773:../Src/main.c ****        /* Long press => stop this demo */
+ 774:../Src/main.c ****        if( status )
+ 775:../Src/main.c ****            Over =1;
+ 776:../Src/main.c ****        /* Short press => change alarm mode */
+ 777:../Src/main.c ****        Mode=(Mode+1)%ARRAY_SIZE(AlarmModes);
+ 778:../Src/main.c ****     }while( !Over );
+ 779:../Src/main.c **** 
+ 780:../Src/main.c ****     /* Stop continuous ranging */
+ 781:../Src/main.c ****     VL53L0X_StopMeasurement(pDev);
+ 782:../Src/main.c **** 
+ 783:../Src/main.c ****     /* Ensure device is ready for other commands */
+ 784:../Src/main.c ****     WaitStopCompleted(pDev);
+ 785:../Src/main.c **** 
+ 786:../Src/main.c ****     /* Disable configuration of BSP/MCU center sensor interrupt */
+ 787:../Src/main.c ****     XNUCLEO53L0A1_SetIntrStateId(0, XNUCLEO53L0A1_DEV_CENTER);
+ 788:../Src/main.c ****     VL53L0A1_EXTI_IOUnconfigure(XNUCLEO53L0A1_DEV_CENTER);
+ 789:../Src/main.c **** }
+ 790:../Src/main.c **** #endif
+ 791:../Src/main.c **** 
+ 792:../Src/main.c **** void ResetAndDetectSensor(int SetDisplay){
+ 793:../Src/main.c ****     int nSensor;
+ 794:../Src/main.c ****     nSensor = DetectSensors(SetDisplay);
+ 795:../Src/main.c ****     /* at least one sensor and if one it must be the built-in one  */
+ 796:../Src/main.c ****     if( (nSensor <=0) ||  (nSensor ==1 && VL53L0XDevs[1].Present==0) ){
+ 797:../Src/main.c ****         HandleError(ERR_DETECT);
+ 798:../Src/main.c ****     }
+ 799:../Src/main.c **** }
+ 800:../Src/main.c **** 
+ 801:../Src/main.c **** /* USER CODE END 0 */
+ 802:../Src/main.c **** 
+ 803:../Src/main.c **** int main(void)
+ 804:../Src/main.c **** {
+ 805:../Src/main.c **** 
+ 806:../Src/main.c ****   /* USER CODE BEGIN 1 */
+ 807:../Src/main.c ****   int ExitWithLongPress;
+ 808:../Src/main.c ****   RangingConfig_e RangingConfig = LONG_RANGE;
+ 809:../Src/main.c ****   DemoMode_e DemoMode = RANGE_VALUE;
+ 810:../Src/main.c ****   int UseSensorsMask = 1<<XNUCLEO53L0A1_DEV_CENTER;
+ 811:../Src/main.c ****   /* USER CODE END 1 */
+ 812:../Src/main.c **** 
+ 813:../Src/main.c ****   /* MCU Configuration----------------------------------------------------------*/
+ 814:../Src/main.c **** 
+ 815:../Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+ 816:../Src/main.c ****   HAL_Init();
+ 817:../Src/main.c **** 
+ 818:../Src/main.c ****   /* Configure the system clock */
+ 819:../Src/main.c ****   SystemClock_Config();
+ 820:../Src/main.c **** 
+ 821:../Src/main.c ****   /* Initialize all configured peripherals */
+ 822:../Src/main.c ****   MX_GPIO_Init();
+ 823:../Src/main.c ****   SystemClock_Config();
+ 824:../Src/main.c ****   MX_I2C1_Init();
+ 825:../Src/main.c ****   MX_TIM3_Init();
+ 826:../Src/main.c ****   MX_USART2_UART_Init();
+ 827:../Src/main.c **** 
+ 828:../Src/main.c ****   /* USER CODE BEGIN 2 */
+ 829:../Src/main.c ****   XNUCLEO53L0A1_Init();
+ARM GAS  /tmp/ccws6er7.s 			page 16
+
+
+ 830:../Src/main.c ****   uart_printf(WelcomeMsg);
+ 831:../Src/main.c ****   XNUCLEO53L0A1_SetDisplayString("53L0");
+ 832:../Src/main.c ****   HAL_Delay(WelcomeTime);
+ 833:../Src/main.c ****   ResetAndDetectSensor(1);
+ 834:../Src/main.c ****   HAL_TIM_Base_Start_IT(&htim3); //£
+ 835:../Src/main.c **** 
+ 836:../Src/main.c ****   /* Set VL53L0X API trace level */
+ 837:../Src/main.c ****   VL53L0X_trace_config(NULL, TRACE_MODULE_NONE, TRACE_LEVEL_NONE, TRACE_FUNCTION_NONE); // No Trace
+ 838:../Src/main.c ****   //VL53L0X_trace_config(NULL,TRACE_MODULE_ALL, TRACE_LEVEL_ALL, TRACE_FUNCTION_ALL); // Full trace
+ 839:../Src/main.c **** 
+ 840:../Src/main.c **** 
+ 841:../Src/main.c ****   /* USER CODE END 2 */
+ 842:../Src/main.c **** 
+ 843:../Src/main.c ****   /* USER CODE BEGIN 3 */
+ 844:../Src/main.c ****   /* Infinite loop */
+ 845:../Src/main.c ****   /* USER CODE BEGIN WHILE */
+ 846:../Src/main.c ****   while (1)
+ 847:../Src/main.c ****   {
+ 848:../Src/main.c ****   /* USER CODE END WHILE */
+ 849:../Src/main.c ****       /* Display demo mode */
+ 850:../Src/main.c ****       XNUCLEO53L0A1_SetDisplayString(DemoModeTxt[DemoMode]);
+ 851:../Src/main.c ****       HAL_Delay(ModeChangeDispTime);
+ 852:../Src/main.c **** 
+ 853:../Src/main.c ****       /* Display Ranging config */
+ 854:../Src/main.c **** 	  XNUCLEO53L0A1_SetDisplayString(RangingConfigTxt[RangingConfig]);
+ 855:../Src/main.c **** 	  HAL_Delay(ModeChangeDispTime);
+ 856:../Src/main.c **** 
+ 857:../Src/main.c **** 	  /* Reset and Detect all sensors */
+ 858:../Src/main.c ****       ResetAndDetectSensor(0);
+ 859:../Src/main.c **** 
+ 860:../Src/main.c ****       /* Reset Timestamping */
+ 861:../Src/main.c ****       TimeStamp_Reset();
+ 862:../Src/main.c **** 
+ 863:../Src/main.c **** #if HAVE_ALARM_DEMO
+ 864:../Src/main.c ****       XNUCLEO53L0A1_SetDisplayString(TxtAlarm);
+ 865:../Src/main.c ****       HAL_Delay(ModeChangeDispTime);
+ 866:../Src/main.c ****       ResetAndDetectSensor(0);
+ 867:../Src/main.c ****       AlarmDemo();
+ 868:../Src/main.c **** #else
+ 869:../Src/main.c **** 
+ 870:../Src/main.c ****       /* Start Ranging demo */
+ 871:../Src/main.c ****       ExitWithLongPress = RangeDemo(UseSensorsMask, RangingConfig);
+ 872:../Src/main.c **** 
+ 873:../Src/main.c ****       /* Blue button has been pressed (long or short press) */
+ 874:../Src/main.c ****       if(ExitWithLongPress){
+ 875:../Src/main.c ****     	  /* Long press : change demo mode if multiple sensors present*/
+ 876:../Src/main.c ****     	  if( nDevPresent >1 ){
+ 877:../Src/main.c ****     		  /* If more than one sensor is present then toggle demo mode */
+ 878:../Src/main.c ****     		  DemoMode = (DemoMode == RANGE_VALUE) ? BAR_GRAPH : RANGE_VALUE;
+ 879:../Src/main.c ****     		  UseSensorsMask = (DemoMode == BAR_GRAPH) ? 0x7 : 1<<XNUCLEO53L0A1_DEV_CENTER;
+ 880:../Src/main.c ****     	  }
+ 881:../Src/main.c ****       } else {
+ 882:../Src/main.c ****     	  /* Short press : change ranging config */
+ 883:../Src/main.c ****     	  RangingConfig = (RangingConfig == LONG_RANGE) ? HIGH_SPEED : ((RangingConfig == HIGH_SPEED) 
+ 884:../Src/main.c ****       }
+ 885:../Src/main.c **** #endif
+ 886:../Src/main.c ****   }
+ARM GAS  /tmp/ccws6er7.s 			page 17
+
+
+ 887:../Src/main.c ****   /* USER CODE END 3 */
+ 888:../Src/main.c **** 
+ 889:../Src/main.c **** }
+ 890:../Src/main.c **** 
+ 891:../Src/main.c **** /** System Clock Configuration
+ 892:../Src/main.c **** */
+ 893:../Src/main.c **** void SystemClock_Config(void)
+ 894:../Src/main.c **** {
+ 895:../Src/main.c **** 
+ 896:../Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct;
+ 897:../Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+ 898:../Src/main.c **** 
+ 899:../Src/main.c ****   __PWR_CLK_ENABLE();
+ 900:../Src/main.c **** 
+ 901:../Src/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+ 902:../Src/main.c **** 
+ 903:../Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+ 904:../Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 905:../Src/main.c ****   RCC_OscInitStruct.HSICalibrationValue = 6;
+ 906:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 907:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+ 908:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLM = 16;
+ 909:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLN = 336;
+ 910:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+ 911:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLQ = 7;
+ 912:../Src/main.c ****   HAL_RCC_OscConfig(&RCC_OscInitStruct);
+ 913:../Src/main.c **** 
+ 914:../Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1;
+ 915:../Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 916:../Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 917:../Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 918:../Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 919:../Src/main.c ****   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
+ 920:../Src/main.c **** 
+ 921:../Src/main.c **** }
+ 922:../Src/main.c **** 
+ 923:../Src/main.c **** /* I2C1 init function */
+ 924:../Src/main.c **** void MX_I2C1_Init(void)
+ 925:../Src/main.c **** {
+ 926:../Src/main.c **** 
+ 927:../Src/main.c ****   hi2c1.Instance = I2C1;
+ 928:../Src/main.c ****   hi2c1.Init.ClockSpeed = 400000;
+ 929:../Src/main.c ****   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+ 930:../Src/main.c ****   hi2c1.Init.OwnAddress1 = 0;
+ 931:../Src/main.c ****   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+ 932:../Src/main.c ****   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
+ 933:../Src/main.c ****   hi2c1.Init.OwnAddress2 = 0;
+ 934:../Src/main.c ****   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLED;
+ 935:../Src/main.c ****   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLED;
+ 936:../Src/main.c ****   HAL_I2C_Init(&hi2c1);
+ 937:../Src/main.c **** 
+ 938:../Src/main.c **** }
+ 939:../Src/main.c **** 
+ 940:../Src/main.c **** /* TIM3 init function */
+ 941:../Src/main.c **** void MX_TIM3_Init(void)
+ 942:../Src/main.c **** {
+ 943:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 18
+
+
+ 944:../Src/main.c ****   TIM_ClockConfigTypeDef sClockSourceConfig;
+ 945:../Src/main.c ****   TIM_MasterConfigTypeDef sMasterConfig;
+ 946:../Src/main.c **** 
+ 947:../Src/main.c ****   htim3.Instance = TIM3;
+ 948:../Src/main.c ****   htim3.Init.Prescaler = 42000-1;
+ 949:../Src/main.c ****   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 950:../Src/main.c ****   htim3.Init.Period = 1000-1;
+ 951:../Src/main.c ****   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 952:../Src/main.c ****   HAL_TIM_Base_Init(&htim3);
+ 953:../Src/main.c **** 
+ 954:../Src/main.c ****   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+ 955:../Src/main.c ****   HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig);
+ 956:../Src/main.c **** 
+ 957:../Src/main.c ****   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+ 958:../Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 959:../Src/main.c ****   HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig);
+ 960:../Src/main.c **** 
+ 961:../Src/main.c **** }
+ 962:../Src/main.c **** 
+ 963:../Src/main.c **** /* USART2 init function */
+ 964:../Src/main.c **** void MX_USART2_UART_Init(void)
+ 965:../Src/main.c **** {
+ 966:../Src/main.c **** 
+ 967:../Src/main.c ****   huart2.Instance = USART2;
+ 968:../Src/main.c ****   huart2.Init.BaudRate = 9600;
+ 969:../Src/main.c ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
+ 970:../Src/main.c ****   huart2.Init.StopBits = UART_STOPBITS_1;
+ 971:../Src/main.c ****   huart2.Init.Parity = UART_PARITY_NONE;
+ 972:../Src/main.c ****   huart2.Init.Mode = UART_MODE_TX_RX;
+ 973:../Src/main.c ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 974:../Src/main.c ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+ 975:../Src/main.c ****   HAL_UART_Init(&huart2);
+ 976:../Src/main.c **** 
+ 977:../Src/main.c **** }
+ 978:../Src/main.c **** 
+ 979:../Src/main.c **** /** Configure pins as 
+ 980:../Src/main.c ****         * Analog 
+ 981:../Src/main.c ****         * Input 
+ 982:../Src/main.c ****         * Output
+ 983:../Src/main.c ****         * EVENT_OUT
+ 984:../Src/main.c ****         * EXTI
+ 985:../Src/main.c **** */
+ 986:../Src/main.c **** void MX_GPIO_Init(void)
+ 987:../Src/main.c **** {
+  28              		.loc 1 987 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  37 0002 86B0     		sub	sp, sp, #24
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+ 988:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 19
+
+
+ 989:../Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 990:../Src/main.c **** 
+ 991:../Src/main.c ****   /* GPIO Ports Clock Enable */
+ 992:../Src/main.c ****   __GPIOC_CLK_ENABLE();
+  40              		.loc 1 992 0
+  41 0004 134B     		ldr	r3, .L3
+  42 0006 1A6B     		ldr	r2, [r3, #48]
+  43 0008 42F00402 		orr	r2, r2, #4
+  44 000c 1A63     		str	r2, [r3, #48]
+ 993:../Src/main.c ****   __GPIOH_CLK_ENABLE();
+  45              		.loc 1 993 0
+  46 000e 1A6B     		ldr	r2, [r3, #48]
+  47 0010 42F08002 		orr	r2, r2, #128
+  48 0014 1A63     		str	r2, [r3, #48]
+ 994:../Src/main.c ****   __GPIOA_CLK_ENABLE();
+  49              		.loc 1 994 0
+  50 0016 1A6B     		ldr	r2, [r3, #48]
+  51 0018 42F00102 		orr	r2, r2, #1
+  52 001c 1A63     		str	r2, [r3, #48]
+ 995:../Src/main.c ****   __GPIOB_CLK_ENABLE();
+  53              		.loc 1 995 0
+  54 001e 1A6B     		ldr	r2, [r3, #48]
+  55 0020 42F00202 		orr	r2, r2, #2
+  56 0024 1A63     		str	r2, [r3, #48]
+ 996:../Src/main.c **** 
+ 997:../Src/main.c ****   /*Configure GPIO pin : PC13 */
+ 998:../Src/main.c ****   GPIO_InitStruct.Pin = GPIO_PIN_13;
+  57              		.loc 1 998 0
+  58 0026 4FF40053 		mov	r3, #8192
+  59 002a 0193     		str	r3, [sp, #4]
+ 999:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  60              		.loc 1 999 0
+  61 002c 0024     		movs	r4, #0
+  62 002e 0294     		str	r4, [sp, #8]
+1000:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  63              		.loc 1 1000 0
+  64 0030 0394     		str	r4, [sp, #12]
+1001:../Src/main.c ****   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  65              		.loc 1 1001 0
+  66 0032 0948     		ldr	r0, .L3+4
+  67 0034 01A9     		add	r1, sp, #4
+  68 0036 FFF7FEFF 		bl	HAL_GPIO_Init
+  69              	.LVL0:
+1002:../Src/main.c **** 
+1003:../Src/main.c ****   /*Configure GPIO pin : PA5 */
+1004:../Src/main.c ****   GPIO_InitStruct.Pin = GPIO_PIN_5;
+  70              		.loc 1 1004 0
+  71 003a 2023     		movs	r3, #32
+  72 003c 0193     		str	r3, [sp, #4]
+1005:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  73              		.loc 1 1005 0
+  74 003e 0123     		movs	r3, #1
+  75 0040 0293     		str	r3, [sp, #8]
+1006:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  76              		.loc 1 1006 0
+  77 0042 0394     		str	r4, [sp, #12]
+1007:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+ARM GAS  /tmp/ccws6er7.s 			page 20
+
+
+  78              		.loc 1 1007 0
+  79 0044 0494     		str	r4, [sp, #16]
+1008:../Src/main.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  80              		.loc 1 1008 0
+  81 0046 0548     		ldr	r0, .L3+8
+  82 0048 01A9     		add	r1, sp, #4
+  83 004a FFF7FEFF 		bl	HAL_GPIO_Init
+  84              	.LVL1:
+1009:../Src/main.c **** 
+1010:../Src/main.c **** }
+  85              		.loc 1 1010 0
+  86 004e 06B0     		add	sp, sp, #24
+  87              	.LCFI2:
+  88              		.cfi_def_cfa_offset 8
+  89              		@ sp needed
+  90 0050 10BD     		pop	{r4, pc}
+  91              	.L4:
+  92 0052 00BF     		.align	2
+  93              	.L3:
+  94 0054 00380240 		.word	1073887232
+  95 0058 00080240 		.word	1073874944
+  96 005c 00000240 		.word	1073872896
+  97              		.cfi_endproc
+  98              	.LFE132:
+ 100              		.section	.text.SystemClock_Config,"ax",%progbits
+ 101              		.align	2
+ 102              		.thumb
+ 103              		.thumb_func
+ 105              	SystemClock_Config:
+ 106              	.LFB128:
+ 894:../Src/main.c **** 
+ 107              		.loc 1 894 0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 72
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0000 30B5     		push	{r4, r5, lr}
+ 112              	.LCFI3:
+ 113              		.cfi_def_cfa_offset 12
+ 114              		.cfi_offset 4, -12
+ 115              		.cfi_offset 5, -8
+ 116              		.cfi_offset 14, -4
+ 117 0002 93B0     		sub	sp, sp, #76
+ 118              	.LCFI4:
+ 119              		.cfi_def_cfa_offset 88
+ 899:../Src/main.c **** 
+ 120              		.loc 1 899 0
+ 121 0004 174A     		ldr	r2, .L7
+ 122 0006 136C     		ldr	r3, [r2, #64]
+ 123 0008 43F08053 		orr	r3, r3, #268435456
+ 124 000c 1364     		str	r3, [r2, #64]
+ 901:../Src/main.c **** 
+ 125              		.loc 1 901 0
+ 126 000e A2F5E432 		sub	r2, r2, #116736
+ 127 0012 1368     		ldr	r3, [r2]
+ 128 0014 23F44043 		bic	r3, r3, #49152
+ 129 0018 43F40043 		orr	r3, r3, #32768
+ 130 001c 1360     		str	r3, [r2]
+ARM GAS  /tmp/ccws6er7.s 			page 21
+
+
+ 903:../Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 131              		.loc 1 903 0
+ 132 001e 0224     		movs	r4, #2
+ 133 0020 0694     		str	r4, [sp, #24]
+ 904:../Src/main.c ****   RCC_OscInitStruct.HSICalibrationValue = 6;
+ 134              		.loc 1 904 0
+ 135 0022 0123     		movs	r3, #1
+ 136 0024 0993     		str	r3, [sp, #36]
+ 905:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 137              		.loc 1 905 0
+ 138 0026 0623     		movs	r3, #6
+ 139 0028 0A93     		str	r3, [sp, #40]
+ 906:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+ 140              		.loc 1 906 0
+ 141 002a 0C94     		str	r4, [sp, #48]
+ 907:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLM = 16;
+ 142              		.loc 1 907 0
+ 143 002c 0025     		movs	r5, #0
+ 144 002e 0D95     		str	r5, [sp, #52]
+ 908:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLN = 336;
+ 145              		.loc 1 908 0
+ 146 0030 1023     		movs	r3, #16
+ 147 0032 0E93     		str	r3, [sp, #56]
+ 909:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+ 148              		.loc 1 909 0
+ 149 0034 4FF4A873 		mov	r3, #336
+ 150 0038 0F93     		str	r3, [sp, #60]
+ 910:../Src/main.c ****   RCC_OscInitStruct.PLL.PLLQ = 7;
+ 151              		.loc 1 910 0
+ 152 003a 0423     		movs	r3, #4
+ 153 003c 1093     		str	r3, [sp, #64]
+ 911:../Src/main.c ****   HAL_RCC_OscConfig(&RCC_OscInitStruct);
+ 154              		.loc 1 911 0
+ 155 003e 0723     		movs	r3, #7
+ 156 0040 1193     		str	r3, [sp, #68]
+ 912:../Src/main.c **** 
+ 157              		.loc 1 912 0
+ 158 0042 06A8     		add	r0, sp, #24
+ 159 0044 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 160              	.LVL2:
+ 914:../Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 161              		.loc 1 914 0
+ 162 0048 0523     		movs	r3, #5
+ 163 004a 0193     		str	r3, [sp, #4]
+ 915:../Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 164              		.loc 1 915 0
+ 165 004c 0294     		str	r4, [sp, #8]
+ 916:../Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 166              		.loc 1 916 0
+ 167 004e 0395     		str	r5, [sp, #12]
+ 917:../Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 168              		.loc 1 917 0
+ 169 0050 4FF48053 		mov	r3, #4096
+ 170 0054 0493     		str	r3, [sp, #16]
+ 918:../Src/main.c ****   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
+ 171              		.loc 1 918 0
+ 172 0056 0595     		str	r5, [sp, #20]
+ARM GAS  /tmp/ccws6er7.s 			page 22
+
+
+ 919:../Src/main.c **** 
+ 173              		.loc 1 919 0
+ 174 0058 01A8     		add	r0, sp, #4
+ 175 005a 2146     		mov	r1, r4
+ 176 005c FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 177              	.LVL3:
+ 921:../Src/main.c **** 
+ 178              		.loc 1 921 0
+ 179 0060 13B0     		add	sp, sp, #76
+ 180              	.LCFI5:
+ 181              		.cfi_def_cfa_offset 12
+ 182              		@ sp needed
+ 183 0062 30BD     		pop	{r4, r5, pc}
+ 184              	.L8:
+ 185              		.align	2
+ 186              	.L7:
+ 187 0064 00380240 		.word	1073887232
+ 188              		.cfi_endproc
+ 189              	.LFE128:
+ 191              		.section	.text.MX_I2C1_Init,"ax",%progbits
+ 192              		.align	2
+ 193              		.thumb
+ 194              		.thumb_func
+ 196              	MX_I2C1_Init:
+ 197              	.LFB129:
+ 925:../Src/main.c **** 
+ 198              		.loc 1 925 0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 0
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+ 202 0000 08B5     		push	{r3, lr}
+ 203              	.LCFI6:
+ 204              		.cfi_def_cfa_offset 8
+ 205              		.cfi_offset 3, -8
+ 206              		.cfi_offset 14, -4
+ 927:../Src/main.c ****   hi2c1.Init.ClockSpeed = 400000;
+ 207              		.loc 1 927 0
+ 208 0002 0948     		ldr	r0, .L11
+ 209 0004 094B     		ldr	r3, .L11+4
+ 210 0006 0360     		str	r3, [r0]
+ 928:../Src/main.c ****   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+ 211              		.loc 1 928 0
+ 212 0008 094B     		ldr	r3, .L11+8
+ 213 000a 4360     		str	r3, [r0, #4]
+ 929:../Src/main.c ****   hi2c1.Init.OwnAddress1 = 0;
+ 214              		.loc 1 929 0
+ 215 000c 0023     		movs	r3, #0
+ 216 000e 8360     		str	r3, [r0, #8]
+ 930:../Src/main.c ****   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+ 217              		.loc 1 930 0
+ 218 0010 C360     		str	r3, [r0, #12]
+ 931:../Src/main.c ****   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
+ 219              		.loc 1 931 0
+ 220 0012 4FF48042 		mov	r2, #16384
+ 221 0016 0261     		str	r2, [r0, #16]
+ 932:../Src/main.c ****   hi2c1.Init.OwnAddress2 = 0;
+ 222              		.loc 1 932 0
+ARM GAS  /tmp/ccws6er7.s 			page 23
+
+
+ 223 0018 4361     		str	r3, [r0, #20]
+ 933:../Src/main.c ****   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLED;
+ 224              		.loc 1 933 0
+ 225 001a 8361     		str	r3, [r0, #24]
+ 934:../Src/main.c ****   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLED;
+ 226              		.loc 1 934 0
+ 227 001c C361     		str	r3, [r0, #28]
+ 935:../Src/main.c ****   HAL_I2C_Init(&hi2c1);
+ 228              		.loc 1 935 0
+ 229 001e 0362     		str	r3, [r0, #32]
+ 936:../Src/main.c **** 
+ 230              		.loc 1 936 0
+ 231 0020 FFF7FEFF 		bl	HAL_I2C_Init
+ 232              	.LVL4:
+ 233 0024 08BD     		pop	{r3, pc}
+ 234              	.L12:
+ 235 0026 00BF     		.align	2
+ 236              	.L11:
+ 237 0028 00000000 		.word	hi2c1
+ 238 002c 00540040 		.word	1073763328
+ 239 0030 801A0600 		.word	400000
+ 240              		.cfi_endproc
+ 241              	.LFE129:
+ 243              		.section	.text.MX_TIM3_Init,"ax",%progbits
+ 244              		.align	2
+ 245              		.thumb
+ 246              		.thumb_func
+ 248              	MX_TIM3_Init:
+ 249              	.LFB130:
+ 942:../Src/main.c **** 
+ 250              		.loc 1 942 0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 24
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254 0000 30B5     		push	{r4, r5, lr}
+ 255              	.LCFI7:
+ 256              		.cfi_def_cfa_offset 12
+ 257              		.cfi_offset 4, -12
+ 258              		.cfi_offset 5, -8
+ 259              		.cfi_offset 14, -4
+ 260 0002 87B0     		sub	sp, sp, #28
+ 261              	.LCFI8:
+ 262              		.cfi_def_cfa_offset 40
+ 947:../Src/main.c ****   htim3.Init.Prescaler = 42000-1;
+ 263              		.loc 1 947 0
+ 264 0004 0F4C     		ldr	r4, .L15
+ 265 0006 104B     		ldr	r3, .L15+4
+ 266 0008 2360     		str	r3, [r4]
+ 948:../Src/main.c ****   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 267              		.loc 1 948 0
+ 268 000a 4AF20F43 		movw	r3, #41999
+ 269 000e 6360     		str	r3, [r4, #4]
+ 949:../Src/main.c ****   htim3.Init.Period = 1000-1;
+ 270              		.loc 1 949 0
+ 271 0010 0025     		movs	r5, #0
+ 272 0012 A560     		str	r5, [r4, #8]
+ 950:../Src/main.c ****   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ARM GAS  /tmp/ccws6er7.s 			page 24
+
+
+ 273              		.loc 1 950 0
+ 274 0014 40F2E733 		movw	r3, #999
+ 275 0018 E360     		str	r3, [r4, #12]
+ 951:../Src/main.c ****   HAL_TIM_Base_Init(&htim3);
+ 276              		.loc 1 951 0
+ 277 001a 2561     		str	r5, [r4, #16]
+ 952:../Src/main.c **** 
+ 278              		.loc 1 952 0
+ 279 001c 2046     		mov	r0, r4
+ 280 001e FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 281              	.LVL5:
+ 954:../Src/main.c ****   HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig);
+ 282              		.loc 1 954 0
+ 283 0022 06A9     		add	r1, sp, #24
+ 284 0024 4FF48053 		mov	r3, #4096
+ 285 0028 41F8103D 		str	r3, [r1, #-16]!
+ 955:../Src/main.c **** 
+ 286              		.loc 1 955 0
+ 287 002c 2046     		mov	r0, r4
+ 288 002e FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
+ 289              	.LVL6:
+ 957:../Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 290              		.loc 1 957 0
+ 291 0032 0095     		str	r5, [sp]
+ 958:../Src/main.c ****   HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig);
+ 292              		.loc 1 958 0
+ 293 0034 0195     		str	r5, [sp, #4]
+ 959:../Src/main.c **** 
+ 294              		.loc 1 959 0
+ 295 0036 2046     		mov	r0, r4
+ 296 0038 6946     		mov	r1, sp
+ 297 003a FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 298              	.LVL7:
+ 961:../Src/main.c **** 
+ 299              		.loc 1 961 0
+ 300 003e 07B0     		add	sp, sp, #28
+ 301              	.LCFI9:
+ 302              		.cfi_def_cfa_offset 12
+ 303              		@ sp needed
+ 304 0040 30BD     		pop	{r4, r5, pc}
+ 305              	.L16:
+ 306 0042 00BF     		.align	2
+ 307              	.L15:
+ 308 0044 00000000 		.word	htim3
+ 309 0048 00040040 		.word	1073742848
+ 310              		.cfi_endproc
+ 311              	.LFE130:
+ 313              		.section	.text.MX_USART2_UART_Init,"ax",%progbits
+ 314              		.align	2
+ 315              		.thumb
+ 316              		.thumb_func
+ 318              	MX_USART2_UART_Init:
+ 319              	.LFB131:
+ 965:../Src/main.c **** 
+ 320              		.loc 1 965 0
+ 321              		.cfi_startproc
+ 322              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccws6er7.s 			page 25
+
+
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324 0000 08B5     		push	{r3, lr}
+ 325              	.LCFI10:
+ 326              		.cfi_def_cfa_offset 8
+ 327              		.cfi_offset 3, -8
+ 328              		.cfi_offset 14, -4
+ 967:../Src/main.c ****   huart2.Init.BaudRate = 9600;
+ 329              		.loc 1 967 0
+ 330 0002 0848     		ldr	r0, .L19
+ 331 0004 084B     		ldr	r3, .L19+4
+ 332 0006 0360     		str	r3, [r0]
+ 968:../Src/main.c ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
+ 333              		.loc 1 968 0
+ 334 0008 4FF41653 		mov	r3, #9600
+ 335 000c 4360     		str	r3, [r0, #4]
+ 969:../Src/main.c ****   huart2.Init.StopBits = UART_STOPBITS_1;
+ 336              		.loc 1 969 0
+ 337 000e 0023     		movs	r3, #0
+ 338 0010 8360     		str	r3, [r0, #8]
+ 970:../Src/main.c ****   huart2.Init.Parity = UART_PARITY_NONE;
+ 339              		.loc 1 970 0
+ 340 0012 C360     		str	r3, [r0, #12]
+ 971:../Src/main.c ****   huart2.Init.Mode = UART_MODE_TX_RX;
+ 341              		.loc 1 971 0
+ 342 0014 0361     		str	r3, [r0, #16]
+ 972:../Src/main.c ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 343              		.loc 1 972 0
+ 344 0016 0C22     		movs	r2, #12
+ 345 0018 4261     		str	r2, [r0, #20]
+ 973:../Src/main.c ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+ 346              		.loc 1 973 0
+ 347 001a 8361     		str	r3, [r0, #24]
+ 974:../Src/main.c ****   HAL_UART_Init(&huart2);
+ 348              		.loc 1 974 0
+ 349 001c C361     		str	r3, [r0, #28]
+ 975:../Src/main.c **** 
+ 350              		.loc 1 975 0
+ 351 001e FFF7FEFF 		bl	HAL_UART_Init
+ 352              	.LVL8:
+ 353 0022 08BD     		pop	{r3, pc}
+ 354              	.L20:
+ 355              		.align	2
+ 356              	.L19:
+ 357 0024 00000000 		.word	huart2
+ 358 0028 00440040 		.word	1073759232
+ 359              		.cfi_endproc
+ 360              	.LFE131:
+ 362              		.section	.text.MX_TIM5_Init,"ax",%progbits
+ 363              		.align	2
+ 364              		.global	MX_TIM5_Init
+ 365              		.thumb
+ 366              		.thumb_func
+ 368              	MX_TIM5_Init:
+ 369              	.LFB112:
+ 166:../Src/main.c **** 
+ 370              		.loc 1 166 0
+ 371              		.cfi_startproc
+ARM GAS  /tmp/ccws6er7.s 			page 26
+
+
+ 372              		@ args = 0, pretend = 0, frame = 40
+ 373              		@ frame_needed = 0, uses_anonymous_args = 0
+ 374 0000 30B5     		push	{r4, r5, lr}
+ 375              	.LCFI11:
+ 376              		.cfi_def_cfa_offset 12
+ 377              		.cfi_offset 4, -12
+ 378              		.cfi_offset 5, -8
+ 379              		.cfi_offset 14, -4
+ 380 0002 8BB0     		sub	sp, sp, #44
+ 381              	.LCFI12:
+ 382              		.cfi_def_cfa_offset 56
+ 171:../Src/main.c ****   htim5.Init.Prescaler = 83;
+ 383              		.loc 1 171 0
+ 384 0004 0F4D     		ldr	r5, .L23
+ 385 0006 104B     		ldr	r3, .L23+4
+ 386 0008 2B60     		str	r3, [r5]
+ 172:../Src/main.c ****   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 387              		.loc 1 172 0
+ 388 000a 5323     		movs	r3, #83
+ 389 000c 6B60     		str	r3, [r5, #4]
+ 173:../Src/main.c ****   htim5.Init.Period = 0xFFFFFFFF;
+ 390              		.loc 1 173 0
+ 391 000e 0024     		movs	r4, #0
+ 392 0010 AC60     		str	r4, [r5, #8]
+ 174:../Src/main.c ****   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 393              		.loc 1 174 0
+ 394 0012 4FF0FF33 		mov	r3, #-1
+ 395 0016 EB60     		str	r3, [r5, #12]
+ 175:../Src/main.c ****   HAL_TIM_OC_Init(&htim5);
+ 396              		.loc 1 175 0
+ 397 0018 2C61     		str	r4, [r5, #16]
+ 176:../Src/main.c **** 
+ 398              		.loc 1 176 0
+ 399 001a 2846     		mov	r0, r5
+ 400 001c FFF7FEFF 		bl	HAL_TIM_OC_Init
+ 401              	.LVL9:
+ 178:../Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 402              		.loc 1 178 0
+ 403 0020 0894     		str	r4, [sp, #32]
+ 179:../Src/main.c ****   HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig);
+ 404              		.loc 1 179 0
+ 405 0022 0994     		str	r4, [sp, #36]
+ 180:../Src/main.c **** 
+ 406              		.loc 1 180 0
+ 407 0024 2846     		mov	r0, r5
+ 408 0026 08A9     		add	r1, sp, #32
+ 409 0028 FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 410              	.LVL10:
+ 182:../Src/main.c ****   sConfigOC.Pulse = 0;
+ 411              		.loc 1 182 0
+ 412 002c 0194     		str	r4, [sp, #4]
+ 183:../Src/main.c ****   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+ 413              		.loc 1 183 0
+ 414 002e 0294     		str	r4, [sp, #8]
+ 184:../Src/main.c ****   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 415              		.loc 1 184 0
+ 416 0030 0394     		str	r4, [sp, #12]
+ARM GAS  /tmp/ccws6er7.s 			page 27
+
+
+ 185:../Src/main.c ****   HAL_TIM_OC_ConfigChannel(&htim5, &sConfigOC, TIM_CHANNEL_1);
+ 417              		.loc 1 185 0
+ 418 0032 0594     		str	r4, [sp, #20]
+ 186:../Src/main.c **** 
+ 419              		.loc 1 186 0
+ 420 0034 2846     		mov	r0, r5
+ 421 0036 01A9     		add	r1, sp, #4
+ 422 0038 2246     		mov	r2, r4
+ 423 003a FFF7FEFF 		bl	HAL_TIM_OC_ConfigChannel
+ 424              	.LVL11:
+ 188:../Src/main.c **** 
+ 425              		.loc 1 188 0
+ 426 003e 0BB0     		add	sp, sp, #44
+ 427              	.LCFI13:
+ 428              		.cfi_def_cfa_offset 12
+ 429              		@ sp needed
+ 430 0040 30BD     		pop	{r4, r5, pc}
+ 431              	.L24:
+ 432 0042 00BF     		.align	2
+ 433              	.L23:
+ 434 0044 00000000 		.word	htim5
+ 435 0048 000C0040 		.word	1073744896
+ 436              		.cfi_endproc
+ 437              	.LFE112:
+ 439              		.section	.text.TimeStamp_Init,"ax",%progbits
+ 440              		.align	2
+ 441              		.global	TimeStamp_Init
+ 442              		.thumb
+ 443              		.thumb_func
+ 445              	TimeStamp_Init:
+ 446              	.LFB113:
+ 190:../Src/main.c ****     MX_TIM5_Init();
+ 447              		.loc 1 190 0
+ 448              		.cfi_startproc
+ 449              		@ args = 0, pretend = 0, frame = 0
+ 450              		@ frame_needed = 0, uses_anonymous_args = 0
+ 451 0000 08B5     		push	{r3, lr}
+ 452              	.LCFI14:
+ 453              		.cfi_def_cfa_offset 8
+ 454              		.cfi_offset 3, -8
+ 455              		.cfi_offset 14, -4
+ 191:../Src/main.c **** }
+ 456              		.loc 1 191 0
+ 457 0002 FFF7FEFF 		bl	MX_TIM5_Init
+ 458              	.LVL12:
+ 459 0006 08BD     		pop	{r3, pc}
+ 460              		.cfi_endproc
+ 461              	.LFE113:
+ 463              		.section	.text.TimeStamp_Reset,"ax",%progbits
+ 464              		.align	2
+ 465              		.global	TimeStamp_Reset
+ 466              		.thumb
+ 467              		.thumb_func
+ 469              	TimeStamp_Reset:
+ 470              	.LFB114:
+ 194:../Src/main.c ****     HAL_TIM_Base_Start(&htim5);
+ 471              		.loc 1 194 0
+ARM GAS  /tmp/ccws6er7.s 			page 28
+
+
+ 472              		.cfi_startproc
+ 473              		@ args = 0, pretend = 0, frame = 0
+ 474              		@ frame_needed = 0, uses_anonymous_args = 0
+ 475 0000 10B5     		push	{r4, lr}
+ 476              	.LCFI15:
+ 477              		.cfi_def_cfa_offset 8
+ 478              		.cfi_offset 4, -8
+ 479              		.cfi_offset 14, -4
+ 195:../Src/main.c ****     htim5.Instance->CNT=0;
+ 480              		.loc 1 195 0
+ 481 0002 044C     		ldr	r4, .L29
+ 482 0004 2046     		mov	r0, r4
+ 483 0006 FFF7FEFF 		bl	HAL_TIM_Base_Start
+ 484              	.LVL13:
+ 196:../Src/main.c **** }
+ 485              		.loc 1 196 0
+ 486 000a 2368     		ldr	r3, [r4]
+ 487 000c 0022     		movs	r2, #0
+ 488 000e 5A62     		str	r2, [r3, #36]
+ 489 0010 10BD     		pop	{r4, pc}
+ 490              	.L30:
+ 491 0012 00BF     		.align	2
+ 492              	.L29:
+ 493 0014 00000000 		.word	htim5
+ 494              		.cfi_endproc
+ 495              	.LFE114:
+ 497              		.section	.text.TimeStamp_Get,"ax",%progbits
+ 498              		.align	2
+ 499              		.global	TimeStamp_Get
+ 500              		.thumb
+ 501              		.thumb_func
+ 503              	TimeStamp_Get:
+ 504              	.LFB115:
+ 199:../Src/main.c ****     return htim5.Instance->CNT;
+ 505              		.loc 1 199 0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 0
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 509              		@ link register save eliminated.
+ 200:../Src/main.c **** }
+ 510              		.loc 1 200 0
+ 511 0000 014B     		ldr	r3, .L32
+ 512 0002 1B68     		ldr	r3, [r3]
+ 513 0004 586A     		ldr	r0, [r3, #36]
+ 201:../Src/main.c **** 
+ 514              		.loc 1 201 0
+ 515 0006 7047     		bx	lr
+ 516              	.L33:
+ 517              		.align	2
+ 518              	.L32:
+ 519 0008 00000000 		.word	htim5
+ 520              		.cfi_endproc
+ 521              	.LFE115:
+ 523              		.section	.text.BSP_GetPushButton,"ax",%progbits
+ 524              		.align	2
+ 525              		.global	BSP_GetPushButton
+ 526              		.thumb
+ARM GAS  /tmp/ccws6er7.s 			page 29
+
+
+ 527              		.thumb_func
+ 529              	BSP_GetPushButton:
+ 530              	.LFB116:
+ 233:../Src/main.c ****     GPIO_PinState state ;
+ 531              		.loc 1 233 0
+ 532              		.cfi_startproc
+ 533              		@ args = 0, pretend = 0, frame = 0
+ 534              		@ frame_needed = 0, uses_anonymous_args = 0
+ 535 0000 08B5     		push	{r3, lr}
+ 536              	.LCFI16:
+ 537              		.cfi_def_cfa_offset 8
+ 538              		.cfi_offset 3, -8
+ 539              		.cfi_offset 14, -4
+ 235:../Src/main.c ****     return state;
+ 540              		.loc 1 235 0
+ 541 0002 0348     		ldr	r0, .L36
+ 542 0004 4FF40051 		mov	r1, #8192
+ 543 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 544              	.LVL14:
+ 237:../Src/main.c **** 
+ 545              		.loc 1 237 0
+ 546 000c 08BD     		pop	{r3, pc}
+ 547              	.L37:
+ 548 000e 00BF     		.align	2
+ 549              	.L36:
+ 550 0010 00080240 		.word	1073874944
+ 551              		.cfi_endproc
+ 552              	.LFE116:
+ 554              		.section	.text.PusbButton_WaitUnPress,"ax",%progbits
+ 555              		.align	2
+ 556              		.global	PusbButton_WaitUnPress
+ 557              		.thumb
+ 558              		.thumb_func
+ 560              	PusbButton_WaitUnPress:
+ 561              	.LFB117:
+ 249:../Src/main.c ****     uint32_t TimeStarted;
+ 562              		.loc 1 249 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 566 0000 10B5     		push	{r4, lr}
+ 567              	.LCFI17:
+ 568              		.cfi_def_cfa_offset 8
+ 569              		.cfi_offset 4, -8
+ 570              		.cfi_offset 14, -4
+ 251:../Src/main.c ****     while( !BSP_GetPushButton() ){ ; /* debounce */
+ 571              		.loc 1 251 0
+ 572 0002 FFF7FEFF 		bl	HAL_GetTick
+ 573              	.LVL15:
+ 574 0006 0446     		mov	r4, r0
+ 575              	.LVL16:
+ 252:../Src/main.c ****         if(HAL_GetTick()- TimeStarted> PressBPSwicthTime){
+ 576              		.loc 1 252 0
+ 577 0008 08E0     		b	.L40
+ 578              	.LVL17:
+ 579              	.L41:
+ 253:../Src/main.c ****             XNUCLEO53L0A1_SetDisplayString (" rb ");
+ARM GAS  /tmp/ccws6er7.s 			page 30
+
+
+ 580              		.loc 1 253 0
+ 581 000a FFF7FEFF 		bl	HAL_GetTick
+ 582              	.LVL18:
+ 583 000e 001B     		subs	r0, r0, r4
+ 584 0010 B0F57A7F 		cmp	r0, #1000
+ 585 0014 02D9     		bls	.L40
+ 254:../Src/main.c ****         }
+ 586              		.loc 1 254 0
+ 587 0016 0848     		ldr	r0, .L43
+ 588 0018 FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 589              	.LVL19:
+ 590              	.L40:
+ 252:../Src/main.c ****         if(HAL_GetTick()- TimeStarted> PressBPSwicthTime){
+ 591              		.loc 1 252 0
+ 592 001c FFF7FEFF 		bl	BSP_GetPushButton
+ 593              	.LVL20:
+ 594 0020 0028     		cmp	r0, #0
+ 595 0022 F2D0     		beq	.L41
+ 257:../Src/main.c **** 
+ 596              		.loc 1 257 0
+ 597 0024 FFF7FEFF 		bl	HAL_GetTick
+ 598              	.LVL21:
+ 599 0028 001B     		subs	r0, r0, r4
+ 259:../Src/main.c **** 
+ 600              		.loc 1 259 0
+ 601 002a B0F57A7F 		cmp	r0, #1000
+ 602 002e 94BF     		ite	ls
+ 603 0030 0020     		movls	r0, #0
+ 604 0032 0120     		movhi	r0, #1
+ 605 0034 10BD     		pop	{r4, pc}
+ 606              	.LVL22:
+ 607              	.L44:
+ 608 0036 00BF     		.align	2
+ 609              	.L43:
+ 610 0038 00000000 		.word	.LC0
+ 611              		.cfi_endproc
+ 612              	.LFE117:
+ 614              		.section	.text.HandleError,"ax",%progbits
+ 615              		.align	2
+ 616              		.global	HandleError
+ 617              		.thumb
+ 618              		.thumb_func
+ 620              	HandleError:
+ 621              	.LFB118:
+ 284:../Src/main.c ****     char msg[16];
+ 622              		.loc 1 284 0
+ 623              		.cfi_startproc
+ 624              		@ args = 0, pretend = 0, frame = 16
+ 625              		@ frame_needed = 0, uses_anonymous_args = 0
+ 626              	.LVL23:
+ 627 0000 00B5     		push	{lr}
+ 628              	.LCFI18:
+ 629              		.cfi_def_cfa_offset 4
+ 630              		.cfi_offset 14, -4
+ 631 0002 85B0     		sub	sp, sp, #20
+ 632              	.LCFI19:
+ 633              		.cfi_def_cfa_offset 24
+ARM GAS  /tmp/ccws6er7.s 			page 31
+
+
+ 634 0004 0246     		mov	r2, r0
+ 286:../Src/main.c ****     XNUCLEO53L0A1_SetDisplayString(msg);
+ 635              		.loc 1 286 0
+ 636 0006 6846     		mov	r0, sp
+ 637              	.LVL24:
+ 638 0008 0349     		ldr	r1, .L48
+ 639 000a FFF7FEFF 		bl	sprintf
+ 640              	.LVL25:
+ 287:../Src/main.c ****     while(1){};
+ 641              		.loc 1 287 0
+ 642 000e 6846     		mov	r0, sp
+ 643 0010 FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 644              	.LVL26:
+ 645              	.L46:
+ 288:../Src/main.c **** }
+ 646              		.loc 1 288 0 discriminator 1
+ 647 0014 FEE7     		b	.L46
+ 648              	.L49:
+ 649 0016 00BF     		.align	2
+ 650              	.L48:
+ 651 0018 08000000 		.word	.LC1
+ 652              		.cfi_endproc
+ 653              	.LFE118:
+ 655              		.section	.text.DetectSensors,"ax",%progbits
+ 656              		.align	2
+ 657              		.global	DetectSensors
+ 658              		.thumb
+ 659              		.thumb_func
+ 661              	DetectSensors:
+ 662              	.LFB119:
+ 297:../Src/main.c ****     int i;
+ 663              		.loc 1 297 0
+ 664              		.cfi_startproc
+ 665              		@ args = 0, pretend = 0, frame = 8
+ 666              		@ frame_needed = 0, uses_anonymous_args = 0
+ 667              	.LVL27:
+ 668 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 669              	.LCFI20:
+ 670              		.cfi_def_cfa_offset 24
+ 671              		.cfi_offset 4, -24
+ 672              		.cfi_offset 5, -20
+ 673              		.cfi_offset 6, -16
+ 674              		.cfi_offset 7, -12
+ 675              		.cfi_offset 8, -8
+ 676              		.cfi_offset 14, -4
+ 677 0004 82B0     		sub	sp, sp, #8
+ 678              	.LCFI21:
+ 679              		.cfi_def_cfa_offset 32
+ 680 0006 0746     		mov	r7, r0
+ 303:../Src/main.c ****     /* Reset all */
+ 681              		.loc 1 303 0
+ 682 0008 4E4B     		ldr	r3, .L65
+ 683 000a 93E80300 		ldmia	r3, {r0, r1}
+ 684              	.LVL28:
+ 685 000e 0090     		str	r0, [sp]
+ 686 0010 8DF80410 		strb	r1, [sp, #4]
+ 305:../Src/main.c ****     for (i = 0; i < 3; i++)
+ARM GAS  /tmp/ccws6er7.s 			page 32
+
+
+ 687              		.loc 1 305 0
+ 688 0014 0024     		movs	r4, #0
+ 689 0016 4C4B     		ldr	r3, .L65+4
+ 690 0018 1C60     		str	r4, [r3]
+ 691              	.LVL29:
+ 306:../Src/main.c ****         status = XNUCLEO53L0A1_ResetId(i, 0);
+ 692              		.loc 1 306 0
+ 693 001a 04E0     		b	.L51
+ 694              	.LVL30:
+ 695              	.L52:
+ 307:../Src/main.c **** 
+ 696              		.loc 1 307 0 discriminator 3
+ 697 001c 2046     		mov	r0, r4
+ 698 001e 0021     		movs	r1, #0
+ 699 0020 FFF7FEFF 		bl	XNUCLEO53L0A1_ResetId
+ 700              	.LVL31:
+ 306:../Src/main.c ****         status = XNUCLEO53L0A1_ResetId(i, 0);
+ 701              		.loc 1 306 0 discriminator 3
+ 702 0024 0134     		adds	r4, r4, #1
+ 703              	.LVL32:
+ 704              	.L51:
+ 306:../Src/main.c ****         status = XNUCLEO53L0A1_ResetId(i, 0);
+ 705              		.loc 1 306 0 is_stmt 0 discriminator 1
+ 706 0026 022C     		cmp	r4, #2
+ 707 0028 F8DD     		ble	.L52
+ 708 002a 0025     		movs	r5, #0
+ 709 002c 60E0     		b	.L53
+ 710              	.LVL33:
+ 711              	.L57:
+ 712              	.LBB2:
+ 312:../Src/main.c ****         pDev->I2cDevAddr = 0x52;
+ 713              		.loc 1 312 0 is_stmt 1
+ 714 002e 4FF4C874 		mov	r4, #400
+ 715 0032 464B     		ldr	r3, .L65+8
+ 716 0034 04FB0534 		mla	r4, r4, r5, r3
+ 717              	.LVL34:
+ 313:../Src/main.c ****         pDev->Present = 0;
+ 718              		.loc 1 313 0
+ 719 0038 5223     		movs	r3, #82
+ 720 003a 84F86031 		strb	r3, [r4, #352]
+ 314:../Src/main.c ****         status = XNUCLEO53L0A1_ResetId( pDev->Id, 1);
+ 721              		.loc 1 314 0
+ 722 003e 0023     		movs	r3, #0
+ 723 0040 C4F86831 		str	r3, [r4, #360]
+ 315:../Src/main.c ****         HAL_Delay(2);
+ 724              		.loc 1 315 0
+ 725 0044 D4F86401 		ldr	r0, [r4, #356]
+ 726 0048 0121     		movs	r1, #1
+ 727 004a FFF7FEFF 		bl	XNUCLEO53L0A1_ResetId
+ 728              	.LVL35:
+ 729 004e 0646     		mov	r6, r0
+ 730              	.LVL36:
+ 316:../Src/main.c ****         FinalAddress=0x52+(i+1)*2;
+ 731              		.loc 1 316 0
+ 732 0050 0220     		movs	r0, #2
+ 733              	.LVL37:
+ 734 0052 FFF7FEFF 		bl	HAL_Delay
+ARM GAS  /tmp/ccws6er7.s 			page 33
+
+
+ 735              	.LVL38:
+ 317:../Src/main.c **** 
+ 736              		.loc 1 317 0
+ 737 0056 05F12A03 		add	r3, r5, #42
+ 738 005a 4FEA4308 		lsl	r8, r3, #1
+ 739              	.LVL39:
+ 321:../Src/main.c ****         		status = VL53L0X_WrByte(pDev, 0x88, 0x00);
+ 740              		.loc 1 321 0
+ 741 005e 26B9     		cbnz	r6, .L54
+ 322:../Src/main.c **** 
+ 742              		.loc 1 322 0
+ 743 0060 2046     		mov	r0, r4
+ 744 0062 8821     		movs	r1, #136
+ 745 0064 0022     		movs	r2, #0
+ 746 0066 FFF7FEFF 		bl	VL53L0X_WrByte
+ 747              	.LVL40:
+ 748              	.L54:
+ 325:../Src/main.c ****             if (status) {
+ 749              		.loc 1 325 0
+ 750 006a 2046     		mov	r0, r4
+ 751 006c C021     		movs	r1, #192
+ 752 006e 0DF10602 		add	r2, sp, #6
+ 753 0072 FFF7FEFF 		bl	VL53L0X_RdWord
+ 754              	.LVL41:
+ 755 0076 0346     		mov	r3, r0
+ 756              	.LVL42:
+ 326:../Src/main.c ****                 debug_printf("#%d Read id fail\n", i);
+ 757              		.loc 1 326 0
+ 758 0078 A0BB     		cbnz	r0, .L55
+ 330:../Src/main.c **** 				/* Sensor is found => Change its I2C address to final one */
+ 759              		.loc 1 330 0
+ 760 007a BDF80620 		ldrh	r2, [sp, #6]
+ 761 007e 4EF6AA63 		movw	r3, #61098
+ 762 0082 9A42     		cmp	r2, r3
+ 763 0084 2DD1     		bne	.L62
+ 332:../Src/main.c ****                 if (status != 0) {
+ 764              		.loc 1 332 0
+ 765 0086 5FFA88F8 		uxtb	r8, r8
+ 766              	.LVL43:
+ 767 008a 2046     		mov	r0, r4
+ 768              	.LVL44:
+ 769 008c 4146     		mov	r1, r8
+ 770 008e FFF7FEFF 		bl	VL53L0X_SetDeviceAddress
+ 771              	.LVL45:
+ 772 0092 0346     		mov	r3, r0
+ 773              	.LVL46:
+ 333:../Src/main.c ****                     debug_printf("#i VL53L0X_SetDeviceAddress fail\n", i);
+ 774              		.loc 1 333 0
+ 775 0094 30BB     		cbnz	r0, .L55
+ 337:../Src/main.c ****                 /* Check all is OK with the new I2C address and initialize the sensor */
+ 776              		.loc 1 337 0
+ 777 0096 4FF4C873 		mov	r3, #400
+ 778 009a 2C4A     		ldr	r2, .L65+8
+ 779 009c 03FB0523 		mla	r3, r3, r5, r2
+ 780 00a0 83F86081 		strb	r8, [r3, #352]
+ 339:../Src/main.c ****                 if (status != 0) {
+ 781              		.loc 1 339 0
+ARM GAS  /tmp/ccws6er7.s 			page 34
+
+
+ 782 00a4 2046     		mov	r0, r4
+ 783              	.LVL47:
+ 784 00a6 C021     		movs	r1, #192
+ 785 00a8 0DF10602 		add	r2, sp, #6
+ 786 00ac FFF7FEFF 		bl	VL53L0X_RdWord
+ 787              	.LVL48:
+ 788 00b0 0346     		mov	r3, r0
+ 789              	.LVL49:
+ 340:../Src/main.c **** 					debug_printf("#i VL53L0X_RdWord fail\n", i);
+ 790              		.loc 1 340 0
+ 791 00b2 B8B9     		cbnz	r0, .L55
+ 345:../Src/main.c ****                 if( status == 0 ){
+ 792              		.loc 1 345 0
+ 793 00b4 2046     		mov	r0, r4
+ 794              	.LVL50:
+ 795 00b6 FFF7FEFF 		bl	VL53L0X_DataInit
+ 796              	.LVL51:
+ 797 00ba 0346     		mov	r3, r0
+ 798              	.LVL52:
+ 346:../Src/main.c ****                     pDev->Present = 1;
+ 799              		.loc 1 346 0
+ 800 00bc 90B9     		cbnz	r0, .L55
+ 347:../Src/main.c ****                 }
+ 801              		.loc 1 347 0
+ 802 00be 4FF4C872 		mov	r2, #400
+ 803 00c2 2249     		ldr	r1, .L65+8
+ 804 00c4 02FB0511 		mla	r1, r2, r5, r1
+ 805 00c8 0122     		movs	r2, #1
+ 806 00ca C1F86821 		str	r2, [r1, #360]
+ 354:../Src/main.c ****                 nDevMask |= 1 << i;
+ 807              		.loc 1 354 0
+ 808 00ce 1E48     		ldr	r0, .L65+4
+ 809              	.LVL53:
+ 810 00d0 0168     		ldr	r1, [r0]
+ 811 00d2 1144     		add	r1, r1, r2
+ 812 00d4 0160     		str	r1, [r0]
+ 355:../Src/main.c ****                 pDev->Present = 1;
+ 813              		.loc 1 355 0
+ 814 00d6 AA40     		lsls	r2, r2, r5
+ 815 00d8 1D48     		ldr	r0, .L65+12
+ 816 00da 0168     		ldr	r1, [r0]
+ 817 00dc 0A43     		orrs	r2, r2, r1
+ 818 00de 0260     		str	r2, [r0]
+ 819 00e0 00E0     		b	.L55
+ 820              	.LVL54:
+ 821              	.L62:
+ 360:../Src/main.c ****             }
+ 822              		.loc 1 360 0
+ 823 00e2 0123     		movs	r3, #1
+ 824              	.LVL55:
+ 825              	.L55:
+ 364:../Src/main.c ****             XNUCLEO53L0A1_ResetId(i, 0);
+ 826              		.loc 1 364 0
+ 827 00e4 1BB1     		cbz	r3, .L56
+ 365:../Src/main.c ****         }
+ 828              		.loc 1 365 0
+ 829 00e6 2846     		mov	r0, r5
+ARM GAS  /tmp/ccws6er7.s 			page 35
+
+
+ 830 00e8 0021     		movs	r1, #0
+ 831 00ea FFF7FEFF 		bl	XNUCLEO53L0A1_ResetId
+ 832              	.LVL56:
+ 833              	.L56:
+ 834              	.LBE2:
+ 310:../Src/main.c ****         VL53L0X_Dev_t *pDev;
+ 835              		.loc 1 310 0 discriminator 2
+ 836 00ee 0135     		adds	r5, r5, #1
+ 837              	.LVL57:
+ 838              	.L53:
+ 310:../Src/main.c ****         VL53L0X_Dev_t *pDev;
+ 839              		.loc 1 310 0 is_stmt 0 discriminator 1
+ 840 00f0 022D     		cmp	r5, #2
+ 841 00f2 9CDD     		ble	.L57
+ 369:../Src/main.c ****         for(i=0; i<3; i++){
+ 842              		.loc 1 369 0 is_stmt 1
+ 843 00f4 A7B9     		cbnz	r7, .L63
+ 844 00f6 20E0     		b	.L59
+ 845              	.LVL58:
+ 846              	.L61:
+ 371:../Src/main.c ****                 PresentMsg[i+1]=VL53L0XDevs[i].DevLetter;
+ 847              		.loc 1 371 0
+ 848 00f8 4FF4C872 		mov	r2, #400
+ 849 00fc 1349     		ldr	r1, .L65+8
+ 850 00fe 02FB0312 		mla	r2, r2, r3, r1
+ 851 0102 D2F86821 		ldr	r2, [r2, #360]
+ 852 0106 4AB1     		cbz	r2, .L60
+ 372:../Src/main.c ****             }
+ 853              		.loc 1 372 0
+ 854 0108 4FF4C872 		mov	r2, #400
+ 855 010c 02FB0312 		mla	r2, r2, r3, r1
+ 856 0110 92F86111 		ldrb	r1, [r2, #353]	@ zero_extendqisi2
+ 857 0114 02AA     		add	r2, sp, #8
+ 858 0116 1A44     		add	r2, r2, r3
+ 859 0118 02F8071C 		strb	r1, [r2, #-7]
+ 860              	.L60:
+ 370:../Src/main.c ****             if( VL53L0XDevs[i].Present ){
+ 861              		.loc 1 370 0 discriminator 2
+ 862 011c 0133     		adds	r3, r3, #1
+ 863              	.LVL59:
+ 864 011e 00E0     		b	.L58
+ 865              	.LVL60:
+ 866              	.L63:
+ 867 0120 0023     		movs	r3, #0
+ 868              	.LVL61:
+ 869              	.L58:
+ 370:../Src/main.c ****             if( VL53L0XDevs[i].Present ){
+ 870              		.loc 1 370 0 is_stmt 0 discriminator 1
+ 871 0122 022B     		cmp	r3, #2
+ 872 0124 E8DD     		ble	.L61
+ 375:../Src/main.c ****         XNUCLEO53L0A1_SetDisplayString(PresentMsg);
+ 873              		.loc 1 375 0 is_stmt 1
+ 874 0126 02A8     		add	r0, sp, #8
+ 875 0128 2023     		movs	r3, #32
+ 876              	.LVL62:
+ 877 012a 00F8083D 		strb	r3, [r0, #-8]!
+ 376:../Src/main.c ****         HAL_Delay(1000);
+ARM GAS  /tmp/ccws6er7.s 			page 36
+
+
+ 878              		.loc 1 376 0
+ 879 012e FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 880              	.LVL63:
+ 377:../Src/main.c ****     }
+ 881              		.loc 1 377 0
+ 882 0132 4FF47A70 		mov	r0, #1000
+ 883 0136 FFF7FEFF 		bl	HAL_Delay
+ 884              	.LVL64:
+ 885              	.L59:
+ 381:../Src/main.c **** 
+ 886              		.loc 1 381 0
+ 887 013a 034B     		ldr	r3, .L65+4
+ 888 013c 1868     		ldr	r0, [r3]
+ 889 013e 02B0     		add	sp, sp, #8
+ 890              	.LCFI22:
+ 891              		.cfi_def_cfa_offset 24
+ 892              		@ sp needed
+ 893 0140 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 894              	.LVL65:
+ 895              	.L66:
+ 896              		.align	2
+ 897              	.L65:
+ 898 0144 10000000 		.word	.LC2
+ 899 0148 00000000 		.word	.LANCHOR0
+ 900 014c 00000000 		.word	.LANCHOR1
+ 901 0150 00000000 		.word	nDevMask
+ 902              		.cfi_endproc
+ 903              	.LFE119:
+ 905              		.section	.text.SetupSingleShot,"ax",%progbits
+ 906              		.align	2
+ 907              		.global	SetupSingleShot
+ 908              		.thumb
+ 909              		.thumb_func
+ 911              	SetupSingleShot:
+ 912              	.LFB120:
+ 386:../Src/main.c ****     int i;
+ 913              		.loc 1 386 0
+ 914              		.cfi_startproc
+ 915              		@ args = 0, pretend = 0, frame = 16
+ 916              		@ frame_needed = 0, uses_anonymous_args = 0
+ 917              	.LVL66:
+ 918 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 919              	.LCFI23:
+ 920              		.cfi_def_cfa_offset 36
+ 921              		.cfi_offset 4, -36
+ 922              		.cfi_offset 5, -32
+ 923              		.cfi_offset 6, -28
+ 924              		.cfi_offset 7, -24
+ 925              		.cfi_offset 8, -20
+ 926              		.cfi_offset 9, -16
+ 927              		.cfi_offset 10, -12
+ 928              		.cfi_offset 11, -8
+ 929              		.cfi_offset 14, -4
+ 930 0004 85B0     		sub	sp, sp, #20
+ 931              	.LCFI24:
+ 932              		.cfi_def_cfa_offset 56
+ 933 0006 0646     		mov	r6, r0
+ARM GAS  /tmp/ccws6er7.s 			page 37
+
+
+ 934              	.LVL67:
+ 397:../Src/main.c **** 
+ 935              		.loc 1 397 0
+ 936 0008 4FF00A0B 		mov	fp, #10
+ 396:../Src/main.c **** 	uint8_t finalRangeVcselPeriod = 10;
+ 937              		.loc 1 396 0
+ 938 000c 4FF00E0A 		mov	r10, #14
+ 395:../Src/main.c **** 	uint8_t preRangeVcselPeriod = 14;
+ 939              		.loc 1 395 0
+ 940 0010 48F2E809 		movw	r9, #33000
+ 394:../Src/main.c **** 	uint32_t timingBudget = 33000;
+ 941              		.loc 1 394 0
+ 942 0014 4FF49018 		mov	r8, #1179648
+ 393:../Src/main.c **** 	FixPoint1616_t sigmaLimit = (FixPoint1616_t)(18*65536);
+ 943              		.loc 1 393 0
+ 944 0018 4FF48047 		mov	r7, #16384
+ 399:../Src/main.c ****         if( VL53L0XDevs[i].Present){
+ 945              		.loc 1 399 0
+ 946 001c 0024     		movs	r4, #0
+ 947 001e 77E0     		b	.L68
+ 948              	.LVL68:
+ 949              	.L74:
+ 400:../Src/main.c ****             status=VL53L0X_StaticInit(&VL53L0XDevs[i]);
+ 950              		.loc 1 400 0
+ 951 0020 4FF4C873 		mov	r3, #400
+ 952 0024 3D4A     		ldr	r2, .L77
+ 953 0026 03FB0423 		mla	r3, r3, r4, r2
+ 954 002a D3F86831 		ldr	r3, [r3, #360]
+ 955 002e 002B     		cmp	r3, #0
+ 956 0030 6DD0     		beq	.L69
+ 401:../Src/main.c ****             if( status ){
+ 957              		.loc 1 401 0
+ 958 0032 4FF4C873 		mov	r3, #400
+ 959 0036 03FB0425 		mla	r5, r3, r4, r2
+ 960 003a 2846     		mov	r0, r5
+ 961 003c FFF7FEFF 		bl	VL53L0X_StaticInit
+ 962              	.LVL69:
+ 406:../Src/main.c **** 			if( status ){
+ 963              		.loc 1 406 0
+ 964 0040 2846     		mov	r0, r5
+ 965 0042 0DF10F01 		add	r1, sp, #15
+ 966 0046 0DF10E02 		add	r2, sp, #14
+ 967 004a FFF7FEFF 		bl	VL53L0X_PerformRefCalibration
+ 968              	.LVL70:
+ 411:../Src/main.c **** 			if( status ){
+ 969              		.loc 1 411 0
+ 970 004e 2846     		mov	r0, r5
+ 971 0050 02A9     		add	r1, sp, #8
+ 972 0052 0DF10702 		add	r2, sp, #7
+ 973 0056 FFF7FEFF 		bl	VL53L0X_PerformRefSpadManagement
+ 974              	.LVL71:
+ 416:../Src/main.c ****             if( status ){
+ 975              		.loc 1 416 0
+ 976 005a 2846     		mov	r0, r5
+ 977 005c 0021     		movs	r1, #0
+ 978 005e FFF7FEFF 		bl	VL53L0X_SetDeviceMode
+ 979              	.LVL72:
+ARM GAS  /tmp/ccws6er7.s 			page 38
+
+
+ 421:../Src/main.c **** 			if( status ){
+ 980              		.loc 1 421 0
+ 981 0062 2846     		mov	r0, r5
+ 982 0064 0021     		movs	r1, #0
+ 983 0066 0122     		movs	r2, #1
+ 984 0068 FFF7FEFF 		bl	VL53L0X_SetLimitCheckEnable
+ 985              	.LVL73:
+ 426:../Src/main.c **** 			if( status ){
+ 986              		.loc 1 426 0
+ 987 006c 2846     		mov	r0, r5
+ 988 006e 0121     		movs	r1, #1
+ 989 0070 0A46     		mov	r2, r1
+ 990 0072 FFF7FEFF 		bl	VL53L0X_SetLimitCheckEnable
+ 991              	.LVL74:
+ 431:../Src/main.c ****             case LONG_RANGE:
+ 992              		.loc 1 431 0
+ 993 0076 012E     		cmp	r6, #1
+ 994 0078 0DD0     		beq	.L71
+ 995 007a BEB1     		cbz	r6, .L75
+ 996 007c 022E     		cmp	r6, #2
+ 997 007e 1FD1     		bne	.L72
+ 998              	.LVL75:
+ 444:../Src/main.c **** 				break;
+ 999              		.loc 1 444 0
+ 1000 0080 4FF00A0B 		mov	fp, #10
+ 443:../Src/main.c **** 				finalRangeVcselPeriod = 10;
+ 1001              		.loc 1 443 0
+ 1002 0084 4FF00E0A 		mov	r10, #14
+ 442:../Src/main.c **** 				preRangeVcselPeriod = 14; //laser pulse periods
+ 1003              		.loc 1 442 0
+ 1004 0088 DFF89490 		ldr	r9, .L77+4
+ 441:../Src/main.c **** 				timingBudget = 200000; //200ms
+ 1005              		.loc 1 441 0
+ 1006 008c 4FF49018 		mov	r8, #1179648
+ 440:../Src/main.c **** 				sigmaLimit = (FixPoint1616_t)(18*65536);
+ 1007              		.loc 1 440 0
+ 1008 0090 4FF48047 		mov	r7, #16384
+ 445:../Src/main.c ****             case HIGH_SPEED:
+ 1009              		.loc 1 445 0
+ 1010 0094 14E0     		b	.L72
+ 1011              	.LVL76:
+ 1012              	.L71:
+ 451:../Src/main.c **** 				break;
+ 1013              		.loc 1 451 0
+ 1014 0096 4FF00A0B 		mov	fp, #10
+ 450:../Src/main.c **** 				finalRangeVcselPeriod = 10;
+ 1015              		.loc 1 450 0
+ 1016 009a 4FF00E0A 		mov	r10, #14
+ 449:../Src/main.c **** 				preRangeVcselPeriod = 14;
+ 1017              		.loc 1 449 0
+ 1018 009e 44F62069 		movw	r9, #20000
+ 448:../Src/main.c **** 				timingBudget = 20000; //20ms
+ 1019              		.loc 1 448 0
+ 1020 00a2 4FF40018 		mov	r8, #2097152
+ 447:../Src/main.c **** 				sigmaLimit = (FixPoint1616_t)(32*65536);
+ 1021              		.loc 1 447 0
+ 1022 00a6 4FF48047 		mov	r7, #16384
+ARM GAS  /tmp/ccws6er7.s 			page 39
+
+
+ 452:../Src/main.c ****             default:
+ 1023              		.loc 1 452 0
+ 1024 00aa 09E0     		b	.L72
+ 1025              	.LVL77:
+ 1026              	.L75:
+ 437:../Src/main.c ****             	break;
+ 1027              		.loc 1 437 0
+ 1028 00ac 4FF00E0B 		mov	fp, #14
+ 1029              	.LVL78:
+ 436:../Src/main.c ****             	finalRangeVcselPeriod = 14;
+ 1030              		.loc 1 436 0
+ 1031 00b0 4FF0120A 		mov	r10, #18
+ 1032              	.LVL79:
+ 435:../Src/main.c ****             	preRangeVcselPeriod = 18;
+ 1033              		.loc 1 435 0
+ 1034 00b4 44F62069 		movw	r9, #20000
+ 1035              	.LVL80:
+ 434:../Src/main.c ****             	timingBudget = 20000; //33ms
+ 1036              		.loc 1 434 0
+ 1037 00b8 4FF47018 		mov	r8, #3932160
+ 1038              	.LVL81:
+ 433:../Src/main.c ****             	sigmaLimit = (FixPoint1616_t)(60*65536);
+ 1039              		.loc 1 433 0
+ 1040 00bc 41F69917 		movw	r7, #6553
+ 1041              	.LVL82:
+ 1042              	.L72:
+ 457:../Src/main.c **** 			if( status ){
+ 1043              		.loc 1 457 0
+ 1044 00c0 2846     		mov	r0, r5
+ 1045 00c2 0121     		movs	r1, #1
+ 1046 00c4 3A46     		mov	r2, r7
+ 1047 00c6 FFF7FEFF 		bl	VL53L0X_SetLimitCheckValue
+ 1048              	.LVL83:
+ 462:../Src/main.c **** 			if( status ){
+ 1049              		.loc 1 462 0
+ 1050 00ca 2846     		mov	r0, r5
+ 1051 00cc 0021     		movs	r1, #0
+ 1052 00ce 4246     		mov	r2, r8
+ 1053 00d0 FFF7FEFF 		bl	VL53L0X_SetLimitCheckValue
+ 1054              	.LVL84:
+ 467:../Src/main.c ****             if( status ){
+ 1055              		.loc 1 467 0
+ 1056 00d4 2846     		mov	r0, r5
+ 1057 00d6 4946     		mov	r1, r9
+ 1058 00d8 FFF7FEFF 		bl	VL53L0X_SetMeasurementTimingBudgetMicroSeconds
+ 1059              	.LVL85:
+ 472:../Src/main.c **** 			if( status ){
+ 1060              		.loc 1 472 0
+ 1061 00dc 2846     		mov	r0, r5
+ 1062 00de 0021     		movs	r1, #0
+ 1063 00e0 5246     		mov	r2, r10
+ 1064 00e2 FFF7FEFF 		bl	VL53L0X_SetVcselPulsePeriod
+ 1065              	.LVL86:
+ 477:../Src/main.c **** 			if( status ){
+ 1066              		.loc 1 477 0
+ 1067 00e6 2846     		mov	r0, r5
+ 1068 00e8 0121     		movs	r1, #1
+ARM GAS  /tmp/ccws6er7.s 			page 40
+
+
+ 1069 00ea 5A46     		mov	r2, fp
+ 1070 00ec FFF7FEFF 		bl	VL53L0X_SetVcselPulsePeriod
+ 1071              	.LVL87:
+ 482:../Src/main.c **** 			if( status ){
+ 1072              		.loc 1 482 0
+ 1073 00f0 2846     		mov	r0, r5
+ 1074 00f2 0DF10F01 		add	r1, sp, #15
+ 1075 00f6 0DF10E02 		add	r2, sp, #14
+ 1076 00fa FFF7FEFF 		bl	VL53L0X_PerformRefCalibration
+ 1077              	.LVL88:
+ 487:../Src/main.c ****         }
+ 1078              		.loc 1 487 0
+ 1079 00fe 4FF4C873 		mov	r3, #400
+ 1080 0102 064A     		ldr	r2, .L77
+ 1081 0104 03FB0423 		mla	r3, r3, r4, r2
+ 1082 0108 0122     		movs	r2, #1
+ 1083 010a C3F87C21 		str	r2, [r3, #380]
+ 1084              	.L69:
+ 399:../Src/main.c ****         if( VL53L0XDevs[i].Present){
+ 1085              		.loc 1 399 0 discriminator 2
+ 1086 010e 0134     		adds	r4, r4, #1
+ 1087              	.LVL89:
+ 1088              	.L68:
+ 399:../Src/main.c ****         if( VL53L0XDevs[i].Present){
+ 1089              		.loc 1 399 0 is_stmt 0 discriminator 1
+ 1090 0110 022C     		cmp	r4, #2
+ 1091 0112 85DD     		ble	.L74
+ 490:../Src/main.c **** 
+ 1092              		.loc 1 490 0 is_stmt 1
+ 1093 0114 05B0     		add	sp, sp, #20
+ 1094              	.LCFI25:
+ 1095              		.cfi_def_cfa_offset 36
+ 1096              		@ sp needed
+ 1097 0116 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1098              	.LVL90:
+ 1099              	.L78:
+ 1100 011a 00BF     		.align	2
+ 1101              	.L77:
+ 1102 011c 00000000 		.word	.LANCHOR1
+ 1103 0120 400D0300 		.word	200000
+ 1104              		.cfi_endproc
+ 1105              	.LFE120:
+ 1107              		.section	.text.RangeToLetter,"ax",%progbits
+ 1108              		.align	2
+ 1109              		.global	RangeToLetter
+ 1110              		.thumb
+ 1111              		.thumb_func
+ 1113              	RangeToLetter:
+ 1114              	.LFB121:
+ 492:../Src/main.c ****     char c;
+ 1115              		.loc 1 492 0
+ 1116              		.cfi_startproc
+ 1117              		@ args = 0, pretend = 0, frame = 0
+ 1118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1119              		@ link register save eliminated.
+ 1120              	.LVL91:
+ 494:../Src/main.c ****         if( pDev->LeakyRange < RangeLow ){
+ARM GAS  /tmp/ccws6er7.s 			page 41
+
+
+ 1121              		.loc 1 494 0
+ 1122 0000 0B7E     		ldrb	r3, [r1, #24]	@ zero_extendqisi2
+ 1123 0002 5BB9     		cbnz	r3, .L81
+ 495:../Src/main.c ****             c='_';
+ 1124              		.loc 1 495 0
+ 1125 0004 D0F87831 		ldr	r3, [r0, #376]
+ 1126 0008 074A     		ldr	r2, .L84
+ 1127 000a 1268     		ldr	r2, [r2]
+ 1128 000c 9342     		cmp	r3, r2
+ 1129 000e 07DB     		blt	.L82
+ 498:../Src/main.c ****                 c='=';
+ 1130              		.loc 1 498 0
+ 1131 0010 064A     		ldr	r2, .L84+4
+ 1132 0012 1268     		ldr	r2, [r2]
+ 1133 0014 9342     		cmp	r3, r2
+ 1134 0016 05DA     		bge	.L83
+ 499:../Src/main.c ****         }
+ 1135              		.loc 1 499 0
+ 1136 0018 3D20     		movs	r0, #61
+ 1137              	.LVL92:
+ 1138 001a 7047     		bx	lr
+ 1139              	.LVL93:
+ 1140              	.L81:
+ 507:../Src/main.c ****     }
+ 1141              		.loc 1 507 0
+ 1142 001c 2D20     		movs	r0, #45
+ 1143              	.LVL94:
+ 1144 001e 7047     		bx	lr
+ 1145              	.LVL95:
+ 1146              	.L82:
+ 496:../Src/main.c ****         }
+ 1147              		.loc 1 496 0
+ 1148 0020 5F20     		movs	r0, #95
+ 1149              	.LVL96:
+ 1150 0022 7047     		bx	lr
+ 1151              	.LVL97:
+ 1152              	.L83:
+ 502:../Src/main.c ****         }
+ 1153              		.loc 1 502 0
+ 1154 0024 7E20     		movs	r0, #126
+ 1155              	.LVL98:
+ 510:../Src/main.c **** 
+ 1156              		.loc 1 510 0
+ 1157 0026 7047     		bx	lr
+ 1158              	.L85:
+ 1159              		.align	2
+ 1160              	.L84:
+ 1161 0028 00000000 		.word	.LANCHOR2
+ 1162 002c 00000000 		.word	.LANCHOR3
+ 1163              		.cfi_endproc
+ 1164              	.LFE121:
+ 1166              		.section	.text.Sensor_SetNewRange,"ax",%progbits
+ 1167              		.align	2
+ 1168              		.global	Sensor_SetNewRange
+ 1169              		.thumb
+ 1170              		.thumb_func
+ 1172              	Sensor_SetNewRange:
+ARM GAS  /tmp/ccws6er7.s 			page 42
+
+
+ 1173              	.LFB122:
+ 513:../Src/main.c ****     if( pRange->RangeStatus == 0 ){
+ 1174              		.loc 1 513 0
+ 1175              		.cfi_startproc
+ 1176              		@ args = 0, pretend = 0, frame = 0
+ 1177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1178              		@ link register save eliminated.
+ 1179              	.LVL99:
+ 514:../Src/main.c ****         if( pDev->LeakyFirst ){
+ 1180              		.loc 1 514 0
+ 1181 0000 0B7E     		ldrb	r3, [r1, #24]	@ zero_extendqisi2
+ 1182 0002 CBB9     		cbnz	r3, .L87
+ 515:../Src/main.c ****             pDev->LeakyFirst = 0;
+ 1183              		.loc 1 515 0
+ 1184 0004 D0F87C31 		ldr	r3, [r0, #380]
+ 1185 0008 33B1     		cbz	r3, .L88
+ 516:../Src/main.c ****             pDev->LeakyRange = pRange->RangeMilliMeter;
+ 1186              		.loc 1 516 0
+ 1187 000a 0023     		movs	r3, #0
+ 1188 000c C0F87C31 		str	r3, [r0, #380]
+ 517:../Src/main.c ****         }
+ 1189              		.loc 1 517 0
+ 1190 0010 0B89     		ldrh	r3, [r1, #8]
+ 1191 0012 C0F87831 		str	r3, [r0, #376]
+ 1192 0016 7047     		bx	lr
+ 1193              	.L88:
+ 513:../Src/main.c ****     if( pRange->RangeStatus == 0 ){
+ 1194              		.loc 1 513 0
+ 1195 0018 30B4     		push	{r4, r5}
+ 1196              	.LCFI26:
+ 1197              		.cfi_def_cfa_offset 8
+ 1198              		.cfi_offset 4, -8
+ 1199              		.cfi_offset 5, -4
+ 520:../Src/main.c ****         }
+ 1200              		.loc 1 520 0
+ 1201 001a D0F87831 		ldr	r3, [r0, #376]
+ 1202 001e 094A     		ldr	r2, .L92
+ 1203 0020 1468     		ldr	r4, [r2]
+ 1204 0022 C4F58075 		rsb	r5, r4, #256
+ 1205 0026 0A89     		ldrh	r2, [r1, #8]
+ 1206 0028 02FB05F2 		mul	r2, r2, r5
+ 1207 002c 04FB0323 		mla	r3, r4, r3, r2
+ 1208 0030 1B12     		asrs	r3, r3, #8
+ 1209 0032 C0F87831 		str	r3, [r0, #376]
+ 1210 0036 03E0     		b	.L86
+ 1211              	.L87:
+ 1212              	.LCFI27:
+ 1213              		.cfi_def_cfa_offset 0
+ 1214              		.cfi_restore 4
+ 1215              		.cfi_restore 5
+ 524:../Src/main.c ****     }
+ 1216              		.loc 1 524 0
+ 1217 0038 0123     		movs	r3, #1
+ 1218 003a C0F87C31 		str	r3, [r0, #380]
+ 1219 003e 7047     		bx	lr
+ 1220              	.L86:
+ 1221              	.LCFI28:
+ARM GAS  /tmp/ccws6er7.s 			page 43
+
+
+ 1222              		.cfi_def_cfa_offset 8
+ 1223              		.cfi_offset 4, -8
+ 1224              		.cfi_offset 5, -4
+ 526:../Src/main.c **** 
+ 1225              		.loc 1 526 0
+ 1226 0040 30BC     		pop	{r4, r5}
+ 1227              	.LCFI29:
+ 1228              		.cfi_restore 5
+ 1229              		.cfi_restore 4
+ 1230              		.cfi_def_cfa_offset 0
+ 1231 0042 7047     		bx	lr
+ 1232              	.L93:
+ 1233              		.align	2
+ 1234              	.L92:
+ 1235 0044 00000000 		.word	.LANCHOR4
+ 1236              		.cfi_endproc
+ 1237              	.LFE122:
+ 1239              		.section	.text.blink_led,"ax",%progbits
+ 1240              		.align	2
+ 1241              		.global	blink_led
+ 1242              		.thumb
+ 1243              		.thumb_func
+ 1245              	blink_led:
+ 1246              	.LFB123:
+ 528:../Src/main.c ****     if (*compteur == 10){                 /////modification toutes les 6 mesures correctes du capte
+ 1247              		.loc 1 528 0
+ 1248              		.cfi_startproc
+ 1249              		@ args = 0, pretend = 0, frame = 0
+ 1250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1251              	.LVL100:
+ 529:../Src/main.c ****         HAL_TIM_Base_Stop_IT(&htim3);
+ 1252              		.loc 1 529 0
+ 1253 0000 0B68     		ldr	r3, [r1]
+ 1254 0002 0A2B     		cmp	r3, #10
+ 1255 0004 12D1     		bne	.L97
+ 528:../Src/main.c ****     if (*compteur == 10){                 /////modification toutes les 6 mesures correctes du capte
+ 1256              		.loc 1 528 0
+ 1257 0006 70B5     		push	{r4, r5, r6, lr}
+ 1258              	.LCFI30:
+ 1259              		.cfi_def_cfa_offset 16
+ 1260              		.cfi_offset 4, -16
+ 1261              		.cfi_offset 5, -12
+ 1262              		.cfi_offset 6, -8
+ 1263              		.cfi_offset 14, -4
+ 1264 0008 0D46     		mov	r5, r1
+ 1265 000a 0446     		mov	r4, r0
+ 530:../Src/main.c ****         htim3.Instance->ARR = 2*valeur-1+20;   /////modification de la periode du capteur (voir wik
+ 1266              		.loc 1 530 0
+ 1267 000c 084E     		ldr	r6, .L98
+ 1268 000e 3046     		mov	r0, r6
+ 1269              	.LVL101:
+ 1270 0010 FFF7FEFF 		bl	HAL_TIM_Base_Stop_IT
+ 1271              	.LVL102:
+ 531:../Src/main.c ****         HAL_TIM_Base_Start_IT(&htim3);  
+ 1272              		.loc 1 531 0
+ 1273 0014 3368     		ldr	r3, [r6]
+ 1274 0016 6000     		lsls	r0, r4, #1
+ARM GAS  /tmp/ccws6er7.s 			page 44
+
+
+ 1275 0018 1330     		adds	r0, r0, #19
+ 1276 001a D862     		str	r0, [r3, #44]
+ 532:../Src/main.c ****         htim3.Instance->CNT = 0;               /////remise a zero du timer de la led
+ 1277              		.loc 1 532 0
+ 1278 001c 3046     		mov	r0, r6
+ 1279 001e FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 1280              	.LVL103:
+ 533:../Src/main.c ****         *compteur = 0;                         /////remise a zero du compteur
+ 1281              		.loc 1 533 0
+ 1282 0022 3268     		ldr	r2, [r6]
+ 1283 0024 0023     		movs	r3, #0
+ 1284 0026 5362     		str	r3, [r2, #36]
+ 534:../Src/main.c ****     }
+ 1285              		.loc 1 534 0
+ 1286 0028 2B60     		str	r3, [r5]
+ 1287 002a 70BD     		pop	{r4, r5, r6, pc}
+ 1288              	.LVL104:
+ 1289              	.L97:
+ 1290              	.LCFI31:
+ 1291              		.cfi_def_cfa_offset 0
+ 1292              		.cfi_restore 4
+ 1293              		.cfi_restore 5
+ 1294              		.cfi_restore 6
+ 1295              		.cfi_restore 14
+ 1296 002c 7047     		bx	lr
+ 1297              	.L99:
+ 1298 002e 00BF     		.align	2
+ 1299              	.L98:
+ 1300 0030 00000000 		.word	htim3
+ 1301              		.cfi_endproc
+ 1302              	.LFE123:
+ 1304              		.section	.text.transmit,"ax",%progbits
+ 1305              		.align	2
+ 1306              		.global	transmit
+ 1307              		.thumb
+ 1308              		.thumb_func
+ 1310              	transmit:
+ 1311              	.LFB124:
+ 540:../Src/main.c ****     char data[10];                                /////variable stockage de la valeur du capteur
+ 1312              		.loc 1 540 0
+ 1313              		.cfi_startproc
+ 1314              		@ args = 0, pretend = 0, frame = 16
+ 1315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1316              	.LVL105:
+ 1317 0000 70B5     		push	{r4, r5, r6, lr}
+ 1318              	.LCFI32:
+ 1319              		.cfi_def_cfa_offset 16
+ 1320              		.cfi_offset 4, -16
+ 1321              		.cfi_offset 5, -12
+ 1322              		.cfi_offset 6, -8
+ 1323              		.cfi_offset 14, -4
+ 1324 0002 84B0     		sub	sp, sp, #16
+ 1325              	.LCFI33:
+ 1326              		.cfi_def_cfa_offset 32
+ 1327 0004 0446     		mov	r4, r0
+ 1328 0006 0D46     		mov	r5, r1
+ 544:../Src/main.c ****         sprintf(data, "%d,",valeur);
+ARM GAS  /tmp/ccws6er7.s 			page 45
+
+
+ 1329              		.loc 1 544 0
+ 1330 0008 0368     		ldr	r3, [r0]
+ 1331 000a 302B     		cmp	r3, #48
+ 1332 000c 04DC     		bgt	.L101
+ 545:../Src/main.c ****     }
+ 1333              		.loc 1 545 0
+ 1334 000e 01A8     		add	r0, sp, #4
+ 1335              	.LVL106:
+ 1336 0010 1849     		ldr	r1, .L105
+ 1337              	.LVL107:
+ 1338 0012 FFF7FEFF 		bl	sprintf
+ 1339              	.LVL108:
+ 1340 0016 05E0     		b	.L102
+ 1341              	.LVL109:
+ 1342              	.L101:
+ 547:../Src/main.c ****         sprintf(data, "%d",valeur);
+ 1343              		.loc 1 547 0
+ 1344 0018 312B     		cmp	r3, #49
+ 1345 001a 03D1     		bne	.L102
+ 548:../Src/main.c ****     }
+ 1346              		.loc 1 548 0
+ 1347 001c 01A8     		add	r0, sp, #4
+ 1348              	.LVL110:
+ 1349 001e 1649     		ldr	r1, .L105+4
+ 1350              	.LVL111:
+ 1351 0020 FFF7FEFF 		bl	sprintf
+ 1352              	.LVL112:
+ 1353              	.L102:
+ 550:../Src/main.c ****     if (*i==Maxi_char_transmit-1){
+ 1354              		.loc 1 550 0
+ 1355 0024 2846     		mov	r0, r5
+ 1356 0026 01A9     		add	r1, sp, #4
+ 1357 0028 FFF7FEFF 		bl	strcat
+ 1358              	.LVL113:
+ 551:../Src/main.c ****         len=strlen(buffer);                       /////longueur du buffer
+ 1359              		.loc 1 551 0
+ 1360 002c 2368     		ldr	r3, [r4]
+ 1361 002e 312B     		cmp	r3, #49
+ 1362 0030 1DD1     		bne	.L100
+ 552:../Src/main.c ****         HAL_UART_Transmit(&huart2, (uint8_t*)(buffer), len, 1000); /////transmission du buffer
+ 1363              		.loc 1 552 0
+ 1364 0032 2846     		mov	r0, r5
+ 1365 0034 FFF7FEFF 		bl	strlen
+ 1366              	.LVL114:
+ 553:../Src/main.c ****         sprintf(ligne, "\n");                                     /////ajout \n a ligne
+ 1367              		.loc 1 553 0
+ 1368 0038 104E     		ldr	r6, .L105+8
+ 1369 003a 82B2     		uxth	r2, r0
+ 1370 003c 3046     		mov	r0, r6
+ 1371              	.LVL115:
+ 1372 003e 2946     		mov	r1, r5
+ 1373 0040 4FF47A73 		mov	r3, #1000
+ 1374 0044 FFF7FEFF 		bl	HAL_UART_Transmit
+ 1375              	.LVL116:
+ 554:../Src/main.c ****         HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer l
+ 1376              		.loc 1 554 0
+ 1377 0048 04A9     		add	r1, sp, #16
+ARM GAS  /tmp/ccws6er7.s 			page 46
+
+
+ 1378 004a 0A23     		movs	r3, #10
+ 1379 004c 21F8103D 		strh	r3, [r1, #-16]!	@ movhi
+ 555:../Src/main.c ****         (*i)=-1;                                                  /////remise a zero du compteur
+ 1380              		.loc 1 555 0
+ 1381 0050 3046     		mov	r0, r6
+ 1382 0052 0122     		movs	r2, #1
+ 1383 0054 4FF47A73 		mov	r3, #1000
+ 1384 0058 FFF7FEFF 		bl	HAL_UART_Transmit
+ 1385              	.LVL117:
+ 556:../Src/main.c ****         sprintf(buffer, "");                                      /////remise a zero du buffer
+ 1386              		.loc 1 556 0
+ 1387 005c 4FF0FF33 		mov	r3, #-1
+ 1388 0060 2360     		str	r3, [r4]
+ 557:../Src/main.c ****         HAL_Delay(Delay);         //////necessaire pour le graphique
+ 1389              		.loc 1 557 0
+ 1390 0062 0023     		movs	r3, #0
+ 1391 0064 2B70     		strb	r3, [r5]
+ 558:../Src/main.c ****     }
+ 1392              		.loc 1 558 0
+ 1393 0066 40F6DE50 		movw	r0, #3550
+ 1394 006a FFF7FEFF 		bl	HAL_Delay
+ 1395              	.LVL118:
+ 1396              	.L100:
+ 560:../Src/main.c **** 
+ 1397              		.loc 1 560 0
+ 1398 006e 04B0     		add	sp, sp, #16
+ 1399              	.LCFI34:
+ 1400              		.cfi_def_cfa_offset 16
+ 1401              		@ sp needed
+ 1402 0070 70BD     		pop	{r4, r5, r6, pc}
+ 1403              	.LVL119:
+ 1404              	.L106:
+ 1405 0072 00BF     		.align	2
+ 1406              	.L105:
+ 1407 0074 18000000 		.word	.LC3
+ 1408 0078 1C000000 		.word	.LC4
+ 1409 007c 00000000 		.word	huart2
+ 1410              		.cfi_endproc
+ 1411              	.LFE124:
+ 1413              		.section	.text.RangeDemo,"ax",%progbits
+ 1414              		.align	2
+ 1415              		.global	RangeDemo
+ 1416              		.thumb
+ 1417              		.thumb_func
+ 1419              	RangeDemo:
+ 1420              	.LFB125:
+ 569:../Src/main.c ****     int over=0;
+ 1421              		.loc 1 569 0
+ 1422              		.cfi_startproc
+ 1423              		@ args = 0, pretend = 0, frame = 216
+ 1424              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1425              	.LVL120:
+ 1426 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 1427              	.LCFI35:
+ 1428              		.cfi_def_cfa_offset 28
+ 1429              		.cfi_offset 4, -28
+ 1430              		.cfi_offset 5, -24
+ARM GAS  /tmp/ccws6er7.s 			page 47
+
+
+ 1431              		.cfi_offset 6, -20
+ 1432              		.cfi_offset 7, -16
+ 1433              		.cfi_offset 8, -12
+ 1434              		.cfi_offset 9, -8
+ 1435              		.cfi_offset 14, -4
+ 1436 0004 B7B0     		sub	sp, sp, #220
+ 1437              	.LCFI36:
+ 1438              		.cfi_def_cfa_offset 248
+ 1439 0006 0546     		mov	r5, r0
+ 1440              	.LVL121:
+ 578:../Src/main.c ****     int* compteur = NULL;   ///creation pointeur sur compteur
+ 1441              		.loc 1 578 0
+ 1442 0008 0024     		movs	r4, #0
+ 1443 000a 3394     		str	r4, [sp, #204]
+ 1444              	.LVL122:
+ 581:../Src/main.c ****     int* compteur2 = NULL;   ///creation pointeur sur compteur2
+ 1445              		.loc 1 581 0
+ 1446 000c 3294     		str	r4, [sp, #200]
+ 1447              	.LVL123:
+ 585:../Src/main.c **** 
+ 1448              		.loc 1 585 0
+ 1449 000e 8DF80040 		strb	r4, [sp]
+ 588:../Src/main.c **** 
+ 1450              		.loc 1 588 0
+ 1451 0012 0846     		mov	r0, r1
+ 1452              	.LVL124:
+ 1453 0014 FFF7FEFF 		bl	SetupSingleShot
+ 1454              	.LVL125:
+ 576:../Src/main.c ****     int valeur;             ///creation variable valeur
+ 1455              		.loc 1 576 0
+ 1456 0018 2746     		mov	r7, r4
+ 591:../Src/main.c ****         if(( UseSensorsMask& (1<<i) ) && VL53L0XDevs[i].Present ){
+ 1457              		.loc 1 591 0
+ 1458 001a 2646     		mov	r6, r4
+ 1459 001c 2346     		mov	r3, r4
+ 1460 001e 11E0     		b	.L108
+ 1461              	.LVL126:
+ 1462              	.L110:
+ 592:../Src/main.c ****             nSensorToUse++;
+ 1463              		.loc 1 592 0
+ 1464 0020 45FA03F2 		asr	r2, r5, r3
+ 1465 0024 12F0010F 		tst	r2, #1
+ 1466 0028 0BD0     		beq	.L109
+ 592:../Src/main.c ****             nSensorToUse++;
+ 1467              		.loc 1 592 0 is_stmt 0 discriminator 1
+ 1468 002a 4FF4C872 		mov	r2, #400
+ 1469 002e 5249     		ldr	r1, .L124
+ 1470 0030 02FB0312 		mla	r2, r2, r3, r1
+ 1471 0034 D2F86821 		ldr	r2, [r2, #360]
+ 1472 0038 1AB1     		cbz	r2, .L109
+ 593:../Src/main.c ****             if( nSensorToUse==1 )
+ 1473              		.loc 1 593 0 is_stmt 1
+ 1474 003a 0136     		adds	r6, r6, #1
+ 1475              	.LVL127:
+ 594:../Src/main.c ****                 SingleSensorNo=i;
+ 1476              		.loc 1 594 0
+ 1477 003c 012E     		cmp	r6, #1
+ARM GAS  /tmp/ccws6er7.s 			page 48
+
+
+ 1478 003e 00D1     		bne	.L109
+ 595:../Src/main.c ****         }
+ 1479              		.loc 1 595 0
+ 1480 0040 1F46     		mov	r7, r3
+ 1481              	.LVL128:
+ 1482              	.L109:
+ 591:../Src/main.c ****         if(( UseSensorsMask& (1<<i) ) && VL53L0XDevs[i].Present ){
+ 1483              		.loc 1 591 0 discriminator 2
+ 1484 0042 0133     		adds	r3, r3, #1
+ 1485              	.LVL129:
+ 1486              	.L108:
+ 591:../Src/main.c ****         if(( UseSensorsMask& (1<<i) ) && VL53L0XDevs[i].Present ){
+ 1487              		.loc 1 591 0 is_stmt 0 discriminator 1
+ 1488 0044 022B     		cmp	r3, #2
+ 1489 0046 EBDD     		ble	.L110
+ 598:../Src/main.c ****         return -1;
+ 1490              		.loc 1 598 0 is_stmt 1
+ 1491 0048 002E     		cmp	r6, #0
+ 1492 004a 00F08F80 		beq	.L122
+ 1493              	.LVL130:
+ 1494              	.L120:
+ 604:../Src/main.c ****         	/* Multiple devices */
+ 1495              		.loc 1 604 0
+ 1496 004e 012E     		cmp	r6, #1
+ 1497 0050 32DD     		ble	.L112
+ 606:../Src/main.c ****             for( i=0; i<3; i++){
+ 1498              		.loc 1 606 0
+ 1499 0052 4A4B     		ldr	r3, .L124+4
+ 1500 0054 93E80300 		ldmia	r3, {r0, r1}
+ 1501 0058 3490     		str	r0, [sp, #208]
+ 1502 005a 8DF8D410 		strb	r1, [sp, #212]
+ 1503              	.LVL131:
+ 607:../Src/main.c ****                 if( ! VL53L0XDevs[i].Present  || (UseSensorsMask & (1<<i))==0 )
+ 1504              		.loc 1 607 0
+ 1505 005e 0024     		movs	r4, #0
+ 1506 0060 27E0     		b	.L113
+ 1507              	.LVL132:
+ 1508              	.L116:
+ 608:../Src/main.c ****                     continue;
+ 1509              		.loc 1 608 0
+ 1510 0062 4FF4C873 		mov	r3, #400
+ 1511 0066 444A     		ldr	r2, .L124
+ 1512 0068 03FB0423 		mla	r3, r3, r4, r2
+ 1513 006c D3F86831 		ldr	r3, [r3, #360]
+ 1514 0070 F3B1     		cbz	r3, .L114
+ 608:../Src/main.c ****                     continue;
+ 1515              		.loc 1 608 0 is_stmt 0 discriminator 1
+ 1516 0072 45FA04F3 		asr	r3, r5, r4
+ 1517 0076 13F0010F 		tst	r3, #1
+ 1518 007a 19D0     		beq	.L114
+ 611:../Src/main.c ****                 if( status ){
+ 1519              		.loc 1 611 0 is_stmt 1
+ 1520 007c 4FF4C873 		mov	r3, #400
+ 1521 0080 03FB0428 		mla	r8, r3, r4, r2
+ 1522 0084 4046     		mov	r0, r8
+ 1523 0086 3E49     		ldr	r1, .L124+8
+ 1524 0088 FFF7FEFF 		bl	VL53L0X_PerformSingleRangingMeasurement
+ARM GAS  /tmp/ccws6er7.s 			page 49
+
+
+ 1525              	.LVL133:
+ 612:../Src/main.c ****                     HandleError(ERR_DEMO_RANGE_MULTI);
+ 1526              		.loc 1 612 0
+ 1527 008c 10B1     		cbz	r0, .L115
+ 613:../Src/main.c ****                 }
+ 1528              		.loc 1 613 0
+ 1529 008e 0220     		movs	r0, #2
+ 1530              	.LVL134:
+ 1531 0090 FFF7FEFF 		bl	HandleError
+ 1532              	.LVL135:
+ 1533              	.L115:
+ 618:../Src/main.c ****                 /* Translate distance in bar graph (multiple device) */
+ 1534              		.loc 1 618 0
+ 1535 0094 DFF8E890 		ldr	r9, .L124+8
+ 1536 0098 4046     		mov	r0, r8
+ 1537              	.LVL136:
+ 1538 009a 4946     		mov	r1, r9
+ 1539 009c FFF7FEFF 		bl	Sensor_SetNewRange
+ 1540              	.LVL137:
+ 620:../Src/main.c ****                 StrDisplay[i+1]=c;
+ 1541              		.loc 1 620 0
+ 1542 00a0 4046     		mov	r0, r8
+ 1543 00a2 4946     		mov	r1, r9
+ 1544 00a4 FFF7FEFF 		bl	RangeToLetter
+ 1545              	.LVL138:
+ 621:../Src/main.c ****             }
+ 1546              		.loc 1 621 0
+ 1547 00a8 36AB     		add	r3, sp, #216
+ 1548 00aa 2344     		add	r3, r3, r4
+ 1549 00ac 03F8070C 		strb	r0, [r3, #-7]
+ 1550              	.LVL139:
+ 1551              	.L114:
+ 607:../Src/main.c ****                 if( ! VL53L0XDevs[i].Present  || (UseSensorsMask & (1<<i))==0 )
+ 1552              		.loc 1 607 0 discriminator 2
+ 1553 00b0 0134     		adds	r4, r4, #1
+ 1554              	.LVL140:
+ 1555              	.L113:
+ 607:../Src/main.c ****                 if( ! VL53L0XDevs[i].Present  || (UseSensorsMask & (1<<i))==0 )
+ 1556              		.loc 1 607 0 is_stmt 0 discriminator 1
+ 1557 00b2 022C     		cmp	r4, #2
+ 1558 00b4 D5DD     		ble	.L116
+ 1559 00b6 4AE0     		b	.L117
+ 1560              	.LVL141:
+ 1561              	.L112:
+ 627:../Src/main.c ****             if( status ==0 ){
+ 1562              		.loc 1 627 0 is_stmt 1
+ 1563 00b8 4FF4C873 		mov	r3, #400
+ 1564 00bc 2E4C     		ldr	r4, .L124
+ 1565 00be 03FB0744 		mla	r4, r3, r7, r4
+ 1566 00c2 2046     		mov	r0, r4
+ 1567 00c4 2E49     		ldr	r1, .L124+8
+ 1568 00c6 FFF7FEFF 		bl	VL53L0X_PerformSingleRangingMeasurement
+ 1569              	.LVL142:
+ 628:../Src/main.c ****             	/* Push data logging to UART */
+ 1570              		.loc 1 628 0
+ 1571 00ca 0028     		cmp	r0, #0
+ 1572 00cc 3CD1     		bne	.L118
+ARM GAS  /tmp/ccws6er7.s 			page 50
+
+
+ 631:../Src/main.c ****                 /* Display distance in cm */
+ 1573              		.loc 1 631 0
+ 1574 00ce DFF8B080 		ldr	r8, .L124+8
+ 1575 00d2 2046     		mov	r0, r4
+ 1576              	.LVL143:
+ 1577 00d4 4146     		mov	r1, r8
+ 1578 00d6 FFF7FEFF 		bl	Sensor_SetNewRange
+ 1579              	.LVL144:
+ 633:../Src/main.c ****                     *compteur+=1;                               /////incrementation du compteur
+ 1580              		.loc 1 633 0
+ 1581 00da 98F81830 		ldrb	r3, [r8, #24]	@ zero_extendqisi2
+ 1582 00de 1BBB     		cbnz	r3, .L119
+ 634:../Src/main.c ****                     sprintf(StrDisplay, "%3dc",(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10);  //
+ 1583              		.loc 1 634 0
+ 1584 00e0 339B     		ldr	r3, [sp, #204]
+ 1585 00e2 0133     		adds	r3, r3, #1
+ 1586 00e4 3393     		str	r3, [sp, #204]
+ 635:../Src/main.c ****                     valeur=(int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////valeur lue par le
+ 1587              		.loc 1 635 0
+ 1588 00e6 A046     		mov	r8, r4
+ 1589 00e8 D4F87831 		ldr	r3, [r4, #376]
+ 1590 00ec 254C     		ldr	r4, .L124+12
+ 1591 00ee 84FB0312 		smull	r1, r2, r4, r3
+ 1592 00f2 DB17     		asrs	r3, r3, #31
+ 1593 00f4 34A8     		add	r0, sp, #208
+ 1594 00f6 2449     		ldr	r1, .L124+16
+ 1595 00f8 C3EBA202 		rsb	r2, r3, r2, asr #2
+ 1596 00fc FFF7FEFF 		bl	sprintf
+ 1597              	.LVL145:
+ 636:../Src/main.c ****                     blink_led(valeur, compteur);                 /////fonction blink_led
+ 1598              		.loc 1 636 0
+ 1599 0100 D8F87831 		ldr	r3, [r8, #376]
+ 1600 0104 84FB0324 		smull	r2, r4, r4, r3
+ 1601 0108 DB17     		asrs	r3, r3, #31
+ 1602 010a C3EBA404 		rsb	r4, r3, r4, asr #2
+ 1603              	.LVL146:
+ 637:../Src/main.c ****                     transmit(compteur2, buffer, valeur);        /////fonction transmit vers pc
+ 1604              		.loc 1 637 0
+ 1605 010e 2046     		mov	r0, r4
+ 1606 0110 33A9     		add	r1, sp, #204
+ 1607              	.LVL147:
+ 1608 0112 FFF7FEFF 		bl	blink_led
+ 1609              	.LVL148:
+ 638:../Src/main.c ****                     *compteur2+=1;                              /////incrementation du compteur2
+ 1610              		.loc 1 638 0
+ 1611 0116 32A8     		add	r0, sp, #200
+ 1612              	.LVL149:
+ 1613 0118 6946     		mov	r1, sp
+ 1614 011a 2246     		mov	r2, r4
+ 1615 011c FFF7FEFF 		bl	transmit
+ 1616              	.LVL150:
+ 639:../Src/main.c ****                 }
+ 1617              		.loc 1 639 0
+ 1618 0120 329B     		ldr	r3, [sp, #200]
+ 1619 0122 0133     		adds	r3, r3, #1
+ 1620 0124 3293     		str	r3, [sp, #200]
+ 1621 0126 12E0     		b	.L117
+ARM GAS  /tmp/ccws6er7.s 			page 51
+
+
+ 1622              	.LVL151:
+ 1623              	.L119:
+ 642:../Src/main.c ****                     StrDisplay[0]=VL53L0XDevs[SingleSensorNo].DevLetter;
+ 1624              		.loc 1 642 0
+ 1625 0128 184B     		ldr	r3, .L124+20
+ 1626 012a 93E80300 		ldmia	r3, {r0, r1}
+ 1627 012e 3490     		str	r0, [sp, #208]
+ 1628 0130 8DF8D410 		strb	r1, [sp, #212]
+ 643:../Src/main.c ****                     //HAL_TIM_Base_Stop_IT(&htim3);             /////version courante : memoire de 
+ 1629              		.loc 1 643 0
+ 1630 0134 4FF4C873 		mov	r3, #400
+ 1631 0138 0F4A     		ldr	r2, .L124
+ 1632 013a 03FB0723 		mla	r3, r3, r7, r2
+ 1633 013e 93F86131 		ldrb	r3, [r3, #353]	@ zero_extendqisi2
+ 1634 0142 8DF8D030 		strb	r3, [sp, #208]
+ 1635 0146 02E0     		b	.L117
+ 1636              	.LVL152:
+ 1637              	.L118:
+ 650:../Src/main.c ****             }
+ 1638              		.loc 1 650 0
+ 1639 0148 0120     		movs	r0, #1
+ 1640              	.LVL153:
+ 1641 014a FFF7FEFF 		bl	HandleError
+ 1642              	.LVL154:
+ 1643              	.L117:
+ 653:../Src/main.c ****         /* Check blue button */
+ 1644              		.loc 1 653 0
+ 1645 014e 34A8     		add	r0, sp, #208
+ 1646 0150 FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 1647              	.LVL155:
+ 655:../Src/main.c ****             over=1;
+ 1648              		.loc 1 655 0
+ 1649 0154 FFF7FEFF 		bl	BSP_GetPushButton
+ 1650              	.LVL156:
+ 1651 0158 0028     		cmp	r0, #0
+ 1652 015a 7FF478AF 		bne	.L120
+ 661:../Src/main.c ****     htim3.Instance->CNT=0;       /////remise a zero du timer de la led
+ 1653              		.loc 1 661 0
+ 1654 015e FFF7FEFF 		bl	PusbButton_WaitUnPress
+ 1655              	.LVL157:
+ 662:../Src/main.c ****     return status;
+ 1656              		.loc 1 662 0
+ 1657 0162 0B4B     		ldr	r3, .L124+24
+ 1658 0164 1B68     		ldr	r3, [r3]
+ 1659 0166 0022     		movs	r2, #0
+ 1660 0168 5A62     		str	r2, [r3, #36]
+ 663:../Src/main.c **** }
+ 1661              		.loc 1 663 0
+ 1662 016a 01E0     		b	.L111
+ 1663              	.LVL158:
+ 1664              	.L122:
+ 599:../Src/main.c ****     }
+ 1665              		.loc 1 599 0
+ 1666 016c 4FF0FF30 		mov	r0, #-1
+ 1667              	.LVL159:
+ 1668              	.L111:
+ 664:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 52
+
+
+ 1669              		.loc 1 664 0
+ 1670 0170 37B0     		add	sp, sp, #220
+ 1671              	.LCFI37:
+ 1672              		.cfi_def_cfa_offset 28
+ 1673              		@ sp needed
+ 1674 0172 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 1675              	.LVL160:
+ 1676              	.L125:
+ 1677 0176 00BF     		.align	2
+ 1678              	.L124:
+ 1679 0178 00000000 		.word	.LANCHOR1
+ 1680 017c 10000000 		.word	.LC2
+ 1681 0180 00000000 		.word	RangingMeasurementData
+ 1682 0184 67666666 		.word	1717986919
+ 1683 0188 20000000 		.word	.LC5
+ 1684 018c 28000000 		.word	.LC6
+ 1685 0190 00000000 		.word	htim3
+ 1686              		.cfi_endproc
+ 1687              	.LFE125:
+ 1689              		.section	.text.ResetAndDetectSensor,"ax",%progbits
+ 1690              		.align	2
+ 1691              		.global	ResetAndDetectSensor
+ 1692              		.thumb
+ 1693              		.thumb_func
+ 1695              	ResetAndDetectSensor:
+ 1696              	.LFB126:
+ 792:../Src/main.c ****     int nSensor;
+ 1697              		.loc 1 792 0
+ 1698              		.cfi_startproc
+ 1699              		@ args = 0, pretend = 0, frame = 0
+ 1700              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1701              	.LVL161:
+ 1702 0000 08B5     		push	{r3, lr}
+ 1703              	.LCFI38:
+ 1704              		.cfi_def_cfa_offset 8
+ 1705              		.cfi_offset 3, -8
+ 1706              		.cfi_offset 14, -4
+ 794:../Src/main.c ****     /* at least one sensor and if one it must be the built-in one  */
+ 1707              		.loc 1 794 0
+ 1708 0002 FFF7FEFF 		bl	DetectSensors
+ 1709              	.LVL162:
+ 796:../Src/main.c ****         HandleError(ERR_DETECT);
+ 1710              		.loc 1 796 0
+ 1711 0006 0028     		cmp	r0, #0
+ 1712 0008 05DD     		ble	.L127
+ 796:../Src/main.c ****         HandleError(ERR_DETECT);
+ 1713              		.loc 1 796 0 is_stmt 0 discriminator 1
+ 1714 000a 0128     		cmp	r0, #1
+ 1715 000c 07D1     		bne	.L126
+ 796:../Src/main.c ****         HandleError(ERR_DETECT);
+ 1716              		.loc 1 796 0 discriminator 2
+ 1717 000e 044B     		ldr	r3, .L130
+ 1718 0010 D3F8F832 		ldr	r3, [r3, #760]
+ 1719 0014 1BB9     		cbnz	r3, .L126
+ 1720              	.L127:
+ 797:../Src/main.c ****     }
+ 1721              		.loc 1 797 0 is_stmt 1
+ARM GAS  /tmp/ccws6er7.s 			page 53
+
+
+ 1722 0016 4FF0FF30 		mov	r0, #-1
+ 1723              	.LVL163:
+ 1724 001a FFF7FEFF 		bl	HandleError
+ 1725              	.LVL164:
+ 1726              	.L126:
+ 1727 001e 08BD     		pop	{r3, pc}
+ 1728              	.L131:
+ 1729              		.align	2
+ 1730              	.L130:
+ 1731 0020 00000000 		.word	.LANCHOR1
+ 1732              		.cfi_endproc
+ 1733              	.LFE126:
+ 1735              		.section	.text.main,"ax",%progbits
+ 1736              		.align	2
+ 1737              		.global	main
+ 1738              		.thumb
+ 1739              		.thumb_func
+ 1741              	main:
+ 1742              	.LFB127:
+ 804:../Src/main.c **** 
+ 1743              		.loc 1 804 0
+ 1744              		.cfi_startproc
+ 1745              		@ args = 0, pretend = 0, frame = 0
+ 1746              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1747 0000 70B5     		push	{r4, r5, r6, lr}
+ 1748              	.LCFI39:
+ 1749              		.cfi_def_cfa_offset 16
+ 1750              		.cfi_offset 4, -16
+ 1751              		.cfi_offset 5, -12
+ 1752              		.cfi_offset 6, -8
+ 1753              		.cfi_offset 14, -4
+ 1754              	.LVL165:
+ 816:../Src/main.c **** 
+ 1755              		.loc 1 816 0
+ 1756 0002 FFF7FEFF 		bl	HAL_Init
+ 1757              	.LVL166:
+ 819:../Src/main.c **** 
+ 1758              		.loc 1 819 0
+ 1759 0006 FFF7FEFF 		bl	SystemClock_Config
+ 1760              	.LVL167:
+ 822:../Src/main.c ****   SystemClock_Config();
+ 1761              		.loc 1 822 0
+ 1762 000a FFF7FEFF 		bl	MX_GPIO_Init
+ 1763              	.LVL168:
+ 823:../Src/main.c ****   MX_I2C1_Init();
+ 1764              		.loc 1 823 0
+ 1765 000e FFF7FEFF 		bl	SystemClock_Config
+ 1766              	.LVL169:
+ 824:../Src/main.c ****   MX_TIM3_Init();
+ 1767              		.loc 1 824 0
+ 1768 0012 FFF7FEFF 		bl	MX_I2C1_Init
+ 1769              	.LVL170:
+ 825:../Src/main.c ****   MX_USART2_UART_Init();
+ 1770              		.loc 1 825 0
+ 1771 0016 FFF7FEFF 		bl	MX_TIM3_Init
+ 1772              	.LVL171:
+ 826:../Src/main.c **** 
+ARM GAS  /tmp/ccws6er7.s 			page 54
+
+
+ 1773              		.loc 1 826 0
+ 1774 001a FFF7FEFF 		bl	MX_USART2_UART_Init
+ 1775              	.LVL172:
+ 829:../Src/main.c ****   uart_printf(WelcomeMsg);
+ 1776              		.loc 1 829 0
+ 1777 001e FFF7FEFF 		bl	XNUCLEO53L0A1_Init
+ 1778              	.LVL173:
+ 831:../Src/main.c ****   HAL_Delay(WelcomeTime);
+ 1779              		.loc 1 831 0
+ 1780 0022 2048     		ldr	r0, .L141
+ 1781 0024 FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 1782              	.LVL174:
+ 832:../Src/main.c ****   ResetAndDetectSensor(1);
+ 1783              		.loc 1 832 0
+ 1784 0028 4FF42570 		mov	r0, #660
+ 1785 002c FFF7FEFF 		bl	HAL_Delay
+ 1786              	.LVL175:
+ 833:../Src/main.c ****   HAL_TIM_Base_Start_IT(&htim3); //£
+ 1787              		.loc 1 833 0
+ 1788 0030 0120     		movs	r0, #1
+ 1789 0032 FFF7FEFF 		bl	ResetAndDetectSensor
+ 1790              	.LVL176:
+ 834:../Src/main.c **** 
+ 1791              		.loc 1 834 0
+ 1792 0036 1C48     		ldr	r0, .L141+4
+ 1793 0038 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 1794              	.LVL177:
+ 810:../Src/main.c ****   /* USER CODE END 1 */
+ 1795              		.loc 1 810 0
+ 1796 003c 0226     		movs	r6, #2
+ 809:../Src/main.c ****   int UseSensorsMask = 1<<XNUCLEO53L0A1_DEV_CENTER;
+ 1797              		.loc 1 809 0
+ 1798 003e 0025     		movs	r5, #0
+ 808:../Src/main.c ****   DemoMode_e DemoMode = RANGE_VALUE;
+ 1799              		.loc 1 808 0
+ 1800 0040 2C46     		mov	r4, r5
+ 1801 0042 02E0     		b	.L133
+ 1802              	.LVL178:
+ 1803              	.L137:
+ 879:../Src/main.c ****     	  }
+ 1804              		.loc 1 879 0
+ 1805 0044 0226     		movs	r6, #2
+ 1806              	.LVL179:
+ 1807 0046 00E0     		b	.L133
+ 1808              	.LVL180:
+ 1809              	.L138:
+ 883:../Src/main.c ****       }
+ 1810              		.loc 1 883 0
+ 1811 0048 0124     		movs	r4, #1
+ 1812              	.LVL181:
+ 1813              	.L133:
+ 850:../Src/main.c ****       HAL_Delay(ModeChangeDispTime);
+ 1814              		.loc 1 850 0
+ 1815 004a 184B     		ldr	r3, .L141+8
+ 1816 004c 53F82500 		ldr	r0, [r3, r5, lsl #2]
+ 1817 0050 FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 1818              	.LVL182:
+ARM GAS  /tmp/ccws6er7.s 			page 55
+
+
+ 851:../Src/main.c **** 
+ 1819              		.loc 1 851 0
+ 1820 0054 4FF4FA70 		mov	r0, #500
+ 1821 0058 FFF7FEFF 		bl	HAL_Delay
+ 1822              	.LVL183:
+ 854:../Src/main.c **** 	  HAL_Delay(ModeChangeDispTime);
+ 1823              		.loc 1 854 0
+ 1824 005c 144B     		ldr	r3, .L141+12
+ 1825 005e 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 1826 0062 FFF7FEFF 		bl	XNUCLEO53L0A1_SetDisplayString
+ 1827              	.LVL184:
+ 855:../Src/main.c **** 
+ 1828              		.loc 1 855 0
+ 1829 0066 4FF4FA70 		mov	r0, #500
+ 1830 006a FFF7FEFF 		bl	HAL_Delay
+ 1831              	.LVL185:
+ 858:../Src/main.c **** 
+ 1832              		.loc 1 858 0
+ 1833 006e 0020     		movs	r0, #0
+ 1834 0070 FFF7FEFF 		bl	ResetAndDetectSensor
+ 1835              	.LVL186:
+ 861:../Src/main.c **** 
+ 1836              		.loc 1 861 0
+ 1837 0074 FFF7FEFF 		bl	TimeStamp_Reset
+ 1838              	.LVL187:
+ 871:../Src/main.c **** 
+ 1839              		.loc 1 871 0
+ 1840 0078 3046     		mov	r0, r6
+ 1841 007a 2146     		mov	r1, r4
+ 1842 007c FFF7FEFF 		bl	RangeDemo
+ 1843              	.LVL188:
+ 874:../Src/main.c ****     	  /* Long press : change demo mode if multiple sensors present*/
+ 1844              		.loc 1 874 0
+ 1845 0080 40B1     		cbz	r0, .L134
+ 876:../Src/main.c ****     		  /* If more than one sensor is present then toggle demo mode */
+ 1846              		.loc 1 876 0
+ 1847 0082 0C4B     		ldr	r3, .L141+16
+ 1848 0084 1B68     		ldr	r3, [r3]
+ 1849 0086 012B     		cmp	r3, #1
+ 1850 0088 DFDD     		ble	.L133
+ 1851              	.LVL189:
+ 879:../Src/main.c ****     	  }
+ 1852              		.loc 1 879 0
+ 1853 008a 95F00105 		eors	r5, r5, #1
+ 1854              	.LVL190:
+ 1855 008e D9D0     		beq	.L137
+ 1856 0090 0726     		movs	r6, #7
+ 1857              	.LVL191:
+ 1858 0092 DAE7     		b	.L133
+ 1859              	.LVL192:
+ 1860              	.L134:
+ 883:../Src/main.c ****       }
+ 1861              		.loc 1 883 0
+ 1862 0094 002C     		cmp	r4, #0
+ 1863 0096 D7D0     		beq	.L138
+ 883:../Src/main.c ****       }
+ 1864              		.loc 1 883 0 is_stmt 0 discriminator 1
+ARM GAS  /tmp/ccws6er7.s 			page 56
+
+
+ 1865 0098 012C     		cmp	r4, #1
+ 1866 009a 01D1     		bne	.L139
+ 883:../Src/main.c ****       }
+ 1867              		.loc 1 883 0
+ 1868 009c 0224     		movs	r4, #2
+ 1869              	.LVL193:
+ 1870 009e D4E7     		b	.L133
+ 1871              	.LVL194:
+ 1872              	.L139:
+ 1873 00a0 0024     		movs	r4, #0
+ 1874              	.LVL195:
+ 1875 00a2 D2E7     		b	.L133
+ 1876              	.L142:
+ 1877              		.align	2
+ 1878              	.L141:
+ 1879 00a4 30000000 		.word	.LC7
+ 1880 00a8 00000000 		.word	htim3
+ 1881 00ac 00000000 		.word	.LANCHOR5
+ 1882 00b0 00000000 		.word	.LANCHOR6
+ 1883 00b4 00000000 		.word	.LANCHOR0
+ 1884              		.cfi_endproc
+ 1885              	.LFE127:
+ 1887              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 1888              		.align	2
+ 1889              		.global	HAL_TIM_PeriodElapsedCallback
+ 1890              		.thumb
+ 1891              		.thumb_func
+ 1893              	HAL_TIM_PeriodElapsedCallback:
+ 1894              	.LFB133:
+1011:../Src/main.c **** 
+1012:../Src/main.c **** /* USER CODE BEGIN 4 */
+1013:../Src/main.c **** 
+1014:../Src/main.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){ //£
+ 1895              		.loc 1 1014 0 is_stmt 1
+ 1896              		.cfi_startproc
+ 1897              		@ args = 0, pretend = 0, frame = 0
+ 1898              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1899              	.LVL196:
+ 1900 0000 08B5     		push	{r3, lr}
+ 1901              	.LCFI40:
+ 1902              		.cfi_def_cfa_offset 8
+ 1903              		.cfi_offset 3, -8
+ 1904              		.cfi_offset 14, -4
+1015:../Src/main.c ****   if(htim->Instance == htim3.Instance){
+ 1905              		.loc 1 1015 0
+ 1906 0002 0268     		ldr	r2, [r0]
+ 1907 0004 044B     		ldr	r3, .L146
+ 1908 0006 1B68     		ldr	r3, [r3]
+ 1909 0008 9A42     		cmp	r2, r3
+ 1910 000a 03D1     		bne	.L143
+1016:../Src/main.c ****     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);              /////changement d'etat de la led
+ 1911              		.loc 1 1016 0
+ 1912 000c 0348     		ldr	r0, .L146+4
+ 1913              	.LVL197:
+ 1914 000e 2021     		movs	r1, #32
+ 1915 0010 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 1916              	.LVL198:
+ARM GAS  /tmp/ccws6er7.s 			page 57
+
+
+ 1917              	.L143:
+ 1918 0014 08BD     		pop	{r3, pc}
+ 1919              	.L147:
+ 1920 0016 00BF     		.align	2
+ 1921              	.L146:
+ 1922 0018 00000000 		.word	htim3
+ 1923 001c 00000240 		.word	1073872896
+ 1924              		.cfi_endproc
+ 1925              	.LFE133:
+ 1927              		.global	WelcomeMsg
+ 1928              		.comm	htim5,60,4
+ 1929              		.global	RangeMedium
+ 1930              		.global	RangeLow
+ 1931              		.global	VL53L0XDevs
+ 1932              		.comm	nDevMask,4,4
+ 1933              		.global	nDevPresent
+ 1934              		.global	LeakyFactorFix8
+ 1935              		.comm	RangingMeasurementData,28,4
+ 1936              		.global	DemoModeTxt
+ 1937              		.global	RangingConfigTxt
+ 1938              		.global	TxtBarGraph
+ 1939              		.global	TxtRangeValue
+ 1940              		.comm	huart2,60,4
+ 1941              		.comm	htim3,60,4
+ 1942              		.comm	hi2c1,56,4
+ 1943              		.section	.bss.nDevPresent,"aw",%nobits
+ 1944              		.align	2
+ 1945              		.set	.LANCHOR0,. + 0
+ 1948              	nDevPresent:
+ 1949 0000 00000000 		.space	4
+ 1950              		.section	.rodata.TxtRangeValue,"a",%progbits
+ 1951              		.align	2
+ 1954              	TxtRangeValue:
+ 1955 0000 726E6700 		.ascii	"rng\000"
+ 1956              		.section	.data.VL53L0XDevs,"aw",%progbits
+ 1957              		.align	2
+ 1958              		.set	.LANCHOR1,. + 0
+ 1961              	VL53L0XDevs:
+ 1962 0000 00000000 		.space	348
+ 1962      00000000 
+ 1962      00000000 
+ 1962      00000000 
+ 1962      00000000 
+ 1963 015c 00000000 		.word	XNUCLEO53L0A1_hi2c
+ 1964 0160 52       		.byte	82
+ 1965 0161 6C       		.byte	108
+ 1966 0162 0000     		.space	2
+ 1967 0164 00000000 		.word	0
+ 1968 0168 00000000 		.space	40
+ 1968      00000000 
+ 1968      00000000 
+ 1968      00000000 
+ 1968      00000000 
+ 1969 0190 00000000 		.space	348
+ 1969      00000000 
+ 1969      00000000 
+ 1969      00000000 
+ARM GAS  /tmp/ccws6er7.s 			page 58
+
+
+ 1969      00000000 
+ 1970 02ec 00000000 		.word	XNUCLEO53L0A1_hi2c
+ 1971 02f0 52       		.byte	82
+ 1972 02f1 63       		.byte	99
+ 1973 02f2 0000     		.space	2
+ 1974 02f4 01000000 		.word	1
+ 1975 02f8 00000000 		.space	40
+ 1975      00000000 
+ 1975      00000000 
+ 1975      00000000 
+ 1975      00000000 
+ 1976 0320 00000000 		.space	348
+ 1976      00000000 
+ 1976      00000000 
+ 1976      00000000 
+ 1976      00000000 
+ 1977 047c 00000000 		.word	XNUCLEO53L0A1_hi2c
+ 1978 0480 52       		.byte	82
+ 1979 0481 72       		.byte	114
+ 1980 0482 0000     		.space	2
+ 1981 0484 02000000 		.word	2
+ 1982 0488 00000000 		.space	40
+ 1982      00000000 
+ 1982      00000000 
+ 1982      00000000 
+ 1982      00000000 
+ 1983              		.section	.data.LeakyFactorFix8,"aw",%progbits
+ 1984              		.align	2
+ 1985              		.set	.LANCHOR4,. + 0
+ 1988              	LeakyFactorFix8:
+ 1989 0000 99000000 		.word	153
+ 1990              		.section	.data.WelcomeMsg,"aw",%progbits
+ 1991              		.align	2
+ 1994              	WelcomeMsg:
+ 1995 0000 48692049 		.ascii	"Hi I am Ranging VL53L0X mcu STM32F401xE\012\000"
+ 1995      20616D20 
+ 1995      52616E67 
+ 1995      696E6720 
+ 1995      564C3533 
+ 1996              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1997              		.align	2
+ 1998              	.LC0:
+ 1999 0000 20726220 		.ascii	" rb \000"
+ 1999      00
+ 2000 0005 000000   		.space	3
+ 2001              	.LC1:
+ 2002 0008 45722564 		.ascii	"Er%d\000"
+ 2002      00
+ 2003 000d 000000   		.space	3
+ 2004              	.LC2:
+ 2005 0010 20202020 		.ascii	"    \000"
+ 2005      00
+ 2006 0015 000000   		.space	3
+ 2007              	.LC3:
+ 2008 0018 25642C00 		.ascii	"%d,\000"
+ 2009              	.LC4:
+ 2010 001c 256400   		.ascii	"%d\000"
+ARM GAS  /tmp/ccws6er7.s 			page 59
+
+
+ 2011 001f 00       		.space	1
+ 2012              	.LC5:
+ 2013 0020 25336463 		.ascii	"%3dc\000"
+ 2013      00
+ 2014 0025 000000   		.space	3
+ 2015              	.LC6:
+ 2016 0028 2D2D2D2D 		.ascii	"----\000"
+ 2016      00
+ 2017 002d 000000   		.space	3
+ 2018              	.LC7:
+ 2019 0030 35334C30 		.ascii	"53L0\000"
+ 2019      00
+ 2020 0035 000000   		.space	3
+ 2021              	.LC8:
+ 2022 0038 726E6700 		.ascii	"rng\000"
+ 2023              	.LC9:
+ 2024 003c 62617200 		.ascii	"bar\000"
+ 2025              	.LC10:
+ 2026 0040 4C5200   		.ascii	"LR\000"
+ 2027 0043 00       		.space	1
+ 2028              	.LC11:
+ 2029 0044 485300   		.ascii	"HS\000"
+ 2030 0047 00       		.space	1
+ 2031              	.LC12:
+ 2032 0048 484100   		.ascii	"HA\000"
+ 2033              		.section	.data.RangingConfigTxt,"aw",%progbits
+ 2034              		.align	2
+ 2035              		.set	.LANCHOR6,. + 0
+ 2038              	RangingConfigTxt:
+ 2039 0000 40000000 		.word	.LC10
+ 2040 0004 44000000 		.word	.LC11
+ 2041 0008 48000000 		.word	.LC12
+ 2042              		.section	.rodata.TxtBarGraph,"a",%progbits
+ 2043              		.align	2
+ 2046              	TxtBarGraph:
+ 2047 0000 62617200 		.ascii	"bar\000"
+ 2048              		.section	.data.RangeLow,"aw",%progbits
+ 2049              		.align	2
+ 2050              		.set	.LANCHOR2,. + 0
+ 2053              	RangeLow:
+ 2054 0000 64000000 		.word	100
+ 2055              		.section	.data.RangeMedium,"aw",%progbits
+ 2056              		.align	2
+ 2057              		.set	.LANCHOR3,. + 0
+ 2060              	RangeMedium:
+ 2061 0000 2C010000 		.word	300
+ 2062              		.section	.data.DemoModeTxt,"aw",%progbits
+ 2063              		.align	2
+ 2064              		.set	.LANCHOR5,. + 0
+ 2067              	DemoModeTxt:
+ 2068 0000 38000000 		.word	.LC8
+ 2069 0004 3C000000 		.word	.LC9
+ 2070              		.text
+ 2071              	.Letext0:
+ 2072              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 2073              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 2074              		.file 4 "../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
+ARM GAS  /tmp/ccws6er7.s 			page 60
+
+
+ 2075              		.file 5 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 2076              		.file 6 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h"
+ 2077              		.file 7 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 2078              		.file 8 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 2079              		.file 9 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 2080              		.file 10 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 2081              		.file 11 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h"
+ 2082              		.file 12 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 2083              		.file 13 "/usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h"
+ 2084              		.file 14 "../Drivers/BSP/Components/vl53l0x/vl53l0x_types.h"
+ 2085              		.file 15 "../Drivers/BSP/Components/vl53l0x/vl53l0x_device.h"
+ 2086              		.file 16 "../Drivers/BSP/Components/vl53l0x/vl53l0x_def.h"
+ 2087              		.file 17 "../Drivers/BSP/X-NUCLEO-53L0A1/vl53l0x_platform.h"
+ 2088              		.file 18 "../Drivers/CMSIS/Include/core_cm4.h"
+ 2089              		.file 19 "../Drivers/BSP/X-NUCLEO-53L0A1/X-NUCLEO-53L0A1.h"
+ 2090              		.file 20 "/usr/include/newlib/stdio.h"
+ 2091              		.file 21 "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 2092              		.file 22 "../Drivers/BSP/Components/vl53l0x/vl53l0x_api.h"
+ 2093              		.file 23 "/usr/include/newlib/string.h"
+ARM GAS  /tmp/ccws6er7.s 			page 61
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/ccws6er7.s:21     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/ccws6er7.s:25     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/ccws6er7.s:94     .text.MX_GPIO_Init:0000000000000054 $d
+     /tmp/ccws6er7.s:101    .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccws6er7.s:105    .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccws6er7.s:187    .text.SystemClock_Config:0000000000000064 $d
+     /tmp/ccws6er7.s:192    .text.MX_I2C1_Init:0000000000000000 $t
+     /tmp/ccws6er7.s:196    .text.MX_I2C1_Init:0000000000000000 MX_I2C1_Init
+     /tmp/ccws6er7.s:237    .text.MX_I2C1_Init:0000000000000028 $d
+                            *COM*:0000000000000038 hi2c1
+     /tmp/ccws6er7.s:244    .text.MX_TIM3_Init:0000000000000000 $t
+     /tmp/ccws6er7.s:248    .text.MX_TIM3_Init:0000000000000000 MX_TIM3_Init
+     /tmp/ccws6er7.s:308    .text.MX_TIM3_Init:0000000000000044 $d
+                            *COM*:000000000000003c htim3
+     /tmp/ccws6er7.s:314    .text.MX_USART2_UART_Init:0000000000000000 $t
+     /tmp/ccws6er7.s:318    .text.MX_USART2_UART_Init:0000000000000000 MX_USART2_UART_Init
+     /tmp/ccws6er7.s:357    .text.MX_USART2_UART_Init:0000000000000024 $d
+                            *COM*:000000000000003c huart2
+     /tmp/ccws6er7.s:363    .text.MX_TIM5_Init:0000000000000000 $t
+     /tmp/ccws6er7.s:368    .text.MX_TIM5_Init:0000000000000000 MX_TIM5_Init
+     /tmp/ccws6er7.s:434    .text.MX_TIM5_Init:0000000000000044 $d
+                            *COM*:000000000000003c htim5
+     /tmp/ccws6er7.s:440    .text.TimeStamp_Init:0000000000000000 $t
+     /tmp/ccws6er7.s:445    .text.TimeStamp_Init:0000000000000000 TimeStamp_Init
+     /tmp/ccws6er7.s:464    .text.TimeStamp_Reset:0000000000000000 $t
+     /tmp/ccws6er7.s:469    .text.TimeStamp_Reset:0000000000000000 TimeStamp_Reset
+     /tmp/ccws6er7.s:493    .text.TimeStamp_Reset:0000000000000014 $d
+     /tmp/ccws6er7.s:498    .text.TimeStamp_Get:0000000000000000 $t
+     /tmp/ccws6er7.s:503    .text.TimeStamp_Get:0000000000000000 TimeStamp_Get
+     /tmp/ccws6er7.s:519    .text.TimeStamp_Get:0000000000000008 $d
+     /tmp/ccws6er7.s:524    .text.BSP_GetPushButton:0000000000000000 $t
+     /tmp/ccws6er7.s:529    .text.BSP_GetPushButton:0000000000000000 BSP_GetPushButton
+     /tmp/ccws6er7.s:550    .text.BSP_GetPushButton:0000000000000010 $d
+     /tmp/ccws6er7.s:555    .text.PusbButton_WaitUnPress:0000000000000000 $t
+     /tmp/ccws6er7.s:560    .text.PusbButton_WaitUnPress:0000000000000000 PusbButton_WaitUnPress
+     /tmp/ccws6er7.s:610    .text.PusbButton_WaitUnPress:0000000000000038 $d
+     /tmp/ccws6er7.s:615    .text.HandleError:0000000000000000 $t
+     /tmp/ccws6er7.s:620    .text.HandleError:0000000000000000 HandleError
+     /tmp/ccws6er7.s:651    .text.HandleError:0000000000000018 $d
+     /tmp/ccws6er7.s:656    .text.DetectSensors:0000000000000000 $t
+     /tmp/ccws6er7.s:661    .text.DetectSensors:0000000000000000 DetectSensors
+     /tmp/ccws6er7.s:898    .text.DetectSensors:0000000000000144 $d
+                            *COM*:0000000000000004 nDevMask
+     /tmp/ccws6er7.s:906    .text.SetupSingleShot:0000000000000000 $t
+     /tmp/ccws6er7.s:911    .text.SetupSingleShot:0000000000000000 SetupSingleShot
+     /tmp/ccws6er7.s:1102   .text.SetupSingleShot:000000000000011c $d
+     /tmp/ccws6er7.s:1108   .text.RangeToLetter:0000000000000000 $t
+     /tmp/ccws6er7.s:1113   .text.RangeToLetter:0000000000000000 RangeToLetter
+     /tmp/ccws6er7.s:1161   .text.RangeToLetter:0000000000000028 $d
+     /tmp/ccws6er7.s:1167   .text.Sensor_SetNewRange:0000000000000000 $t
+     /tmp/ccws6er7.s:1172   .text.Sensor_SetNewRange:0000000000000000 Sensor_SetNewRange
+     /tmp/ccws6er7.s:1235   .text.Sensor_SetNewRange:0000000000000044 $d
+     /tmp/ccws6er7.s:1240   .text.blink_led:0000000000000000 $t
+     /tmp/ccws6er7.s:1245   .text.blink_led:0000000000000000 blink_led
+     /tmp/ccws6er7.s:1300   .text.blink_led:0000000000000030 $d
+ARM GAS  /tmp/ccws6er7.s 			page 62
+
+
+     /tmp/ccws6er7.s:1305   .text.transmit:0000000000000000 $t
+     /tmp/ccws6er7.s:1310   .text.transmit:0000000000000000 transmit
+     /tmp/ccws6er7.s:1407   .text.transmit:0000000000000074 $d
+     /tmp/ccws6er7.s:1414   .text.RangeDemo:0000000000000000 $t
+     /tmp/ccws6er7.s:1419   .text.RangeDemo:0000000000000000 RangeDemo
+     /tmp/ccws6er7.s:1679   .text.RangeDemo:0000000000000178 $d
+                            *COM*:000000000000001c RangingMeasurementData
+     /tmp/ccws6er7.s:1690   .text.ResetAndDetectSensor:0000000000000000 $t
+     /tmp/ccws6er7.s:1695   .text.ResetAndDetectSensor:0000000000000000 ResetAndDetectSensor
+     /tmp/ccws6er7.s:1731   .text.ResetAndDetectSensor:0000000000000020 $d
+     /tmp/ccws6er7.s:1736   .text.main:0000000000000000 $t
+     /tmp/ccws6er7.s:1741   .text.main:0000000000000000 main
+     /tmp/ccws6er7.s:1879   .text.main:00000000000000a4 $d
+     /tmp/ccws6er7.s:1888   .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
+     /tmp/ccws6er7.s:1893   .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 HAL_TIM_PeriodElapsedCallback
+     /tmp/ccws6er7.s:1922   .text.HAL_TIM_PeriodElapsedCallback:0000000000000018 $d
+     /tmp/ccws6er7.s:1994   .data.WelcomeMsg:0000000000000000 WelcomeMsg
+     /tmp/ccws6er7.s:2060   .data.RangeMedium:0000000000000000 RangeMedium
+     /tmp/ccws6er7.s:2053   .data.RangeLow:0000000000000000 RangeLow
+     /tmp/ccws6er7.s:1961   .data.VL53L0XDevs:0000000000000000 VL53L0XDevs
+     /tmp/ccws6er7.s:1948   .bss.nDevPresent:0000000000000000 nDevPresent
+     /tmp/ccws6er7.s:1988   .data.LeakyFactorFix8:0000000000000000 LeakyFactorFix8
+     /tmp/ccws6er7.s:2067   .data.DemoModeTxt:0000000000000000 DemoModeTxt
+     /tmp/ccws6er7.s:2038   .data.RangingConfigTxt:0000000000000000 RangingConfigTxt
+     /tmp/ccws6er7.s:2046   .rodata.TxtBarGraph:0000000000000000 TxtBarGraph
+     /tmp/ccws6er7.s:1954   .rodata.TxtRangeValue:0000000000000000 TxtRangeValue
+     /tmp/ccws6er7.s:1944   .bss.nDevPresent:0000000000000000 $d
+     /tmp/ccws6er7.s:1951   .rodata.TxtRangeValue:0000000000000000 $d
+     /tmp/ccws6er7.s:1957   .data.VL53L0XDevs:0000000000000000 $d
+     /tmp/ccws6er7.s:1984   .data.LeakyFactorFix8:0000000000000000 $d
+     /tmp/ccws6er7.s:1991   .data.WelcomeMsg:0000000000000000 $d
+     /tmp/ccws6er7.s:1997   .rodata.str1.4:0000000000000000 $d
+     /tmp/ccws6er7.s:2034   .data.RangingConfigTxt:0000000000000000 $d
+     /tmp/ccws6er7.s:2043   .rodata.TxtBarGraph:0000000000000000 $d
+     /tmp/ccws6er7.s:2049   .data.RangeLow:0000000000000000 $d
+     /tmp/ccws6er7.s:2056   .data.RangeMedium:0000000000000000 $d
+     /tmp/ccws6er7.s:2063   .data.DemoModeTxt:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_I2C_Init
+HAL_TIM_Base_Init
+HAL_TIM_ConfigClockSource
+HAL_TIMEx_MasterConfigSynchronization
+HAL_UART_Init
+HAL_TIM_OC_Init
+HAL_TIM_OC_ConfigChannel
+HAL_TIM_Base_Start
+HAL_GPIO_ReadPin
+HAL_GetTick
+XNUCLEO53L0A1_SetDisplayString
+sprintf
+XNUCLEO53L0A1_ResetId
+HAL_Delay
+ARM GAS  /tmp/ccws6er7.s 			page 63
+
+
+VL53L0X_WrByte
+VL53L0X_RdWord
+VL53L0X_SetDeviceAddress
+VL53L0X_DataInit
+VL53L0X_StaticInit
+VL53L0X_PerformRefCalibration
+VL53L0X_PerformRefSpadManagement
+VL53L0X_SetDeviceMode
+VL53L0X_SetLimitCheckEnable
+VL53L0X_SetLimitCheckValue
+VL53L0X_SetMeasurementTimingBudgetMicroSeconds
+VL53L0X_SetVcselPulsePeriod
+HAL_TIM_Base_Stop_IT
+HAL_TIM_Base_Start_IT
+strcat
+strlen
+HAL_UART_Transmit
+VL53L0X_PerformSingleRangingMeasurement
+HAL_Init
+XNUCLEO53L0A1_Init
+HAL_GPIO_TogglePin
+XNUCLEO53L0A1_hi2c
