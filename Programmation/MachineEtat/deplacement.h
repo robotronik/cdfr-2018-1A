@@ -8,32 +8,32 @@
 /*
 Initialise la variable deverouillageValide a 0
 */
-void Initialisation(Deplacement* deplacement);
+void Initialisation(MachineEtat* machineEtat);
 
 /*
 Fait avancer le vehicule en changeant les positions x et y du robot
 En faisant attention aux autres robots 
 */
-void Deplacement(Deplacement* deplacement);
+void Deplacement(MachineEtat* machineEtat);
 
 /*
 Fait tourner le vehicule vers la :
 - Gauche : sens = 1
 - Droite : sens = -1
 */
-void Tourner(int sens);
+void Tourner(MachineEtat* machineEtat,int sens);
 
 /*
 Deplace le robot afin de deverouiller le loquet vers la position :
 - 1 si deverouillageValide = 0
 - 2 si deverouillageValide = 1
 */
-void Deverouillage(Deplacement* deplacement);
+void Deverouillage(MachineEtat* machineEtat);
 
 /*
 Deplace le robot sur la position de tir avec l'orientation
 */
-void PositionnementTir(Deplacement* deplacement);
+void PositionnementTir(MachineEtat* machineEtat);
 
 /*
 Renvoie :
