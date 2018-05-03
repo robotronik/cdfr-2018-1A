@@ -47,18 +47,15 @@ void TransitionEtats(MachineEtat* machineEtat){
 }
 
 void InitialisationParametresGlobaux(MachineEtat* machineEtat){
-    if((machineEtat->triage).couleurDetecte == "O"){
-        (machineEtat->deplacement).xTerrain = xTerrainO;
-        (machineEtat->deplacement).yTerrain = yTerrainO;
-        (machineEtat->deplacement).xRobot = xRobotO;
-        (machineEtat->deplacement).yRobot = yRobotO;
-    }
-    else if((machineEtat->triage).couleurDetecte == "V"){
-        (machineEtat->deplacement).xTerrain = xTerrainV;
-        (machineEtat->deplacement).yTerrain = yTerrainV;
-        (machineEtat->deplacement).xRobot = xRobotV;
-        (machineEtat->deplacement).yRobot = yRobotV;
-    }
+    (machineEtat->deplacement).dimTerrain.x = xTerrain;
+    (machineEtat->deplacement).dimTerrain.y  = yTerrain;
+    (machineEtat->deplacement).positionRobot.x = xRobotDepart*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).positionRobot.y = yRobotDepart*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).positionContainer1.x = xContainer1*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).positionContainer1.y = yContainer1*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).positionContainer2.x = xContainer2*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).positionContainer1.y = yContainer2*(machineEtat->triage).couleurDetecte;
+    (machineEtat->deplacement).positionTir.y = yContainer2*(machineEtat->triage).couleurDetecte;
     (machineEtat->attente).deltaT = tempsAttente;
     (machineEtat->attente).finAttente = 1;
 

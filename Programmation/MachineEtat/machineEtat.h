@@ -18,15 +18,11 @@ typedef struct{
 } MachineEtat;
 
 typedef struct{
-  float xTerrain;
-  float yTerrain;
-  float xRobot;
-  float yRobot;
-  float xContainer1
-  float yContainer1
-  float xContainer2
-  float yContainer2
-  float depo
+  FVecteur2D dimTerrain;
+  FVecteur2D positionRobot;
+  FVecteur2D positionContainer1;
+  FVecteur2D positionContainer2;
+  FVecteur2D positionTir;
   int deverouillageValide;
   int deverouillage;
   int deverouillagePrecedent;
@@ -45,8 +41,8 @@ typedef struct{
 } XL_ME_Wrapper
 
 typedef struct{
-  char* maCouleur; // cest la couleur de notre equipe
-  char* couleurDetecte;
+  int maCouleur; // 1 orange, -1 vert
+  int couleurDetecte; // 0 sinon
   int secouer;
   int tri; //prend la valeur 1 si le premier tri a bugue ou s'il est fini, 2 au deuxième tri
   int triPrecedent; // cest un peu iconoclaste
@@ -57,6 +53,11 @@ typedef struct{
 typedef struct{
   int tir;
 } Lancer;
+
+typedef struct{
+  float x;
+  float y;
+} FVecteur2D;
 
 /*
 Initialise tout les parametres globaux du jeu
