@@ -27,13 +27,11 @@ void TransitionEtats(MachineEtat* machineEtat){
                 machineEtat->etatActuel = DEPLACEMENT;
                 (machineEtat->triage).triPrecedent++;
             }
-
             break;
 
         case LANCER:
             /* Passe au tri quand le tir est fini */
             else if ((machineEtat->lancer).tir == 0){
-                (machineEtat->lancer).tir = 0;
                 machineEtat->etatActuel = TRIAGE;
             }
             break;
@@ -76,4 +74,5 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
         (machineEtat->deplacement).positionTir.x = xTirV;
         (machineEtat->deplacement).positionTir.y = yTirV;
     }
+    XL_Set_Goal_Position( &((machineEtat->lancer).accelerateur.servo), (machineEtat->lancer).accelerateur.posOuvert, 1);
 }

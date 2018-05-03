@@ -11,7 +11,7 @@ void ControlePorteEntree(MachineEtat* machineEtat, int ouverture){
     if (ouverture==0) {  pos = (machineEtat->triage).xl_porte_entre.posFerme;}
     else{ pos = (machineEtat->triage).xl_porte_entre.posOuvert;}
 
-    XL_Set_Goal_Position( &((machineEtat->triage).xl_porte_entre.servo) , pos, uint8_t now);
+    XL_Set_Goal_Position( &((machineEtat->triage).xl_porte_entre.servo) , pos, 1);
 }
 
 void ControleSortieBalle(MachineEtat* machineEtat,int sens){
@@ -20,5 +20,5 @@ void ControleSortieBalle(MachineEtat* machineEtat,int sens){
     if (sens==0) {  pos = (machineEtat->triage).xl_porte_sortie.posFerme;}
     else{ pos = (machineEtat->triage).xl_porte_sortie.posOuvert;}
 
-    XL_Set_Goal_Position( &((machineEtat->triage).xl_porte_sortie.servo) , pos, uint8_t now);
+    XL_Set_Goal_Position( &((machineEtat->triage).xl_porte_sortie.servo) , pos, 1);
 }
