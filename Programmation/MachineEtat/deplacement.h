@@ -6,7 +6,7 @@
 /* Definition des fonctions de l'etat deplacement */
 
 /*
-Initialise la variable deverouillageValide a 0, position sur le terrain en fonction de la couleur
+Initialise la variable deverouillageValide a 0
 */
 void Initialisation(Deplacement* deplacement);
 
