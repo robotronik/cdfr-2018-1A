@@ -27,7 +27,7 @@ Controle la porte de sortie en fonction de sens :
 - sens = 1 : redirection vers le module de tir
 - sens = 0 : redirection vers l'evacuation
 */
-void ControleSortieBalle(int sens);
+void ControleSortieBalle(MachineEtat* machineEtat,int sens);
 
 
 /*
