@@ -1,0 +1,81 @@
+Configuration	NucleoF401
+STM32CubeMX 	4.25.0
+Date	05/04/2018
+MCU	STM32F401RETx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+TIM3	Internal Clock	TIM3_VS_ClockSourceINT	VP_TIM3_VS_ClockSourceINT
+USART1	Asynchronous	USART1_RX	PA10
+USART1	Asynchronous	USART1_TX	PA9
+USART2	Asynchronous	USART2_RX	PA3
+USART2	Asynchronous	USART2_TX	PA2
+USART6	Asynchronous	USART6_RX	PC7
+USART6	Asynchronous	USART6_TX	PC6
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+2	PC13-ANTI_TAMP	GPIO_EXTI13	B1
+3	PC14-OSC32_IN*	RCC_OSC32_IN	
+4	PC15-OSC32_OUT*	RCC_OSC32_OUT	
+5	PH0 - OSC_IN*	RCC_OSC_IN	
+6	PH1 - OSC_OUT*	RCC_OSC_OUT	
+8	PC0	GPIO_Output	US_OUT_2
+9	PC1	GPIO_EXTI1	US_IN_2
+10	PC2	GPIO_Output	Lanceur_Control
+11	PC3	GPIO_Output	DIR_Servo
+14	PA0-WKUP*	TIM2_CH1	CH_B1
+16	PA2	USART2_TX	USART_TX
+17	PA3	USART2_RX	USART_RX
+21	PA5	GPIO_Output	LD2 [Green Led]
+22	PA6*	TIM3_CH1	CH_A2
+23	PA7	GPIO_Output	US_OUT_3
+24	PC4	GPIO_EXTI4	US_IN_3
+25	PC5	GPIO_EXTI5	US_IN_4
+26	PB0	GPIO_Output	US__OUT_4
+34	PB13	GPIO_Output	RDG
+35	PB14	GPIO_Output	RDD
+36	PB15	GPIO_Output	RGG
+37	PC6	USART6_TX	
+38	PC7	USART6_RX	
+41	PA8*	TIM1_CH1	CH_A1
+42	PA9	USART1_TX	
+43	PA10	USART1_RX	
+45	PA12	GPIO_Output	RGD
+46	PA13*	SYS_JTMS-SWDIO	TMS
+49	PA14*	SYS_JTCK-SWCLK	TCK
+55	PB3*	SYS_JTDO-SWO	SWO
+58	PB6*	TIM4_CH1	CH_B2
+61	PB8	GPIO_EXTI8	US_IN_1
+62	PB9	GPIO_Output	US_OUT_1
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : NucleoF401
+Project Folder : /home/robotronik/Documents/cdfr-2018-1A/Programmation/FINAL
+Toolchain / IDE : Makefile
+Firmware Package Name and Version : STM32Cube FW_F4 V1.21.0
+
+
+Code Generation Settings : 
+STM32Cube Firmware Library Package : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : Yes
+Backup previously generated files when re-generating : Yes
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : Yes
+
+
+Toolchains Settings : 
+Compiler Optimizations : Balanced Size/Speed
+
+
+
+
+
+
