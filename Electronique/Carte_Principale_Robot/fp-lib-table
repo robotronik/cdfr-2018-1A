@@ -1,0 +1,7 @@
+(fp_lib_table
+  (lib (name DSN)(type KiCad)(uri "C:/Users/lucno/Desktop/Luc/Travail/3_Ecole d'Ingénieur - INP PHELMA/Associations/Robotronik/Robot Coupe de France/cdfr-2018-1A-Electronique/Electronique/Carte/dsn2596.pretty")(options "")(descr ""))
+  (lib (name Bplug)(type KiCad)(uri "C:/Users/lucno/Desktop/Luc/Travail/3_Ecole d'Ingénieur - INP PHELMA/Associations/Robotronik/Robot Coupe de France/cdfr-2018-1A-Electronique/Electronique/Carte/lib/B plug.pretty")(options "")(descr ""))
+  (lib (name maxon)(type KiCad)(uri "C:/Users/lucno/Desktop/Luc/Travail/3_Ecole d'Ingénieur - INP PHELMA/Associations/Robotronik/Robot Coupe de France/cdfr-2018-1A-Electronique/Electronique/Carte/lib/maxon.pretty")(options "")(descr ""))
+  (lib (name robot_1A)(type KiCad)(uri "$(KIPRJMOD)/robot_1A.pretty")(options "")(descr ""))
+  (lib (name dsn2596)(type KiCad)(uri "$(KIPRJMOD)/dsn2596.pretty")(options "")(descr ""))
+)

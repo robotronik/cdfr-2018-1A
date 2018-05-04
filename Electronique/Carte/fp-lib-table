@@ -1,6 +1,0 @@
-(fp_lib_table
-  (lib (name robot1A)(type KiCad)(uri E:/clubRobot/cdfr-2018-1A/Electronique/Carte/1A_cdfr2017.pretty)(options "")(descr ""))
-  (lib (name DSN)(type KiCad)(uri E:/clubRobot/cdfr-2018-1A/Electronique/Carte/dsn2596.pretty)(options "")(descr ""))
-  (lib (name Bplug)(type KiCad)(uri "E:/clubRobot/cdfr-2018-1A/Electronique/Carte/lib/B plug.pretty")(options "")(descr ""))
-  (lib (name maxon)(type KiCad)(uri E:/clubRobot/cdfr-2018-1A/Electronique/Carte/lib/maxon.pretty)(options "")(descr ""))
-)
