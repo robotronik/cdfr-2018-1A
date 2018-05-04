@@ -1,5 +1,5 @@
 BOARD=f4
-PROJECT_DIR=final/NucleoF401
+PROJECT_DIR=cap
 PROJECT_NAME=NucleoF401
 DOC_DIR= /home/$(USER)/STM32Cube/
 
