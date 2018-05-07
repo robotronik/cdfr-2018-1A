@@ -14,7 +14,7 @@ typedef struct{
   Deplacement deplacement;
   Triage triage;
   Lancer lancer;
-  Attente attente;deltaT
+  Attente attente;
   EtatActuel etatActuel;
 } MachineEtat;
 

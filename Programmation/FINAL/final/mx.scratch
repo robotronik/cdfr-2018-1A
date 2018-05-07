@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-<ProjectName>/home/robotronik/Documents/cdfr-2018-1A/Programmation/FINAL/final/NucleoF401\NucleoF401</ProjectName>
+<ProjectName>/home/student/cdfr-2018-1A/Programmation/FINAL/final/NucleoF401\NucleoF401</ProjectName>
 <ProjectNature>C</ProjectNature> 
 <CMSIS>../Drivers/CMSIS</CMSIS>
-<HAL_Driver>/home/robotronik/STM32Cube/Repository//STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS</HAL_Driver>
+<HAL_Driver>/home/student/STM32Cube/Repository//STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS</HAL_Driver>
 <Toolchain>Makefile</Toolchain>
 <Version>0</Version>
 
@@ -32,7 +32,7 @@
     <usedDebug>true</usedDebug>
     	<debugprobe></debugprobe>
     <optimization></optimization>
-    <icfloc>1</icfloc>
+    <icfloc>0</icfloc>
     <Adefines>
         <define></define>
     </Adefines>   
