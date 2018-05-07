@@ -81,7 +81,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, LD2_Pin|US_OUT_3_Pin|RGD_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, US__OUT_4_Pin|RDG_Pin|RDD_Pin|RGG_Pin 
+  HAL_GPIO_WritePin(GPIOB, US_OUT_4_Pin|RDG_Pin|RDD_Pin|RGG_Pin 
                           |US_OUT_1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PtPin */
@@ -126,7 +126,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin 
                            PBPin */
-  GPIO_InitStruct.Pin = US__OUT_4_Pin|RDG_Pin|RDD_Pin|RGG_Pin 
+  GPIO_InitStruct.Pin = US_OUT_4_Pin|RDG_Pin|RDD_Pin|RGG_Pin 
                           |US_OUT_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -174,7 +174,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = US_IN_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(US_IN_1_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
