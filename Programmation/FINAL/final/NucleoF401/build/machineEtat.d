@@ -27,7 +27,7 @@ build/machineEtat.d: ..//Src/machineEtat.c ../Inc/machineEtat.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/config.h \
- ../Inc/machineEtat.h ../Inc/config.h
+ ../Inc/machineEtat.h ../Inc/config.h ../Inc/lancer.h
 
 ../Inc/machineEtat.h:
 
@@ -96,3 +96,5 @@ build/machineEtat.d: ..//Src/machineEtat.c ../Inc/machineEtat.h \
 ../Inc/machineEtat.h:
 
 ../Inc/config.h:
+
+../Inc/lancer.h:
