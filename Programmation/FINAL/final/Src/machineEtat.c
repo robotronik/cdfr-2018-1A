@@ -1,5 +1,6 @@
 #include "machineEtat.h"
 #include "config.h"
+#include "lancer.h"
 
 void TransitionEtats(MachineEtat* machineEtat){
     switch (machineEtat->etatActuel){
@@ -26,6 +27,7 @@ void TransitionEtats(MachineEtat* machineEtat){
             if ((machineEtat->triage).maCouleur == (machineEtat->triage).couleurDetecte){
                 (machineEtat->lancer).tir = 1;
                 machineEtat->etatActuel = LANCER;
+                ActivationMoteur();
             }
             /* Passe au deplacement si le tri actuel est fini */
             else if ((machineEtat->triage).tri > (machineEtat->triage).triPrecedent){
