@@ -65,13 +65,18 @@ C_SOURCES =  \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 ../Src/gpio.c \
-../Src/ultrason.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
 ../Src/usart.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c \
 ../Src/stm32f4xx_it.c \
-../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+../Src/ultrason.c \
+../Src/lancer.c \
+../Src/triage.c \
+../Src/machineEtat.c \
+../Src/attente.c \
+../Src/xl_320.c
 
 # ASM sources
 ASM_SOURCES =  \

@@ -42,6 +42,8 @@
 
 #include "gpio.h"
 
+#include "machineEtat.h"
+
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -245,14 +247,19 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
   /* USER CODE END TIM11_MspDeInit 1 */
   }
 } 
-
+//extern MachineEtat machineEtat
 /* USER CODE BEGIN 1 */
+extern MachineEtat machineEtat;
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
   if(htim->Instance == htim9.Instance){
     HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 0);
     HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 0);
     HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 0);
     HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 0);
+    if ((machineEtat.triage).servoPret < 1){
+      (machineEtat.triage).servoPret++;
+    }
   }
 }
 
