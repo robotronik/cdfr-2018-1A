@@ -9,19 +9,22 @@
 /*
 Initialise les moteurs et la variable deverouillageValide a 0
 */
-void Initialisation(MachineEtat* machineEtat, Moteur* moteurGauche, Moteur* moteurDroit);
+void Initialisation(MachineEtat* machineEtat, GPIO_TypeDef* RG_av_PORT, uint16_t RG_av_PIN, GPIO_TypeDef* RG_ar_PORT, uint16_t RG_ar_PIN, GPIO_TypeDef* RD_av_PORT, uint16_t RD_av_PIN, GPIO_TypeDef* RD_ar_PORT, uint16_t RD_ar_PIN);
 
 /*
 Sous programmes avancer et arreter
 */
-void MoteurAvant(Moteur moteur);
-void MoteurOff(Moteur moteur);
+void MoteurAvant(Moteur* moteur);
+void MoteurOff(Moteur* moteur);
 
 /*
-Fait avancer le vehicule en changeant les positions x et y du robot
+Fait le parcourt en changeant les positions x et y du robot
 En faisant attention aux autres robots
 */
-void Deplacement(MachineEtat* machineEtat);
+void DeplacementGlobal(MachineEtat* machineEtat);
+
+/* Permet d'avancer */
+void Avancer(MachineEtat* machineEtat);
 
 /*
 Fait tourner le vehicule vers la :

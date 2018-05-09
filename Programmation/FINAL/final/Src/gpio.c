@@ -59,6 +59,7 @@
         * Free pins are configured automatically as Analog (this feature is enabled through 
         * the Code Generation settings)
      PA0-WKUP   ------> S_TIM2_CH1_ETR
+     PA6   ------> S_TIM3_CH1
      PB6   ------> S_TIM4_CH1
 */
 void MX_GPIO_Init(void)
@@ -129,6 +130,14 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = CH_A2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
+  HAL_GPIO_Init(CH_A2_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = US_OUT_3_Pin;

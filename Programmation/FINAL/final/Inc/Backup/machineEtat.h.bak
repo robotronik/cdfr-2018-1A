@@ -3,8 +3,8 @@
 
 /* Debut des librairies necessaires a la machine a etat */
 #include "xl_320.h"
-#include "ultrason.h"
 #include "stm32f4xx_hal.h"
+
 /* Fin des librairies necessaires a la machine a etat */
 
 typedef enum{
@@ -15,6 +15,33 @@ typedef enum{
 } EtatActuel;
 
 /* Debut fonctions liees au deplacement */
+
+/*
+Structure pour les tests de distance
+*/
+typedef struct{
+    GPIO_TypeDef* port;
+    uint16_t pin;
+
+    int tensionPrecedent;
+    int tension;
+    uint32_t tempsReception;
+    uint32_t tempsEnvoie;
+
+    char detection;
+} TestUltrason;
+
+/*
+Permet de connaitre quel capteur detecte
+*/
+typedef struct{
+    uint32_t seuilDetection;
+    char detection;
+    TestUltrason usAvantGauche;
+    TestUltrason usAvant;
+    TestUltrason usAvantDroit;
+    TestUltrason usArriere;
+} DetectionCapteur;
 
 typedef struct{
   float x;
@@ -40,6 +67,8 @@ typedef struct{
   int deverouillageValide;
   int deverouillage;
   int deverouillagePrecedent;
+  Moteur moteurGauche;
+  Moteur moteurDroit;
   DetectionCapteur detectionCapteur;
   int pretTri;
 } Deplacement;
