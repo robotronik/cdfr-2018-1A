@@ -33,12 +33,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"
+
+/* USER CODE BEGIN 0 */
+
 #include "ultrason.h"
 #include "main.h"
 #include "config.h"
-
-
-/* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
 

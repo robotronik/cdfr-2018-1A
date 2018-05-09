@@ -79,8 +79,8 @@
 #define US_IN_4_Pin GPIO_PIN_5
 #define US_IN_4_GPIO_Port GPIOC
 #define US_IN_4_EXTI_IRQn EXTI9_5_IRQn
-#define US__OUT_4_Pin GPIO_PIN_0
-#define US__OUT_4_GPIO_Port GPIOB
+#define US_OUT_4_Pin GPIO_PIN_0
+#define US_OUT_4_GPIO_Port GPIOB
 #define RDG_Pin GPIO_PIN_13
 #define RDG_GPIO_Port GPIOB
 #define RDD_Pin GPIO_PIN_14

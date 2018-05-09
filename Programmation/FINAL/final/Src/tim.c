@@ -42,9 +42,9 @@
 
 #include "gpio.h"
 
-#include "machineEtat.h"
-
 /* USER CODE BEGIN 0 */
+
+#include "machineEtat.h"
 
 /* USER CODE END 0 */
 

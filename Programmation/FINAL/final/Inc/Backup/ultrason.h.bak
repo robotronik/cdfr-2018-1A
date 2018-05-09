@@ -24,7 +24,7 @@ Permet de connaitre quel capteur detecte
 */
 typedef struct{
     uint32_t seuilDetection;
-
+    char detection;
     TestUltrason usAvantGauche;
     TestUltrason usAvant;
     TestUltrason usAvantDroit;

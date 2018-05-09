@@ -35,6 +35,7 @@
 #include "stm32f4xx.h"
 #include "ultrason.h"
 #include "main.h"
+#include "config.h"
 
 
 /* USER CODE BEGIN 0 */
@@ -172,10 +173,10 @@ void EXTI15_10_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-extern DetectionCapteur detectionCapteur;
+extern MachineEtat machineEtat;
 
 void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin){
-  DetecterObstacleGlobal(&detectionCapteur, GPIO_Pin);
+  DetecterObstacleGlobal(&(machineEtat.deplacement.detectionCapteur), GPIO_Pin);
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

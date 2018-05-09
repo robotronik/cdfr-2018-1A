@@ -40,8 +40,6 @@ typedef struct{
   int deverouillageValide;
   int deverouillage;
   int deverouillagePrecedent;
-  Moteur moteurGauche;
-  Moteur moteurDroit;
   DetectionCapteur detectionCapteur;
   int pretTri;
 } Deplacement;

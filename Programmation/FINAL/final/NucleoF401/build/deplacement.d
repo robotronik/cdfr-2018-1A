@@ -1,5 +1,5 @@
-build/machineEtat.d: ..//Src/machineEtat.c ../Inc/machineEtat.h \
- ../Inc/xl_320.h ../Inc/ultrason.h \
+build/deplacement.d: ..//Src/deplacement.c ../Inc/deplacement.h \
+ ../Inc/machineEtat.h ../Inc/xl_320.h ../Inc/ultrason.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -26,8 +26,9 @@ build/machineEtat.d: ..//Src/machineEtat.c ../Inc/machineEtat.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/config.h \
- ../Inc/machineEtat.h ../Inc/config.h ../Inc/lancer.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/config.h
+
+../Inc/deplacement.h:
 
 ../Inc/machineEtat.h:
 
@@ -92,9 +93,3 @@ build/machineEtat.d: ..//Src/machineEtat.c ../Inc/machineEtat.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Inc/config.h:
-
-../Inc/machineEtat.h:
-
-../Inc/config.h:
-
-../Inc/lancer.h:
