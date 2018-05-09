@@ -1,6 +1,8 @@
 #include "machineEtat.h"
 #include "config.h"
 #include "lancer.h"
+#include "attente.h"
+#include "deplacement.h"
 
 void TransitionEtats(MachineEtat* machineEtat){
     switch (machineEtat->etatActuel){
@@ -10,6 +12,7 @@ void TransitionEtats(MachineEtat* machineEtat){
                 ((machineEtat->deplacement).deverouillagePrecedent)++;
                 machineEtat->etatActuel = ATTENTE;
                 (machineEtat->attente).finAttente = 0;
+                Pause(machineEtat);
             }
 
             /* Passage de deplacement a triage si pret a tri (mis dans la bonne position) */
@@ -17,9 +20,15 @@ void TransitionEtats(MachineEtat* machineEtat){
                 machineEtat->etatActuel = TRIAGE;
             }
 
+            /* Si ultrason detecte quelque chose */
             else if ((machineEtat->deplacement).detectionCapteur.detection){
                 machineEtat->etatActuel = ATTENTE;
                 (machineEtat->attente).finAttente = 0;
+                ArretUltrason(machineEtat);
+            }
+
+            else{
+                DeplacementGlobal(machineEtat);
             }
             break;
 
@@ -47,13 +56,14 @@ void TransitionEtats(MachineEtat* machineEtat){
 
         case ATTENTE:
             /* Reste en attente si une detection se fait */
-            if (!(machineEtat->deplacement).detectionCapteur.detection){
-                machineEtat->etatActuel = ATTENTE;
+            if ((machineEtat->deplacement).detectionCapteur.detection){
+                ArretUltrason(machineEtat);
             }
 
             /* Reviens au deplacement quand l'attente est fini */
             else if ((machineEtat->attente).finAttente){
                 machineEtat->etatActuel = DEPLACEMENT;
+                DeplacementGlobal(machineEtat);
             }
 
             break;
@@ -64,6 +74,7 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->deplacement).dimTerrain.x = xTerrain;
     (machineEtat->deplacement).dimTerrain.y = yTerrain;
     (machineEtat->attente).deltaT = tempsAttente;
+    machineEtat->etatActuel = DEPLACEMENT;
     (machineEtat->attente).finAttente = 1;
     (machineEtat->deplacement).deverouillage = 0;
     (machineEtat->deplacement).deverouillageValide = 0;

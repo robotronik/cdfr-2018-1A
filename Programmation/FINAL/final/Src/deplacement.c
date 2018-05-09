@@ -21,6 +21,10 @@ void MoteurOff(Moteur* moteur){
   HAL_GPIO_WritePin(moteur->ar.type, moteur->ar.pin, GPIO_PIN_RESET);
 }
 
+void DeplacementGlobal(MachineEtat* machineEtat){
+  Avancer(machineEtat);
+}
+
 void Avancer(MachineEtat* machineEtat){
   MoteurAvant(&((machineEtat->deplacement).moteurGauche));
   MoteurAvant(&((machineEtat->deplacement).moteurDroit));

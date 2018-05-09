@@ -66,7 +66,6 @@ void DetecterObstacleGlobal(MachineEtat* machineEtat, uint16_t GPIO_Pin){
         (machineEtat->deplacement).detectionCapteur.detection = 0;
         HAL_GPIO_WritePin(GPIOA, LD2_Pin,0);
     }
-    //TransitionEtats(machineEtat);
 }
 
 void DetecterObstableUnitaire(TestUltrason* testUltrason){

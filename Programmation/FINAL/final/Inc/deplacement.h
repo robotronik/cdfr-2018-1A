@@ -18,9 +18,12 @@ void MoteurAvant(Moteur* moteur);
 void MoteurOff(Moteur* moteur);
 
 /*
-Fait avancer le vehicule en changeant les positions x et y du robot
+Fait le parcourt en changeant les positions x et y du robot
 En faisant attention aux autres robots
 */
+void DeplacementGlobal(MachineEtat* machineEtat);
+
+/* Permet d'avancer */
 void Avancer(MachineEtat* machineEtat);
 
 /*

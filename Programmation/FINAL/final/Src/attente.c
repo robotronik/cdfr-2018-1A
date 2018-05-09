@@ -10,5 +10,6 @@ void ArretUltrason(MachineEtat* machineEtat){
     MoteurOff(&(machineEtat->deplacement).moteurDroit);
     while((machineEtat->deplacement).detectionCapteur.detection){
     }
+    HAL_GPIO_WritePin(GPIOA, LD2_Pin,0);
     (machineEtat->attente).finAttente = 1;
 }

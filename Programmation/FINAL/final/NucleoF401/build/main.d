@@ -28,7 +28,7 @@ build/main.d: ..//Src/main.c ../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/tim.h \
  ../Inc/usart.h ../Inc/gpio.h ../Inc/ultrason.h ../Inc/machineEtat.h \
  ../Inc/xl_320.h ../Inc/config.h ../Inc/ultrason.h ../Inc/machineEtat.h \
- ../Inc/deplacement.h
+ ../Inc/deplacement.h ../Inc/lancer.h
 
 ../Inc/main.h:
 
@@ -107,3 +107,5 @@ build/main.d: ..//Src/main.c ../Inc/main.h \
 ../Inc/machineEtat.h:
 
 ../Inc/deplacement.h:
+
+../Inc/lancer.h:
