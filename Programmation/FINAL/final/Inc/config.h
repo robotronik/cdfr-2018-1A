@@ -7,6 +7,9 @@
 /* Temps d'attente de la machine a etat */
 #define tempsAttente 20
 
+/* Distance de detection ultrason */
+#define distanceDeSeuil 300
+
 /* Dimension du terrain */
 #define xTerrain 3000
 #define yTerrain 2000

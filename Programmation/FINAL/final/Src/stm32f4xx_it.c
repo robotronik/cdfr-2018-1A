@@ -176,7 +176,7 @@ void EXTI15_10_IRQHandler(void)
 extern MachineEtat machineEtat;
 
 void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin){
-  DetecterObstacleGlobal(&(machineEtat.deplacement.detectionCapteur), GPIO_Pin);
+  DetecterObstacleGlobal(&machineEtat, GPIO_Pin);
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

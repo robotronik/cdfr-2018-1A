@@ -46,6 +46,7 @@
 /* USER CODE BEGIN Includes */
 #include "ultrason.h"
 #include "machineEtat.h"
+#include "deplacement.h"
 
 //#include "interpol.h"
 /* USER CODE END Includes */
@@ -113,11 +114,11 @@ int main(void)
   extern MachineEtat machineEtat;
 
   InitialisationParametresGlobaux(&machineEtat);
-  InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin, 200);
-/*
-  extern DetectionCapteur detectionCapteur;
-  InitialiserCapteur(&detectionCapteur, US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin, 200);
-*/
+  InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin);
+  //ActivationMoteur();
+  Initialisation(&machineEtat, RG_av_GPIO_Port, RG_av_Pin, RG_ar_GPIO_Port, RG_ar_Pin, RD_av_GPIO_Port, RD_av_Pin, RD_ar_GPIO_Port, RD_ar_Pin);
+  //HAL_GPIO_WritePin(RG_av_GPIO_Port, RG_av_Pin, 1);
+  Avancer(&machineEtat);
   
   /* USER CODE END 2 */
 

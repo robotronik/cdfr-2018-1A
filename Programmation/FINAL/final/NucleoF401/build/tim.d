@@ -26,7 +26,7 @@ build/tim.d: ..//Src/tim.c ../Inc/tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/gpio.h \
- ../Inc/machineEtat.h ../Inc/xl_320.h ../Inc/ultrason.h ../Inc/config.h \
+ ../Inc/machineEtat.h ../Inc/xl_320.h ../Inc/config.h ../Inc/ultrason.h \
  ../Inc/machineEtat.h
 
 ../Inc/tim.h:
@@ -93,8 +93,8 @@ build/tim.d: ..//Src/tim.c ../Inc/tim.h \
 
 ../Inc/xl_320.h:
 
-../Inc/ultrason.h:
-
 ../Inc/config.h:
+
+../Inc/ultrason.h:
 
 ../Inc/machineEtat.h:

@@ -2,6 +2,7 @@
 #define ATTENTE_H
 
 #include "machineEtat.h"
+#include "deplacement.h"
 
 /* Definition des fonctions de l'etat attente */
 

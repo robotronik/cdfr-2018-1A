@@ -19,6 +19,7 @@ void TransitionEtats(MachineEtat* machineEtat){
 
             else if ((machineEtat->deplacement).detectionCapteur.detection){
                 machineEtat->etatActuel = ATTENTE;
+                (machineEtat->attente).finAttente = 0;
             }
             break;
 
@@ -45,14 +46,16 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case ATTENTE:
+            /* Reste en attente si une detection se fait */
+            if (!(machineEtat->deplacement).detectionCapteur.detection){
+                machineEtat->etatActuel = ATTENTE;
+            }
+
             /* Reviens au deplacement quand l'attente est fini */
-            if ((machineEtat->attente).finAttente){
+            else if ((machineEtat->attente).finAttente){
                 machineEtat->etatActuel = DEPLACEMENT;
             }
 
-            else if (!(machineEtat->deplacement).detectionCapteur.detection){
-                machineEtat->etatActuel = ATTENTE;
-            }
             break;
     }
 }
@@ -71,6 +74,7 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->triage).nombreBallesDetectees = 0;
     (machineEtat->triage).nombreBallesTri1 = 0;
     (machineEtat->triage).servoPret = -1;
+    (machineEtat->deplacement).detectionCapteur.seuilDetection = distanceDeSeuil;
 
     if ((machineEtat->triage).maCouleur == 1){
         (machineEtat->deplacement).positionRobot.x = xRobotDepartO;

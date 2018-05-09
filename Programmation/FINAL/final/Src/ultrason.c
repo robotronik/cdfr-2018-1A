@@ -2,9 +2,7 @@
 
 
 
-void InitialiserCapteur(DetectionCapteur* detectionCapteur, GPIO_TypeDef* portUsAvantGauche, uint16_t pinUsAvantGauche, GPIO_TypeDef* portUsAvant, uint16_t pinUsAvant, GPIO_TypeDef* portUsAvantDroit, uint16_t pinUsAvantDroit, GPIO_TypeDef* portUsArriere, uint16_t pinUsArriere, uint32_t seuilDetection){
-    detectionCapteur->seuilDetection = seuilDetection;
-    
+void InitialiserCapteur(DetectionCapteur* detectionCapteur, GPIO_TypeDef* portUsAvantGauche, uint16_t pinUsAvantGauche, GPIO_TypeDef* portUsAvant, uint16_t pinUsAvant, GPIO_TypeDef* portUsAvantDroit, uint16_t pinUsAvantDroit, GPIO_TypeDef* portUsArriere, uint16_t pinUsArriere){
     (detectionCapteur->usAvantGauche).detection = 0;
     (detectionCapteur->usAvant).detection = 0;
     (detectionCapteur->usAvantDroit).detection = 0;
@@ -40,37 +38,35 @@ void InitialiserCapteur(DetectionCapteur* detectionCapteur, GPIO_TypeDef* portUs
     (detectionCapteur->usArriere).pin = pinUsArriere;
 }
 
-void DetecterObstacleGlobal(DetectionCapteur* detectionCapteur, uint16_t GPIO_Pin){
+void DetecterObstacleGlobal(MachineEtat* machineEtat, uint16_t GPIO_Pin){
     switch (GPIO_Pin){
         case US_IN_1_Pin :
-                DetecterObstableUnitaire(&(detectionCapteur->usAvantGauche));
-                //(detectionCapteur->usAvantDroit).detection = 1;
+                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvantGauche));
             break;
         
         case US_IN_2_Pin :
-                DetecterObstableUnitaire(&(detectionCapteur->usAvant));
-                //(detectionCapteur->usAvantDroit).detection = 1;
+                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvant));
             break;
 
         case US_IN_3_Pin :
-                DetecterObstableUnitaire(&(detectionCapteur->usAvantDroit));
-                //(detectionCapteur->usAvantDroit).detection = 1;
+                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvantDroit));
             break;
 
         case US_IN_4_Pin :
-                DetecterObstableUnitaire(&(detectionCapteur->usArriere));
+                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usArriere));
             break;
     }
 
-    if (detectionCapteur->usAvantGauche.detection==1 || detectionCapteur->usAvant.detection==1 || detectionCapteur->usAvantDroit.detection==1 || detectionCapteur->usArriere.detection==1 )
+    if ((machineEtat->deplacement).detectionCapteur.usAvantGauche.detection==1 || (machineEtat->deplacement).detectionCapteur.usAvant.detection==1 || (machineEtat->deplacement).detectionCapteur.usAvantDroit.detection==1 || (machineEtat->deplacement).detectionCapteur.usArriere.detection==1 )
     {
-        detectionCapteur->detection = 1;
+        (machineEtat->deplacement).detectionCapteur.detection = 1;
         HAL_GPIO_WritePin(GPIOA, LD2_Pin,1);
     }
     else{
-        detectionCapteur->detection = 0;
+        (machineEtat->deplacement).detectionCapteur.detection = 0;
         HAL_GPIO_WritePin(GPIOA, LD2_Pin,0);
     }
+    //TransitionEtats(machineEtat);
 }
 
 void DetecterObstableUnitaire(TestUltrason* testUltrason){
