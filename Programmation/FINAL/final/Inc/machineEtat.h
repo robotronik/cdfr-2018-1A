@@ -14,7 +14,12 @@ typedef enum{
   ATTENTE
 } EtatActuel;
 
-/* Debut structures deplacement */
+/* Debut fonctions liees au deplacement */
+
+typedef struct{
+  float x;
+  float y;
+} FVecteur2D;
 
 typedef struct{
   GPIO_TypeDef* type;
@@ -27,11 +32,6 @@ typedef struct{
 } Moteur;
 
 typedef struct{
-  float x;
-  float y;
-} FVecteur2D;
-
-typedef struct{
   FVecteur2D dimTerrain;
   FVecteur2D positionRobot;
   FVecteur2D positionContainer1;
@@ -40,13 +40,13 @@ typedef struct{
   int deverouillageValide;
   int deverouillage;
   int deverouillagePrecedent;
-  DetectionCapteur detectionCapteur;
-  int pretTri;
   Moteur moteurGauche;
   Moteur moteurDroit;
+  DetectionCapteur detectionCapteur;
+  int pretTri;
 } Deplacement;
 
-/* Fin structures deplacement */
+/* Fin fonctions liees au deplacement */
 
 typedef struct{
   int deltaT;

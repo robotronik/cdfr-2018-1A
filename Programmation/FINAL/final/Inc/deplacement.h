@@ -3,34 +3,25 @@
 
 #include "machineEtat.h"
 
-typedef struct{
-  GPIO_TypeDef* type;
-  uint16_t pin;
-} MoteurPin;
-
-typedef struct{
-  MoteurPin av;
-  MoteurPin ar;
-} Moteur;
 
 /* Definition des fonctions de l'etat deplacement */
 
 /*
 Initialise les moteurs et la variable deverouillageValide a 0
 */
-void Initialisation(MachineEtat* machineEtat, Moteur* moteurGauche, Moteur* moteurDroit);
+void Initialisation(MachineEtat* machineEtat, GPIO_TypeDef* RG_av_PORT, uint16_t RG_av_PIN, GPIO_TypeDef* RG_ar_PORT, uint16_t RG_ar_PIN, GPIO_TypeDef* RD_av_PORT, uint16_t RD_av_PIN, GPIO_TypeDef* RD_ar_PORT, uint16_t RD_ar_PIN);
 
 /*
 Sous programmes avancer et arreter
 */
-void MoteurAvant(Moteur moteur);
-void MoteurOff(Moteur moteur);
+void MoteurAvant(Moteur* moteur);
+void MoteurOff(Moteur* moteur);
 
 /*
 Fait avancer le vehicule en changeant les positions x et y du robot
 En faisant attention aux autres robots
 */
-void Deplacement(MachineEtat* machineEtat);
+void Avancer(MachineEtat* machineEtat);
 
 /*
 Fait tourner le vehicule vers la :

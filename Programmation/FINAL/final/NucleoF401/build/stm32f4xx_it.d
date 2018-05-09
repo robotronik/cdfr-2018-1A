@@ -26,8 +26,8 @@ build/stm32f4xx_it.d: ..//Src/stm32f4xx_it.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Inc/stm32f4xx_it.h ../Inc/machineEtat.h ../Inc/xl_320.h \
- ../Inc/ultrason.h ../Inc/config.h ../Inc/machineEtat.h
+ ../Inc/ultrason.h ../Inc/main.h ../Inc/config.h ../Inc/ultrason.h \
+ ../Inc/machineEtat.h ../Inc/xl_320.h ../Inc/config.h
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -85,14 +85,16 @@ build/stm32f4xx_it.d: ..//Src/stm32f4xx_it.c \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Inc/stm32f4xx_it.h:
+../Inc/ultrason.h:
+
+../Inc/main.h:
+
+../Inc/config.h:
+
+../Inc/ultrason.h:
 
 ../Inc/machineEtat.h:
 
 ../Inc/xl_320.h:
 
-../Inc/ultrason.h:
-
 ../Inc/config.h:
-
-../Inc/machineEtat.h:

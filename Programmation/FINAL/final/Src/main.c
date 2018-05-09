@@ -1,4 +1,3 @@
-
 /**
   ******************************************************************************
   * @file           : main.c
@@ -42,6 +41,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+
 
 /* USER CODE BEGIN Includes */
 #include "ultrason.h"
@@ -102,9 +102,9 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   MX_USART6_UART_Init();
-  MX_TIM9_Init();
   MX_TIM11_Init();
-  MX_TIM1_Init();
+  MX_TIM9_Init();
+  
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim9);
   HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
@@ -114,7 +114,6 @@ int main(void)
 
   InitialisationParametresGlobaux(&machineEtat);
   InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin, 200);
-
 /*
   extern DetectionCapteur detectionCapteur;
   InitialiserCapteur(&detectionCapteur, US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin, 200);
