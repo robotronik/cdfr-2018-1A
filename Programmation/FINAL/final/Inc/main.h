@@ -118,7 +118,8 @@
 /* #define USE_FULL_ASSERT    1U */
 
 /* USER CODE BEGIN Private defines */
-
+#define ARM_MATH_CM4 //ajout du processeur
+#define __FPU_PRESENT 1U
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

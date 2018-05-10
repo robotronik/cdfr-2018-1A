@@ -25,7 +25,9 @@ build/attente.d: ..//Src/attente.c ../Inc/attente.h ../Inc/machineEtat.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/config.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ ../Inc/odometry.h ../Drivers/CMSIS/Include/arm_math.h \
+ ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h ../Inc/config.h \
  ../Inc/ultrason.h ../Inc/deplacement.h ../Inc/tim.h
 
 ../Inc/attente.h:
@@ -89,6 +91,14 @@ build/attente.d: ..//Src/attente.c ../Inc/attente.h ../Inc/machineEtat.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+
+../Inc/odometry.h:
+
+../Drivers/CMSIS/Include/arm_math.h:
+
+../Drivers/CMSIS/Include/core_cm4.h:
+
+../Inc/encoder.h:
 
 ../Inc/config.h:
 

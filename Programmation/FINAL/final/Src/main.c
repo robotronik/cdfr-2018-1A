@@ -52,6 +52,7 @@
 #include "servo.h"
 #include "triage.h"
 
+
 //#include "interpol.h"
 /* USER CODE END Includes */
 
@@ -127,7 +128,7 @@ int main(void)
 
   InitialisationParametresGlobaux(&machineEtat);
   InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin);
-
+  init_odometry(&(machineEtat.deplacement.odometrie), &htim10);
   /************************************/
   /* Debut Initialisation servomoteur */
   /************************************/

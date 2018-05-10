@@ -12,7 +12,7 @@ void AccelerateurBalle(MachineEtat* machineEtat){
 void ControleAccelerateur(MachineEtat* machineEtat, int sens){
     uint16_t pos;
 
-    if (sens==0) {  pos = (machineEtat->triage).servosGlobal.positionAccelerateur.ferme;}
+    if (sens==-1) {  pos = (machineEtat->triage).servosGlobal.positionAccelerateur.ferme;}
     else{ pos = (machineEtat->triage).servosGlobal.positionAccelerateur.ouvert;}
 
     XL_Set_Goal_Position( &((machineEtat->triage).servosGlobal.servo[1]) , pos, 1);

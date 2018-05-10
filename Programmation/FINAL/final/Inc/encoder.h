@@ -1,7 +1,7 @@
 #ifndef __ENCODER_H_
 #define __ENCODER_H_
 
-#include "stm32f3xx_hal.h"
+#include "stm32f4xx_hal.h"
 
 #define ENCODER_MAX 1440
 
@@ -27,10 +27,14 @@ typedef struct Encoder_S{
   volatile int steps;
 
   //Timers
-  TIM_HandleTypeDef *htim;
+  // replace par le timer gitan de vincecent
+  //TIM_HandleTypeDef *htim;
+  volatile int cmpt;
+  //TIM_HandleTypeDef *htima;  //jai ajouté ce truc pour gerer le fait quon a les channel repartis sur 4 truc différents
+
 }Encoder;
 
-void init_encoder(Encoder *encoder, TIM_HandleTypeDef *htim);
+void init_encoder(Encoder *encoder);
 /**
  * Initialise encoder.
  */

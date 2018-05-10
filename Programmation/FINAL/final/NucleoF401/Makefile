@@ -78,7 +78,10 @@ C_SOURCES =  \
 ../Src/attente.c \
 ../Src/xl_320.c \
 ../Src/deplacement.c \
-../Src/servo.c
+../Src/servo.c \
+../Src/Robotronik_corp_pid.c \
+../Src/odometry.c \
+../Src/encoder.c
 
 # ASM sources
 ASM_SOURCES =  \

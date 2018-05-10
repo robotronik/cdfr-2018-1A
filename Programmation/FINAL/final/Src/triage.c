@@ -15,7 +15,7 @@ void InitialisationServo(MachineEtat* machineEtat){
 void ControlePorteEntree(MachineEtat* machineEtat, int sens){
     uint16_t pos;
 
-    if (sens==0) {  pos = (machineEtat->triage).servosGlobal.positionPorteEntree.ferme;}
+    if (sens==-1) {  pos = (machineEtat->triage).servosGlobal.positionPorteEntree.ferme;}
     else{ pos = (machineEtat->triage).servosGlobal.positionPorteEntree.ouvert;}
 
     XL_Set_Goal_Position( &((machineEtat->triage).servosGlobal.servo[0]) , pos, 1);
@@ -24,14 +24,14 @@ void ControlePorteEntree(MachineEtat* machineEtat, int sens){
 void ControleSortieBalle(MachineEtat* machineEtat,int sens){
     uint16_t pos;
 
-    if (sens==0) {  pos = (machineEtat->triage).servosGlobal.positionPorteSortie.ferme;}
+    if (sens==-1) {  pos = (machineEtat->triage).servosGlobal.positionPorteSortie.ferme;}
     else{ pos = (machineEtat->triage).servosGlobal.positionPorteSortie.ouvert;}
-
+ 
     XL_Set_Goal_Position( &((machineEtat->triage).servosGlobal.servo[2]), pos, 1);
 }
 
-char ReceptionArduinoCouleur(UART_HandleTypeDef* huart){
-    return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3);
+int ReceptionArduinoCouleur(GPIO_TypeDef* portArduino, uint16_t pinArduino){
+    return HAL_GPIO_ReadPin(portArduino, pinArduino);
 }
 
 void TestFinTri(MachineEtat* machineEtat){
@@ -40,6 +40,8 @@ void TestFinTri(MachineEtat* machineEtat){
     }
 }
 
-void Tri(MachineEtat* machineEtat){
+/*void Tri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduino){
+    while (ReceptionArduinoCouleur(portArduino, pinArduino)!=0){
 
-}
+    }
+}*/

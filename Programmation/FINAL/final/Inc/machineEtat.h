@@ -4,6 +4,7 @@
 /* Debut des librairies necessaires a la machine a etat */
 #include "xl_320.h"
 #include "stm32f4xx_hal.h"
+#include "odometry.h"
 
 /* Fin des librairies necessaires a la machine a etat */
 
@@ -74,7 +75,7 @@ typedef struct{
   Moteur moteurDroit;
   DetectionCapteur detectionCapteur;
   int pretTri;
-
+  Odometry odometrie;
 } Deplacement;
 
 /* Fin fonctions liees au deplacement */

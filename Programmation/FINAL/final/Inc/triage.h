@@ -8,7 +8,7 @@
 /*
 Fonction global du tri
 */
-void Tri(MachineEtat* machineEtat);
+void Tri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduino);
 
 /*
 Initialise les capteurs
@@ -18,7 +18,7 @@ void InitialisationServo(MachineEtat* machineEtat);
 /*
 Renvoie la couleur recu par l'arduino suivant
 */
-char ReceptionArduinoCouleur(UART_HandleTypeDef* huart);
+int ReceptionArduinoCouleur(GPIO_TypeDef* portArduino, uint16_t pinArduino);
 
 /*
 Controle la porte d'entree en fonction de la position du robot (structure Deplacement)

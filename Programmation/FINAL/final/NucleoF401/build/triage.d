@@ -25,7 +25,9 @@ build/triage.d: ..//Src/triage.c ../Inc/triage.h ../Inc/machineEtat.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/config.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ ../Inc/odometry.h ../Drivers/CMSIS/Include/arm_math.h \
+ ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h ../Inc/config.h \
  ../Inc/ultrason.h ../Inc/xl_320.h ../Inc/lancer.h
 
 ../Inc/triage.h:
@@ -89,6 +91,14 @@ build/triage.d: ..//Src/triage.c ../Inc/triage.h ../Inc/machineEtat.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+
+../Inc/odometry.h:
+
+../Drivers/CMSIS/Include/arm_math.h:
+
+../Drivers/CMSIS/Include/core_cm4.h:
+
+../Inc/encoder.h:
 
 ../Inc/config.h:
 

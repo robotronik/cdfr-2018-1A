@@ -27,9 +27,10 @@ build/main.d: ..//Src/main.c ../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/tim.h \
  ../Inc/usart.h ../Inc/gpio.h ../Inc/ultrason.h ../Inc/machineEtat.h \
- ../Inc/xl_320.h ../Inc/config.h ../Inc/ultrason.h ../Inc/machineEtat.h \
- ../Inc/deplacement.h ../Inc/tim.h ../Inc/lancer.h ../Inc/xl_320.h \
- ../Inc/servo.h ../Inc/triage.h
+ ../Inc/xl_320.h ../Inc/odometry.h ../Drivers/CMSIS/Include/arm_math.h \
+ ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h ../Inc/config.h \
+ ../Inc/ultrason.h ../Inc/machineEtat.h ../Inc/deplacement.h ../Inc/tim.h \
+ ../Inc/lancer.h ../Inc/xl_320.h ../Inc/servo.h ../Inc/triage.h
 
 ../Inc/main.h:
 
@@ -100,6 +101,14 @@ build/main.d: ..//Src/main.c ../Inc/main.h \
 ../Inc/machineEtat.h:
 
 ../Inc/xl_320.h:
+
+../Inc/odometry.h:
+
+../Drivers/CMSIS/Include/arm_math.h:
+
+../Drivers/CMSIS/Include/core_cm4.h:
+
+../Inc/encoder.h:
 
 ../Inc/config.h:
 
