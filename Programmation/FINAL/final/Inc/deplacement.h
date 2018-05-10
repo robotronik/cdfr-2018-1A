@@ -2,6 +2,7 @@
 #define DEPLACEMENT_H
 
 #include "machineEtat.h"
+#include "tim.h"
 
 
 /* Definition des fonctions de l'etat deplacement */
@@ -15,7 +16,7 @@ void Initialisation(MachineEtat* machineEtat, GPIO_TypeDef* RG_av_PORT, uint16_t
 Sous programmes avancer et arreter
 */
 void MoteurAvant(Moteur* moteur);
-void MoteurOff(Moteur* moteur);
+void MoteurOff();
 
 /*
 Fait le parcourt en changeant les positions x et y du robot
@@ -24,7 +25,7 @@ En faisant attention aux autres robots
 void DeplacementGlobal(MachineEtat* machineEtat);
 
 /* Permet d'avancer */
-void Avancer(MachineEtat* machineEtat);
+void Avancer();
 
 /*
 Fait tourner le vehicule vers la :
@@ -53,5 +54,6 @@ Renvoie :
 3 si detecte derriere
 */
 int DetectionUltrason();
-
+// pute
+//void setVoltageMoteur (Moteur* moteur , float voltage);
 #endif

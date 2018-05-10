@@ -110,6 +110,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim9);
   HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
+  HAL_TIM_Base_Start_IT(&htim1);
+  HAL_TIM_PWM_Start_IT(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_Base_Start_IT(&htim10);
 
 
   extern MachineEtat machineEtat;
@@ -117,7 +122,8 @@ int main(void)
   InitialisationParametresGlobaux(&machineEtat);
   InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin);
   //ActivationMoteur();
-  Initialisation(&machineEtat, RG_av_GPIO_Port, RG_av_Pin, RG_ar_GPIO_Port, RG_ar_Pin, RD_av_GPIO_Port, RD_av_Pin, RD_ar_GPIO_Port, RD_ar_Pin);
+  //Initialisation(&machineEtat, RG_av_GPIO_Port, RG_av_Pin, RG_ar_GPIO_Port, RG_ar_Pin, RD_av_GPIO_Port, RD_av_Pin, RD_ar_GPIO_Port, RD_ar_Pin);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

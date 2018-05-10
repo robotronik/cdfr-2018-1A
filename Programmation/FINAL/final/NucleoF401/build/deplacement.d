@@ -27,7 +27,7 @@ build/deplacement.d: ..//Src/deplacement.c ../Inc/deplacement.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/config.h \
- ../Inc/ultrason.h
+ ../Inc/ultrason.h ../Inc/tim.h ../Inc/motor.h
 
 ../Inc/deplacement.h:
 
@@ -94,3 +94,7 @@ build/deplacement.d: ..//Src/deplacement.c ../Inc/deplacement.h \
 ../Inc/config.h:
 
 ../Inc/ultrason.h:
+
+../Inc/tim.h:
+
+../Inc/motor.h:

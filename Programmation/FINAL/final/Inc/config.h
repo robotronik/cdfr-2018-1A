@@ -46,6 +46,9 @@
 #define xTirV 1000
 #define yTirV 1000
 
+//#define PWM_MAX 50
+
+
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;
 

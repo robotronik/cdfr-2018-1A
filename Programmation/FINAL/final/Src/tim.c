@@ -374,27 +374,40 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 /* USER CODE BEGIN 1 */
 extern MachineEtat machineEtat;
 
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
-  if(htim->Instance == htim9.Instance){
-    HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 0);
-    HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 0);
-    HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 0);
-    HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 0);
-    if ((machineEtat.triage).servoPret < 1){
-      (machineEtat.triage).servoPret++;
+    if(htim->Instance == htim9.Instance){
+      HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 0);
+      HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 0);
+      HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 0);
+      HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 0);
     }
-  }
+
+    else if(htim->Instance == htim1.Instance){
+      HAL_GPIO_WritePin(((machineEtat.deplacement.moteurDroit).superPin).type, ((machineEtat.deplacement.moteurDroit).superPin).pin, 1);
+    }
+
+    else if(htim->Instance == htim2.Instance){
+      HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 1);
+    }
 }
 
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef * htim){
+    if(htim->Instance == htim9.Instance){
+      HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 1);
+      HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 1);
+      HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 1);
+      HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 1);
+    }
 
-  if(htim->Instance == htim9.Instance){
-    HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 1);
-    HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 1);
-    HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 1);
-    HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 1);
-  }
+    else if(htim->Instance == htim1.Instance){
+      HAL_GPIO_WritePin(((machineEtat.deplacement.moteurDroit).superPin).type, ((machineEtat.deplacement.moteurDroit).superPin).pin, 0);
+    }
+
+    else if(htim->Instance == htim2.Instance){
+      HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 0);
+    }
 }
 /* USER CODE END 1 */
 

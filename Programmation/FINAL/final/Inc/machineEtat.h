@@ -56,6 +56,9 @@ typedef struct{
 typedef struct{
   MoteurPin av;
   MoteurPin ar;
+
+  MoteurPin superPin;
+  TIM_HandleTypeDef htim;
 } Moteur;
 
 typedef struct{
@@ -71,6 +74,7 @@ typedef struct{
   Moteur moteurDroit;
   DetectionCapteur detectionCapteur;
   int pretTri;
+
 } Deplacement;
 
 /* Fin fonctions liees au deplacement */

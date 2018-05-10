@@ -6,10 +6,8 @@ void Pause(MachineEtat* machineEtat){
 }
 
 void ArretUltrason(MachineEtat* machineEtat){
-    MoteurOff(&(machineEtat->deplacement).moteurGauche);
-    MoteurOff(&(machineEtat->deplacement).moteurDroit);
+    MoteurOff();
     while((machineEtat->deplacement).detectionCapteur.detection){
     }
-    HAL_GPIO_WritePin(GPIOA, LD2_Pin,0);
     (machineEtat->attente).finAttente = 1;
 }
