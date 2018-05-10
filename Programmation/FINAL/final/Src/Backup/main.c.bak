@@ -1,3 +1,4 @@
+
 /**
   ******************************************************************************
   * @file           : main.c
@@ -41,7 +42,6 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-
 
 /* USER CODE BEGIN Includes */
 #include "ultrason.h"
@@ -101,12 +101,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  MX_TIM3_Init();
   MX_USART2_UART_Init();
   MX_USART6_UART_Init();
-  MX_TIM11_Init();
   MX_TIM9_Init();
-  
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim9);
   HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);

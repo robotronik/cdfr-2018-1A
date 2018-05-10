@@ -80,6 +80,8 @@ typedef struct{
   int finAttente; //1 si fini, 0 sinon
 } Attente;
 
+/* Debut tri */
+
 typedef struct{
   XL servo;
   uint16_t posFerme;
@@ -98,7 +100,10 @@ typedef struct{
   int triPrecedent; // cest un peu iconoclaste
   XL_ME_Wrapper xl_porte_entre;
   XL_ME_Wrapper xl_porte_sortie;
+  XL_ME_Wrapper xl_propulsion;
 } Triage;
+
+/* Fin tri */
 
 typedef struct{
   int tir;
