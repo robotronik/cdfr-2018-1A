@@ -18,7 +18,7 @@ void InitialisationServo(MachineEtat* machineEtat);
 /*
 Renvoie la couleur recu par l'arduino suivant
 */
-int ReceptionArduinoCouleur(GPIO_TypeDef* portArduino, uint16_t pinArduino);
+int ReceptionArduinoCouleur(GPIO_TypeDef* portArduino, uint16_t pinArduino, int* couleurDetecte);
 
 /*
 Controle la porte d'entree en fonction de la position du robot (structure Deplacement)
@@ -45,6 +45,6 @@ Test si le tri est fini :
 - si le tri a fonctionner, c'est a dire 8 balles detecte lors d'un tri alors :
 on augmente la variable tri pour changer d'etat
 */
-void TestFinTri(MachineEtat* machineEtat);
+void TestFinTri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduino);
 
 #endif

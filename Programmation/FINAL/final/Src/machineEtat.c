@@ -84,7 +84,6 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->triage).secouerPrecedent = 0;
     (machineEtat->triage).nombreBallesDetectees = 0;
     (machineEtat->triage).nombreBallesTri1 = 0;
-    (machineEtat->triage).servoPret = -1;
     (machineEtat->triage).servosGlobal.positionPorteEntree.ferme = debutPorteEntree;
     (machineEtat->triage).servosGlobal.positionPorteEntree.ouvert = finPorteEntree;
     (machineEtat->triage).servosGlobal.positionPorteSortie.ferme = debutPorteSortie;

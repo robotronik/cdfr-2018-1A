@@ -389,7 +389,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
 
     else if(htim->Instance == htim2.Instance){
       HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 1);
-    }
+    }    
 }
 
 

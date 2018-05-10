@@ -142,7 +142,7 @@ int main(void)
   /**********************************/
   /* Fin Initialisation servomoteur */
   /**********************************/
-
+  //ActivationMoteur();
   //Initialisation(&machineEtat, RG_av_GPIO_Port, RG_av_Pin, RG_ar_GPIO_Port, RG_ar_Pin, RD_av_GPIO_Port, RD_av_Pin, RD_ar_GPIO_Port, RD_ar_Pin);
 
   /* USER CODE END 2 */
@@ -156,6 +156,7 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
   TransitionEtats(&machineEtat);
+  //Tri(&machineEtat, USART_RX_GPIO_Port, USART_RX_Pin);
   }
   /* USER CODE END 3 */
 
