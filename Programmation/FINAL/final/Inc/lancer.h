@@ -11,6 +11,16 @@ Met en marche le moteur de lancement
 void ActivationMoteur();
 
 /*
+Eteint le moteur de lancement
+*/
+void EteintMoteur();
+
+/*
+Controle le servo de l'accelerateur
+*/
+void ControleAccelerateur(MachineEtat* machineEtat, int sens);
+
+/*
 Test si la demande de tir est faite et active un servo pour assister la balle dans la propulsion
 */
 void AccelerateurBalle(MachineEtat* machineEtat);

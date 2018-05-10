@@ -46,6 +46,9 @@
 #define xTirV 1000
 #define yTirV 1000
 
+/* Parametre des servos */
+
+
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;
 

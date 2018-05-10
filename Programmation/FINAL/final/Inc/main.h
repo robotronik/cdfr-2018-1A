@@ -87,6 +87,10 @@
 #define RD_ar_GPIO_Port GPIOB
 #define RG_av_Pin GPIO_PIN_15
 #define RG_av_GPIO_Port GPIOB
+#define Couleur_Pin GPIO_PIN_8
+#define Couleur_GPIO_Port GPIOC
+#define Tirette_Pin GPIO_PIN_9
+#define Tirette_GPIO_Port GPIOC
 #define CH_A1_Pin GPIO_PIN_8
 #define CH_A1_GPIO_Port GPIOA
 #define RG_ar_Pin GPIO_PIN_12

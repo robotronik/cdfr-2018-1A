@@ -32,7 +32,7 @@ Fait tourner le vehicule vers la :
 - Gauche : sens = 1
 - Droite : sens = -1
 */
-void Tourner(MachineEtat* machineEtat,int sens);
+void Tourner(int sens);
 
 /*
 Deplace le robot afin de deverouiller le loquet vers la position :

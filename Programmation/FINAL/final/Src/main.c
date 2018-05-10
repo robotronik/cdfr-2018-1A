@@ -48,6 +48,9 @@
 #include "machineEtat.h"
 #include "deplacement.h"
 #include "lancer.h"
+#include "xl_320.h"
+#include "servo.h"
+#include "triage.h"
 
 //#include "interpol.h"
 /* USER CODE END Includes */
@@ -119,9 +122,26 @@ int main(void)
 
   extern MachineEtat machineEtat;
 
+  while (HAL_GPIO_ReadPin(Tirette_GPIO_Port, Tirette_Pin)){
+  }
+
   InitialisationParametresGlobaux(&machineEtat);
   InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin);
-  //ActivationMoteur();
+
+  /************************************/
+  /* Debut Initialisation servomoteur */
+  /************************************/
+
+  XL320InterfaceDefine(&(machineEtat.triage.servosGlobal.interface));
+
+  uint16_t nbServos; //number of detected servos
+  uint8_t nbmaxServosWanted = 3; //number max of servos controle
+  XL320ServosActivation(&(machineEtat.triage.servosGlobal.interface), (machineEtat.triage.servosGlobal.servo), nbmaxServosWanted, &nbServos);
+  InitialisationServo(&machineEtat);
+  /**********************************/
+  /* Fin Initialisation servomoteur */
+  /**********************************/
+
   //Initialisation(&machineEtat, RG_av_GPIO_Port, RG_av_Pin, RG_ar_GPIO_Port, RG_ar_Pin, RD_av_GPIO_Port, RD_av_Pin, RD_ar_GPIO_Port, RD_ar_Pin);
 
   /* USER CODE END 2 */

@@ -4,7 +4,7 @@
 
 TIM_OC_InitTypeDef sConfigOC = {.OCMode = TIM_OCMODE_PWM1, .OCPolarity = TIM_OCPOLARITY_HIGH, .OCFastMode = TIM_OCFAST_DISABLE};
 
-
+/* Initialisation sans macro */
 void Initialisation(MachineEtat* machineEtat, GPIO_TypeDef* RG_av_PORT, uint16_t RG_av_PIN, GPIO_TypeDef* RG_ar_PORT, uint16_t RG_ar_PIN, GPIO_TypeDef* RD_av_PORT, uint16_t RD_av_PIN, GPIO_TypeDef* RD_ar_PORT, uint16_t RD_ar_PIN){
   (machineEtat->deplacement).moteurGauche.av.type = RG_av_PORT;
   (machineEtat->deplacement).moteurGauche.av.pin = RG_av_PIN;
@@ -39,47 +39,16 @@ void Avancer(){
 
 }
 
-void Tourner(MachineEtat* machineEtat, int sens){
+void Tourner(int sens){
   if (sens) { /* Tourner a gauche */
-    MoteurOff(&((machineEtat->deplacement).moteurGauche));
-    MoteurAvant(&((machineEtat->deplacement).moteurDroit));
+    SET_MOTOR_L(5);
+    SET_MOTOR_R(5);
     /* l'arreter lorsqu'on est dans le bon axe avec l'odometrie et un timer*/
 
-  } else { /* Tourner a droite */
-    MoteurOff(&((machineEtat->deplacement).moteurDroit));
-    MoteurAvant(&((machineEtat->deplacement).moteurGauche));
+  } else { /* Tourner a droite */ //lol cest trop bidon
+    SET_MOTOR_L(-5);
+    SET_MOTOR_R(-5);
     /* l'arreter lorsqu'on est dans le bon axe avec l'odometrie et un timer*/
 
   }
 }
-/*
-void setVoltageMoteur (Moteur* moteur , float voltage){ // prototype a verif
-  int16_t value = (int16_t) (voltage *(255.0/12.0));
-  TIM_OC_InitTypedef sConfigOC;
-  //peut etre inclure .. quoi je ne sais plus  
-  if (voltage >0){
-    //set pwm à avant et 0 a l'autre .. alllez cest parrrtttti
-    moteur->superPin = moteur->av;
-    HAL_GPIO_WritePin((moteur->ar).type,(moteur->ar).pin,0);
-  }
-  else{
-    //set pwm à arriere et 0 à l'autre
-    moteur->superPin = moteur->ar;
-    HAL_GPIO_WritePin((moteur->av).type,(moteur->av).pin,0);
-    value =-value;
-  }
-  //check max value
-  if (value > PWM_MAX){
-    value = PWM_MAX;
-  }
-  sConfigOC.Pulse = value;
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
-  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-  //a ajouter htim dans moteur struct et verifier vlue sconfig puis channel 1 cf cubeMX
-  HAL_TIM_PWM_ConfigChannel(moteur->htim,&sConfigOC,TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(moteur->htim, TIM_CHANNEL_1);
-}*/

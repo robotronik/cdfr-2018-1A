@@ -1,5 +1,10 @@
 #include "deplacement.h"
+#include "motor.h"
 
+
+TIM_OC_InitTypeDef sConfigOC = {.OCMode = TIM_OCMODE_PWM1, .OCPolarity = TIM_OCPOLARITY_HIGH, .OCFastMode = TIM_OCFAST_DISABLE};
+
+/* Initialisation sans macro */
 void Initialisation(MachineEtat* machineEtat, GPIO_TypeDef* RG_av_PORT, uint16_t RG_av_PIN, GPIO_TypeDef* RG_ar_PORT, uint16_t RG_ar_PIN, GPIO_TypeDef* RD_av_PORT, uint16_t RD_av_PIN, GPIO_TypeDef* RD_ar_PORT, uint16_t RD_ar_PIN){
   (machineEtat->deplacement).moteurGauche.av.type = RG_av_PORT;
   (machineEtat->deplacement).moteurGauche.av.pin = RG_av_PIN;
@@ -16,33 +21,33 @@ void MoteurAvant(Moteur* moteur){
   HAL_GPIO_WritePin(moteur->ar.type, moteur->ar.pin, GPIO_PIN_RESET);
 }
 
-void MoteurOff(Moteur* moteur){
-  HAL_GPIO_WritePin(moteur->av.type, moteur->av.pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(moteur->ar.type, moteur->ar.pin, GPIO_PIN_RESET);
+void MoteurOff(){
+  SET_MOTOR_L(-0.0);
+  SET_MOTOR_R(0.0);
 }
 
 void DeplacementGlobal(MachineEtat* machineEtat){
-  Avancer(machineEtat);
+  Avancer();
 }
 
-void Avancer(MachineEtat* machineEtat){
-  MoteurAvant(&((machineEtat->deplacement).moteurGauche));
-  MoteurAvant(&((machineEtat->deplacement).moteurDroit));
+void Avancer(){
+  SET_MOTOR_L(-5.0);
+  SET_MOTOR_R(5.0);
   /*  A completer avec l'odometrie  */
 
 
 
 }
 
-void Tourner(MachineEtat* machineEtat, int sens){
+void Tourner(int sens){
   if (sens) { /* Tourner a gauche */
-    MoteurOff(&((machineEtat->deplacement).moteurGauche));
-    MoteurAvant(&((machineEtat->deplacement).moteurDroit));
+    SET_MOTOR_L(5);
+    SET_MOTOR_R(5);
     /* l'arreter lorsqu'on est dans le bon axe avec l'odometrie et un timer*/
 
-  } else { /* Tourner a droite */
-    MoteurOff(&((machineEtat->deplacement).moteurDroit));
-    MoteurAvant(&((machineEtat->deplacement).moteurGauche));
+  } else { /* Tourner a droite */ //lol cest trop bidon
+    SET_MOTOR_L(-5);
+    SET_MOTOR_R(-5);
     /* l'arreter lorsqu'on est dans le bon axe avec l'odometrie et un timer*/
 
   }

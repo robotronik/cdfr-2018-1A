@@ -4,6 +4,7 @@
 #include "stm32f4xx.h"
 #include "xl_320.h"
 
+
 // TODO : voir pour un get pos apres les goal pos
 void ControlePorteEntree(MachineEtat* machineEtat, int ouverture){
     uint16_t pos;

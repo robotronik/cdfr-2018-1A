@@ -5,6 +5,15 @@
 
 /* Definition des fonctions de l'etat triage */
 
+/*
+Fonction global du tri
+*/
+void Tri(MachineEtat* machineEtat);
+
+/*
+Initialise les capteurs
+*/
+void InitialisationServo(MachineEtat* machineEtat);
 
 /*
 Renvoie la couleur recu par l'arduino suivant
@@ -20,7 +29,7 @@ si :
 - ouverture = 0 : on ferme
 - ouverture = 1 : on ouvre
 */
-void ControlePorteEntree(MachineEtat* machineEtat, int ouverture);
+void ControlePorteEntree(MachineEtat* machineEtat, int sens);
 
 /*
 Controle la porte de sortie en fonction de sens :

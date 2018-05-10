@@ -7,6 +7,11 @@
 
 
 /*
+Initialisation servomoteur
+*/
+void InitialisationServo(MachineEtat* machineEtat);
+
+/*
 Renvoie la couleur recu par l'arduino suivant
 */
 char ReceptionArduinoCouleur(UART_HandleTypeDef* huart);

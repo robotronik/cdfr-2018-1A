@@ -46,8 +46,15 @@
 #define xTirV 1000
 #define yTirV 1000
 
-//#define PWM_MAX 50
+/* Parametre des servos */
+#define debutPorteEntree 250
+#define finPorteEntree 650
 
+#define debutPorteSortie 620
+#define finPorteSortie 420
+
+#define debutAccelerateur 380
+#define finAccelerateur 220
 
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;

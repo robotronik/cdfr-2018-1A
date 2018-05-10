@@ -99,6 +99,7 @@
 #define SWO_GPIO_Port GPIOB
 #define CH_B2_Pin GPIO_PIN_6
 #define CH_B2_GPIO_Port GPIOB
+#define CH_B2_EXTI_IRQn EXTI9_5_IRQn
 #define US_IN_1_Pin GPIO_PIN_8
 #define US_IN_1_GPIO_Port GPIOB
 #define US_IN_1_EXTI_IRQn EXTI9_5_IRQn

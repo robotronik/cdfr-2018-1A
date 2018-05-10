@@ -87,10 +87,17 @@ typedef struct{
 /* Debut tri */
 
 typedef struct{
-  XL servo;
-  uint16_t posFerme;
-  uint16_t posOuvert;
-} XL_ME_Wrapper;
+  uint16_t ferme;
+  uint16_t ouvert;
+} PositionServo;
+
+typedef struct{
+  XL servo[3];
+  XL_Interface interface;
+  PositionServo positionPorteEntree;
+  PositionServo positionPorteSortie;
+  PositionServo positionAccelerateur;
+} Servos;
 
 typedef struct{
   int maCouleur; // 1 orange, -1 vert
@@ -102,16 +109,14 @@ typedef struct{
   int servoPret; //1 si servos dispo sinon -1 (0 est un cas intermediaire a ne pas prendre en compte)
   int tri; //prend la valeur 1 si le premier tri a bugue ou s'il est fini, 2 au deuxième tri
   int triPrecedent; // cest un peu iconoclaste
-  XL_ME_Wrapper xl_porte_entre;
-  XL_ME_Wrapper xl_porte_sortie;
-  XL_ME_Wrapper xl_propulsion;
+  Servos servosGlobal;
 } Triage;
 
 /* Fin tri */
 
 typedef struct{
   int tir;
-  XL_ME_Wrapper accelerateur;
+  Servos accelerateur;
 } Lancer;
 
 typedef struct{
