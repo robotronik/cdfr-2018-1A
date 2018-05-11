@@ -5,6 +5,8 @@
 #include "xl_320.h"
 #include "stm32f4xx_hal.h"
 #include "odometry.h"
+#include "Robotronik_corp_pid.h"
+#include "fsm_position_abs.h"
 
 /* Fin des librairies necessaires a la machine a etat */
 
@@ -62,6 +64,28 @@ typedef struct{
   TIM_HandleTypeDef htim;
 } Moteur;
 
+typedef struct FSM_Position_Abs_S{
+  FSM_Instance instance;
+  float angle;//in rad
+  float pos;//in mm
+  float linear_speed;//in cm/s
+  float angular_speed;//in rad/s
+  float x;
+  float y;
+  int n;
+  int initial_sum;
+}FSM_Position_Abs;
+
+typedef struct {
+  int Te;
+  //int prec_steps_l , prec_steps_r;
+  FSM_Position_Abs fsm_pos; //init les trois
+  PID_DATA pid_sum;
+  PID_DATA pid_diff;
+  int sum_goal;
+  int diff_goal;
+}Asserv;
+
 typedef struct{
   FVecteur2D dimTerrain;
   FVecteur2D positionRobot;
@@ -76,6 +100,7 @@ typedef struct{
   DetectionCapteur detectionCapteur;
   int pretTri;
   Odometry odometrie;
+  Asserv asserv;
 } Deplacement;
 
 /* Fin fonctions liees au deplacement */
@@ -83,6 +108,7 @@ typedef struct{
 typedef struct{
   int deltaT;
   int finAttente; //1 si fini, 0 sinon
+  int tempsEnCours;
 } Attente;
 
 /* Debut tri */

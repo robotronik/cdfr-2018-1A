@@ -27,8 +27,9 @@ build/lancer.d: ..//Src/lancer.c ../Inc/lancer.h ../Inc/machineEtat.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Inc/odometry.h ../Drivers/CMSIS/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h ../Inc/config.h \
- ../Inc/ultrason.h
+ ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h \
+ ../Inc/Robotronik_corp_pid.h ../Inc/fsm_position_abs.h \
+ ../Inc/fsm_master.h ../Inc/config.h ../Inc/ultrason.h
 
 ../Inc/lancer.h:
 
@@ -99,6 +100,12 @@ build/lancer.d: ..//Src/lancer.c ../Inc/lancer.h ../Inc/machineEtat.h \
 ../Drivers/CMSIS/Include/core_cm4.h:
 
 ../Inc/encoder.h:
+
+../Inc/Robotronik_corp_pid.h:
+
+../Inc/fsm_position_abs.h:
+
+../Inc/fsm_master.h:
 
 ../Inc/config.h:
 

@@ -33,7 +33,7 @@ HAL_TIM_PWM_ConfigChannel(&myhtim,&sConfigOC,TIM_CHANNEL_1);\
 #define SET_MOTOR_L(voltage) setVoltageMoteur(voltage, \
                                             RG_av_GPIO_Port,RG_av_Pin,\
                                             RG_ar_GPIO_Port,RG_ar_Pin,\
-                                            machineEtat.deplacement.moteurGauche.superPin.type,\
+                                            (machineEtat.deplacement).moteurGauche.superPin.type,\
                                             machineEtat.deplacement.moteurGauche.superPin.pin,\
                                             htim2);
 #define SET_MOTOR_R(voltage) setVoltageMoteur(voltage, \

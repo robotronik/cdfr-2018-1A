@@ -3,6 +3,9 @@
 
 #include "machineEtat.h"
 #include "tim.h"
+#include "fsm_master.h"
+#include "fsm_position_abs.h"
+#include "odometry.h"
 
 
 /* Definition des fonctions de l'etat deplacement */
@@ -19,13 +22,18 @@ void MoteurAvant(Moteur* moteur);
 void MoteurOff();
 
 /*
+Devine
+*/
+void PositionVoulu();
+
+/*
 Fait le parcourt en changeant les positions x et y du robot
 En faisant attention aux autres robots
 */
 void DeplacementGlobal(MachineEtat* machineEtat);
 
 /* Permet d'avancer */
-void Avancer();
+void Avancer(MachineEtat* machineEtat);
 
 /*
 Fait tourner le vehicule vers la :

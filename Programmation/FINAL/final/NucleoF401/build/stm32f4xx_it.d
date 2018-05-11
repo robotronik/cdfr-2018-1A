@@ -28,8 +28,10 @@ build/stm32f4xx_it.d: ..//Src/stm32f4xx_it.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Inc/stm32f4xx_it.h ../Inc/ultrason.h ../Inc/machineEtat.h \
  ../Inc/xl_320.h ../Inc/odometry.h ../Drivers/CMSIS/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h ../Inc/config.h \
- ../Inc/ultrason.h ../Inc/main.h ../Inc/config.h ../Inc/odometry.h
+ ../Drivers/CMSIS/Include/core_cm4.h ../Inc/encoder.h \
+ ../Inc/Robotronik_corp_pid.h ../Inc/fsm_position_abs.h \
+ ../Inc/fsm_master.h ../Inc/config.h ../Inc/ultrason.h ../Inc/main.h \
+ ../Inc/config.h ../Inc/odometry.h
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -102,6 +104,12 @@ build/stm32f4xx_it.d: ..//Src/stm32f4xx_it.c \
 ../Drivers/CMSIS/Include/core_cm4.h:
 
 ../Inc/encoder.h:
+
+../Inc/Robotronik_corp_pid.h:
+
+../Inc/fsm_position_abs.h:
+
+../Inc/fsm_master.h:
 
 ../Inc/config.h:
 

@@ -4,6 +4,9 @@
 /* Debut des librairies necessaires a la machine a etat */
 #include "xl_320.h"
 #include "stm32f4xx_hal.h"
+#include "odometry.h"
+#include "Robotronik_corp_pid.h"
+#include "fsm_position_abs.h"
 
 /* Fin des librairies necessaires a la machine a etat */
 
@@ -60,6 +63,15 @@ typedef struct{
   MoteurPin superPin;
   TIM_HandleTypeDef htim;
 } Moteur;
+typedef struct {
+  int Te;
+  //int prec_steps_l , prec_steps_r;
+  FSM_Position_Abs fsm_pos; //init les trois
+  PID_DATA pid_sum;
+  PID_DATA pid_diff;
+  int sum_goal;
+  int diff_goal;
+}Asserv;
 
 typedef struct{
   FVecteur2D dimTerrain;
@@ -74,7 +86,8 @@ typedef struct{
   Moteur moteurDroit;
   DetectionCapteur detectionCapteur;
   int pretTri;
-
+  Odometry odometrie;
+  Asserv asserv;
 } Deplacement;
 
 /* Fin fonctions liees au deplacement */
@@ -96,7 +109,7 @@ typedef struct{
   XL_Interface interface;
   PositionServo positionPorteEntree;
   PositionServo positionPorteSortie;
-  PositionServo positionPropulsion;
+  PositionServo positionAccelerateur;
 } Servos;
 
 typedef struct{
@@ -109,14 +122,14 @@ typedef struct{
   int servoPret; //1 si servos dispo sinon -1 (0 est un cas intermediaire a ne pas prendre en compte)
   int tri; //prend la valeur 1 si le premier tri a bugue ou s'il est fini, 2 au deuxième tri
   int triPrecedent; // cest un peu iconoclaste
-  Servos servosglobal;
+  Servos servosGlobal;
 } Triage;
 
 /* Fin tri */
 
 typedef struct{
   int tir;
-  XL_ME_Wrapper accelerateur;
+  Servos accelerateur;
 } Lancer;
 
 typedef struct{

@@ -4,7 +4,7 @@ void AccelerateurBalle(MachineEtat* machineEtat){
     if ((machineEtat->lancer).tir){
         ControleAccelerateur(machineEtat, 1);
         HAL_Delay(100);
-        ControleAccelerateur(machineEtat, -1);
+        ControleAccelerateur(machineEtat, 1);
         (machineEtat->lancer).tir = 0;
     }
 }

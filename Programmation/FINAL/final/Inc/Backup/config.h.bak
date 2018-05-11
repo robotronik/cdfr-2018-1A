@@ -47,7 +47,19 @@
 #define yTirV 1000
 
 /* Parametre des servos */
+#define debutPorteEntree 250
+#define finPorteEntree 650
 
+#define debutPorteSortie 620
+#define finPorteSortie 420
+
+#define debutAccelerateur 380
+#define finAccelerateur 220
+
+#define _te 0.01
+#define _kp 0.01
+#define _ki 0.01
+#define _kd 0.0001
 
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;

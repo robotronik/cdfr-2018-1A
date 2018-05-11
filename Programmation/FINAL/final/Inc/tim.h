@@ -53,6 +53,7 @@
 
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim9;
 extern TIM_HandleTypeDef htim10;
 
@@ -64,6 +65,7 @@ extern void _Error_Handler(char *, int);
 
 void MX_TIM1_Init(void);
 void MX_TIM2_Init(void);
+void MX_TIM3_Init(void);
 void MX_TIM9_Init(void);
 void MX_TIM10_Init(void);
 

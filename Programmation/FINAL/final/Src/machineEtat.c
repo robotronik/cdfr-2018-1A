@@ -4,11 +4,16 @@
 #include "attente.h"
 #include "deplacement.h"
 
+#define tempsArret 8
 void TransitionEtats(MachineEtat* machineEtat){
     switch (machineEtat->etatActuel){
         case DEPLACEMENT:
+            if((machineEtat->attente).tempsEnCours>=tempsArret){
+                FinDuMatch(machineEtat);
+            }
+
             /* Passage de deplacement a attente si le deverouillage a ete execute */
-            if ((machineEtat->deplacement).deverouillage > (machineEtat->deplacement).deverouillagePrecedent){
+            else if ((machineEtat->deplacement).deverouillage > (machineEtat->deplacement).deverouillagePrecedent){
                 ((machineEtat->deplacement).deverouillagePrecedent)++;
                 machineEtat->etatActuel = ATTENTE;
                 (machineEtat->attente).finAttente = 0;
@@ -33,8 +38,11 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case TRIAGE:
+            if((machineEtat->attente).tempsEnCours>=tempsArret){
+                FinDuMatch(machineEtat);
+            }
             /* Passe au tir si la couleur detecte est egal a la notre */
-            if ((machineEtat->triage).maCouleur == (machineEtat->triage).couleurDetecte){
+            else if ((machineEtat->triage).maCouleur == (machineEtat->triage).couleurDetecte){
                 (machineEtat->lancer).tir = 1;
                 machineEtat->etatActuel = LANCER;
                 ActivationMoteur();
@@ -48,15 +56,21 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case LANCER:
+            if((machineEtat->attente).tempsEnCours>=tempsArret){
+                FinDuMatch(machineEtat);
+            }
             /* Passe au tri quand le tir est fini */
-            if ((machineEtat->lancer).tir == 0){
+            else if ((machineEtat->lancer).tir == 0){
                 machineEtat->etatActuel = TRIAGE;
             }
             break;
 
         case ATTENTE:
+            if((machineEtat->attente).tempsEnCours>=tempsArret){
+                FinDuMatch(machineEtat);
+            }
             /* Reste en attente si une detection se fait */
-            if ((machineEtat->deplacement).detectionCapteur.detection){
+            else if ((machineEtat->deplacement).detectionCapteur.detection){
                 ArretUltrason(machineEtat);
             }
 
@@ -92,7 +106,17 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->triage).servosGlobal.positionAccelerateur.ouvert = finAccelerateur;
 
     (machineEtat->deplacement).detectionCapteur.seuilDetection = distanceDeSeuil;
-    
+    (machineEtat->deplacement).asserv.sum_goal = 0;
+    (machineEtat->deplacement).asserv.diff_goal =0;
+    (machineEtat->deplacement).asserv.pid_sum = (PID_DATA){.Te = _te,
+                                                  				 .Kp = _kp,
+                                                  				 .Ki = _ki,
+                                                  				 .Kd = _kd};
+    (machineEtat->deplacement).asserv.pid_diff = (PID_DATA){.Te = _te,
+                                                            .Kp = _kp,
+                                                            .Ki = _ki,
+                                                            .Kd = _kd};
+
     if(HAL_GPIO_ReadPin(Couleur_GPIO_Port, Couleur_Pin)){
         (machineEtat->triage).maCouleur = -1; //interrupteur vers l'avant orange
         (machineEtat->deplacement).positionRobot.x = xRobotDepartO;
@@ -106,6 +130,7 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     }
 
     else{
+        
         (machineEtat->triage).maCouleur = 1; //interrupteur vers l'arriere vert
         (machineEtat->deplacement).positionRobot.x = xRobotDepartV;
         (machineEtat->deplacement).positionRobot.y = yRobotDepartV;

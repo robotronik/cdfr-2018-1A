@@ -11,3 +11,11 @@ void ArretUltrason(MachineEtat* machineEtat){
     }
     (machineEtat->attente).finAttente = 1;
 }
+
+void FinDuMatch(MachineEtat* machineEtat){
+    __disable_irq();
+    MoteurOff();
+    while(1){
+        HAL_Delay(1000);
+    }
+}

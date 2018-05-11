@@ -60,11 +60,11 @@ void DetecterObstacleGlobal(MachineEtat* machineEtat, uint16_t GPIO_Pin){
     if ((machineEtat->deplacement).detectionCapteur.usAvantGauche.detection==1 || (machineEtat->deplacement).detectionCapteur.usAvant.detection==1 || (machineEtat->deplacement).detectionCapteur.usAvantDroit.detection==1 || (machineEtat->deplacement).detectionCapteur.usArriere.detection==1 )
     {
         (machineEtat->deplacement).detectionCapteur.detection = 1;
-        HAL_GPIO_WritePin(GPIOA, LD2_Pin,1);
+        //HAL_GPIO_WritePin(GPIOA, LD2_Pin,1);
     }
     else{
         (machineEtat->deplacement).detectionCapteur.detection = 0;
-        HAL_GPIO_WritePin(GPIOA, LD2_Pin,0);
+        //HAL_GPIO_WritePin(GPIOA, LD2_Pin,0);
     }
 }
 

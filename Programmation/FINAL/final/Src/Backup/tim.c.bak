@@ -389,7 +389,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
 
     else if(htim->Instance == htim2.Instance){
       HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 1);
-    }
+    }    
 }
 
 
@@ -408,6 +408,9 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef * htim){
     else if(htim->Instance == htim2.Instance){
       HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 0);
     }
+    else if(htim->Instance == htim10.Instance){
+    update_odometry(&(machineEtat.deplacement.odometrie));
+  }
 }
 /* USER CODE END 1 */
 

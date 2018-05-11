@@ -18,7 +18,7 @@ typedef struct Odometry_S{
   float speed_percent_tolerance;
 }Odometry;
 
-void init_odometry(Odometry *odometry, TIM_HandleTypeDef *htim_l, TIM_HandleTypeDef *htim_r, TIM_HandleTypeDef *htim_poll);
+void init_odometry(Odometry *odometry, TIM_HandleTypeDef *htim_poll);
 
 void update_odometry(Odometry *odometry);
 

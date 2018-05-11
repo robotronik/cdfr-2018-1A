@@ -36,14 +36,14 @@ int ReceptionArduinoCouleur(GPIO_TypeDef* portArduino, uint16_t pinArduino, int*
     return *couleurDetecte;
 }
 
-/*void TestFinTri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduino){
-    if (((machineEtat->triage).secouer > (machineEtat->triage).secouerPrecedent || (machineEtat->triage).nombreBallesDetectees == 8 + (machineEtat->triage).nombreBallesTri1) && ReceptionArduinoCouleur(portArduino, pinArduino)==0){
+void TestFinTri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduino){
+    /*if (((machineEtat->triage).secouer > (machineEtat->triage).secouerPrecedent || (machineEtat->triage).nombreBallesDetectees == 8 + (machineEtat->triage).nombreBallesTri1) && ReceptionArduinoCouleur(portArduino, pinArduino)==0){
         (machineEtat->triage).tri++;
-    }
+    }*/
     if ((machineEtat->triage).nombreBallesDetectees == 8 + (machineEtat->triage).nombreBallesTri1 && ReceptionArduinoCouleur(portArduino, pinArduino, &((machineEtat->triage).couleurDetecte))==0){
         (machineEtat->triage).tri++;
     }
-}*/
+}
 
 void Tri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduino){
     while ((machineEtat->triage).tri<=(machineEtat->triage).triPrecedent){
@@ -56,27 +56,26 @@ void Tri(MachineEtat* machineEtat, GPIO_TypeDef* portArduino, uint16_t pinArduin
                 }*/
             default:
                 if ((machineEtat->triage).couleurDetecte == (machineEtat->triage).maCouleur){
-                    HAL_Delay(10000);
                     ControleSortieBalle(machineEtat, -1);
                     HAL_Delay(50);
                     ControlePorteEntree(machineEtat, 1);
+                    ActivationMoteur();
                     HAL_Delay(825);
                     ControlePorteEntree(machineEtat,-1);
                     HAL_Delay(1200);
                     AccelerateurBalle(machineEtat);
+                    EteintMoteur();
                     HAL_Delay(50);
                 }
-                else if((machineEtat->triage).couleurDetecte == -(machineEtat->triage).maCouleur){
-                    HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
+                else{
                     ControleSortieBalle(machineEtat, 1);
                     HAL_Delay(50);
                     ControlePorteEntree(machineEtat, 1);
                     HAL_Delay(600);
                     ControlePorteEntree(machineEtat, -1);
-                    HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
                 }
                 break;
         }
-        //TestFinTri(machineEtat, portArduino, pinArduino);
+        TestFinTri(machineEtat, portArduino, pinArduino);
     }
 }

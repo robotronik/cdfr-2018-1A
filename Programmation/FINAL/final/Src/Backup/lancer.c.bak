@@ -2,15 +2,26 @@
 
 void AccelerateurBalle(MachineEtat* machineEtat){
     if ((machineEtat->lancer).tir){
-        HAL_Delay(1000);
-        XL_Set_Goal_Position( &((machineEtat->lancer).accelerateur.servo), (machineEtat->lancer).accelerateur.posFerme, 1);
-        HAL_Delay(10);
-        XL_Set_Goal_Position( &((machineEtat->lancer).accelerateur.servo), (machineEtat->lancer).accelerateur.posOuvert, 1);
+        ControleAccelerateur(machineEtat, 1);
+        HAL_Delay(100);
+        ControleAccelerateur(machineEtat, 1);
         (machineEtat->lancer).tir = 0;
-        TransitionEtats(machineEtat);
     }
+}
+
+void ControleAccelerateur(MachineEtat* machineEtat, int sens){
+    uint16_t pos;
+
+    if (sens==-1) {  pos = (machineEtat->triage).servosGlobal.positionAccelerateur.ferme;}
+    else{ pos = (machineEtat->triage).servosGlobal.positionAccelerateur.ouvert;}
+
+    XL_Set_Goal_Position( &((machineEtat->triage).servosGlobal.servo[1]) , pos, 1);
 }
 
 void ActivationMoteur(){
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+}
+
+void EteintMoteur(){
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_RESET);
 }

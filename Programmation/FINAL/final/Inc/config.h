@@ -56,6 +56,11 @@
 #define debutAccelerateur 380
 #define finAccelerateur 220
 
+#define _te 0.01
+#define _kp 0.01
+#define _ki 0.01
+#define _kd 0.0001
+
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;
 

@@ -48,6 +48,7 @@
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim9;
 TIM_HandleTypeDef htim10;
 
@@ -158,6 +159,36 @@ void MX_TIM2_Init(void)
   }
 
 }
+/* TIM3 init function */
+void MX_TIM3_Init(void)
+{
+  TIM_ClockConfigTypeDef sClockSourceConfig;
+  TIM_MasterConfigTypeDef sMasterConfig;
+
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 50000-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 13440-1;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+}
 /* TIM9 init function */
 void MX_TIM9_Init(void)
 {
@@ -248,6 +279,21 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 
   /* USER CODE END TIM2_MspInit 1 */
   }
+  else if(tim_baseHandle->Instance==TIM3)
+  {
+  /* USER CODE BEGIN TIM3_MspInit 0 */
+
+  /* USER CODE END TIM3_MspInit 0 */
+    /* TIM3 clock enable */
+    __HAL_RCC_TIM3_CLK_ENABLE();
+
+    /* TIM3 interrupt Init */
+    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM3_IRQn);
+  /* USER CODE BEGIN TIM3_MspInit 1 */
+
+  /* USER CODE END TIM3_MspInit 1 */
+  }
   else if(tim_baseHandle->Instance==TIM9)
   {
   /* USER CODE BEGIN TIM9_MspInit 0 */
@@ -327,6 +373,20 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 
   /* USER CODE END TIM2_MspDeInit 1 */
   }
+  else if(tim_baseHandle->Instance==TIM3)
+  {
+  /* USER CODE BEGIN TIM3_MspDeInit 0 */
+
+  /* USER CODE END TIM3_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM3_CLK_DISABLE();
+
+    /* TIM3 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(TIM3_IRQn);
+  /* USER CODE BEGIN TIM3_MspDeInit 1 */
+
+  /* USER CODE END TIM3_MspDeInit 1 */
+  }
   else if(tim_baseHandle->Instance==TIM9)
   {
   /* USER CODE BEGIN TIM9_MspDeInit 0 */
@@ -376,6 +436,9 @@ extern MachineEtat machineEtat;
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
+    if(htim->Instance == htim3.Instance){
+      machineEtat.attente.tempsEnCours++;
+    }
     if(htim->Instance == htim9.Instance){
       HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 0);
       HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 0);
@@ -383,32 +446,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
       HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 0);
     }
 
-    else if(htim->Instance == htim1.Instance){
+    if(htim->Instance == htim1.Instance){
       HAL_GPIO_WritePin(((machineEtat.deplacement.moteurDroit).superPin).type, ((machineEtat.deplacement.moteurDroit).superPin).pin, 1);
     }
 
-    else if(htim->Instance == htim2.Instance){
+    if(htim->Instance == htim2.Instance){
       HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 1);
     }    
 }
 
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef * htim){
-    if(htim->Instance == htim9.Instance){
-      HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 1);
-      HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 1);
-      HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 1);
-      HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 1);
-    }
+  if(htim->Instance == htim9.Instance){
+    HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 1);
+    HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 1);
+    HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 1);
+    HAL_GPIO_WritePin(US_OUT_4_GPIO_Port, US_OUT_4_Pin, 1);
+  }
 
-    else if(htim->Instance == htim1.Instance){
-      HAL_GPIO_WritePin(((machineEtat.deplacement.moteurDroit).superPin).type, ((machineEtat.deplacement.moteurDroit).superPin).pin, 0);
-    }
+  else if(htim->Instance == htim1.Instance){
+    HAL_GPIO_WritePin(((machineEtat.deplacement.moteurDroit).superPin).type, ((machineEtat.deplacement.moteurDroit).superPin).pin, 0);
+  }
 
-    else if(htim->Instance == htim2.Instance){
-      HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 0);
-    }
-    else if(htim->Instance == htim10.Instance){
+  else if(htim->Instance == htim2.Instance){
+    HAL_GPIO_WritePin(((machineEtat.deplacement.moteurGauche).superPin).type, ((machineEtat.deplacement.moteurGauche).superPin).pin, 0);
+  }
+  else if(htim->Instance == htim10.Instance){
     update_odometry(&(machineEtat.deplacement.odometrie));
   }
 }
