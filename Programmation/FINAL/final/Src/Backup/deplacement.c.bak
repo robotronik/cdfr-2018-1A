@@ -31,7 +31,7 @@ void DeplacementGlobal(MachineEtat* machineEtat){
 }
 
 void Avancer(){
-  SET_MOTOR_L(-5.0);
+  SET_MOTOR_L(-4.0);
   SET_MOTOR_R(5.0);
   /*  A completer avec l'odometrie  */
 

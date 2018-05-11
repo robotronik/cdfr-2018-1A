@@ -15,4 +15,6 @@ void Pause(MachineEtat* machineEtat);
 s'arrete a la detection
 */
 void ArretUltrason(MachineEtat* machineEtat);
+
+void ArretFinal();
 #endif

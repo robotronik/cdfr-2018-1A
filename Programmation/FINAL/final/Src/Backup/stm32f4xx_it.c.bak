@@ -40,6 +40,7 @@
 #include "ultrason.h"
 #include "main.h"
 #include "config.h"
+#include "odometry.h" //pas forcement utile
 
 /* USER CODE END 0 */
 
@@ -220,8 +221,67 @@ void EXTI15_10_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 extern MachineEtat machineEtat;
 
+
+GPIO_PinState currA2;
+GPIO_PinState currA1;
+
+
+
 void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin){
   DetecterObstacleGlobal(&machineEtat, GPIO_Pin);
+  switch (GPIO_Pin){
+    case CH_B1_Pin : //gestion encoder 1 -----
+      //newB1 =  HAL_GPIO_ReadPin(CH_B1_GPIO_Port,CH_B1_Pin);
+      currA1 = HAL_GPIO_ReadPin (CH_A1_GPIO_Port,CH_A1_Pin);
+      // code pour la gestion d'un codeur incremental logiciel simule sa mere
+        //if (newB1 > oldB1){ //front montant B1
+          if(currA1 == GPIO_PIN_SET){
+            // check state of channel A to
+            machineEtat.deplacement.odometrie.encoder_r.cmpt++;
+          }
+          else{
+            machineEtat.deplacement.odometrie.encoder_r.cmpt--;
+          }
+        //}
+        /*else{// la cest l'inverse cf tableau feuille magique vl
+          if(currA1 == GPIO_PIN_SET){
+            // check state of channel A to
+            odometry.encoder_r.cmpt++;
+          }
+          else{
+            odometry.encoder_r.cmpt--;
+          }
+
+        }*/
+        //oldB1 = newB2;
+    break;
+
+    case CH_B2_Pin : //gestion encoder 2 -----
+      //newB2 =  HAL_GPIO_ReadPin(CH_B2_GPIO_Port,CH_B2_Pin);
+      currA2 = HAL_GPIO_ReadPin (CH_A2_GPIO_Port,CH_A2_Pin);
+      // code pour la gestion d'un codeur incremental logiciel simule sa mere
+        //if (newB2 > oldB2){ //front montant B1
+          if(currA2 == GPIO_PIN_SET){
+            // check state of channel A to
+            machineEtat.deplacement.odometrie.encoder_l.cmpt--;
+          }
+          else{
+            machineEtat.deplacement.odometrie.encoder_l.cmpt++;
+          }
+        //}
+        /*else{// la cest l'inverse cf tableau feuille magique vl
+          if(currA2 == GPIO_PIN_SET){
+            // check state of channel A to
+            odometry.encoder_l.cmpt++;
+          }
+          else{
+            odometry.encoder_l.cmpt--;
+          }
+
+        }*/
+      //oldB2 = newB2;
+    break;
+  }
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

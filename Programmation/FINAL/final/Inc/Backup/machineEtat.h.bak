@@ -4,6 +4,7 @@
 /* Debut des librairies necessaires a la machine a etat */
 #include "xl_320.h"
 #include "stm32f4xx_hal.h"
+#include "odometry.h"
 
 /* Fin des librairies necessaires a la machine a etat */
 
@@ -74,7 +75,7 @@ typedef struct{
   Moteur moteurDroit;
   DetectionCapteur detectionCapteur;
   int pretTri;
-
+  Odometry odometrie;
 } Deplacement;
 
 /* Fin fonctions liees au deplacement */
@@ -82,6 +83,7 @@ typedef struct{
 typedef struct{
   int deltaT;
   int finAttente; //1 si fini, 0 sinon
+  int tempsEnCours;
 } Attente;
 
 /* Debut tri */
@@ -96,7 +98,7 @@ typedef struct{
   XL_Interface interface;
   PositionServo positionPorteEntree;
   PositionServo positionPorteSortie;
-  PositionServo positionPropulsion;
+  PositionServo positionAccelerateur;
 } Servos;
 
 typedef struct{
@@ -109,14 +111,14 @@ typedef struct{
   int servoPret; //1 si servos dispo sinon -1 (0 est un cas intermediaire a ne pas prendre en compte)
   int tri; //prend la valeur 1 si le premier tri a bugue ou s'il est fini, 2 au deuxième tri
   int triPrecedent; // cest un peu iconoclaste
-  Servos servosglobal;
+  Servos servosGlobal;
 } Triage;
 
 /* Fin tri */
 
 typedef struct{
   int tir;
-  XL_ME_Wrapper accelerateur;
+  Servos accelerateur;
 } Lancer;
 
 typedef struct{

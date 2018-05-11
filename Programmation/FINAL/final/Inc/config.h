@@ -8,7 +8,7 @@
 #define tempsAttente 20
 
 /* Distance de detection ultrason */
-#define distanceDeSeuil 300
+#define distanceDeSeuil 200
 
 /* Dimension du terrain */
 #define xTerrain 3000
@@ -47,7 +47,7 @@
 #define yTirV 1000
 
 /* Parametre des servos */
-#define debutPorteEntree 250
+#define debutPorteEntree 450
 #define finPorteEntree 650
 
 #define debutPorteSortie 620
@@ -55,6 +55,7 @@
 
 #define debutAccelerateur 380
 #define finAccelerateur 220
+
 
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;

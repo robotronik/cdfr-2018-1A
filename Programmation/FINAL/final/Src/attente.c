@@ -11,3 +11,11 @@ void ArretUltrason(MachineEtat* machineEtat){
     }
     (machineEtat->attente).finAttente = 1;
 }
+
+void ArretFinal(){
+    MoteurOff();
+    __disable_irq();
+    while(1){
+      MoteurOff();
+    }
+}

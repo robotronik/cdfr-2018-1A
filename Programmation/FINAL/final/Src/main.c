@@ -111,7 +111,15 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_TIM10_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+
+
+  __disable_irq();
+  extern MachineEtat machineEtat;
+  while (HAL_GPIO_ReadPin(Tirette_GPIO_Port, Tirette_Pin)){
+  }
+  HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim9);
   HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
   HAL_TIM_Base_Start_IT(&htim1);
@@ -119,12 +127,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);
   HAL_TIM_Base_Start_IT(&htim10);
-
-
-  extern MachineEtat machineEtat;
-
-  while (HAL_GPIO_ReadPin(Tirette_GPIO_Port, Tirette_Pin)){
-  }
+  __enable_irq();
 
   InitialisationParametresGlobaux(&machineEtat);
   InitialiserCapteur(&(machineEtat.deplacement.detectionCapteur), US_IN_1_GPIO_Port, US_IN_1_Pin, US_IN_2_GPIO_Port, US_IN_2_Pin, US_IN_3_GPIO_Port, US_IN_3_Pin, US_IN_4_GPIO_Port, US_IN_4_Pin);
@@ -156,6 +159,7 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
   TransitionEtats(&machineEtat);
+
   //Tri(&machineEtat, USART_RX_GPIO_Port, USART_RX_Pin);
   }
   /* USER CODE END 3 */

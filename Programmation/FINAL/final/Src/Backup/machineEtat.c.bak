@@ -84,10 +84,17 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->triage).secouerPrecedent = 0;
     (machineEtat->triage).nombreBallesDetectees = 0;
     (machineEtat->triage).nombreBallesTri1 = 0;
-    (machineEtat->triage).servoPret = -1;
-    (machineEtat->deplacement).detectionCapteur.seuilDetection = distanceDeSeuil;
+    (machineEtat->triage).servosGlobal.positionPorteEntree.ferme = debutPorteEntree;
+    (machineEtat->triage).servosGlobal.positionPorteEntree.ouvert = finPorteEntree;
+    (machineEtat->triage).servosGlobal.positionPorteSortie.ferme = debutPorteSortie;
+    (machineEtat->triage).servosGlobal.positionPorteSortie.ouvert = finPorteSortie;
+    (machineEtat->triage).servosGlobal.positionAccelerateur.ferme = debutAccelerateur;
+    (machineEtat->triage).servosGlobal.positionAccelerateur.ouvert = finAccelerateur;
 
-    if ((machineEtat->triage).maCouleur == 1){
+    (machineEtat->deplacement).detectionCapteur.seuilDetection = distanceDeSeuil;
+    
+    if(HAL_GPIO_ReadPin(Couleur_GPIO_Port, Couleur_Pin)){
+        (machineEtat->triage).maCouleur = -1; //interrupteur vers l'avant orange
         (machineEtat->deplacement).positionRobot.x = xRobotDepartO;
         (machineEtat->deplacement).positionRobot.y = yRobotDepartO;
         (machineEtat->deplacement).positionContainer1.x = xContainer1O;
@@ -99,6 +106,7 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     }
 
     else{
+        (machineEtat->triage).maCouleur = 1; //interrupteur vers l'arriere vert
         (machineEtat->deplacement).positionRobot.x = xRobotDepartV;
         (machineEtat->deplacement).positionRobot.y = yRobotDepartV;
         (machineEtat->deplacement).positionContainer1.x = xContainer1V;
@@ -108,5 +116,4 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
         (machineEtat->deplacement).positionTir.x = xTirV;
         (machineEtat->deplacement).positionTir.y = yTirV;
     }
-    //XL_Set_Goal_Position( &((machineEtat->lancer).accelerateur.servo), (machineEtat->lancer).accelerateur.posOuvert, 1);
 }

@@ -7,8 +7,11 @@
 void TransitionEtats(MachineEtat* machineEtat){
     switch (machineEtat->etatActuel){
         case DEPLACEMENT:
+            if((machineEtat->attente).tempsEnCours >= 12){
+                ArretFinal();
+            }
             /* Passage de deplacement a attente si le deverouillage a ete execute */
-            if ((machineEtat->deplacement).deverouillage > (machineEtat->deplacement).deverouillagePrecedent){
+            else if ((machineEtat->deplacement).deverouillage > (machineEtat->deplacement).deverouillagePrecedent){
                 ((machineEtat->deplacement).deverouillagePrecedent)++;
                 machineEtat->etatActuel = ATTENTE;
                 (machineEtat->attente).finAttente = 0;
@@ -33,6 +36,9 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case TRIAGE:
+            if((machineEtat->attente).tempsEnCours >= 12){
+                ArretFinal();
+            }
             /* Passe au tir si la couleur detecte est egal a la notre */
             if ((machineEtat->triage).maCouleur == (machineEtat->triage).couleurDetecte){
                 (machineEtat->lancer).tir = 1;
@@ -48,6 +54,9 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case LANCER:
+            if((machineEtat->attente).tempsEnCours >= 12){
+                ArretFinal();
+            }
             /* Passe au tri quand le tir est fini */
             if ((machineEtat->lancer).tir == 0){
                 machineEtat->etatActuel = TRIAGE;
@@ -55,6 +64,9 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case ATTENTE:
+            if((machineEtat->attente).tempsEnCours >= 12){
+                ArretFinal();
+            }
             /* Reste en attente si une detection se fait */
             if ((machineEtat->deplacement).detectionCapteur.detection){
                 ArretUltrason(machineEtat);
@@ -90,7 +102,7 @@ void InitialisationParametresGlobaux(MachineEtat* machineEtat){
     (machineEtat->triage).servosGlobal.positionPorteSortie.ouvert = finPorteSortie;
     (machineEtat->triage).servosGlobal.positionAccelerateur.ferme = debutAccelerateur;
     (machineEtat->triage).servosGlobal.positionAccelerateur.ouvert = finAccelerateur;
-
+    (machineEtat->attente).tempsEnCours = 0;
     (machineEtat->deplacement).detectionCapteur.seuilDetection = distanceDeSeuil;
     
     if(HAL_GPIO_ReadPin(Couleur_GPIO_Port, Couleur_Pin)){
