@@ -43,6 +43,7 @@
 /* USER CODE BEGIN 0 */
 
 #include "machineEtat.h"
+#include "deplacement.h"
 
 /* USER CODE END 0 */
 
@@ -373,10 +374,15 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 
 /* USER CODE BEGIN 1 */
 extern MachineEtat machineEtat;
-
+volatile int tempspls=0;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
     if(htim->Instance == htim9.Instance){
+      tempspls++;
+      if(tempspls>100){
+        MoteurOff();
+        while(1);
+           }
       HAL_GPIO_WritePin(US_OUT_1_GPIO_Port, US_OUT_1_Pin, 0);
       HAL_GPIO_WritePin(US_OUT_2_GPIO_Port, US_OUT_2_Pin, 0);
       HAL_GPIO_WritePin(US_OUT_3_GPIO_Port, US_OUT_3_Pin, 0);

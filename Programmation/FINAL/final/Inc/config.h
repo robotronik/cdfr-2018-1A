@@ -59,4 +59,5 @@
 DetectionCapteur detectionCapteur;
 MachineEtat machineEtat;
 
+
 #endif
