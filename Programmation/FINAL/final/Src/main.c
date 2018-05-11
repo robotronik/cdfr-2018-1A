@@ -125,9 +125,7 @@ int main(void)
 
 
   extern MachineEtat machineEtat;
-  volatile int tirette = HAL_GPIO_ReadPin(Tirette_GPIO_Port, Tirette_Pin);
-  while (tirette){
-    tirette = HAL_GPIO_ReadPin(Tirette_GPIO_Port, Tirette_Pin);
+  while (HAL_GPIO_ReadPin(Tirette_GPIO_Port, Tirette_Pin)){
   }
 
   HAL_TIM_Base_Start_IT(&htim3);

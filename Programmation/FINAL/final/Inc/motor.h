@@ -1,7 +1,7 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#define PWM_MAX 255
+#define PWM_MAX 80
 #define voltMax 15
 
 #define setVoltageMoteur(voltage, motavPort, motavPin, motarPort,motarPin,supPort,supPin,myhtim) { \

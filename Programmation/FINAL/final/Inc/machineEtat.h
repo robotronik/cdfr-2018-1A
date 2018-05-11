@@ -108,7 +108,7 @@ typedef struct{
 typedef struct{
   int deltaT;
   int finAttente; //1 si fini, 0 sinon
-  int tempsEnCours;
+  volatile int tempsEnCours;
 } Attente;
 
 /* Debut tri */
