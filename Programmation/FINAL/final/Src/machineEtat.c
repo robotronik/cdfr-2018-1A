@@ -7,7 +7,7 @@
 void TransitionEtats(MachineEtat* machineEtat){
     switch (machineEtat->etatActuel){
         case DEPLACEMENT:
-            if((machineEtat->attente).tempsEnCours >= 12){
+            if((machineEtat->attente).tempsEnCours >= 1){
                 ArretFinal();
             }
             /* Passage de deplacement a attente si le deverouillage a ete execute */
@@ -36,7 +36,7 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case TRIAGE:
-            if((machineEtat->attente).tempsEnCours >= 12){
+            if((machineEtat->attente).tempsEnCours >= 1){
                 ArretFinal();
             }
             /* Passe au tir si la couleur detecte est egal a la notre */
@@ -54,7 +54,7 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case LANCER:
-            if((machineEtat->attente).tempsEnCours >= 12){
+            if((machineEtat->attente).tempsEnCours >= 1){
                 ArretFinal();
             }
             /* Passe au tri quand le tir est fini */
@@ -64,7 +64,7 @@ void TransitionEtats(MachineEtat* machineEtat){
             break;
 
         case ATTENTE:
-            if((machineEtat->attente).tempsEnCours >= 12){
+            if((machineEtat->attente).tempsEnCours >= 1){
                 ArretFinal();
             }
             /* Reste en attente si une detection se fait */

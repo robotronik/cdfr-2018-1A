@@ -31,7 +31,7 @@ void DeplacementGlobal(MachineEtat* machineEtat){
 }
 
 void Avancer(){
-  SET_MOTOR_L(-4.0);
+  SET_MOTOR_L(4.0);
   SET_MOTOR_R(5.0);
   /*  A completer avec l'odometrie  */
 
@@ -41,8 +41,8 @@ void Avancer(){
 
 void Tourner(int sens){
   if (sens) { /* Tourner a gauche */
-    SET_MOTOR_L(5);
-    SET_MOTOR_R(5);
+    SET_MOTOR_L(-7);
+    SET_MOTOR_R(-7);
     /* l'arreter lorsqu'on est dans le bon axe avec l'odometrie et un timer*/
 
   } else { /* Tourner a droite */ //lol cest trop bidon

@@ -45,11 +45,13 @@ void DetecterObstacleGlobal(MachineEtat* machineEtat, uint16_t GPIO_Pin){
             break;
         
         case US_IN_2_Pin :
-                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvant));
+            if((machineEtat->triage).maCouleur==1){
+                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvant));}
             break;
 
         case US_IN_3_Pin :
-                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvantDroit));
+        if((machineEtat->triage).maCouleur==-1){
+                DetecterObstableUnitaire(&((machineEtat->deplacement).detectionCapteur.usAvantDroit));}
             break;
 
         case US_IN_4_Pin :
