@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name Nucleo_64)(type KiCad)(uri "$(KIPRJMOD)/Nucleo_64.pretty")(options "")(descr ""))
+  (lib (name dsn2596)(type KiCad)(uri "$(KIPRJMOD)/dsn2596.pretty")(options "")(descr ""))
+  (lib (name Raspberry_pi_3)(type KiCad)(uri "$(KIPRJMOD)/Raspberry_pi_3.pretty")(options "")(descr ""))
+)
