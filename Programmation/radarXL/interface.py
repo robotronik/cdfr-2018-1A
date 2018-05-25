@@ -173,8 +173,6 @@ def graph(Angle, Distance):
     x_midpoint = screen_width/2
     y_midpoint = screen_height/2 - border_down
     midpoint = [ x_midpoint, y_midpoint ]
-
-    # Init variables
     angle = 0
     dist = -1
 
@@ -236,19 +234,19 @@ def graph(Angle, Distance):
     pygame.font.quit()
     pygame.quit()
 
-with Serial(port="/dev/ttyACM0", baudrate=115200, timeout=1, writeTimeout=1) as port_serie:   #port serie
+with Serial(port="/dev/ttyACM0", baudrate=115200, timeout=1, writeTimeout=1) as port_serie:
     if port_serie.isOpen():
 	while True:
-            ligne = port_serie.readline()                             #lire la ligne de transmission
-            if(len(ligne)>1):                                         #si pas de problemes
-                ligne=ligne[:-1]                                      #virer le \n
-                L=ligne.split('|')                                    #recomposer les valeurs
-                print("Liste :")
+            ligne = port_serie.readline()      #read the serial port
+            if( len(ligne)>1 ):                #if no problem
+                ligne = ligne[:-1]             #remove \n
+                L = ligne.split('|')           #separate distances from angles
+                print("List :")
                 print(L)
-                D=L[0].split(',')
-                A=L[1].split(',')
-                print("distance :")
+                D = L[0].split(',')            #create a list of distances
+                A = L[1].split(',')            #create a list of angles
+                print("Distance :")
                 print(D)
-                print("theta :")
+                print("Angle :")
                 print(A)
-                graph(D,A)                                       #graphe
+                graph(D,A)                     #graphe

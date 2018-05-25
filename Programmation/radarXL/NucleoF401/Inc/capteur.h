@@ -33,11 +33,13 @@ extern int nDevMask;
 extern int RangeLow;
 extern int RangeMedium;
 
+/* Main function of the radar : launch the radar and send the values by UART */
 void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo);
 
 /* Store new ranging data into the device structure, apply leaky integrator if needed */
 void Sensor_SetNewRange(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange);
 
+/* Associate a letter to a sensor */
 char RangeToLetter(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *pRange);
 
 /**
@@ -61,6 +63,7 @@ int DetectSensors(int SetDisplay);
  */
 void HandleError(int err);
 
+/* Reset and detect the sensors */
 void ResetAndDetectSensor(int SetDisplay);
 
 #endif

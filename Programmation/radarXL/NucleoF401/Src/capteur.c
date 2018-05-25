@@ -1,6 +1,7 @@
 #include "capteur.h"
 
 void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
+    /* Set the variables */
     int over = 0;
     int status;
     char StrDisplay[5];
@@ -8,24 +9,30 @@ void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
     int i;
     int nSensorToUse;
     int SingleSensorNo = 0;
-    int distance;     ///creation variable distance
-    int compteur_blink = 0;                ///creation compteur
-    int* ptr_compteur_blink = NULL;   ///creation pointeur sur compteur
-    ptr_compteur_blink = &compteur_blink;
-    int compteur = 0;                 ///creation compteur
-    int* ptr_compteur = NULL;   ///creation pointeur sur compteur
-    ptr_compteur = &compteur;
-    char buffer_distance[MAXI_CHAR_TRANSMIT*15]; /////creation du buffer
-    char buffer_angle[MAXI_CHAR_TRANSMIT*10];
-    sprintf(buffer_distance, "");               /////mise a zero du buffer
-    sprintf(buffer_angle, "");
-	  int angle=0;              ////creation
-	  int* ptr_angle = &angle;
     int sens = 1;
     char ligne[2];
     int len;
-    int test = 0;
-    int* ptr_test = &test;
+
+    /* Init the pointers */
+    int distance;
+    int compteur_blink = 0;
+    int* ptr_compteur_blink = NULL;
+    ptr_compteur_blink = &compteur_blink;
+    int compteur = 0;
+    int* ptr_compteur = NULL;
+    ptr_compteur = &compteur;
+    int angle = 0;
+    int* ptr_angle = NULL;
+    ptr_angle = &angle;
+    int rotation = 0;
+    int* ptr_rotation = NULL;
+    ptr_rotation = &rotation;
+
+    /* Init the buffers */
+    char buffer_distance[MAXI_CHAR_TRANSMIT*15];
+    char buffer_angle[MAXI_CHAR_TRANSMIT*10];
+    sprintf(buffer_distance, "");
+    sprintf(buffer_angle, "");
 
     /* Setup all sensors in Single Shot mode */
     SetupSingleShot(rangingConfig);
@@ -63,31 +70,34 @@ void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
             if( status == 0 ){
             	Sensor_SetNewRange(&VL53L0XDevs[SingleSensorNo],&RangingMeasurementData);
                 /* Display distance in cm */
-            	if( RangingMeasurementData.RangeStatus == 0 ){  /////boucle de mesures correctes
-                    *ptr_compteur_blink+=1;                      /////incrementation du compteur
-                    *ptr_compteur+=1;
-                    distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;   /////distance lue par le capteur en cm
-                    blink_led(distance, ptr_compteur_blink);         /////fonction blink_led
-					          angle_transmit(servo, ptr_angle, buffer_angle, ptr_compteur, &sens, ptr_test);
+            	if( RangingMeasurementData.RangeStatus == 0 ){
+                 /* Detection */
+                    *ptr_compteur_blink += 1;
+                    *ptr_compteur += 1;
+                    distance = (int)VL53L0XDevs[SingleSensorNo].LeakyRange/10;
+                    blink_led(distance, ptr_compteur_blink);
+					          angle_transmit(servo, ptr_angle, buffer_angle, ptr_compteur, &sens, ptr_rotation);
                     distance_transmit(distance, buffer_distance, ptr_compteur);
+                    /* If the buffer is full, */
                     if (*ptr_compteur == MAXI_CHAR_TRANSMIT) {
-                        strcat(buffer_distance,buffer_angle);
-                        len=strlen(buffer_distance);                       /////longueur du buffer
-                        HAL_UART_Transmit(&huart2, (uint8_t*)(buffer_distance), len, 1000); /////transmission du buffer
-                        sprintf(ligne, "\n");                                     /////ajout \n a ligne
-                        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);     /////transmission pour cloturer la ligne                                                  /////remise a zero du compteur
+                        /* Concatenate the 2 buffers in the buffer_distance */
+                        strcat(buffer_distance, buffer_angle);
+                        len = strlen(buffer_distance);
+                        HAL_UART_Transmit(&huart2, (uint8_t*)buffer_distance, len, 1000);
+                        sprintf(ligne, "\n");
+                        HAL_UART_Transmit(&huart2, (uint8_t*)ligne, 1, 1000);
+                        /* Reset the 2 buffers and a counter */
                         sprintf(buffer_distance, "");
                         sprintf(buffer_angle, "");
-                        *ptr_compteur=0;
-                        HAL_Delay(1000);         //////necessaire pour le graphique
+                        *ptr_compteur = 0;
+                        /* Necessary for the graph */
+                        HAL_Delay(1000);
                     }
                 }
-                else{                                           /////boucle de mesures incorrectes
+                else{
+                  /* No detection */
                     sprintf(StrDisplay, "----");
                     StrDisplay[0]=VL53L0XDevs[SingleSensorNo].DevLetter;
-                    /* Action a faire si perte de distance */
-
-                    /* Fin d'action a faire si perte de distance */
                 }
             }
             else{
@@ -97,7 +107,8 @@ void RangeDemo(int UseSensorsMask, RangingConfig_e rangingConfig, XL* servo){
         XNUCLEO53L0A1_SetDisplayString(StrDisplay);
     }while( !over);
     /* Wait button to be un-pressed*/
-    htim3.Instance->CNT=0;       /////remise a zero du timer de la led
+    /* Reset counter */
+    htim3.Instance->CNT=0;
 }
 
 void HandleError(int err){
@@ -119,7 +130,7 @@ int DetectSensors(int SetDisplay) {
     for (i = 0; i < 3; i++)
         status = XNUCLEO53L0A1_ResetId(i, 0);
 
-    /* detect all sensors (even on-board)*/
+    /* Detect all sensors (even on-board)*/
     for (i = 0; i < 3; i++) {
         VL53L0X_Dev_t *pDev;
         pDev = &VL53L0XDevs[i];
@@ -173,7 +184,7 @@ int DetectSensors(int SetDisplay) {
                 status = 1;
             }
         } while (0);
-        /* if fail r can't use for any reason then put the  device back to reset */
+        /* if fail or can't use for any reason then put the device back to reset */
         if (status) {
             XNUCLEO53L0A1_ResetId(i, 0);
         }
@@ -311,7 +322,7 @@ void Sensor_SetNewRange(VL53L0X_Dev_t *pDev, VL53L0X_RangingMeasurementData_t *p
 void ResetAndDetectSensor(int SetDisplay){
     int nSensor;
     nSensor = DetectSensors(SetDisplay);
-    /* at least one sensor and if one it must be the built-in one  */
+    /* At least one sensor and if one it must be the built-in one  */
     if( (nSensor <=0) ||  (nSensor ==1 && VL53L0XDevs[1].Present==0) ){
         HandleError(ERR_DETECT);
     }

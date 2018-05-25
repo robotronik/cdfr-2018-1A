@@ -101,7 +101,6 @@ VL53L0X_Dev_t VL53L0XDevs[]={
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-//void SystemClock_Config(void);
 void ResetAndDetectSensor(int SetDisplay);
 
 /* USER CODE BEGIN PFP */
@@ -110,13 +109,19 @@ void ResetAndDetectSensor(int SetDisplay);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-void blink_led(int valeur, int* compteur){     /////modification de la led
-    if (*compteur == 6){                       /////modification toutes les 6 mesures correctes du capteur (valeur limite ?)
+
+void blink_led(int valeur, int* compteur){
+	  /* 6 is an arbitrary number that works */
+    if (*compteur == 6){
+			  /* Stop the led timer */
         HAL_TIM_Base_Stop_IT(&htim3);
-        htim3.Instance->ARR = 2*valeur-1+20;   /////modification de la periode du capteur (voir wiki stm32 pour plus de details) selon une droite
-        HAL_TIM_Base_Start_IT(&htim3);
-        htim3.Instance->CNT = 0;               /////remise a zero du timer de la led
-        *compteur = 0;                         /////remise a zero du compteur
+				/* Modify the led period according a homemade straight line */
+        htim3.Instance->ARR = 2*valeur-1+20;
+				/* Restart the led timer */
+				HAL_TIM_Base_Start_IT(&htim3);
+				/* Reset the led timer and the counter */
+        htim3.Instance->CNT = 0;
+        *compteur = 0;
     }
 }
 

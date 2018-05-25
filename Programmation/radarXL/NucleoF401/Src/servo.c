@@ -39,54 +39,56 @@ void XL320ServosActivation(XL_Interface* interface, XL* servo, uint8_t nbmServos
 }
 
 void angle_variation(XL* servo, int* angle, int pas, int maxAngle, int* sens){
+  /* Increasing direction */
   if (*sens){
-    if(*angle<maxAngle){
+    if(*angle < maxAngle){
       XL_Set_Goal_Position(servo, *angle, 1);
-      *angle+=pas;
+      *angle += pas;
     }
     else
       *sens = 0;
-  }
-  else{
-    if(*angle>=0){
+  } /* Decreasing direction */
+   else {
+    if(*angle >= 0){
       XL_Set_Goal_Position(servo, *angle, 1);
-      *angle-=pas;
+      *angle -= pas;
     }
     else
       *sens = 1;
   }
 }
 
-void angle_transmit(XL* servo, int* ptr_angle, char* buffer, int* i, int* sens, int* ptr_test){ ///test fonctionne
+void angle_transmit(XL* servo, int* ptr_angle, char* buffer, int* i, int* sens, int* ptr_rotation){
 		uint16_t position;
 		char dataAngle[10];
 		char ligne[2];
 		int len;
     if (*sens) {
-      *ptr_test+=DELTA_ANGLE;
+      *ptr_rotation += DELTA_ANGLE;
     } else {
-      *ptr_test-=DELTA_ANGLE;
+      *ptr_rotation -= DELTA_ANGLE;
     }
+
 		angle_variation(&servo[0], ptr_angle, DELTA_ANGLE, 1023, sens);
 
-    position = position*320/1023
+    position = position*320/1023;
 		HAL_Delay(10);
-    if (*i<MAXI_CHAR){                 /////ajout valeur, dans data
-          sprintf(dataAngle, "%d,",position); //permet de differencier les bonnes valeurs
-    }  else if (*i==MAXI_CHAR){           /////ajout valeur dans data -> pour cloturer la sequence
-          sprintf(dataAngle, "%d",position); //permet de differencier les bonnes valeurs
+    if (*i < MAXI_CHAR){
+          sprintf(dataAngle, "%d,", position);
+    }  else if (*i == MAXI_CHAR){
+          sprintf(dataAngle, "%d", position);
     }
-    strcat(buffer,dataAngle);                          /////ajout valeur au buffer
+    strcat(buffer, dataAngle);
 }
 
-void distance_transmit(int valeur, char* buffer, int* i){ ///test fonctionne
+void distance_transmit(int valeur, char* buffer, int* i){
 		char data[10];
 		char ligne[2];
 		int len;
-    if (*i<MAXI_CHAR){                 /////ajout valeur, dans data
-        sprintf(data, "%d,",valeur);
-    } else if (*i==MAXI_CHAR){           /////ajout valeur dans data -> pour cloturer la sequence
-        sprintf(data, "%d|",valeur);
+    if (*i < MAXI_CHAR){
+        sprintf(data, "%d,", valeur);
+    } else if (*i == MAXI_CHAR){
+        sprintf(data, "%d|", valeur);
     }
-    strcat(buffer,data);                          /////ajout valeur au buffer
+    strcat(buffer, data);
 }
