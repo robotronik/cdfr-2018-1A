@@ -1,0 +1,117 @@
+Info : Unable to match requested speed 2000 kHz, using 1800 kHz
+Info : Unable to match requested speed 2000 kHz, using 1800 kHz
+Info : clock speed 1800 kHz
+Info : STLINK v2 JTAG v27 API v2 SWIM v15 VID 0x0483 PID 0x374B
+Info : using stlink api v2
+Info : Target voltage: 3.236220
+Info : stm32f4x.cpu: hardware has 6 breakpoints, 4 watchpoints
+Info : accepting 'gdb' connection from pipe
+Info : device id = 0x10016433
+Info : flash size = 512kbytes
+undefined debug reason 7 - target needs reset
+target state: halted
+target halted due to debug-request, current mode: Thread 
+xPSR: 0x01000000 pc: 0x08006aec msp: 0x20018000
+Info : halted: PC: 0x08004304
+Info : halted: PC: 0x08000ea0
+Info : halted: PC: 0x08001198
+Info : halted: PC: 0x08000ea6
+Info : halted: PC: 0x08005ed0
+target state: halted
+target halted due to debug-request, current mode: Thread 
+xPSR: 0x01000000 pc: 0x08006aec msp: 0x20018000
+Info : halted: PC: 0x08004304
+Info : halted: PC: 0x08005d06
+Info : halted: PC: 0x08005d0a
+Info : halted: PC: 0x08005d0e
+Info : halted: PC: 0x08005d10
+Info : halted: PC: 0x08005d12
+Info : halted: PC: 0x08005d14
+Info : halted: PC: 0x08005d16
+Info : halted: PC: 0x08005d18
+Info : halted: PC: 0x08005d1a
+Info : halted: PC: 0x08005d1c
+Info : halted: PC: 0x08005d1e
+Info : halted: PC: 0x08005d30
+Info : halted: PC: 0x08005d32
+Info : halted: PC: 0x08005d34
+Info : halted: PC: 0x08005d20
+Info : halted: PC: 0x08005d22
+Info : halted: PC: 0x08005d24
+Info : halted: PC: 0x080043b8
+Info : halted: PC: 0x08005d2a
+Info : halted: PC: 0x08005d2c
+Info : halted: PC: 0x08005d2e
+Info : halted: PC: 0x08005d30
+Info : halted: PC: 0x08005d32
+Info : halted: PC: 0x08005d34
+Info : halted: PC: 0x08005d20
+Info : halted: PC: 0x08005d22
+Info : halted: PC: 0x08005d24
+Info : halted: PC: 0x080043b8
+Info : halted: PC: 0x08005d2a
+Info : halted: PC: 0x08005d2c
+Info : halted: PC: 0x08005d2e
+Info : halted: PC: 0x08005d30
+Info : halted: PC: 0x08005d32
+Info : halted: PC: 0x08005d34
+Info : halted: PC: 0x08005d20
+Info : halted: PC: 0x08005d22
+Info : halted: PC: 0x08005d24
+Info : halted: PC: 0x080043b8
+Info : halted: PC: 0x08005d2a
+Info : halted: PC: 0x08005d2c
+Info : halted: PC: 0x08005d2e
+Info : halted: PC: 0x08005d30
+Info : halted: PC: 0x08005d32
+Info : halted: PC: 0x08005d34
+Info : halted: PC: 0x08005d36
+Info : halted: PC: 0x08005d38
+Info : halted: PC: 0x08005d3a
+Info : halted: PC: 0x08005e44
+Info : halted: PC: 0x08005e46
+Info : halted: PC: 0x08005e48
+Info : halted: PC: 0x08005d3c
+Info : halted: PC: 0x08005d3e
+Info : halted: PC: 0x08005d42
+Info : halted: PC: 0x08005d46
+Info : halted: PC: 0x08005d48
+Info : halted: PC: 0x08005d4a
+Info : halted: PC: 0x08005d4c
+Info : halted: PC: 0x08005d4e
+Info : halted: PC: 0x08005d50
+Info : halted: PC: 0x08005d54
+Info : halted: PC: 0x08005d56
+Info : halted: PC: 0x08005d58
+Info : halted: PC: 0x08005d5c
+Info : halted: PC: 0x08005d5e
+Info : halted: PC: 0x08005d62
+Info : halted: PC: 0x08005d64
+Info : halted: PC: 0x08005d66
+Info : halted: PC: 0x080043b8
+Info : halted: PC: 0x08005d6c
+Info : halted: PC: 0x08005d6e
+Info : halted: PC: 0x08001198
+Info : halted: PC: 0x08005d74
+Info : halted: PC: 0x08005d76
+Info : halted: PC: 0x08005d78
+Info : halted: PC: 0x08005d7a
+Info : halted: PC: 0x08005d7c
+Info : halted: PC: 0x08005d7e
+Info : halted: PC: 0x08005d8e
+Info : halted: PC: 0x08005d92
+Info : halted: PC: 0x08005d94
+Info : halted: PC: 0x08005d96
+Info : halted: PC: 0x08005d98
+Info : halted: PC: 0x080057b0
+Info : halted: PC: 0x08005d9e
+Info : halted: PC: 0x08005da0
+Info : halted: PC: 0x08005da2
+Info : halted: PC: 0x08005da4
+Info : halted: PC: 0x08005da6
+Debugger detaching: resuming execution.
+Debugger detaching: resuming execution.
+Warn : target not halted
+
+
+Info : dropped 'gdb' connection
