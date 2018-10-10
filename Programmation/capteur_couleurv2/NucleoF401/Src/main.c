@@ -79,7 +79,7 @@ void blink_led(uint8_t data, uint8_t* last_color, int* sens){
             HAL_TIM_Base_Start_IT(&htim3);
             htim3.Instance->CNT = 0;
             *sens = 1;
-        } else if (data == 111){ //orange o
+        } else if (data == 111){ //orange
             HAL_TIM_Base_Stop_IT(&htim3);
             htim3.Instance->ARR = 300-1;
             HAL_TIM_Base_Start_IT(&htim3);
@@ -134,26 +134,26 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
 
   //////XL maintenance ----------------------
-  // HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
-	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	// HAL_Delay(100);
+  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	/*HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	HAL_Delay(100);*/
   XL_Interface interface;
   XL320InterfaceDefine(&interface);
 
@@ -176,8 +176,9 @@ int main(void)
 
   //init position servos
   XL_Set_Goal_Position(&servo[0], 450, 1);
-  XL_Set_Goal_Position(&servo[1], 350, 1);
+  XL_Set_Goal_Position(&servo[1], 380, 1);
   XL_Set_Goal_Position(&servo[2], 420, 1);
+  HAL_GPIO_WritePin(Lanceur_Control_GPIO_Port, Lanceur_Control_Pin, GPIO_PIN_SET);
   // HAL_Delay(5000);
   // XL_Set_Goal_Position(&servo[1], 200, 1);
 
@@ -190,7 +191,7 @@ int main(void)
   {
     init_0 = 450;
     pas_0 = 650;
-    init_1 = 350;
+    init_1 = 380;
     pas_1 = 220;
     init_2 = 420;
     pas_2 = 620;
@@ -219,6 +220,19 @@ int main(void)
     // HAL_Delay(100);
     // XL_Set_Goal_Position(&servo[2], 200, 1);
     // HAL_Delay(100);
+
+    /* Truc qui bouge */
+    XL_Set_Goal_Position(&servo[2], pas_2, 1);
+    HAL_Delay(50);
+    XL_Set_Goal_Position(&servo[0], pas_0, 1);
+    HAL_Delay(825);
+    XL_Set_Goal_Position(&servo[0], init_0, 1);
+    HAL_Delay(1200);
+    XL_Set_Goal_Position(&servo[1], pas_1, 1);
+    HAL_Delay(500);
+    XL_Set_Goal_Position(&servo[1], init_1, 1);
+    HAL_Delay(50);
+
     switch(data) {
       case 'a':
         XL_Set_Goal_Position(&servo[0], init_0, 1);
@@ -228,9 +242,9 @@ int main(void)
         XL_Set_Goal_Position(&servo[2], pas_2, 1);
         HAL_Delay(50);
         XL_Set_Goal_Position(&servo[0], pas_0, 1);
-        HAL_Delay(800);
+        HAL_Delay(825);
         XL_Set_Goal_Position(&servo[0], init_0, 1);
-        HAL_Delay(1500);
+        HAL_Delay(1200);
         XL_Set_Goal_Position(&servo[1], pas_1, 1);
         HAL_Delay(500);
         XL_Set_Goal_Position(&servo[1], init_1, 1);
@@ -240,7 +254,7 @@ int main(void)
         XL_Set_Goal_Position(&servo[2], init_2, 1);
         HAL_Delay(50);
         XL_Set_Goal_Position(&servo[0], pas_0, 1);
-        HAL_Delay(1000);
+        HAL_Delay(600);
         break;
     }
 
@@ -426,7 +440,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(USART1_DIR_GPIO_Port, USART1_DIR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, Lanceur_Control_Pin|USART1_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
@@ -437,22 +451,22 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PC0 PC1 PC2 PC4
-                           PC5 PC8 PC9 PC10
-                           PC11 PC12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_4
-                          |GPIO_PIN_5|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10
-                          |GPIO_PIN_11|GPIO_PIN_12;
+  /*Configure GPIO pins : PC0 PC1 PC4 PC5
+                           PC8 PC9 PC10 PC11
+                           PC12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_5
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : USART1_DIR_Pin */
-  GPIO_InitStruct.Pin = USART1_DIR_Pin;
+  /*Configure GPIO pins : Lanceur_Control_Pin USART1_DIR_Pin */
+  GPIO_InitStruct.Pin = Lanceur_Control_Pin|USART1_DIR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(USART1_DIR_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA0 PA1 PA4 PA6
                            PA7 PA8 PA11 PA12

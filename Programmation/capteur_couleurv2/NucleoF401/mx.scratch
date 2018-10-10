@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-<ProjectName>/home/student/capteur_couleur/NucleoF401/\NucleoF401</ProjectName>
+<ProjectName>/home/student/cdfr-2018-1A/Programmation/capteur_couleurv2/NucleoF401/\NucleoF401</ProjectName>
 <ProjectNature>C</ProjectNature> 
 <CMSIS>Drivers/CMSIS</CMSIS>
 <HAL_Driver>/home/student/STM32Cube/Repository//STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS</HAL_Driver>
